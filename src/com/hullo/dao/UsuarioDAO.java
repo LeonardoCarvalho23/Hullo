@@ -7,5 +7,7 @@ import com.hullo.entity.Usuario;
 public interface UsuarioDAO {
 	
 	public List<Usuario> getUsuarios();
+
+	public void saveUsuario(Usuario theUsuario);
 	
 }

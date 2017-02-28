@@ -18,7 +18,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	@Transactional //so you don't need to start and commit, import from spring
+	//@Transactional //so you don't need to start and commit, import from spring
 	public List<Usuario> getUsuarios() {
 		
 		//get the current hibernate session
@@ -26,13 +26,22 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		
 		//create a query, import hibernate.query
 		Query<Usuario> theQuery = 
-				currentSession.createQuery("from Usuario", Usuario.class);
+				currentSession.createQuery("from Usuario order by nome_usuario", Usuario.class);
 		
 		//execute query and get result list
 		List<Usuario> usuarios = theQuery.getResultList();
 		
 		//return the results
 		return usuarios;
+	}
+
+	@Override
+	public void saveUsuario(Usuario theUsuario) {
+		//get current hibernate session	
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//save the usuario
+		currentSession.save(theUsuario);
 	}
 
 }
