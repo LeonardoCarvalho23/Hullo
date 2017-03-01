@@ -24,15 +24,43 @@
 	<br><br>
 			<!-- adicionar usuario -->
 			<input type="button" value="Novo Usuario"
-				onclick = "window.location.href='showFormNovoUsuario'; return false;"
+				onclick = "window.location.href='showFormNewUsuario'; return false;"
 				class="add-button"
-			/> <!-- puxa layout do CSS -->
+			/>
+			
 			<!-- ver lista de usuarios -->
-			<!-- clicar no botao chama Controller mapping -->
 			<input type="button" value="Listar Usuarios"
 				onclick = "window.location.href='lista'; return false;"
 				class="list-button"
-			/> <!-- puxa layout do CSS -->
+			/> 
+			
+			<br><br>
+			
+			<!-- adicionar aluno -->
+			<input type="button" value="Novo Aluno"
+				onclick = "window.location.href='showFormNewAluno'; return false;"
+				class="add-button"
+			/>
+			
+			<!-- ver lista de alunos -->
+			<input type="button" value="Listar Alunos"
+				onclick = "window.location.href='listaAlunos'; return false;"
+				class="list-button"
+			/> 
+			
+			<br><br>
+			
+			<!-- adicionar professor -->
+			<input type="button" value="Novo Professor"
+				onclick = "window.location.href='showFormNewProfessor'; return false;"
+				class="add-button"
+			/>
+			
+			<!-- ver lista de professores -->
+			<input type="button" value="Listar Professores"
+				onclick = "window.location.href='listaProfessores'; return false;"
+				class="list-button"
+			/> 
 			
 </body>
 

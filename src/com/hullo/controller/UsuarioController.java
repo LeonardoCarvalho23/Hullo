@@ -3,6 +3,7 @@ package com.hullo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class UsuarioController {
 	
 	//with the service, inject the service here
 	@Autowired
+	@Qualifier("usuarioServiceImpl")
 	private UsuarioService usuarioService;
 	
 	@GetMapping("/lista")
@@ -37,7 +39,7 @@ public class UsuarioController {
 		return "lista-usuarios";
 	}
 	
-	@GetMapping("/showFormNovoUsuario")
+	@GetMapping("/showFormNewUsuario")
 	public String showFormNovoUsuario(Model theModel){
 		
 		//create model attribute to bind form data
@@ -51,7 +53,7 @@ public class UsuarioController {
 	public String showMain(Model theModel){
 		return "main";
 	}
-	
+	/*
 	@PostMapping("novoUsuario")
 	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){
 		theUsuario.setAtivo_usuario("1");
@@ -61,5 +63,5 @@ public class UsuarioController {
 		
 		return "redirect:/usuario/lista";
 	}
-	
+	*/
 }

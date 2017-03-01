@@ -6,10 +6,12 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.Usuario;
 
-public class AlunoDAOImpl implements AlunoDAO {
+@Repository
+public class AlunoDAOImpl implements UsuarioDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -18,7 +20,7 @@ public class AlunoDAOImpl implements AlunoDAO {
 	public List<Usuario> getUsuarios() {
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<Usuario> theQuery = currentSession.createQuery("from Usuario order by nome_usuario where tipo_usuario = 'aluno'", Usuario.class);
+		Query<Usuario> theQuery = currentSession.createQuery("from Usuario where tipo_usuario = 'aluno' order by nome_usuario", Usuario.class);
 
 		List<Usuario> usuarios = theQuery.getResultList();
 

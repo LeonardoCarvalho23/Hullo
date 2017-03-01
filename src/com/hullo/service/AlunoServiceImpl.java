@@ -3,15 +3,19 @@ package com.hullo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hullo.dao.AlunoDAO;
+import com.hullo.dao.UsuarioDAO;
 import com.hullo.entity.Usuario;
 
-public class AlunoServiceImpl implements AlunoService {
+@Service
+public class AlunoServiceImpl implements UsuarioService {
 
 	@Autowired
-	private AlunoDAO alunoDAO;
+	@Qualifier("alunoDAOImpl")
+	private UsuarioDAO alunoDAO;
 	
 	@Override
 	@Transactional
