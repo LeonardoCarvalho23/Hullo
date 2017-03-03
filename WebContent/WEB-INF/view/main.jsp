@@ -1,4 +1,3 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -7,7 +6,7 @@
 
 <head>
 
-<div id="wrapper">
+<div id="wrapper" >
 		<div id="header">
 			<h2>Main Page do Hullo</h2>		
 		</div>
