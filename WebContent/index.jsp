@@ -20,7 +20,8 @@
 
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     	  <div class="modal-dialog">
-    	  <img class="logo" src="${pageContext.request.contextPath}/resources/images/logo200.png">
+    	  <img class="logo" src="${pageContext.request.contextPath}/resources/images/logo200v2.png" width="200px" >
+    	  <p></p>
 				<div class="loginmodal-container">
 				  <form>
 					<input type="text" name="user" placeholder="Usuário">
@@ -29,7 +30,7 @@
 				  </form>
 					
 				  <div class="login-help">
-					<a href="usuario/main/">Crie sua conta</a>
+					<a href="usuario/main">Crie sua conta</a>
 				  </div>
 				</div>
 			</div>
