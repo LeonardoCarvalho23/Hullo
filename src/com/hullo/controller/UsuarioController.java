@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hullo.entity.Usuario;
+import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
 
 @Controller
@@ -31,7 +31,7 @@ public class UsuarioController {
 	public String listarUsuarios(Model theModel){
 		
 		//get usuarios from the DAO
-		List<Usuario> theUsuarios = usuarioService.getUsuarios();
+		List<UsuarioImpl> theUsuarios = usuarioService.getUsuarios();
 		
 		//add the usuarios to the model
 		theModel.addAttribute("usuarios", theUsuarios); //name and value
@@ -43,7 +43,7 @@ public class UsuarioController {
 	public String showFormNovoUsuario(Model theModel){
 		
 		//create model attribute to bind form data
-		Usuario theUsuario = new Usuario();
+		UsuarioImpl theUsuario = new UsuarioImpl();
 		theModel.addAttribute("usuario", theUsuario); //name,value
 		
 		return "usuario-form";

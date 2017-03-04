@@ -2,12 +2,12 @@ package com.hullo.service;
 
 import java.util.List;
 
-import com.hullo.entity.Usuario;;
+import com.hullo.entity.UsuarioImpl;;
 
 public interface UsuarioService {
 	
-	public List<Usuario> getUsuarios(); //import java util
+	public List<UsuarioImpl> getUsuarios(); //import java util
 
-	public void saveUsuario(Usuario theUsuario);
+	public void saveUsuario(UsuarioImpl theUsuario);
 
 }
