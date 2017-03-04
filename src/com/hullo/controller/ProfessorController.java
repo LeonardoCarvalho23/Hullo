@@ -15,7 +15,7 @@ import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
 
 @Controller
-@RequestMapping("/usuario")
+@RequestMapping("/professor")
 public class ProfessorController {
 
 	@Autowired

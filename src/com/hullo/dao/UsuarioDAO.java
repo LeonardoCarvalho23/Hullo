@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.hullo.entity.UsuarioImpl;
 
-public interface UsuarioDAO {
+public interface UsuarioDAO<T> {
 	
-	public List<UsuarioImpl> getUsuarios();
+	public List<T> getUsuarios();
 
 	public void saveUsuario(UsuarioImpl theUsuario);
 	

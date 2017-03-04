@@ -9,18 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hullo.dao.ProfessorDAOImpl;
 import com.hullo.dao.UsuarioDAO;
+import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.UsuarioImpl;
 
 @Service
-public class ProfessorServiceImpl implements UsuarioService {
+public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 
 	@Autowired
 	@Qualifier("professorDAOImpl")
-	private UsuarioDAO professorDAO;
+	private UsuarioDAO<ProfessorImpl> professorDAO;
 	
 	@Override
 	@Transactional
-	public List<UsuarioImpl> getUsuarios() {
+	public List<ProfessorImpl> getUsuarios() {
 		return professorDAO.getUsuarios();
 	}
 

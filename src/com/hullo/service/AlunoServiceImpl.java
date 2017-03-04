@@ -8,18 +8,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hullo.dao.UsuarioDAO;
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.UsuarioImpl;
 
 @Service
-public class AlunoServiceImpl implements UsuarioService {
+public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 
 	@Autowired
 	@Qualifier("alunoDAOImpl")
-	private UsuarioDAO alunoDAO;
+	private UsuarioDAO<AlunoImpl> alunoDAO;
 	
 	@Override
 	@Transactional
-	public List<UsuarioImpl> getUsuarios() {
+	public List<AlunoImpl> getUsuarios() {
 		return alunoDAO.getUsuarios();
 	}
 

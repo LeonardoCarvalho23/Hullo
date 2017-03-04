@@ -8,23 +8,24 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.UsuarioImpl;
 
 @Repository
-public class ProfessorDAOImpl implements UsuarioDAO {
+public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<UsuarioImpl> getUsuarios() {
+	public List<ProfessorImpl> getUsuarios() {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<UsuarioImpl> theQuery = 
-				currentSession.createQuery("from Usuario where tipo_usuario = 'professor' order by nome_usuario", UsuarioImpl.class);
+		Query<ProfessorImpl> theQuery = 
+				currentSession.createQuery("from Professor where tipo_usuario = 'professor' order by nome_usuario", ProfessorImpl.class);
 
-		List<UsuarioImpl> usuarios = theQuery.getResultList();
+		List<ProfessorImpl> usuarios = theQuery.getResultList();
 
 		return usuarios;
 	}
