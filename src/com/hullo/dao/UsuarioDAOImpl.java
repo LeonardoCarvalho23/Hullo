@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.hullo.entity.UsuarioImpl;
 
 @Repository
-public class UsuarioDAOImpl implements UsuarioDAO {
+public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -25,7 +25,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		
 		//create a query, import hibernate.query
 		Query<UsuarioImpl> theQuery = 
-				currentSession.createQuery("from Usuario order by nome_usuario", UsuarioImpl.class);
+				currentSession.createQuery("from UsuarioImpl order by nome_usuario", UsuarioImpl.class);
 		
 		//execute query and get result list
 		List<UsuarioImpl> usuarios = theQuery.getResultList();

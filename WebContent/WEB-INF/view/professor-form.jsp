@@ -24,7 +24,7 @@
 	
 	<div id="container">
 		
-		<form:form action="novoUsuario" modelAttribute="usuario" method="POST">
+		<form:form action="newProfessor" modelAttribute="usuario" method="POST">
 					
 			<table>
 				<tbody>
@@ -48,7 +48,7 @@
 						<td><input type="submit" value="Salvar" class="add-button" />
 						
 						<input type="button" value="Voltar"
-							onclick = "window.location.href='main'; return false;"
+							onclick = "window.location.href='../'; return false;"
 							class="add-button"
 							/>		
 						

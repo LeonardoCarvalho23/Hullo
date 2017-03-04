@@ -1,14 +1,12 @@
 package com.hullo.controller;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hullo.entity.UsuarioImpl;
@@ -25,20 +23,8 @@ public class UsuarioController {
 	//with the service, inject the service here
 	@Autowired
 	@Qualifier("usuarioServiceImpl")
-	private UsuarioService usuarioService;
-	
-	@GetMapping("/lista")
-	public String listarUsuarios(Model theModel){
+	private UsuarioService<UsuarioImpl> usuarioService;
 		
-		//get usuarios from the DAO
-		List<UsuarioImpl> theUsuarios = usuarioService.getUsuarios();
-		
-		//add the usuarios to the model
-		theModel.addAttribute("usuarios", theUsuarios); //name and value
-		
-		return "lista-usuarios";
-	}
-	
 	@GetMapping("/showFormNewUsuario")
 	public String showFormNovoUsuario(Model theModel){
 		
@@ -49,10 +35,7 @@ public class UsuarioController {
 		return "usuario-form";
 	}
 	
-	@GetMapping("/main")
-	public String showMain(Model theModel){
-		return "main";
-	}
+
 	/*
 	@PostMapping("novoUsuario")
 	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){

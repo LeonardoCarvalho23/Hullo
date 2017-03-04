@@ -1,6 +1,5 @@
 package com.hullo.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
 
@@ -18,19 +18,7 @@ public class AlunoController {
 	
 	@Autowired
 	@Qualifier("alunoServiceImpl")
-	private UsuarioService alunoService;
-	
-	@GetMapping("/listaAlunos")
-	public String listarUsuarios(Model theModel){
-		
-		//get usuarios from the DAO
-		List<UsuarioImpl> theUsuarios = alunoService.getUsuarios();
-		
-		//add the usuarios to the model
-		theModel.addAttribute("usuarios", theUsuarios); //name and value
-		
-		return "list-aluno";
-	}
+	private UsuarioService<AlunoImpl> alunoService;
 	
 	@GetMapping("/showFormNewAluno")
 	public String showFormNovoUsuario(Model theModel){
@@ -44,7 +32,7 @@ public class AlunoController {
 	
 	/*
 	Metodo em desenvolvimento
-  @PostMapping("/aluno/newAluno")
+  @PostMapping("/newAluno")
 	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){
 		theUsuario.setAtivo_usuario("1");
 		theUsuario.setDt_insert_usuario("now()");

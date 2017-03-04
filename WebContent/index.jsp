@@ -30,7 +30,7 @@
 				  </form>
 					
 				  <div class="login-help">
-					<a href="usuario/main">Crie sua conta</a>
+					<a href="aluno/showFormNewAluno">Quero ser aluno</a> - <a href="professor/showFormNewProfessor">Quero ser professor</a>
 				  </div>
 				</div>
 			</div>

@@ -191,7 +191,7 @@ public class UsuarioImpl implements Usuario{
 
 	@Override
 	public String toString() {
-		return "Usuario [id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", sobrenome_usuario="
+		return "UsuarioImpl [id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", sobrenome_usuario="
 				+ sobrenome_usuario + ", rg_usuario=" + rg_usuario + ", cpf_usuario=" + cpf_usuario + ", cnpj_usuario="
 				+ cnpj_usuario + ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario
 				+ ", sexo_usuario=" + sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario
@@ -199,7 +199,4 @@ public class UsuarioImpl implements Usuario{
 				+ profissao_usuario + ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
 				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
 	}
-	
-	
-		
 }

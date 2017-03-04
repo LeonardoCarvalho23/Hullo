@@ -11,11 +11,11 @@ import com.hullo.dao.UsuarioDAO;
 import com.hullo.entity.UsuarioImpl;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 	
 	@Autowired
 	@Qualifier("usuarioDAOImpl")
-	private UsuarioDAO usuarioDAO;
+	private UsuarioDAO<UsuarioImpl> usuarioDAO;
 	
 	@Override
 	@Transactional
