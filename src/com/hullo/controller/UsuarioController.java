@@ -26,19 +26,7 @@ public class UsuarioController {
 	@Autowired
 	@Qualifier("usuarioServiceImpl")
 	private UsuarioService usuarioService;
-	
-	@GetMapping("/lista")
-	public String listarUsuarios(Model theModel){
 		
-		//get usuarios from the DAO
-		List<Usuario> theUsuarios = usuarioService.getUsuarios();
-		
-		//add the usuarios to the model
-		theModel.addAttribute("usuarios", theUsuarios); //name and value
-		
-		return "lista-usuarios";
-	}
-	
 	@GetMapping("/showFormNewUsuario")
 	public String showFormNovoUsuario(Model theModel){
 		
@@ -49,10 +37,7 @@ public class UsuarioController {
 		return "usuario-form";
 	}
 	
-	@GetMapping("/main")
-	public String showMain(Model theModel){
-		return "main";
-	}
+
 	/*
 	@PostMapping("novoUsuario")
 	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){

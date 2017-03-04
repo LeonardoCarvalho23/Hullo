@@ -15,24 +15,12 @@ import com.hullo.entity.Usuario;
 import com.hullo.service.UsuarioService;
 
 @Controller
-@RequestMapping("/usuario")
+@RequestMapping("/professor")
 public class ProfessorController {
 
 	@Autowired
 	@Qualifier("professorServiceImpl")
 	private UsuarioService professorService;
-
-	@GetMapping("/listaProfessores")
-	public String listarUsuarios(Model theModel){
-		
-		//get usuarios from the DAO
-		List<Usuario> theUsuarios = professorService.getUsuarios();
-		
-		//add the usuarios to the model
-		theModel.addAttribute("usuarios", theUsuarios); //name and value
-		
-		return "list-professor";
-	}
 	
 	@GetMapping("/showFormNewProfessor")
 	public String showFormNovoUsuario(Model theModel){
@@ -45,7 +33,7 @@ public class ProfessorController {
 	}
 	
 /*	Metodo em desenvolvimento
- * @PostMapping("/professor/newProfessor")
+ * @PostMapping("/newProfessor")
 	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){
 		theUsuario.setAtivo_usuario("1");
 		theUsuario.setDt_insert_usuario("now()");
