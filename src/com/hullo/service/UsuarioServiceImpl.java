@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hullo.dao.UsuarioDAO;
-import com.hullo.entity.Usuario;
+import com.hullo.entity.UsuarioImpl;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -19,13 +19,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	@Transactional
-	public List<Usuario> getUsuarios() {
+	public List<UsuarioImpl> getUsuarios() {
 		return usuarioDAO.getUsuarios();
 	}
 
 	@Override
 	@Transactional
-	public void saveUsuario(Usuario theUsuario) {
+	public void saveUsuario(UsuarioImpl theUsuario) {
 		usuarioDAO.saveUsuario(theUsuario);
 	}
 

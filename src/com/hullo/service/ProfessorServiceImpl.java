@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hullo.dao.ProfessorDAOImpl;
 import com.hullo.dao.UsuarioDAO;
-import com.hullo.entity.Usuario;
+import com.hullo.entity.UsuarioImpl;
 
 @Service
 public class ProfessorServiceImpl implements UsuarioService {
@@ -20,13 +20,13 @@ public class ProfessorServiceImpl implements UsuarioService {
 	
 	@Override
 	@Transactional
-	public List<Usuario> getUsuarios() {
+	public List<UsuarioImpl> getUsuarios() {
 		return professorDAO.getUsuarios();
 	}
 
 	@Override
 	@Transactional
-	public void saveUsuario(Usuario theUsuario) {
+	public void saveUsuario(UsuarioImpl theUsuario) {
 		professorDAO.saveUsuario(theUsuario);
 
 	}

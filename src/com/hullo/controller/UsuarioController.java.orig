@@ -26,6 +26,15 @@ public class UsuarioController {
 	@Autowired
 	@Qualifier("usuarioServiceImpl")
 	private UsuarioService usuarioService;
+<<<<<<< HEAD
+=======
+	
+	@GetMapping("/lista")
+	public String listarUsuarios(Model theModel){
+		
+		//get usuarios from the DAO
+		List<UsuarioImpl> theUsuarios = usuarioService.getUsuarios();
+>>>>>>> e66edb541c5afdbe5a1d51ddf594b82d2255fa0e
 		
 	@GetMapping("/showFormNewUsuario")
 	public String showFormNovoUsuario(Model theModel){

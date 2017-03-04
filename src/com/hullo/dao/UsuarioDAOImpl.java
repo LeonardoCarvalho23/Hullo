@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hullo.entity.Usuario;
+import com.hullo.entity.UsuarioImpl;
 
 @Repository
 public class UsuarioDAOImpl implements UsuarioDAO {
@@ -18,24 +18,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	
 	@Override
 	//@Transactional //so you don't need to start and commit, import from spring
-	public List<Usuario> getUsuarios() {
+	public List<UsuarioImpl> getUsuarios() {
 		
 		//get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession(); //import from hibernate
 		
 		//create a query, import hibernate.query
-		Query<Usuario> theQuery = 
-				currentSession.createQuery("from Usuario order by nome_usuario", Usuario.class);
+		Query<UsuarioImpl> theQuery = 
+				currentSession.createQuery("from Usuario order by nome_usuario", UsuarioImpl.class);
 		
 		//execute query and get result list
-		List<Usuario> usuarios = theQuery.getResultList();
+		List<UsuarioImpl> usuarios = theQuery.getResultList();
 		
 		//return the results
 		return usuarios;
 	}
 
 	@Override
-	public void saveUsuario(Usuario theUsuario) {
+	public void saveUsuario(UsuarioImpl theUsuario) {
 		//get current hibernate session	
 		Session currentSession = sessionFactory.getCurrentSession();
 		

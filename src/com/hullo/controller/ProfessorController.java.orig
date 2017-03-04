@@ -15,38 +15,46 @@ import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
 
 @Controller
-@RequestMapping("/usuario")
-public class UsuarioController {
-	
-	/*inject the usuario DAO, it will look for an implementation of this interface
+@RequestMapping("/professor")
+public class ProfessorController {
+
 	@Autowired
-	private UsuarioDAO usuarioDAO;*/
-	
-	//with the service, inject the service here
-	@Autowired
-	@Qualifier("usuarioServiceImpl")
-	private UsuarioService usuarioService;
+	@Qualifier("professorServiceImpl")
+	private UsuarioService professorService;
+<<<<<<< HEAD
+=======
+
+	@GetMapping("/listaProfessores")
+	public String listarUsuarios(Model theModel){
 		
-	@GetMapping("/showFormNewUsuario")
+		//get usuarios from the DAO
+		List<UsuarioImpl> theUsuarios = professorService.getUsuarios();
+		
+		//add the usuarios to the model
+		theModel.addAttribute("usuarios", theUsuarios); //name and value
+		
+		return "list-professor";
+	}
+>>>>>>> e66edb541c5afdbe5a1d51ddf594b82d2255fa0e
+	
+	@GetMapping("/showFormNewProfessor")
 	public String showFormNovoUsuario(Model theModel){
 		
 		//create model attribute to bind form data
 		UsuarioImpl theUsuario = new UsuarioImpl();
 		theModel.addAttribute("usuario", theUsuario); //name,value
 		
-		return "usuario-form";
+		return "professor-form";
 	}
 	
-
-	/*
-	@PostMapping("novoUsuario")
+/*	Metodo em desenvolvimento
+ * @PostMapping("/newProfessor")
 	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){
 		theUsuario.setAtivo_usuario("1");
 		theUsuario.setDt_insert_usuario("now()");
 		//save the usuario
-		usuarioService.saveUsuario(theUsuario);
+		professorService.saveUsuario(theUsuario);
 		
-		return "redirect:/usuario/lista";
-	}
-	*/
+		return "redirect:/professor/lista";
+	}*/
 }
