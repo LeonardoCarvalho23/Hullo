@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pt">
 	<head>
@@ -23,11 +24,11 @@
     	  <img class="logo" src="${pageContext.request.contextPath}/resources/images/logo200v2.png" width="200px" >
     	  <p></p>
 				<div class="loginmodal-container">
-				  <form>
-					<input type="text" name="user" placeholder="Usuário">
-					<input type="password" name="pass" placeholder="Senha">
+				  <form:form action="loginUser" modelAttribute="login" method="POST">
+					<form:input path="email_usuario" placeholder="E-mail"/>
+					<form:input path="senha_usuario" placeholder="Senha" />
 					<input type="submit" name="login" class="login loginmodal-submit" value="Login">
-				  </form>
+				  </form:form>
 					
 				  <div class="login-help">
 					<a href="aluno/showFormNewAluno">Quero ser aluno</a> - <a href="professor/showFormNewProfessor">Quero ser professor</a>

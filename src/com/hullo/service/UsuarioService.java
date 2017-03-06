@@ -9,5 +9,6 @@ public interface UsuarioService<T> {
 	public List<T> getUsuarios(); //import java util
 
 	public void saveUsuario(UsuarioImpl theUsuario);
+	
 
 }
