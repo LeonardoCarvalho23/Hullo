@@ -1,11 +1,15 @@
 package com.hullo.controller;
 
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hullo.entity.AlunoImpl;
@@ -30,17 +34,22 @@ public class AlunoController {
 		return "aluno-form";
 	}
 	
-	/*
-	Metodo em desenvolvimento
-  @PostMapping("/newAluno")
-	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){
-		theUsuario.setAtivo_usuario("1");
-		theUsuario.setDt_insert_usuario("now()");
+
+	//Metodo em desenvolvimento
+	@PostMapping("/newAluno")
+	public String saveUsuario(@ModelAttribute("aluno") AlunoImpl theAluno){
+		Date current_date = new Date();
 		
-		//save the usuario
-		alunoService.saveUsuario(theUsuario);
+		theAluno.setAtivo_usuario("1");
+		theAluno.setDt_insert_usuario(current_date);
+		theAluno.setDt_last_update_usuario(current_date);
+		theAluno.setTipo_usuario("ALUNO");
+		theAluno.setData_nascimento_usuario(current_date);
 		
-		return "redirect:/aluno/lista";
-	}*/
+		//save the aluno
+		alunoService.saveUsuario(theAluno);
+		
+		return "redirect:../adm/listaAlunos";
+	}
 	
 }

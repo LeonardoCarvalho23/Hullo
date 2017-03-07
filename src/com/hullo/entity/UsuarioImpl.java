@@ -22,9 +22,6 @@ public class UsuarioImpl implements Usuario{
 	@Column(name="sobrenome_usuario")
 	private String sobrenome_usuario;
 	
-	@Column(name="rg_usuario")
-	private String rg_usuario;
-	
 	@Column(name="cpf_usuario")
 	private String cpf_usuario;
 	
@@ -83,14 +80,6 @@ public class UsuarioImpl implements Usuario{
 
 	public void setSobrenome_usuario(String sobrenome_usuario) {
 		this.sobrenome_usuario = sobrenome_usuario;
-	}
-
-	public String getRg_usuario() {
-		return rg_usuario;
-	}
-
-	public void setRg_usuario(String rg_usuario) {
-		this.rg_usuario = rg_usuario;
 	}
 
 	public String getCpf_usuario() {
@@ -192,11 +181,14 @@ public class UsuarioImpl implements Usuario{
 	@Override
 	public String toString() {
 		return "UsuarioImpl [id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", sobrenome_usuario="
-				+ sobrenome_usuario + ", rg_usuario=" + rg_usuario + ", cpf_usuario=" + cpf_usuario + ", cnpj_usuario="
-				+ cnpj_usuario + ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario
-				+ ", sexo_usuario=" + sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario
-				+ ", telefone_usuario=" + telefone_usuario + ", tipo_usuario=" + tipo_usuario + ", profissao_usuario="
-				+ profissao_usuario + ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
+				+ sobrenome_usuario + ", cpf_usuario=" + cpf_usuario + ", cnpj_usuario=" + cnpj_usuario
+				+ ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario + ", sexo_usuario="
+				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
+				+ telefone_usuario + ", tipo_usuario=" + tipo_usuario + ", profissao_usuario=" + profissao_usuario
+				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
 				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
 	}
+
+
+	
 }

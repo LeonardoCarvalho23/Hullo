@@ -8,7 +8,7 @@
 
 <div id="wrapper" >
 		<div id="header">
-			<h2>Main Page do Hullo</h2>		
+			<h2>Main Page do ADM do Hullo</h2>		
 		</div>
 	</div>
 

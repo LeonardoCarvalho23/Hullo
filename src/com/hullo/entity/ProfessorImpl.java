@@ -1,5 +1,7 @@
 package com.hullo.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,9 +24,6 @@ public class ProfessorImpl implements Usuario {
 	@Column(name="sobrenome_usuario")
 	private String sobrenome_usuario;
 	
-	@Column(name="rg_usuario")
-	private String rg_usuario;
-	
 	@Column(name="cpf_usuario")
 	private String cpf_usuario;
 	
@@ -41,7 +40,7 @@ public class ProfessorImpl implements Usuario {
 	private String sexo_usuario;
 	
 	@Column(name="data_nascimento_usuario")
-	private String data_nascimento_usuario;
+	private Date data_nascimento_usuario;
 	
 	@Column(name="telefone_usuario")
 	private String telefone_usuario;
@@ -56,10 +55,10 @@ public class ProfessorImpl implements Usuario {
 	private String ativo_usuario;
 	
 	@Column(name="dt_insert_usuario")
-	private String dt_insert_usuario;
+	private Date dt_insert_usuario;
 	
 	@Column(name="dt_last_update_usuario")
-	private String dt_last_update_usuario;
+	private Date dt_last_update_usuario;
 
 	public int getId_usuario() {
 		return id_usuario;
@@ -83,14 +82,6 @@ public class ProfessorImpl implements Usuario {
 
 	public void setSobrenome_usuario(String sobrenome_usuario) {
 		this.sobrenome_usuario = sobrenome_usuario;
-	}
-
-	public String getRg_usuario() {
-		return rg_usuario;
-	}
-
-	public void setRg_usuario(String rg_usuario) {
-		this.rg_usuario = rg_usuario;
 	}
 
 	public String getCpf_usuario() {
@@ -133,11 +124,11 @@ public class ProfessorImpl implements Usuario {
 		this.sexo_usuario = sexo_usuario;
 	}
 
-	public String getData_nascimento_usuario() {
+	public Date getData_nascimento_usuario() {
 		return data_nascimento_usuario;
 	}
 
-	public void setData_nascimento_usuario(String data_nascimento_usuario) {
+	public void setData_nascimento_usuario(Date data_nascimento_usuario) {
 		this.data_nascimento_usuario = data_nascimento_usuario;
 	}
 
@@ -173,31 +164,33 @@ public class ProfessorImpl implements Usuario {
 		this.ativo_usuario = ativo_usuario;
 	}
 
-	public String getDt_insert_usuario() {
+	public Date getDt_insert_usuario() {
 		return dt_insert_usuario;
 	}
 
-	public void setDt_insert_usuario(String dt_insert_usuario) {
+	public void setDt_insert_usuario(Date dt_insert_usuario) {
 		this.dt_insert_usuario = dt_insert_usuario;
 	}
 
-	public String getDt_last_update_usuario() {
+	public Date getDt_last_update_usuario() {
 		return dt_last_update_usuario;
 	}
 
-	public void setDt_last_update_usuario(String dt_last_update_usuario) {
+	public void setDt_last_update_usuario(Date dt_last_update_usuario) {
 		this.dt_last_update_usuario = dt_last_update_usuario;
 	}
 
 	@Override
 	public String toString() {
 		return "ProfessorImpl [id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", sobrenome_usuario="
-				+ sobrenome_usuario + ", rg_usuario=" + rg_usuario + ", cpf_usuario=" + cpf_usuario + ", cnpj_usuario="
-				+ cnpj_usuario + ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario
-				+ ", sexo_usuario=" + sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario
-				+ ", telefone_usuario=" + telefone_usuario + ", tipo_usuario=" + tipo_usuario + ", profissao_usuario="
-				+ profissao_usuario + ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
+				+ sobrenome_usuario + ", cpf_usuario=" + cpf_usuario + ", cnpj_usuario=" + cnpj_usuario
+				+ ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario + ", sexo_usuario="
+				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
+				+ telefone_usuario + ", tipo_usuario=" + tipo_usuario + ", profissao_usuario=" + profissao_usuario
+				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
 				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
 	}
+
+
 
 }

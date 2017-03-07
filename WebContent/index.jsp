@@ -13,6 +13,7 @@
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 	</head>
 <body>
+ 
 <script type="text/javascript">
     $(window).load(function(){
         $('#login-modal').modal('show');
@@ -32,7 +33,7 @@
 					
 				  <div class="login-help">
 					<a href="aluno/showFormNewAluno">Quero ser aluno</a> - <a href="professor/showFormNewProfessor">Quero ser professor</a>
-				  </div>
+				  </div>  
 				</div>
 			</div>
 		  </div>

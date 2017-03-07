@@ -26,7 +26,7 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 
 	@Override
 	@Transactional
-	public void saveUsuario(UsuarioImpl theUsuario) {
+	public void saveUsuario(ProfessorImpl theUsuario) {
 		professorDAO.saveUsuario(theUsuario);
 
 	}

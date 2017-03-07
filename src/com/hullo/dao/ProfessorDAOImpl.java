@@ -31,7 +31,7 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 	}
 
 	@Override
-	public void saveUsuario(UsuarioImpl theUsuario) {
+	public void saveUsuario(ProfessorImpl theUsuario) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 

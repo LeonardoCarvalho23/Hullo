@@ -29,7 +29,7 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 	}
 
 	@Override
-	public void saveUsuario(UsuarioImpl theUsuario) {
+	public void saveUsuario(AlunoImpl theUsuario) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		currentSession.save(theUsuario);

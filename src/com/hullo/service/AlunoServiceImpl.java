@@ -26,7 +26,7 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 
 	@Override
 	@Transactional
-	public void saveUsuario(UsuarioImpl theUsuario) {
+	public void saveUsuario(AlunoImpl theUsuario) {
 		alunoDAO.saveUsuario(theUsuario);
 	}
 
