@@ -30,8 +30,12 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 	}
 
 	@Override
-	public void buscaUsuario(UsuarioImpl oUsuario) {
-		usuarioDAO.buscaUsuario(oUsuario);
+	@Transactional
+	public UsuarioImpl getUsuario(String email, String senha) {
+		// testa se chegou até aqui
+		System.out.println("UsuarioServiceImpl: o email e " + email);
+		
+		return usuarioDAO.getUsuario(email, senha);
 		
 	}
 

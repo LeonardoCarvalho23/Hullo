@@ -39,9 +39,14 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 	}
 
 	@Override
-	public void buscaUsuario(UsuarioImpl oUsuario) {
+	public UsuarioImpl getUsuario(String email, String senha) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+
+
+
+
 
 }

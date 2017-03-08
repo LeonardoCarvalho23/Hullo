@@ -44,8 +44,35 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 	}
 
 	@Override
-	public void buscaUsuario(UsuarioImpl oUsuario) {
-		// TODO Auto-generated method stub
+	public UsuarioImpl getUsuario(String email, String senha) {
+		// confere se o sistema chegou até aqui
+		System.out.println("UsuarioDAOImpl: o email e " + email);
+		
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// Retrieve user
+		//UsuarioImpl theUsuario = currentSession.get(UsuarioImpl.class, email);
+		
+		Query<UsuarioImpl> theQuery = 
+				currentSession.createQuery("from UsuarioImpl where email_usuario='" + email + "'", UsuarioImpl.class);
+		
+		if (theQuery.getSingleResult() == null){
+			return null;
+		} else {
+			UsuarioImpl theUsuario = theQuery.getSingleResult();
+			// confere se a busca foi realizada no banco
+			System.out.println("o sobrenome do usuario e " + theUsuario.getSobrenome_usuario());
+			
+			// checa se email e senha conferem. 
+			if (theUsuario.getSenha_usuario() == senha){
+				return theUsuario;
+			} else {
+				return null;
+		}
+		
+		}
+		
 		
 	}
 

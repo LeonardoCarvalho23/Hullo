@@ -31,9 +31,11 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 	}
 
 	@Override
-	public void buscaUsuario(AlunoImpl theUsuario) {
-		// TODO Auto-generated method stub
+	public UsuarioImpl getUsuario(String email, String senha) {
+		return null;
 		
 	}
+
+
 
 }

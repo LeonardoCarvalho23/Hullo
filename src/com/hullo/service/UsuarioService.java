@@ -10,7 +10,7 @@ public interface UsuarioService<T> {
 
 	public void saveUsuario(T theUsuario);
 
-	public void buscaUsuario(T theUsuario);
+	public UsuarioImpl getUsuario(String email, String senha);
 	
 	
 

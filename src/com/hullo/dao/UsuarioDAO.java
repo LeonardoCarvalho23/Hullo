@@ -10,6 +10,6 @@ public interface UsuarioDAO<T> {
 
 	public void saveUsuario(T theUsuario);
 
-	public void buscaUsuario(UsuarioImpl oUsuario);
+	public UsuarioImpl getUsuario(String email, String senha);
 	
 }

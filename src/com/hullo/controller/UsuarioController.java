@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
@@ -40,10 +41,21 @@ public class UsuarioController {
 		return "usuario-login";
 	}
 	
-	@PostMapping("buscaUsuario")
-	public String buscaUsuario(@ModelAttribute("usuario") Usuario oUsuario){
-		usuarioService.buscaUsuario((UsuarioImpl) oUsuario);
-		return "pos-login";
+	@PostMapping("/getUsuario")
+	public String loginUsuario(@ModelAttribute("usuario") UsuarioImpl theUsuario){
+		// Pega o Model e retira os parâmetros para variáveis
+		String email = theUsuario.getEmail_usuario();
+		String senha = theUsuario.getSenha_usuario();
+		
+		// Testando se o dado foi obtido do formulario
+		System.out.println("a senha e " + senha);
+		
+		// busca o usuário com base nos dados retirados acima e verifica se ele retorna vazio (não encontrado) ou cheio (encontrado)		
+		if (usuarioService.getUsuario(email, senha) == null){
+			return "pos-login";
+		} else {
+			return "usuario-login";
+		}
 	}
 	
 
