@@ -25,8 +25,15 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 
 	@Override
 	@Transactional
-	public void saveUsuario(UsuarioImpl theUsuario) {
-		usuarioDAO.saveUsuario(theUsuario);
+	public void saveUsuario(UsuarioImpl oUsuario) {
+		usuarioDAO.saveUsuario(oUsuario);
 	}
+
+	@Override
+	public void buscaUsuario(UsuarioImpl oUsuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

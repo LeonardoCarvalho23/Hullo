@@ -35,4 +35,10 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		currentSession.save(theUsuario);
 	}
 
+	@Override
+	public void buscaUsuario(UsuarioImpl oUsuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

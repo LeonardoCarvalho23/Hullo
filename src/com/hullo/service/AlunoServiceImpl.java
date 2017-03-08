@@ -30,4 +30,10 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 		alunoDAO.saveUsuario(theUsuario);
 	}
 
+	@Override
+	public void buscaUsuario(AlunoImpl theUsuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

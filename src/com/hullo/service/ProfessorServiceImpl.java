@@ -31,4 +31,10 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 
 	}
 
+	@Override
+	public void buscaUsuario(ProfessorImpl theUsuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
