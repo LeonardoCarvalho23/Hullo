@@ -31,7 +31,7 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 
 	@Override
 	public void buscaUsuario(UsuarioImpl oUsuario) {
-		// TODO Auto-generated method stub
+		usuarioDAO.buscaUsuario(oUsuario);
 		
 	}
 
