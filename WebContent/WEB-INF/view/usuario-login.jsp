@@ -32,6 +32,7 @@
 				  </form:form>
 					
 				  <div class="login-help">
+					${errorMessage}
 					<a href="aluno/showFormNewAluno">Quero ser aluno</a> - <a href="professor/showFormNewProfessor">Quero ser professor</a>
 				  </div>  
 				</div>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,19 +43,23 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/getUsuario")
-	public String loginUsuario(@ModelAttribute("usuario") UsuarioImpl theUsuario){
+	public String loginUsuario(@ModelAttribute("usuario") UsuarioImpl theUsuario, ModelMap modelMap){
+		// Acima, acrescentei o "ModelMap model" para poder repassar a mensagem de erro quando o login falha
 		// Pega o Model e retira os parâmetros para variáveis
 		String email = theUsuario.getEmail_usuario();
 		String senha = theUsuario.getSenha_usuario();
 		
-		// Testando se o dado foi obtido do formulario
-		System.out.println("a senha e " + senha);
-		
-		// busca o usuário com base nos dados retirados acima e verifica se ele retorna vazio (não encontrado) ou cheio (encontrado)		
-		if (usuarioService.getUsuario(email, senha) == null){
-			return "pos-login";
-		} else {
+		// busca o usuário com base nos dados retirados acima
+		Usuario loggedUser = usuarioService.getUsuario(email, senha);
+		if (loggedUser == null){
+			// erro de login
+			final String errorMessage = 
+					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário ou senha incorretos. </div>"; 
+		    modelMap.addAttribute("errorMessage", errorMessage);
 			return "usuario-login";
+		} else {
+			// login feito com sucesso
+			return "pos-login";
 		}
 	}
 	

@@ -45,35 +45,35 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 
 	@Override
 	public UsuarioImpl getUsuario(String email, String senha) {
-		// confere se o sistema chegou até aqui
-		System.out.println("UsuarioDAOImpl: o email e " + email);
 		
 		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		// Retrieve user
-		//UsuarioImpl theUsuario = currentSession.get(UsuarioImpl.class, email);
+		// Cria query que faz busca no banco
+		Query<UsuarioImpl> theQuery;
+		theQuery = currentSession.createQuery("from UsuarioImpl where email_usuario='" + email + "'", UsuarioImpl.class);
 		
-		Query<UsuarioImpl> theQuery = 
-				currentSession.createQuery("from UsuarioImpl where email_usuario='" + email + "'", UsuarioImpl.class);
+		// Testa com try catch a execução da query e se foi encontrado algo, é obrigatorio o uso do try catch
+		UsuarioImpl result = null;
+		boolean empty = false;
+		try {
+			result = theQuery.getSingleResult();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			empty = true;
+		}
 		
-		if (theQuery.getSingleResult() == null){
+		// Se a variável empty for verdadeira, significa que usuário não foi encontrado e retorna null
+		if (empty){
 			return null;
 		} else {
-			UsuarioImpl theUsuario = theQuery.getSingleResult();
-			// confere se a busca foi realizada no banco
-			System.out.println("o sobrenome do usuario e " + theUsuario.getSobrenome_usuario());
-			
-			// checa se email e senha conferem. 
-			if (theUsuario.getSenha_usuario() == senha){
+			// Do contrário, guardo o usuário na variavel theUsuario e testo agora a senha
+			UsuarioImpl theUsuario = result;
+			if (theUsuario.getSenha_usuario().equals(senha)){
 				return theUsuario;
 			} else {
 				return null;
-		}
-		
-		}
-		
-		
+					}
+		}		
 	}
-
 }
