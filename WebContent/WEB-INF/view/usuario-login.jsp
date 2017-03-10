@@ -20,7 +20,7 @@
     });
 </script>
 
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal show" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     	  <div class="modal-dialog">
     	  <img class="logo" src="${pageContext.request.contextPath}/resources/images/logo200v2.png" width="200px" >
     	  <p></p>
@@ -33,7 +33,7 @@
 					
 				  <div class="login-help">
 					${errorMessage}
-					<a href="aluno/showFormNewAluno">Quero ser aluno</a> - <a href="professor/showFormNewProfessor">Quero ser professor</a>
+					<a href="../aluno/showFormNewAluno">Quero ser aluno</a> - <a href="../professor/showFormNewProfessor">Quero ser professor</a>
 				  </div>  
 				</div>
 			</div>
