@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hullo.dao.UsuarioDAO;
 import com.hullo.entity.AlunoImpl;
-import com.hullo.entity.UsuarioImpl;
 
 @Service
 public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
@@ -31,8 +30,9 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 	}
 
 	@Override
-	public UsuarioImpl getUsuario(String email, String senha) {
-		return null;
+	@Transactional
+	public AlunoImpl getUsuario(String email, String cpf) {
+		return alunoDAO.getUsuario(email, cpf);
 		
 	}
 

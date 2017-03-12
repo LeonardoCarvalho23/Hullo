@@ -23,73 +23,48 @@
 	</div>
 	
 	<div id="container">
-		
+
+					${errorMessage}
+
 		<form:form action="newAluno" modelAttribute="usuario" method="POST">
+
 					
-			<table>
-				<tbody>
-					<tr>
-						<td><label>Nome:</label></td>
-						<td><form:input path="nome_usuario" /></td>
-					</tr>
+					<label>*nome:</label>
+					<form:input path="nome_usuario" required="true"/>
 					
-					<tr>
-						<td><label>Sobrenome:</label></td>
-						<td><form:input path="sobrenome_usuario" /></td>
-					</tr>
+					<label>*Sobrenome:</label>
+					<form:input path="sobrenome_usuario" required="true"/>
 					
+					<label>*CPF:</label>
+					<form:input path="cpf_usuario" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: xxx.xxx.xxx-xx" value="xxx.xxx.xxx-xx" required="true"/>
 					
-					<tr>
-						<td><label>CPF:</label></td>
-						<td><form:input path="cpf_usuario" /></td>
-					</tr>
-										
-					<tr>
-						<td><label>Senha:</label></td>
-						<td><form:input path="senha_usuario" /></td>
-					</tr>
+					<label>*Senha:</label>
+					<form:input type="password" path="senha_usuario" required="true"/>
 					
-					<tr>
-						<td><label>Email:</label></td>
-						<td><form:input path="email_usuario" /></td>
-					</tr>	
-									
-					<tr>
-						<td><label>Sexo:</label></td>
-						<td><form:input path="sexo_usuario" /></td>
-					</tr>
+					<label>*Email:</label>
+					<form:input type="email" path="email_usuario" required="true"/>
 					
-					<tr>
-						<td><label>Data de Nascimento:</label></td>
-						<td><form:input path="data_nascimento_usuario" /></td>
-					</tr>
+					<label>*Sexo:</label>
+					Feminino <form:radiobutton path="sexo_usuario" value="F" required="true"/>
+					Masculino <form:radiobutton path="sexo_usuario" value="M" />
 					
-					<tr>
-						<td><label>Telefone:</label></td>
-						<td><form:input path="telefone_usuario" /></td>
-					</tr>
+					<label>*Data de Nascimento:</label>
+					<form:input path="data_nascimento_usuario" pattern="\d{1,2}/\d{1,2}/\d{4}" title="Digite uma data no formato: dd/mm/aaaa" value="dd/mm/aaaa" required="true"/>
 					
-					<tr>
-						<td><label>Profissao:</label></td>
-						<td><form:input path="profissao_usuario" /></td>
-					</tr>
+					<label>*Telefone:</label>
+					<form:input path="telefone_usuario" required="true"/>
 					
-					<tr>
-						<td><label></label></td>
-						<td><input type="submit" value="Salvar" class="add-button" />
+					<label>Profissao:</label>
+					<form:input path="profissao_usuario" />
+					<br><br>
+						<input type="submit" value="Salvar" class="add-button" />
 						
 						<input type="button" value="Voltar"
 							onclick = "window.location.href='../'; return false;"
 							class="add-button"
 							/>		
-						
-						</td>
-											
-						
-					</tr>
-					
-				</tbody>
-			</table>
+					<br><br>
+					*Campos de preenchimento obrigatório
 		</form:form>
 		<br>
 	</div>

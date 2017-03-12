@@ -32,7 +32,7 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 	}
 
 	@Override
-	public UsuarioImpl getUsuario(String email, String senha) {
+	public ProfessorImpl getUsuario(String email, String senha) {
 		// TODO Auto-generated method stub
 		return null;
 	}

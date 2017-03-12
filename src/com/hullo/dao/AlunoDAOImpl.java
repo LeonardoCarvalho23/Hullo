@@ -36,9 +36,29 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 	}
 
 	@Override
-	public UsuarioImpl getUsuario(String email, String senha) {
-		// TODO Auto-generated method stub
-		return null;
+	public AlunoImpl getUsuario(String email, String cpf) {
+		
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		System.out.println("chegou no DAO");
+		
+				
+		// Cria query que faz busca no banco
+		Query<AlunoImpl> theQuery;
+		theQuery = currentSession.createQuery("from AlunoImpl where tipo_usuario = 'aluno' and email_usuario = '" + email + 
+				"' or cpf_usuario = '" + cpf + "'", AlunoImpl.class);
+		
+		try {
+			AlunoImpl validaAluno = theQuery.getSingleResult();
+			
+			System.out.println("fez a query");
+			return validaAluno;
+			
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 
