@@ -40,7 +40,9 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		//save the usuario
-		currentSession.save(theUsuario);
+		System.out.println("DAO: agora vai pedir");
+		currentSession.saveOrUpdate(theUsuario);
+		System.out.println("DAO: PEDIU.");
 	}
 
 	@Override
@@ -75,5 +77,20 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 				return null;
 					}
 		}		
+	}
+
+	@Override
+	public UsuarioImpl getUsuario(int id) {
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// Cria query que faz busca no banco
+		Query<UsuarioImpl> theQuery;
+		theQuery = currentSession.createQuery("from UsuarioImpl where id_usuario='" + id + "'", UsuarioImpl.class);
+		
+		//executa query
+		UsuarioImpl theUsuario = theQuery.getSingleResult();
+		
+		return theUsuario;
 	}
 }

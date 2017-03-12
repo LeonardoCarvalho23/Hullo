@@ -11,5 +11,7 @@ public interface UsuarioDAO<T> {
 	public void saveUsuario(T theUsuario);
 
 	public UsuarioImpl getUsuario(String email, String senha);
+
+	public UsuarioImpl getUsuario(int id);
 	
 }

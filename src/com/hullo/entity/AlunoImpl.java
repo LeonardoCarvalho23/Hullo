@@ -84,7 +84,6 @@ public class AlunoImpl implements Usuario {
 		this.sobrenome_usuario = sobrenome_usuario;
 	}
 
-
 	public String getCpf_usuario() {
 		return cpf_usuario;
 	}

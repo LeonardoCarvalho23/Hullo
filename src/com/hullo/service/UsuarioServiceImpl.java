@@ -32,11 +32,15 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 	@Override
 	@Transactional
 	public UsuarioImpl getUsuario(String email, String senha) {
-		// testa se chegou até aqui
-		System.out.println("UsuarioServiceImpl: o email e " + email);
 		
 		return usuarioDAO.getUsuario(email, senha);
 		
+	}
+	
+	@Override
+	@Transactional
+	public UsuarioImpl getUsuario(int id){
+		return usuarioDAO.getUsuario(id);
 	}
 
 
