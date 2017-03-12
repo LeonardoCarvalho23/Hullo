@@ -1,5 +1,7 @@
 package com.hullo.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -43,27 +45,67 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/getUsuario")
-	public String loginUsuario(@ModelAttribute("usuario") UsuarioImpl theUsuario, ModelMap modelMap){
+	public String loginUsuario(@ModelAttribute("usuario") UsuarioImpl theUsuario, Model model){
 		// Acima, acrescentei o "ModelMap model" para poder repassar a mensagem de erro quando o login falha
 		// Pega o Model e retira os parâmetros para variáveis
 		String email = theUsuario.getEmail_usuario();
 		String senha = theUsuario.getSenha_usuario();
 		
 		// busca o usuário com base nos dados retirados acima
-		Usuario loggedUser = usuarioService.getUsuario(email, senha);
+		UsuarioImpl loggedUser = usuarioService.getUsuario(email, senha);
 		if (loggedUser == null){
 			// erro de login
 			final String errorMessage = 
 					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário ou senha incorretos. </div>"; 
-		    modelMap.addAttribute("errorMessage", errorMessage);
+		    model.addAttribute("errorMessage", errorMessage);
 			return "usuario-login";
 		} else {
-			// login feito com sucesso
-			return "pos-login";
+			// login feito com sucesso. Atualiza o modelo.
+			model.addAttribute("usuario", loggedUser);
+			// checa se o usuário é aluno ou professor e retorna página apropriada
+			if (loggedUser.getTipo_usuario().equals("ALUNO")){
+				return "home-aluno";
+			} else {
+				return "home-professor";
+			}
 		}
 	}
 	
-
+	@PostMapping("/showFormUpdateAluno")
+	public String showFormUpdateAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
+		//@RequestParam("id_usuario") int id_usuario
+		
+		// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
+		//get aluno form database
+		Usuario theUsuario = usuarioService.getUsuario(id_usuario);
+		
+		//adiciona o usuario ao modelo
+		theModel.addAttribute("usuario", theUsuario);
+		
+		// retorna
+		return "aluno-update-form";
+		
+	}
+	
+	@PostMapping("/saveAluno")
+	public String saveAluno(@ModelAttribute("usuario") UsuarioImpl theUsuario, Model theModel){
+		Date current_date = new Date();
+		
+		theUsuario.setAtivo_usuario("1");
+		theUsuario.setDt_insert_usuario(current_date);
+		theUsuario.setDt_last_update_usuario(current_date);
+		theUsuario.setTipo_usuario("ALUNO");
+		theUsuario.setData_nascimento_usuario(current_date);
+		
+		usuarioService.saveUsuario(theUsuario);
+		
+		theModel.addAttribute(theUsuario);
+		
+		return "home-aluno";
+		
+	}
+	
+	
 	/*
 	@PostMapping("novoUsuario")
 	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){

@@ -32,7 +32,7 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 	public void saveUsuario(AlunoImpl theUsuario) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		currentSession.save(theUsuario);
+		currentSession.saveOrUpdate(theUsuario);
 	}
 
 	@Override
@@ -59,6 +59,12 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 			return null;
 		}
 
+	}
+
+	@Override
+	public UsuarioImpl getUsuario(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
