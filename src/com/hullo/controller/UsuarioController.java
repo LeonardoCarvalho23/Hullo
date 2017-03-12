@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hullo.entity.AlunoImpl;
+import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
@@ -59,62 +61,25 @@ public class UsuarioController {
 					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário ou senha incorretos. </div>"; 
 		    model.addAttribute("errorMessage", errorMessage);
 			return "usuario-login";
+			
 		} else {
-			// login feito com sucesso. Atualiza o modelo.
-			model.addAttribute("usuario", loggedUser);
+			// login feito com sucesso
+			
 			// checa se o usuário é aluno ou professor e retorna página apropriada
 			if (loggedUser.getTipo_usuario().equals("ALUNO")){
+				
+				//transforma o UsuarioImpl em AlunoImpl e atualiza o modelo
+				AlunoImpl loggedAluno = new AlunoImpl(loggedUser);
+				model.addAttribute("usuario", loggedAluno);
 				return "home-aluno";
+				
 			} else {
+				//entao e professor, transforma o ususario e atualiza o modelo
+				ProfessorImpl loggedProfessor = new ProfessorImpl(loggedUser);
+				model.addAttribute("usuario", loggedProfessor);
 				return "home-professor";
 			}
 		}
 	}
 	
-	@PostMapping("/showFormUpdateAluno")
-	public String showFormUpdateAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
-		//@RequestParam("id_usuario") int id_usuario
-		
-		// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
-		//get aluno form database
-		Usuario theUsuario = usuarioService.getUsuario(id_usuario);
-		
-		//adiciona o usuario ao modelo
-		theModel.addAttribute("usuario", theUsuario);
-		
-		// retorna
-		return "aluno-update-form";
-		
-	}
-	
-	@PostMapping("/saveAluno")
-	public String saveAluno(@ModelAttribute("usuario") UsuarioImpl theUsuario, Model theModel){
-		Date current_date = new Date();
-		
-		theUsuario.setAtivo_usuario("1");
-		theUsuario.setDt_insert_usuario(current_date);
-		theUsuario.setDt_last_update_usuario(current_date);
-		theUsuario.setTipo_usuario("ALUNO");
-		theUsuario.setData_nascimento_usuario(current_date);
-		
-		usuarioService.saveUsuario(theUsuario);
-		
-		theModel.addAttribute(theUsuario);
-		
-		return "home-aluno";
-		
-	}
-	
-	
-	/*
-	@PostMapping("novoUsuario")
-	public String saveUsuario(@ModelAttribute("usuario") Usuario theUsuario){
-		theUsuario.setAtivo_usuario("1");
-		theUsuario.setDt_insert_usuario("now()");
-		//save the usuario
-		usuarioService.saveUsuario(theUsuario);
-		
-		return "redirect:/usuario/lista";
-	}
-	*/
 }

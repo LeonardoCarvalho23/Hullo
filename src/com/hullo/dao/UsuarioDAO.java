@@ -12,7 +12,7 @@ public interface UsuarioDAO<T> {
 
 	public T getUsuario(String email, String senha);
 
-	public UsuarioImpl getUsuario(int id);
+	public T getUsuario(int id);
 
 	
 }

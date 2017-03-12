@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AlunoImpl;
-import com.hullo.entity.UsuarioImpl;
 
 @Repository
 public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
@@ -62,9 +61,18 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 	}
 
 	@Override
-	public UsuarioImpl getUsuario(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public AlunoImpl getUsuario(int id_usuario) {
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// Cria query que faz busca no banco
+		Query<AlunoImpl> theQuery;
+		theQuery = currentSession.createQuery("from AlunoImpl where id_usuario='" + id_usuario + "'", AlunoImpl.class);
+		
+		//executa query
+		AlunoImpl theUsuario = theQuery.getSingleResult();
+		
+		return theUsuario;
 	}
 
 

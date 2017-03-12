@@ -40,8 +40,7 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 
 	@Override
 	public Usuario getUsuario(int id_usuario) {
-		// TODO Auto-generated method stub
-		return null;
+		return professorDAO.getUsuario(id_usuario);
 	}
 
 

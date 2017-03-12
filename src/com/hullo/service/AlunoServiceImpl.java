@@ -41,9 +41,9 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 	}
 
 	@Override
+	@Transactional
 	public Usuario getUsuario(int id_usuario) {
-		// TODO Auto-generated method stub
-		return null;
+		return alunoDAO.getUsuario(id_usuario);
 	}
 
 
