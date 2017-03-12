@@ -3,6 +3,7 @@ package com.hullo.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -21,8 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hullo.entity.AlunoImpl;
-import com.hullo.entity.Usuario;
+import com.hullo.entity.EstadoImpl;
 import com.hullo.entity.UsuarioImpl;
+import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
 
 @Controller
@@ -33,6 +35,8 @@ public class AlunoController {
 	@Qualifier("alunoServiceImpl")
 	private UsuarioService<AlunoImpl> alunoService;
 	
+	@Autowired
+	private EstadoServiceImpl estadoService;
 	// --Abaixo, dados para disparo de email
 	@Autowired
 	private MailSender mailSender;
@@ -47,7 +51,12 @@ public class AlunoController {
 		
 		//create model attribute to bind form data
 		UsuarioImpl theUsuario = new UsuarioImpl();
+		
+		List<EstadoImpl> estados = estadoService.getEstados();
+		
+		theModel.addAttribute("estados", estados);
 		theModel.addAttribute("usuario", theUsuario); //name,value
+		
 		
 		return "aluno-form";
 	}

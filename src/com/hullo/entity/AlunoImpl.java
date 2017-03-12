@@ -60,6 +60,9 @@ public class AlunoImpl implements Usuario {
 	@Column(name="dt_last_update_usuario")
 	private Date dt_last_update_usuario;
 	
+	@Column(name="cd_cidade_usuario")
+	private int cd_cidade_usuario;
+	
 	
 	public AlunoImpl() {
 	}
@@ -81,6 +84,14 @@ public class AlunoImpl implements Usuario {
 		this.ativo_usuario = usuario.getAtivo_usuario();
 		this.dt_insert_usuario = usuario.getDt_insert_usuario();
 		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
+	}
+
+	public int getCidade() {
+		return cd_cidade_usuario;
+	}
+
+	public void setCidade(int cd_cidade_usuario) {
+		this.cd_cidade_usuario = cd_cidade_usuario;
 	}
 
 	public int getId_usuario() {

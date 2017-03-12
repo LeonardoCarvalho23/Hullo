@@ -75,13 +75,11 @@ function checkPasswordMatch() {
 	</div>
 	
 	<div id="container">
-
-					${errorMessage}
-
-		<form:form action="newAluno" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();">
-
+		
+					>
 					
 					<label>*Nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
+					
 					
 					<label>*Sobrenome:</label>
 					<form:input path="sobrenome_usuario" required="true" maxlength="45"/>
@@ -90,8 +88,10 @@ function checkPasswordMatch() {
 					<form:input path="cpf_usuario" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
 						title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="xxx.xxx.xxx-xx" required="true"/>
 					
+					
 					<label>*Email:</label>
 					<form:input type="email" path="email_usuario" required="true" maxlength="45"/>
+					
 					
 					<label>*Senha:</label>
 					<form:input type="password" path="senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/>
@@ -99,26 +99,38 @@ function checkPasswordMatch() {
 					<label>*Confirme a Senha:</label>
 					<input type="password" id = "txtConfirmPassword" required/>
 					
+					
 					<label>*Sexo:</label>
 					Feminino <form:radiobutton path="sexo_usuario" value="F" required="true"/>
 					Masculino <form:radiobutton path="sexo_usuario" value="M" />
+					
 					
 					<label>*Data de Nascimento:</label>
 					<input type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
 						<input type="hidden" id="data_nascimento_usuario" name="data_nascimento_usuario" />
 					
-					<label>*Telefone:</label>
-					<form:input path="telefone_usuario" required="true" maxlength="20"/>
 					
-					<label>Profissão:</label>
-					<form:input path="profissao_usuario" size="40"/>
-					<br><br>
-						<input type="submit" value="Salvar" class="add-button" />
+					<tr>
+						<td><dropdown>Estado:</dropdown></td>
+						<form:select path="sg_estado">
+						<td><form:options items="${lista}" itemLabel="nm_estado"/><td>
+						</form:select>
+					</tr>
+					
+					<tr>
+						<td><label>Cidade:</label></td>
+						<td><form:input path="profissao_usuario" /></td>
+					</tr>
+					
+					<tr>
+						<td><label></label></td>
+						<td><input type="submit" value="Salvar" class="add-button" />
 						
 						<input type="button" value="Voltar"
 							onclick = "window.location.href='../'; return false;"
 							class="add-button"
 							/>		
+						
 					<br><br>
 					*Campos de preenchimento obrigatório
 		</form:form>
