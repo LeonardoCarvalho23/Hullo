@@ -33,15 +33,14 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 	}
 
 	@Override
-	public UsuarioImpl getUsuario(String email, String senha) {
+	public ProfessorImpl getUsuario(String email, String senha) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Usuario getUsuario(int id_usuario) {
-		// TODO Auto-generated method stub
-		return null;
+		return professorDAO.getUsuario(id_usuario);
 	}
 
 

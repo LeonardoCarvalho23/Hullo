@@ -20,7 +20,7 @@
 <p>Nascimento: ${dateString}</p>
 <p>Telefone: ${usuario.telefone_usuario}</p>
 <p>Profissão: ${usuario.profissao_usuario}</p>
-<form:form action="showFormUpdateAluno" modelAttribute="usuario" method="POST">
+<form:form action="../aluno/showFormUpdateAluno" modelAttribute="usuario" method="POST">
 <form:hidden path="id_usuario"/>
 <input type="submit" name="Editar" value="Editar">
 </form:form>

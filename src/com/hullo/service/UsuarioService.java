@@ -11,10 +11,8 @@ public interface UsuarioService<T> {
 
 	public void saveUsuario(T theUsuario);
 
-	public UsuarioImpl getUsuario(String email, String senha);
+	public T getUsuario(String email, String senha);
 
 	public Usuario getUsuario(int id_usuario);
-	
-	
 
 }

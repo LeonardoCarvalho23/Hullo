@@ -23,7 +23,7 @@
 	<br><br>
 			<!-- ver lista de usuarios -->
 			<input type="button" value="Listar Usuarios"
-				onclick = "window.location.href='listaUsuarios'; return false;"
+				onclick = "window.location.href='../adm/listaUsuarios'; return false;"
 				class="add-button"
 			/> 
 			
@@ -32,7 +32,7 @@
 			
 			<!-- ver lista de alunos -->
 			<input type="button" value="Listar Alunos"
-				onclick = "window.location.href='listaAlunos'; return false;"
+				onclick = "window.location.href='../adm/listaAlunos'; return false;"
 				class="add-button"
 			/> 
 			
@@ -40,7 +40,7 @@
 			
 			<!-- ver lista de professores -->
 			<input type="button" value="Listar Professores"
-				onclick = "window.location.href='listaProfessores'; return false;"
+				onclick = "window.location.href='../adm/listaProfessores'; return false;"
 				class="add-button"
 			/> 
 			

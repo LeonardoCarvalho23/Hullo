@@ -59,6 +59,29 @@ public class AlunoImpl implements Usuario {
 	
 	@Column(name="dt_last_update_usuario")
 	private Date dt_last_update_usuario;
+	
+	
+	public AlunoImpl() {
+	}
+	
+	//construtor para transformar um usuarioImpl em um alunoImpl
+	public AlunoImpl(UsuarioImpl usuario) {
+		this.id_usuario = usuario.getId_usuario();
+		this.nome_usuario = usuario.getNome_usuario();
+		this.sobrenome_usuario = usuario.getSobrenome_usuario();
+		this.cpf_usuario = usuario.getCpf_usuario();
+		this.cnpj_usuario = usuario.getCnpj_usuario();
+		this.email_usuario = usuario.getEmail_usuario();
+		this.senha_usuario = usuario.getSenha_usuario();
+		this.sexo_usuario = usuario.getSexo_usuario();
+		this.data_nascimento_usuario = usuario.getData_nascimento_usuario();
+		this.telefone_usuario = usuario.getTelefone_usuario();
+		this.tipo_usuario = usuario.getTipo_usuario();
+		this.profissao_usuario = usuario.getProfissao_usuario();
+		this.ativo_usuario = usuario.getAtivo_usuario();
+		this.dt_insert_usuario = usuario.getDt_insert_usuario();
+		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
+	}
 
 	public int getId_usuario() {
 		return id_usuario;
@@ -190,8 +213,5 @@ public class AlunoImpl implements Usuario {
 				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
 				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
 	}
-
-
-
 	
 }

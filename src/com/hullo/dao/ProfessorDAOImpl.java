@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.ProfessorImpl;
-import com.hullo.entity.UsuarioImpl;
 
 @Repository
 public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
@@ -39,20 +38,25 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 	}
 
 	@Override
-	public UsuarioImpl getUsuario(String email, String senha) {
+	public ProfessorImpl getUsuario(String email, String senha) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UsuarioImpl getUsuario(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProfessorImpl getUsuario(int id) {
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// Cria query que faz busca no banco
+		Query<ProfessorImpl> theQuery;
+		theQuery = currentSession.createQuery("from ProfessorImpl where id_usuario='" + id + "'", ProfessorImpl.class);
+		
+		//executa query
+		ProfessorImpl theUsuario = theQuery.getSingleResult();
+		
+		return theUsuario;
 	}
-
-
-
-
 
 
 }
