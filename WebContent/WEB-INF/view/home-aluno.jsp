@@ -1,5 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,7 +16,8 @@
 <p>Senha: ${usuario.senha_usuario}</p>
 <p>CPF: ${usuario.cpf_usuario}</p>
 <p>Sexo: ${usuario.sexo_usuario}</p>
-<p>Nascimento: ${usuario.data_nascimento_usuario}</p>
+<fmt:formatDate value="${usuario.data_nascimento_usuario}" var="dateString" pattern="dd/MM/yyyy" />
+<p>Nascimento: ${dateString}</p>
 <p>Telefone: ${usuario.telefone_usuario}</p>
 <p>Profissão: ${usuario.profissao_usuario}</p>
 <form:form action="../aluno/showFormUpdateAluno" modelAttribute="usuario" method="POST">
