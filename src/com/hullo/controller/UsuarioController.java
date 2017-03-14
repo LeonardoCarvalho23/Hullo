@@ -87,7 +87,7 @@ public class UsuarioController {
 		}
 	}
 	
-<<<<<<< HEAD
+
 	@PostMapping("/showFormUpdateAluno")
 	public String showFormUpdateAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
 		// o id_usuario deve estar especificado no JSP como campo oculto
@@ -131,6 +131,5 @@ public class UsuarioController {
 		return "redirect:/usuario/lista";
 	}
 	*/
-=======
->>>>>>> d0d179e7fc822d65aa7f60fc4e8f7fc7a99f2d44
+
 }
