@@ -33,7 +33,7 @@
 					
 				  <div class="login-help">
 					${errorMessage}
-					<a href="../aluno/formAluno">Quero ser aluno</a> - <a href="../professor/showFormNewProfessor">Quero ser professor</a>
+					<a href="../aluno/formAluno">Quero ser aluno</a> - <a href="../professor/formProfessor">Quero ser professor</a>
 				  </div>  
 				</div>
 			</div>

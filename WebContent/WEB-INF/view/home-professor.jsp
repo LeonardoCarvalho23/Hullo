@@ -8,9 +8,16 @@
 </head>
 <body>
 <h1>Dados do professor</h1>
-Nome: ${usuario.nome_usuario}
-Sobrenome: ${usuario.sobrenome_usuario}
-E-mail: ${usuario.email_usuario}
+<p>Nome: ${usuario.nome_usuario}</p>
+<p>Sobrenome: ${usuario.sobrenome_usuario}</p>
+<p>E-mail: ${usuario.email_usuario}</p>
+<p>Senha: ${usuario.senha_usuario}</p>
+<p>CPF: ${usuario.cpf_usuario}</p>
+<p>CNPJ: ${usuario.cnpj_usuario}</p>
+<p>Sexo: ${usuario.sexo_usuario}</p>
+<p>Nascimento: ${usuario.data_nascimento_usuario}</p>
+<p>Telefone: ${usuario.telefone_usuario}</p>
+<p>Profissão: ${usuario.profissao_usuario}</p>
 
 </body>
 </html>
