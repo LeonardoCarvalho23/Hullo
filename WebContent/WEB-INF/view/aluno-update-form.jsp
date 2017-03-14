@@ -1,21 +1,33 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<title>Editar aluno</title>
-
-	<link type="text/css" 
-		  rel="stylesheet" 
-		  href="${pageContext.request.contextPath}/resources/css/style.css">
-
-	<link type="text/css" 
-		  rel="stylesheet" 
-		  href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
+		<!--  Basic jquery and Bootstrap -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
+		<!--  Datepicker bootstrap plugin -->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css" />
+		<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>
+<script>
+$(function(){
+    $('#data_nascimento_usuario').datepicker({
+    	format: "mm/dd/yyyy",
+    	//dateFormat: "mm/dd/yyyy", 
+    	//altField: "#data_nascimento_usuario", 
+    	//altFormat: "mm/dd/yyyy",
+    	language: "pt-BR"
+    });
+});
+</script>
 </head>
-
 <body>
+<input type="text" class="form-control">
 	<div id="wrapper">
 		<div id="header">
 			<h2>Editar aluno</h2>
@@ -62,7 +74,9 @@
 					
 					<tr>
 						<td><label>Data de Nascimento:</label></td>
-						<td><form:input path="data_nascimento_usuario" value="${usuario.data_nascimento_usuario}"/></td>
+						 <fmt:formatDate pattern="dd/mm/yyyy" value="${usuario.data_nascimento_usuario}" var="dateString" />
+						 <td><input type="text" value="${dateString}" id="data_nascimento_usuario" class="form-control" /></td>
+						
 					</tr>
 					
 					<tr>
@@ -91,6 +105,7 @@
 					
 				</tbody>
 			</table>
+			
 		</form:form>
 		<br>
 	</div>

@@ -73,9 +73,7 @@ public class UsuarioController {
 	
 	@PostMapping("/showFormUpdateAluno")
 	public String showFormUpdateAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
-		//@RequestParam("id_usuario") int id_usuario
-		
-		// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
+		// o id_usuario deve estar especificado no JSP como campo oculto
 		//get aluno form database
 		Usuario theUsuario = usuarioService.getUsuario(id_usuario);
 		
@@ -95,7 +93,6 @@ public class UsuarioController {
 		theUsuario.setDt_insert_usuario(current_date);
 		theUsuario.setDt_last_update_usuario(current_date);
 		theUsuario.setTipo_usuario("ALUNO");
-		theUsuario.setData_nascimento_usuario(current_date);
 		
 		usuarioService.saveUsuario(theUsuario);
 		
