@@ -29,9 +29,13 @@
 			
 			<table>
 				<tr>
+					<th>ID</th>
 					<th>Nome</th>
 					<th>Sobreome</th>
 					<th>Email</th>
+					<th>Data Nascimento</th>
+					<th>Profissao</th>
+					<th>Ativo</th>
 					<th>Data Cadastro</th>
 				</tr>
 				
@@ -39,9 +43,13 @@
 				<c:forEach var="tempUsuario" items="${usuarios}">
 					
 					<tr> 
+						<td>${tempUsuario.id_usuario} </td> 
 						<td>${tempUsuario.nome_usuario} </td>
 						<td> ${tempUsuario.sobrenome_usuario} </td>
 						<td> ${tempUsuario.email_usuario} </td>
+						<td>${tempUsuario.data_nascimento_usuario} </td>
+						<td>${tempUsuario.profissao_usuario} </td>
+						<td>${tempUsuario.ativo_usuario} </td>
 						<td> ${tempUsuario.dt_insert_usuario} </td>
 					</tr>
 					

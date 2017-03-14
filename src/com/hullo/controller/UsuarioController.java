@@ -73,11 +73,16 @@ public class UsuarioController {
 				model.addAttribute("usuario", loggedAluno);
 				return "home-aluno";
 				
-			} else {
-				//entao e professor, transforma o ususario e atualiza o modelo
+			} else if (loggedUser.getTipo_usuario().equals("PROFESSOR")) {
+				//se e professor, transforma o ususario e atualiza o modelo
 				ProfessorImpl loggedProfessor = new ProfessorImpl(loggedUser);
 				model.addAttribute("usuario", loggedProfessor);
 				return "home-professor";
+			}
+			else{
+				//sobrou adm
+				model.addAttribute("usuario", loggedUser);
+				return "main";
 			}
 		}
 	}
