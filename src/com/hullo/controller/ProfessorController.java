@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ public class ProfessorController {
 	@Qualifier("professorServiceImpl")
 	private UsuarioService<ProfessorImpl> professorService;
 	
-	@GetMapping("/showFormNewProfessor")
+	@GetMapping("/formProfessor")
 	public String showFormNovoUsuario(Model theModel){
 		
 		//create model attribute to bind form data
@@ -37,19 +38,40 @@ public class ProfessorController {
 	
 //	Metodo em desenvolvimento
   @PostMapping("/newProfessor")
-	public String saveUsuario(@ModelAttribute("professor") ProfessorImpl theProfessor){
-	  
+	public String saveUsuario(@ModelAttribute("professor") ProfessorImpl theProfessor, ModelMap modelMap){
+	  	  
 	  Date current_date = new Date();
 	  
-	  theProfessor.setAtivo_usuario("1");
-	  theProfessor.setDt_insert_usuario(current_date);
-	  theProfessor.setDt_last_update_usuario(current_date);
-	  theProfessor.setTipo_usuario("PROFESSOR");
-	  theProfessor.setData_nascimento_usuario(current_date);
+	  ProfessorImpl validaProfessor = new ProfessorImpl();
 		
-	  //save the professor
-	  professorService.saveUsuario(theProfessor);
+		//validar se ja existe usuario com esse email ou senha
+	  validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
 		
-		return "redirect:../adm/listaProfessores";
-	}
+		//se retornar que existe, exibe mensagem de erro
+	  
+	///// essa validação não está funcionando ainda:
+		/*if (validaProfessor != null){
+			System.out.println("viu que ha usuario com os dados");
+			//exibe mensagem de erro
+			final String errorMessage = 
+					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Ja exite usuario com esses dados </div>"; 
+		    modelMap.addAttribute("errorMessage", errorMessage);
+			
+			return "professor-form";
+			
+			//se nao existe professor com esses dados, cria o ususario
+		} else {*/
+			System.out.println("viu que nao ha usuario com os dados");
+			theProfessor.setAtivo_usuario("1");
+			theProfessor.setDt_insert_usuario(current_date);
+			theProfessor.setDt_last_update_usuario(current_date);
+			theProfessor.setTipo_usuario("PROFESSOR");
+			theProfessor.setData_nascimento_usuario(current_date);
+		
+			//save the professor
+			professorService.saveUsuario(theProfessor);
+		  
+			return "redirect:/usuario/usuarioLogin";
+		//}   ///// essa validação não está funcionando ainda
+  }  
 }

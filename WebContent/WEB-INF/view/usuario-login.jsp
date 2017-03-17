@@ -36,8 +36,12 @@
 					
 				  <div class="login-help">
 					${errorMessage}
+<<<<<<< HEAD
 					${okPasswordMessage}
 					<a href="../aluno/formAluno">Quero ser aluno</a> - <a href="../professor/showFormNewProfessor">Quero ser professor</a>
+=======
+					<a href="../aluno/formAluno">Quero ser aluno</a> - <a href="../professor/formProfessor">Quero ser professor</a>
+>>>>>>> 32bf939842b9afc3c4a353cd3143d55b0b953f28
 				  </div>  
 				</div>
 			</div>
