@@ -15,4 +15,6 @@ public interface UsuarioService<T> {
 
 	public Usuario getUsuario(int id_usuario);
 
+	public T getUsuario(String email);
+
 }

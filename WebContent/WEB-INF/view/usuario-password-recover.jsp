@@ -25,19 +25,14 @@
     	  <img class="logo" src="${pageContext.request.contextPath}/resources/images/logo200v2.png" width="200px" >
     	  <p></p>
 				<div class="loginmodal-container">
-				  <form:form action="getUsuario" modelAttribute="usuario" method="POST">
+				<p>Digite seu e-mail.</p>
+				  <form:form action="sendPassword" modelAttribute="usuario" method="POST">
 					<form:input path="email_usuario" placeholder="E-mail"/>
-					<form:input path="senha_usuario" placeholder="Senha" />
-					<div class="login-help">
-					<p><a href="../usuario/retrievePassword">Esqueceu sua senha?</a></p>
-					</div>
-					<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+					<input type="submit" name="submit" class="login loginmodal-submit" value="Enviar senha">
 				  </form:form>
 					
 				  <div class="login-help">
 					${errorMessage}
-					${okPasswordMessage}
-					<a href="../aluno/formAluno">Quero ser aluno</a> - <a href="../professor/showFormNewProfessor">Quero ser professor</a>
 				  </div>  
 				</div>
 			</div>

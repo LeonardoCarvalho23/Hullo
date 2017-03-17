@@ -14,5 +14,7 @@ public interface UsuarioDAO<T> {
 
 	public T getUsuario(int id);
 
+	public T getUsuario(String email);
+
 	
 }

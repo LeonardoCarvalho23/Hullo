@@ -75,6 +75,12 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		return theUsuario;
 	}
 
+	@Override
+	public AlunoImpl getUsuario(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

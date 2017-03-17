@@ -43,6 +43,12 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 		return professorDAO.getUsuario(id_usuario);
 	}
 
+	@Override
+	public ProfessorImpl getUsuario(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

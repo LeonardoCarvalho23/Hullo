@@ -58,5 +58,11 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		return theUsuario;
 	}
 
+	@Override
+	public ProfessorImpl getUsuario(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

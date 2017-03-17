@@ -74,8 +74,8 @@ $(function(){
 					
 					<tr>
 						<td><label>Data de Nascimento:</label></td>
-						 <fmt:formatDate pattern="dd/mm/yyyy" value="${usuario.data_nascimento_usuario}" var="dateString" />
-						 <td><input type="text" value="${dateString}" id="data_nascimento_usuario" class="form-control" /></td>
+						<fmt:formatDate type="date" value="${usuario.data_nascimento_usuario}" var="dateString" pattern="mm/dd/yyyy" />
+						 <td><form:input path="data_nascimento_usuario" value="${dateString}" class="form-control" /></td>
 						
 					</tr>
 					

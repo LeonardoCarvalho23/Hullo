@@ -50,7 +50,7 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 		
 		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
-		
+
 		// Cria query que faz busca no banco
 		Query<UsuarioImpl> theQuery;
 		theQuery = currentSession.createQuery("from UsuarioImpl where email_usuario='" + email + "'", UsuarioImpl.class);
@@ -64,7 +64,7 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 			// TODO Auto-generated catch block
 			empty = true;
 		}
-		
+
 		// Se a variável empty for verdadeira, significa que usuário não foi encontrado e retorna null
 		if (empty){
 			return null;
@@ -93,4 +93,34 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 		
 		return theUsuario;
 	}
+
+	@Override
+	public UsuarioImpl getUsuario(String email) {
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// Cria query que faz busca no banco
+		Query<UsuarioImpl> theQuery;
+		theQuery = currentSession.createQuery("from UsuarioImpl where email_usuario='" + email + "'", UsuarioImpl.class);
+				
+		// Testa com try catch a execução da query e se foi encontrado algo, é obrigatorio o uso do try catch
+		UsuarioImpl result = null;
+		boolean empty = false;
+			try {
+					result = theQuery.getSingleResult();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					empty = true;
+				}
+
+				// Se a variável empty for verdadeira, significa que usuário não foi encontrado e retorna null
+		if (empty){
+			return null;
+				} else {
+					// Do contrário, guardo o usuário na variavel theUsuario e testo agora a senha
+					UsuarioImpl theUsuario = result;
+						return theUsuario;
+					} 
+				}	
+	
 }

@@ -43,5 +43,11 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 		return usuarioDAO.getUsuario(id);
 	}
 
+	@Override
+	@Transactional
+	public UsuarioImpl getUsuario(String email) {
+		return usuarioDAO.getUsuario(email);
+	}
+
 
 }

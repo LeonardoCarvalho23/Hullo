@@ -4,6 +4,10 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -22,6 +26,16 @@ import com.hullo.service.UsuarioService;
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
+	
+	// --Abaixo, dados para disparo de email
+	@Autowired
+	private MailSender mailSender;
+	@Autowired
+	public void setMailSender(MailSender mailSender){
+		this.mailSender = mailSender;
+	}
+	
+	// -- fim do código para email
 	
 	//with the service, inject the service here
 	@Autowired
@@ -119,6 +133,47 @@ public class UsuarioController {
 		
 	}
 	
+	@GetMapping("/retrievePassword")
+	public String retrievePassword(Model theModel){
+		Usuario oUsuario = new UsuarioImpl();
+		theModel.addAttribute("usuario", oUsuario);
+		return "usuario-password-recover";
+	}
+	
+	@PostMapping("/sendPassword")
+	public String sendPassword(@ModelAttribute("usuario") UsuarioImpl theUsuario, Model model){
+		//Pega o email passado no modelo e busca o objeto
+		String email = theUsuario.getEmail_usuario();
+		UsuarioImpl visitor = usuarioService.getUsuario(email);
+		//Se o usuario nao foi encontrado, retorna erro. Do contrario, envia email.
+		if (visitor == null){
+			// erro
+			final String errorMessage = 
+					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário não encontrado. </div>"; 
+		    model.addAttribute("errorMessage", errorMessage);
+		    return "usuario-password-recover";
+			
+		} else {
+		
+		SimpleMailMessage msg = new SimpleMailMessage();
+		
+		msg.setTo(visitor.getEmail_usuario());
+		msg.setFrom("noreply@hullo.com.br");
+		msg.setSubject("Recuperação de senha");
+		msg.setText(visitor.getNome_usuario()+", sua senha é "+visitor.getSenha_usuario()+".");
+		
+		try {
+			this.mailSender.send(msg);
+			//System.out.println(msg.toString());
+		} catch (MailException e) {
+			// TODO Auto-generated catch block
+		}
+		final String okPasswordMessage =
+	    		"<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Senha enviada com sucesso. </div>";	
+	    model.addAttribute("okPasswordMessage", okPasswordMessage);
+		return "usuario-login";
+		}
+	}
 	
 	/*
 	@PostMapping("novoUsuario")

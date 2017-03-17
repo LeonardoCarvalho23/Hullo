@@ -46,6 +46,12 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 		return alunoDAO.getUsuario(id_usuario);
 	}
 
+	@Override
+	public AlunoImpl getUsuario(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

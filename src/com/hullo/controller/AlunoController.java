@@ -38,7 +38,7 @@ public class AlunoController {
 	}
 	
 
-	//Metodo em desenvolvimento
+	//Metodo para gravar novo aluno
 	@PostMapping("/newAluno")
 	public String saveUsuario(@ModelAttribute("usuario") AlunoImpl theAluno, ModelMap modelMap){
 		Date current_date = new Date();
@@ -52,14 +52,14 @@ public class AlunoController {
 			System.out.println("viu que ha usuario com os dados");
 			//exibe mensagem de erro
 			final String errorMessage = 
-					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Ja exite usuario com esses dados </div>"; 
+					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Já exite usuário com esses dados. </div>"; 
 		    modelMap.addAttribute("errorMessage", errorMessage);
 			
 			return "aluno-form";
 			
 		//se nao existe aluno com esses dados, cria o ususario
 		} else {
-			System.out.println("viu que nao ha usuario com os dados");
+			
 			theAluno.setAtivo_usuario("1");
 			theAluno.setDt_insert_usuario(current_date);
 			theAluno.setDt_last_update_usuario(current_date);
