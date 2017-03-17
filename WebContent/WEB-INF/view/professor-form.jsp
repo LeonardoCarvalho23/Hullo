@@ -6,16 +6,29 @@
 <head>
 	<title>Novo Professor</title>
 
-	<link type="text/css" 
-		  rel="stylesheet" 
-		  href="${pageContext.request.contextPath}/resources/css/style.css">
-
-	<link type="text/css" 
-		  rel="stylesheet" 
-		  href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
+	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+
+<script type="text/javascript">
+function checkPasswordMatch() {
+    var password = $("#txtNewPassword").val();
+    var confirmPassword = $("#txtConfirmPassword").val();
+
+    if (password != confirmPassword){
+    	alert ("Senhas não são iguais");
+    	return false;
+    }
+    return true
+    
+}
+       
+</script>
+
 	<div id="wrapper">
 		<div id="header">
 			<h2>Novo Profesor</h2>
@@ -24,7 +37,7 @@
 	
 	<div id="container">
 		
-		<form:form action="newProfessor" modelAttribute="usuario" method="POST">
+		<form:form action="newProfessor" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();">
 					
 					<label>*nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
 					
@@ -37,14 +50,18 @@
 						
 					<label>CNPJ:</label>
 					<form:input path="cnpj_usuario" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" 
-						title="Digite um CNPJ no formato: xx.xxx.xxx/xxxx-xx" value="xx.xxx.xxx/xxxx-xx" required="false"/>
+						title="Digite um CNPJ no formato: xx.xxx.xxx/xxxx-xx" value="xx.xxx.xxx/xxxx-xx" />
 					
 					<label>*Email:</label>
 					<form:input type="email" path="email_usuario" required="true" maxlength="45"/>
 					<div style = widht:40>
+					
 					<label>*Senha:</label>
-					<form:input type="password" path="senha_usuario" required="true" maxlength="40"/>
+					<form:input type="password" path="senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/>
 					</div>
+					<label>*Confirme a Senha:</label>
+					<input type="password" id = "txtConfirmPassword" required/>
+					
 					<label>*Sexo:</label>
 					Feminino <form:radiobutton path="sexo_usuario" value="F" required="true"/>
 					Masculino <form:radiobutton path="sexo_usuario" value="M" />
@@ -56,12 +73,9 @@
 					<label>*Telefone:</label>
 					<form:input path="telefone_usuario" required="true" maxlength="20"/>
 					
-					<label>Profissao:</label>
-					<form:input path="profissao_usuario" size="40"/>
-					
-					<label>CV:</label>			
-					<textarea rows="2" cols="100">Anexe seu CV aqui</textarea>
-					
+					<label>Profissão:</label>
+					<form:input path="profissao_usuario" />
+														
 					<input type="submit" value="Salvar" class="add-button" />
 						
 					<input type="button" value="Voltar"
