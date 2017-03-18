@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
@@ -29,7 +30,7 @@
 		<form:form action="newAluno" modelAttribute="usuario" method="POST">
 
 					
-					<label>*nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
+					<label>*Nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
 					
 					<label>*Sobrenome:</label>
 					<form:input path="sobrenome_usuario" required="true" maxlength="45"/>
@@ -55,7 +56,7 @@
 					<label>*Telefone:</label>
 					<form:input path="telefone_usuario" required="true" maxlength="20"/>
 					
-					<label>Profissao:</label>
+					<label>Profissão:</label>
 					<form:input path="profissao_usuario" size="40"/>
 					<br><br>
 						<input type="submit" value="Salvar" class="add-button" />

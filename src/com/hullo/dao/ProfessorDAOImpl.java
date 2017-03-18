@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.ProfessorImpl;
 
 @Repository
@@ -61,7 +60,8 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 					return null;
 				}
 	}
-
+	
+	
 	@Override
 	public ProfessorImpl getUsuario(int id) {
 		//get current hibernate session
