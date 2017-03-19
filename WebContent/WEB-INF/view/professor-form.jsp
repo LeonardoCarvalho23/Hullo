@@ -31,15 +31,17 @@ function checkPasswordMatch() {
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>Novo Profesor</h2>
+			<h2>Novo Professor</h2>
 		</div>
 	</div>
 	
 	<div id="container">
+	
+		${errorMessage}
 		
 		<form:form action="newProfessor" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();">
 					
-					<label>*nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
+					<label>*Nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
 					
 					<label>*Sobrenome:</label>
 					<form:input path="sobrenome_usuario" required="true" maxlength="45"/>
@@ -82,7 +84,8 @@ function checkPasswordMatch() {
 							onclick = "window.location.href='../'; return false;"
 							class="add-button"
 							/>		
-						
+					<br><br>
+					*Campos de preenchimento obrigatório
 						
 		</form:form>
 		<br>

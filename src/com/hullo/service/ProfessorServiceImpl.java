@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hullo.dao.UsuarioDAO;
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
-import com.hullo.entity.UsuarioImpl;
+
 
 @Service
 public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
@@ -33,11 +33,12 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 	}
 
 	@Override
-	public ProfessorImpl getUsuario(String email, String senha) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public ProfessorImpl getUsuario(String email, String cpf) {
+		return professorDAO.getUsuario(email, cpf);
 	}
-
+	
+	
 	@Override
 	public Usuario getUsuario(int id_usuario) {
 		return professorDAO.getUsuario(id_usuario);
