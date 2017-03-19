@@ -11,8 +11,6 @@ import com.hullo.dao.UsuarioDAO;
 import com.hullo.entity.AlunoImpl;
 
 import com.hullo.entity.Usuario;
-import com.hullo.entity.UsuarioImpl;
-
 
 @Service
 public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
@@ -46,12 +44,18 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 		return alunoDAO.getUsuario(id_usuario);
 	}
 
+	//implementado so por obrigacao por enquanto
 	@Override
 	public AlunoImpl getUsuario(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	@Transactional
+	public void updateUsuario(AlunoImpl theUsuario) {
+		alunoDAO.udateUsuario(theUsuario);
+	}
 
 
 }

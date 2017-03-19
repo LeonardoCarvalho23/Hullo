@@ -50,7 +50,11 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 		return null;
 	}
 
-
+	@Override
+	@Transactional
+	public void updateUsuario(ProfessorImpl theUsuario) {
+		professorDAO.udateUsuario(theUsuario);
+	}
 
 
 

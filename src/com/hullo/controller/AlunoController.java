@@ -88,16 +88,13 @@ public class AlunoController {
 	}
 	
 	//metodo para atualizar aluno
-	@PostMapping("/saveAluno")
-	public String saveAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, Model theModel){
+	@PostMapping("/updateAluno")
+	public String updateAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, Model theModel){
 		Date current_date = new Date();
-		
-		theUsuario.setAtivo_usuario("1");
-		theUsuario.setDt_insert_usuario(current_date);
+
 		theUsuario.setDt_last_update_usuario(current_date);
-		theUsuario.setTipo_usuario("ALUNO");
 		
-		alunoService.saveUsuario(theUsuario);
+		alunoService.updateUsuario(theUsuario);
 		
 		theModel.addAttribute(theUsuario);
 		

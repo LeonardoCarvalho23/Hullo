@@ -121,6 +121,13 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 					UsuarioImpl theUsuario = result;
 						return theUsuario;
 					} 
-				}	
+				}
+
+	//implemetado apenas por obrigacao
+	@Override
+	public void udateUsuario(UsuarioImpl theUsuario) {
+		// TODO Auto-generated method stub
+		
+	}	
 	
 }

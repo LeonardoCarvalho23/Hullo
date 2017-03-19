@@ -49,5 +49,11 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 		return usuarioDAO.getUsuario(email);
 	}
 
+	//implementado por orbigacao
+	@Override
+	@Transactional
+	public void updateUsuario(UsuarioImpl theUsuario) {
+	}
+
 
 }

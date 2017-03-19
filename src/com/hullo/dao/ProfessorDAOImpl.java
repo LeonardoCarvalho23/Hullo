@@ -80,10 +80,46 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		return theUsuario;
 	}
 
+	//implementado apenas por obrigacao
 	@Override
 	public ProfessorImpl getUsuario(String email) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	//para fazer update do professor
+	@Override
+	public void udateUsuario(ProfessorImpl theUsuario) {
+		
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+				
+		// Cria query que faz busca no banco
+		Query<ProfessorImpl> theQuery;
+		
+		//para fazer update apenas dos capos editaveis
+		String hql = "UPDATE AlunoImpl set nome_usuario = :nome, sobrenome_usuario = :sobrenome, email_usuario = :email, "
+				+ "senha_usuario = :senha, sexo_usuario = :sexo, data_nascimento_usuario = :data, telefone_usuario = :telefone, "
+				+ "profissao_usuario = :profissao, dt_last_update_usuario = :lastUpdate " 
+	            + "WHERE id_usuario = :id";
+		theQuery = currentSession.createQuery(hql);
+		
+		//adicionando valores para as variaveis do update
+		theQuery.setParameter("nome", theUsuario.getNome_usuario());
+		theQuery.setParameter("sobrenome", theUsuario.getSobrenome_usuario());
+		theQuery.setParameter("email", theUsuario.getEmail_usuario());
+		theQuery.setParameter("senha", theUsuario.getSenha_usuario());
+		theQuery.setParameter("sexo", theUsuario.getSexo_usuario());
+		theQuery.setParameter("data", theUsuario.getData_nascimento_usuario());
+		theQuery.setParameter("profissao", theUsuario.getProfissao_usuario());
+		theQuery.setParameter("telefone", theUsuario.getTelefone_usuario());
+		theQuery.setParameter("lastUpdate", theUsuario.getDt_last_update_usuario());
+		
+		theQuery.setParameter("id", theUsuario.getId_usuario());
+		
+		int result = theQuery.executeUpdate();
+		
+		System.out.println(result + " linha atualizada");
 	}
 
 

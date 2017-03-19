@@ -36,7 +36,7 @@ $(function(){
 	
 	<div id="container">
 		
-		<form:form action="saveAluno" modelAttribute="usuario" method="POST">
+		<form:form action="updateAluno" modelAttribute="usuario" method="POST">
 			<!-- campo oculto com o id para ele não perder o contexto/id -->
 			<form:hidden path="id_usuario" />
 			<table>
