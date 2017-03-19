@@ -7,16 +7,30 @@
 <head>
 	<title>Novo Aluno</title>
 
-	<link type="text/css" 
-		  rel="stylesheet" 
-		  href="${pageContext.request.contextPath}/resources/css/style.css">
-
-	<link type="text/css" 
-		  rel="stylesheet" 
-		  href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
+	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	
 </head>
 
 <body>
+
+<script type="text/javascript">
+function checkPasswordMatch() {
+    var password = $("#txtNewPassword").val();
+    var confirmPassword = $("#txtConfirmPassword").val();
+
+    if (password != confirmPassword){
+    	alert ("Senhas não são iguais");
+    	return false;
+    }
+    return true
+    
+}
+       
+</script>
+
 	<div id="wrapper">
 		<div id="header">
 			<h2>Novo Aluno</h2>
@@ -27,7 +41,7 @@
 
 					${errorMessage}
 
-		<form:form action="newAluno" modelAttribute="usuario" method="POST">
+		<form:form action="newProfessor" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();">
 
 					
 					<label>*Nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
@@ -43,7 +57,10 @@
 					<form:input type="email" path="email_usuario" required="true" maxlength="45"/>
 					
 					<label>*Senha:</label>
-					<form:input type="password" path="senha_usuario" required="true" maxlength="40"/>
+					<form:input type="password" path="senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/>
+					
+					<label>*Confirme a Senha:</label>
+					<input type="password" id = "txtConfirmPassword" required/>
 					
 					<label>*Sexo:</label>
 					Feminino <form:radiobutton path="sexo_usuario" value="F" required="true"/>

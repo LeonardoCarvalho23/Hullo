@@ -36,7 +36,7 @@ public class ProfessorController {
 		return "professor-form";
 	}
 	
-//	Metodo em desenvolvimento
+//para gravar novo professor
   @PostMapping("/newProfessor")
 	public String saveUsuario(@ModelAttribute("usuario") ProfessorImpl theProfessor, ModelMap modelMap){
 	  	  
@@ -61,7 +61,6 @@ public class ProfessorController {
 			
 			//se nao existe professor com esses dados, cria o ususario
 		} else {
-			System.out.println("viu que nao ha usuario com os dados");
 			theProfessor.setAtivo_usuario("1");
 			theProfessor.setDt_insert_usuario(current_date);
 			theProfessor.setDt_last_update_usuario(current_date);
