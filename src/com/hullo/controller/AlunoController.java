@@ -1,6 +1,7 @@
 package com.hullo.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class AlunoController {
 
 		// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
 		//get aluno form database
-		Usuario theUsuario = alunoService.getUsuario(id_usuario);
+		AlunoImpl theUsuario = alunoService.getUsuario(id_usuario);
 		
 		//adiciona o usuario ao modelo
 		theModel.addAttribute("usuario", theUsuario);

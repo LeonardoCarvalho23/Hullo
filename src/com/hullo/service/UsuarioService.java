@@ -12,7 +12,7 @@ public interface UsuarioService<T> {
 
 	public T getUsuario(String email, String senha);
 
-	public Usuario getUsuario(int id_usuario);
+	public T getUsuario(int id_usuario);
 
 	public T getUsuario(String email);
 

@@ -1,5 +1,6 @@
 package com.hullo.entity;
 
+
 import java.util.Date;
 
 import javax.persistence.Column;

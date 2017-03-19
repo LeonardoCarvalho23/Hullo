@@ -65,7 +65,7 @@ public class ProfessorController {
 			theProfessor.setDt_insert_usuario(current_date);
 			theProfessor.setDt_last_update_usuario(current_date);
 			theProfessor.setTipo_usuario("PROFESSOR");
-		
+
 			//save the professor
 			professorService.saveUsuario(theProfessor);
 		  

@@ -14,17 +14,17 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css" />
 		<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>
-<script>
+ <script>
 $(function(){
     $('#data_nascimento_usuario').datepicker({
-    	format: "mm/dd/yyyy",
+    	format: "dd/mm/yyyy",
     	//dateFormat: "mm/dd/yyyy", 
     	//altField: "#data_nascimento_usuario", 
     	//altFormat: "mm/dd/yyyy",
     	language: "pt-BR"
     });
 });
-</script>
+</script> 
 </head>
 <body>
 <input type="text" class="form-control">
@@ -74,8 +74,8 @@ $(function(){
 					
 					<tr>
 						<td><label>Data de Nascimento:</label></td>
-						<fmt:formatDate type="date" value="${usuario.data_nascimento_usuario}" var="dateString" pattern="mm/dd/yyyy" />
-						 <td><form:input path="data_nascimento_usuario" value="${dateString}" class="form-control" /></td>
+						<fmt:formatDate type="date" dateStyle="short" value="${usuario.data_nascimento_usuario}" var="dateString" pattern="dd/MM/yyyy" />
+						 <td><form:input path="data_nascimento_usuario" value="${dateString}" class="form-control" /></td><!-- class="form-control" -->
 						
 					</tr>
 					

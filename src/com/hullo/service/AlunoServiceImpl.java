@@ -40,7 +40,7 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 
 	@Override
 	@Transactional
-	public Usuario getUsuario(int id_usuario) {
+	public AlunoImpl getUsuario(int id_usuario) {
 		return alunoDAO.getUsuario(id_usuario);
 	}
 
