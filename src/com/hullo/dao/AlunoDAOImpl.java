@@ -34,19 +34,18 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		currentSession.saveOrUpdate(theUsuario);
 	}
 
+	//metodo para validar se o alunoa ja existe no banco
 	@Override
 	public AlunoImpl getUsuario(String email, String cpf) {
 		
 		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		System.out.println("chegou no DAO");
+		System.out.println(email);
 		
-				
 		// Cria query que faz busca no banco
 		Query<AlunoImpl> theQuery;
-		theQuery = currentSession.createQuery("from AlunoImpl where tipo_usuario = 'aluno' and email_usuario = '" + email + 
-				"' or cpf_usuario = '" + cpf + "'", AlunoImpl.class);
+		theQuery = currentSession.createQuery("from AlunoImpl where tipo_usuario = 'ALUNO' and email_usuario = '" + email + "' or cpf_usuario = '" + cpf + "'", AlunoImpl.class);
 		
 		try {
 			AlunoImpl validaAluno = theQuery.getSingleResult();

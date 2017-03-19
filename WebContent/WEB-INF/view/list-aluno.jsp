@@ -45,8 +45,8 @@
 					<tr>
 						<td>${tempUsuario.id_usuario} </td> 
 						<td>${tempUsuario.nome_usuario} </td>
-						<td> ${tempUsuario.sobrenome_usuario} </td>
-						<td> ${tempUsuario.email_usuario} </td>
+						<td>${tempUsuario.sobrenome_usuario} </td>
+						<td>${tempUsuario.email_usuario} </td>
 						<td>${tempUsuario.data_nascimento_usuario} </td>
 						<td>${tempUsuario.profissao_usuario} </td>
 						<td>${tempUsuario.ativo_usuario} </td>
