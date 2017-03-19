@@ -53,7 +53,7 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 
 		// Cria query que faz busca no banco
 		Query<UsuarioImpl> theQuery;
-		theQuery = currentSession.createQuery("from UsuarioImpl where email_usuario='" + email + "'", UsuarioImpl.class);
+		theQuery = currentSession.createQuery("from UsuarioImpl where ativo_usuario = '1' and email_usuario='" + email + "'", UsuarioImpl.class);
 		
 		// Testa com try catch a execução da query e se foi encontrado algo, é obrigatorio o uso do try catch
 		UsuarioImpl result = null;

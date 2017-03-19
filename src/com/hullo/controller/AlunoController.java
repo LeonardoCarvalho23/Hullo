@@ -47,14 +47,13 @@ public class AlunoController {
 		//validar se ja existe usuario com esse email ou senha
 		validaAluno = alunoService.getUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 		
-		//se retornar que existe, exibe mensagem de erro
+		//se retornar que existe, vai verificar se esta ativo
 		if (validaAluno != null){
-			System.out.println("viu que ha usuario com os dados");
-			//exibe mensagem de erro
+			
 			final String errorMessage = 
 					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Já exite usuário com esses dados. </div>"; 
-		    modelMap.addAttribute("errorMessage", errorMessage);
-			
+						modelMap.addAttribute("errorMessage", errorMessage);
+				
 			return "aluno-form";
 			
 		//se nao existe aluno com esses dados, cria o ususario

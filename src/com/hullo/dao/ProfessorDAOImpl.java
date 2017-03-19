@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.ProfessorImpl;
 
 @Repository
@@ -43,17 +44,19 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 				Session currentSession = sessionFactory.getCurrentSession();
 				
 				System.out.println("chegou no DAO");
-				
-						
+										
 				// Cria query que faz busca no banco
 				Query<ProfessorImpl> theQuery;
-				theQuery = currentSession.createQuery("from ProfessorImpl where tipo_usuario = 'professor' and email_usuario = '" + email + 
+				//tirei a busca por aluno para nao correr o risco de um prof se cadastrar como aluno e zoar o barraco
+				theQuery = currentSession.createQuery("from ProfessorImpl where email_usuario = '" + email + 
 						"' or cpf_usuario = '" + cpf + "'", ProfessorImpl.class);
 				
 				try {
-					ProfessorImpl validaProfessor = theQuery.getSingleResult();
 					
-					System.out.println("fez a query");
+					//ve se tem mais de um professor com os dados
+					List<ProfessorImpl> professores = theQuery.getResultList();
+					//devolve o primeiro da lista
+					ProfessorImpl validaProfessor = professores.get(0);
 					return validaProfessor;
 					
 				} catch (Exception e) {

@@ -27,7 +27,7 @@
 				<div class="loginmodal-container">
 				  <form:form action="getUsuario" modelAttribute="usuario" method="POST">
 					<form:input path="email_usuario" placeholder="E-mail"/>
-					<form:input path="senha_usuario" placeholder="Senha" />
+					<form:input path="senha_usuario" placeholder="Senha" type="password" />
 					<div class="login-help">
 					<p><a href="../usuario/retrievePassword">Esqueceu sua senha?</a></p>
 					</div>
