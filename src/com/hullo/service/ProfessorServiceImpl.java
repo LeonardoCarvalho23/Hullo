@@ -57,6 +57,12 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 		professorDAO.udateUsuario(theUsuario);
 	}
 
+	@Override
+	public void inactivateUsuario(ProfessorImpl theUsuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

@@ -54,6 +54,10 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 	@Transactional
 	public void updateUsuario(UsuarioImpl theUsuario) {
 	}
-
+		
+	@Override
+	@Transactional
+	public void inactivateUsuario(UsuarioImpl theUsuario){		
+	}
 
 }
