@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.ProfessorImpl;
 
 @Repository
@@ -98,9 +97,9 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		Query<ProfessorImpl> theQuery;
 		
 		//para fazer update apenas dos capos editaveis
-		String hql = "UPDATE AlunoImpl set nome_usuario = :nome, sobrenome_usuario = :sobrenome, email_usuario = :email, "
+		String hql = "UPDATE ProfessorImpl set nome_usuario = :nome, sobrenome_usuario = :sobrenome, email_usuario = :email, "
 				+ "senha_usuario = :senha, sexo_usuario = :sexo, data_nascimento_usuario = :data, telefone_usuario = :telefone, "
-				+ "profissao_usuario = :profissao, dt_last_update_usuario = :lastUpdate " 
+				+ "profissao_usuario = :profissao, profissao_usuario = :profissao, dt_last_update_usuario = :lastUpdate " 
 	            + "WHERE id_usuario = :id";
 		theQuery = currentSession.createQuery(hql);
 		
@@ -122,11 +121,29 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		System.out.println(result + " linha atualizada");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void inactivateUsuario(ProfessorImpl theUsuario) {
-		// TODO Auto-generated method stub
-		
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+								
+		// Cria query que faz busca no banco
+		Query<ProfessorImpl> theQuery;
+						
+		//para fazer update apenas dos capos editaveis
+		String hql = "UPDATE ProfessorImpl set ativo_usuario = 0, dt_last_update_usuario = :lastUpdate " 
+					            + "WHERE id_usuario = :id";
+				
+		theQuery = currentSession.createQuery(hql);		
+		theQuery.setParameter("lastUpdate", theUsuario.getDt_last_update_usuario());
+		theQuery.setParameter("id", theUsuario.getId_usuario());
+				
+		int result = theQuery.executeUpdate();
+				
+		System.out.println(result + " linha atualizada");
 	}
+		
+	
 
 
 }
