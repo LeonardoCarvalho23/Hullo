@@ -28,5 +28,11 @@ public class CidadeServiceImpl {
 		
 		return cidadeDAO.getCidades(estado);
 	}
+
+	@Transactional
+	public List<CidadeImpl> obterCidadesDoEstado(EstadoImpl estado) {
+		
+		return cidadeDAO.getCidades(estado);
+	}
 	
 }

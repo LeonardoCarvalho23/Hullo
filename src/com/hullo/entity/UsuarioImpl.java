@@ -63,14 +63,6 @@ public class UsuarioImpl implements Usuario{
 	
 	@Column(name="cd_cidade_usuario")
 	private int cd_cidade_usuario;
-
-	public int getCidade() {
-		return cd_cidade_usuario;
-	}
-
-	public void setCidade(int cd_cidade_usuario) {
-		this.cd_cidade_usuario = cd_cidade_usuario;
-	}
 	
 	public int getId_usuario() {
 		return id_usuario;
@@ -192,6 +184,14 @@ public class UsuarioImpl implements Usuario{
 		this.dt_last_update_usuario = dt_last_update_usuario;
 	}
 
+	public int getCd_cidade_usuario() {
+		return cd_cidade_usuario;
+	}
+
+	public void setCd_cidade_usuario(int cd_cidade_usuario) {
+		this.cd_cidade_usuario = cd_cidade_usuario;
+	}
+
 	@Override
 	public String toString() {
 		return "UsuarioImpl [id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", sobrenome_usuario="
@@ -200,9 +200,8 @@ public class UsuarioImpl implements Usuario{
 				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
 				+ telefone_usuario + ", tipo_usuario=" + tipo_usuario + ", profissao_usuario=" + profissao_usuario
 				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
-				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
+				+ ", dt_last_update_usuario=" + dt_last_update_usuario + ", cd_cidade_usuario=" + cd_cidade_usuario
+				+ "]";
 	}
-
-
 	
 }

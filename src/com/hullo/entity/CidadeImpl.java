@@ -18,10 +18,7 @@ public class CidadeImpl {
 	@Column(name="nm_cidade")
 	private String nm_cidade;
 
-	@Column(name="sg_cidade")
-	private String sg_cidade;
-	
-	@Column(name="id_Estado")
+	@Column(name="id_estado_cidade")
 	private int id_Estado;
 
 	public int getId_Cidade() {
@@ -40,20 +37,17 @@ public class CidadeImpl {
 		this.nm_cidade = nm_cidade;
 	}
 
-	public String getSg_cidade() {
-		return sg_cidade;
-	}
-
-	public void setSg_cidade(String sg_cidade) {
-		this.sg_cidade = sg_cidade;
-	}
-
 	public int getEstado() {
 		return id_Estado;
 	}
 
 	public void setEstado(int id_Estado) {
 		this.id_Estado = id_Estado;
+	}
+
+	@Override
+	public String toString() {
+		return "{'id_Cidade' :" + id_Cidade + ", 'nm_cidade' : '" + nm_cidade + "' , 'id_Estado' :" + id_Estado + "}";
 	}
 	
 	

@@ -222,7 +222,8 @@ public class AlunoImpl implements Usuario {
 				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
 				+ telefone_usuario + ", tipo_usuario=" + tipo_usuario + ", profissao_usuario=" + profissao_usuario
 				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
-				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
+				+ ", dt_last_update_usuario=" + dt_last_update_usuario + ", cd_cidade_usuario=" + cd_cidade_usuario
+				+ "]";
 	}
 	
 }
