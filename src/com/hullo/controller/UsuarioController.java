@@ -34,7 +34,6 @@ public class UsuarioController {
 	public void setMailSender(MailSender mailSender){
 		this.mailSender = mailSender;
 	}
-	
 	// -- fim do código para email
 	
 	//with the service, inject the service here
@@ -62,7 +61,7 @@ public class UsuarioController {
 	
 	@PostMapping("/getUsuario")
 	public String loginUsuario(@ModelAttribute("usuario") UsuarioImpl theUsuario, Model model){
-		// Acima, acrescentei o "ModelMap model" para poder repassar a mensagem de erro quando o login falha
+		// Acima, acrescentei o "Model model" para poder repassar a mensagem de erro quando o login falha
 		// Pega o Model e retira os parâmetros para variáveis
 		String email = theUsuario.getEmail_usuario();
 		String senha = theUsuario.getSenha_usuario();

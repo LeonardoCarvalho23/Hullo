@@ -6,6 +6,9 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,6 +28,15 @@ public class ProfessorController {
 	@Autowired
 	@Qualifier("professorServiceImpl")
 	private UsuarioService<ProfessorImpl> professorService;
+	
+	// --Abaixo, dados para disparo de email
+		@Autowired
+		private MailSender mailSender;
+		@Autowired
+		public void setMailSender(MailSender mailSender){
+			this.mailSender = mailSender;
+		}
+		// -- fim do código para email
 	
 	@GetMapping("/formProfessor")
 	public String showFormNovoUsuario(Model theModel){
@@ -68,6 +80,21 @@ public class ProfessorController {
 
 			//save the professor
 			professorService.saveUsuario(theProfessor);
+			
+			//Envia email de confirmação
+			SimpleMailMessage msg = new SimpleMailMessage();
+			
+			msg.setTo(theProfessor.getEmail_usuario());
+			msg.setFrom("noreply@hullo.com.br");
+			msg.setSubject("Confirmação de cadastro");
+			msg.setText(theProfessor.getNome_usuario()+", seu cadastro de professor foi realizado com sucesso.");
+			
+			try {
+				this.mailSender.send(msg);
+				//System.out.println(msg.toString());
+			} catch (MailException e) {
+				// TODO Auto-generated catch block
+			}
 		  
 			return "redirect:/usuario/usuarioLogin";
 		}   
