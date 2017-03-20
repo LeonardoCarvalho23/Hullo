@@ -63,6 +63,119 @@ function checkPasswordMatch() {
     return true
     
 }
+
+//Verifica se CPF é válido
+function TestaCPF(strCPF) {
+	strCPF = strCPF.replace(/[^\d]+/g,'');
+	var Soma, Resto, borda_original;
+	Soma = 0;
+	
+	
+	if (strCPF == "00000000000"){
+		document.getElementById("cpf").setCustomValidity('Invalid');
+		alert("CPF INVALIDO");
+		return false;
+	}
+	
+	for (i=1; i<=9; i++){
+		Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+	}
+	
+	Resto = (Soma * 10) % 11;
+	if ((Resto == 10) || (Resto == 11)){
+		Resto = 0;
+	}
+	
+	if (Resto != parseInt(strCPF.substring(9, 10))){
+		document.getElementById("cpf").setCustomValidity('Invalid');
+		alert("CPF INVALIDO");
+		return false;
+	}
+	
+	Soma = 0;
+	for (i = 1; i <= 10; i++){
+		Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+	}
+	
+	Resto = (Soma * 10) % 11;
+	if ((Resto == 10) || (Resto == 11)){
+		Resto = 0;
+	}
+	
+	if (Resto != parseInt(strCPF.substring(10, 11))){
+		document.getElementById("cpf").setCustomValidity('Invalid');
+		alert("CPF INVALIDO");
+		return false;
+	}
+	
+	document.getElementById("cpf").setCustomValidity('');
+	alert("CPF VALIDO!");
+	return true;
+}
+
+function validaCnpj(cnpj){
+	cnpj = cnpj.replace(/[^\d]+/g,'');
+	 
+   // if(cnpj == '') return false;
+     
+    if (cnpj.length != 14)
+        return false;
+ 
+    // Elimina CNPJs invalidos conhecidos
+    if (cnpj == "00000000000000" || 
+        cnpj == "11111111111111" || 
+        cnpj == "22222222222222" || 
+        cnpj == "33333333333333" || 
+        cnpj == "44444444444444" || 
+        cnpj == "55555555555555" || 
+        cnpj == "66666666666666" || 
+        cnpj == "77777777777777" || 
+        cnpj == "88888888888888" || 
+        cnpj == "99999999999999"){
+    	alert("CNPJ INVÁLIDO");
+    	return false;
+    }
+        
+         
+    // Valida DVs
+    tamanho = cnpj.length - 2
+    numeros = cnpj.substring(0,tamanho);
+    digitos = cnpj.substring(tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(0)){
+    	alert("CNPJ INVÁLIDO");
+    	return false;
+    }
+        
+         
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0,tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(1)){
+    	alert("CNPJ INVÁLIDO");
+    	return false;
+    }
+    else{
+    	alert ("CNPJ OK!");
+    	return true;
+    }
+           
+    
+}
        
 </script>
 
@@ -84,12 +197,22 @@ function checkPasswordMatch() {
 					<form:input path="sobrenome_usuario" required="true" maxlength="45"/>
 					
 					<label>*CPF:</label>
-					<form:input path="cpf_usuario" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
-						title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="xxx.xxx.xxx-xx" required="true"/>
-						
+					<form:input path="cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+					 placeholder="Apenas numeros" maxlength="14" size="14" required="true"
+					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
+						 
+					<!-- <label>*CPF:</label>
+					<form:input path="cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
+						title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="xxx.xxx.xxx-xx" required="true"/> 
+						 -->
 					<label>CNPJ:</label>
+					<form:input path="cnpj_usuario" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" id = "cnpj" onblur="validaCnpj(this.value)"
+						title="Digite um CNPJ válido no formato: xx.xxx.xxx/xxxx-xx"  
+						maxlength="18" size="18"  placeholder="Apenas números" />
+					
+					<!-- <label>CNPJ:</label>
 					<form:input path="cnpj_usuario" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" 
-						title="Digite um CNPJ no formato: xx.xxx.xxx/xxxx-xx" placeholder="xx.xxx.xxx/xxxx-xx" />
+						title="Digite um CNPJ no formato: xx.xxx.xxx/xxxx-xx" placeholder="xx.xxx.xxx/xxxx-xx" /> -->
 					
 					<label>*Email:</label>
 					<form:input type="email" path="email_usuario" required="true" maxlength="45"/>

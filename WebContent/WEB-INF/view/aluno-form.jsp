@@ -65,6 +65,55 @@ function checkPasswordMatch() {
     return true
     
 }
+
+//Verifica se CPF é válido
+function TestaCPF(strCPF) {
+	strCPF = strCPF.replace(/[^\d]+/g,'');
+	var Soma, Resto, borda_original;
+	Soma = 0;
+	
+	
+	if (strCPF == "00000000000"){
+		document.getElementById("cpf").setCustomValidity('Invalid');
+		alert("CPF INVALIDO");
+		return false;
+	}
+	
+	for (i=1; i<=9; i++){
+		Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+	}
+	
+	Resto = (Soma * 10) % 11;
+	if ((Resto == 10) || (Resto == 11)){
+		Resto = 0;
+	}
+	
+	if (Resto != parseInt(strCPF.substring(9, 10))){
+		document.getElementById("cpf").setCustomValidity('Invalid');
+		alert("CPF INVALIDO");
+		return false;
+	}
+	
+	Soma = 0;
+	for (i = 1; i <= 10; i++){
+		Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+	}
+	
+	Resto = (Soma * 10) % 11;
+	if ((Resto == 10) || (Resto == 11)){
+		Resto = 0;
+	}
+	
+	if (Resto != parseInt(strCPF.substring(10, 11))){
+		document.getElementById("cpf").setCustomValidity('Invalid');
+		alert("CPF INVALIDO");
+		return false;
+	}
+	
+	document.getElementById("cpf").setCustomValidity('');
+	alert("CPF VALIDO!");
+	return true;
+}
        
 </script>
 
@@ -87,8 +136,13 @@ function checkPasswordMatch() {
 					<form:input path="sobrenome_usuario" required="true" maxlength="45"/>
 					
 					<label>*CPF:</label>
+					<form:input path="cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+					 placeholder="Apenas numeros" maxlength="14" size="14" required="true"
+					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
+					
+					<!-- <label>*CPF:</label>
 					<form:input path="cpf_usuario" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
-						title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="xxx.xxx.xxx-xx" required="true"/>
+						title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="xxx.xxx.xxx-xx" required="true"/> -->
 					
 					<label>*Email:</label>
 					<form:input type="email" path="email_usuario" required="true" maxlength="45"/>
