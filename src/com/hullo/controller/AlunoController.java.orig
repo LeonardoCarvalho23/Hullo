@@ -1,8 +1,11 @@
 package com.hullo.controller;
 
 
-import java.io.IOException;
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
+=======
+import java.io.IOException;
+>>>>>>> finalizacao do cadastro de usuario com cidade
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -45,7 +47,10 @@ public class AlunoController {
 	@Qualifier("alunoServiceImpl")
 	private UsuarioService<AlunoImpl> alunoService;
 	
+<<<<<<< HEAD
+=======
 	 	
+>>>>>>> finalizacao do cadastro de usuario com cidade
 	@Autowired
 	private EstadoServiceImpl estadoService;
 	// --Abaixo, dados para disparo de email
@@ -57,10 +62,14 @@ public class AlunoController {
 	}
 	// -- fim do código para email
 	
+<<<<<<< HEAD
+	@GetMapping("/formAluno") 	
+=======
 	@Autowired
 	private CidadeServiceImpl cidadeService;
 	
 	@GetMapping("/formAluno")
+>>>>>>> finalizacao do cadastro de usuario com cidade
 	public String showFormNovoUsuario(Model theModel){
 		
 		
@@ -84,6 +93,8 @@ public class AlunoController {
 	public String saveUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel, ModelMap modelMap) throws JsonParseException, JsonMappingException, IOException{
 		Date current_date = new Date();
 		
+<<<<<<< HEAD
+=======
 		//pega o aluno do objeto usuarioModel
 		AlunoImpl theAluno = usuarioModel.getUsuario();
 		
@@ -94,24 +105,22 @@ public class AlunoController {
 		//seta o id da cidade no usuario
 		theAluno.setCidade(cidade.getId_Cidade());
 		
+>>>>>>> finalizacao do cadastro de usuario com cidade
 		//validar se ja existe usuario com esse email ou senha
 		AlunoImpl validaAluno = alunoService.getUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 		
-		System.out.println("validou o usuario");
-		
-		//se retornar que existe, exibe mensagem de erro
+		//se retornar que existe, vai verificar se esta ativo
 		if (validaAluno != null){
-			System.out.println("viu que ha usuario com os dados");
-			//exibe mensagem de erro
-			final String errorMessage = 
-					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Ja exite usuario com esses dados </div>"; 
-		    modelMap.addAttribute("errorMessage", errorMessage);
 			
+			final String errorMessage = 
+					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Já exite usuário com esses dados.</div>"; 
+						modelMap.addAttribute("errorMessage", errorMessage);
+				
 			return "aluno-form";
 			
 		//se nao existe aluno com esses dados, cria o ususario
 		} else {
-			System.out.println("viu que nao ha usuario com os dados");
+			
 			theAluno.setAtivo_usuario("1");
 			theAluno.setDt_insert_usuario(current_date);
 			theAluno.setDt_last_update_usuario(current_date);
@@ -120,21 +129,39 @@ public class AlunoController {
 			//save the aluno
 			alunoService.saveUsuario(theAluno);
 			
+			//Envia email de confirmação
+			SimpleMailMessage msg = new SimpleMailMessage();
+			
+			msg.setTo(theAluno.getEmail_usuario());
+			msg.setFrom("noreply@hullo.com.br");
+			msg.setSubject("Confirmação de cadastro");
+			msg.setText(theAluno.getNome_usuario()+", seu cadastro de aluno foi realizado com sucesso.");
+			
+			try {
+				this.mailSender.send(msg);
+				//System.out.println(msg.toString());
+			} catch (MailException e) {
+				// TODO Auto-generated catch block
+			}
+			
 			return "redirect:/usuario/usuarioLogin";
 		}
-		
 	}
 	
-	
-	@RequestMapping(value = "/formAluno/cidades", method = RequestMethod.POST)
-	
-	public @ResponseBody List<CidadeImpl> obterCidade(@RequestBody EstadoImpl estado){
+	//metodo para abrir pagina de update do aluno
+	@PostMapping("/showFormUpdateAluno")
+	public String showFormUpdateAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
+
+		// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
+		//get aluno form database
+		AlunoImpl theUsuario = alunoService.getUsuario(id_usuario);
 		
-		//List<CidadeImpl> cidade = cidadeService.getCidades();
+		//adiciona o usuario ao modelo
+		theModel.addAttribute("usuario", theUsuario);
 		
-		List<CidadeImpl> cidade = cidadeService.obterCidadesDoEstado(estado);
+		// retorna
+		return "aluno-update-form";
 		
-		return cidade;
 	}
 	
 	//metodo para atualizar aluno
@@ -148,8 +175,22 @@ public class AlunoController {
 		
 		theModel.addAttribute(theUsuario);
 		
+<<<<<<< HEAD
 		return "home-aluno";
+=======
+	}
+	
+	
+	@RequestMapping(value = "/formAluno/cidades", method = RequestMethod.POST)
+	
+	public @ResponseBody List<CidadeImpl> obterCidade(@RequestBody EstadoImpl estado){
 		
+		//List<CidadeImpl> cidade = cidadeService.getCidades();
+		
+		List<CidadeImpl> cidade = cidadeService.obterCidadesDoEstado(estado);
+>>>>>>> finalizacao do cadastro de usuario com cidade
+		
+		return cidade;
 	}
 	
 	//metodo para abrir pagina de update do aluno

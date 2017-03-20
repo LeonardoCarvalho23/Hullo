@@ -41,7 +41,7 @@ public class UsuarioImpl implements Usuario{
 	private String sexo_usuario;
 	
 	@Column(name="data_nascimento_usuario")
-	private String data_nascimento_usuario;
+	private Date data_nascimento_usuario;
 	
 	@Column(name="telefone_usuario")
 	private String telefone_usuario;
@@ -56,10 +56,10 @@ public class UsuarioImpl implements Usuario{
 	private String ativo_usuario;
 	
 	@Column(name="dt_insert_usuario")
-	private String dt_insert_usuario;
+	private Date dt_insert_usuario;
 	
 	@Column(name="dt_last_update_usuario")
-	private String dt_last_update_usuario;
+	private Date dt_last_update_usuario;
 	
 	@Column(name="cd_cidade_usuario")
 	private int cd_cidade_usuario;
@@ -128,11 +128,11 @@ public class UsuarioImpl implements Usuario{
 		this.sexo_usuario = sexo_usuario;
 	}
 
-	public String getData_nascimento_usuario() {
+	public Date getData_nascimento_usuario() {
 		return data_nascimento_usuario;
 	}
 
-	public void setData_nascimento_usuario(String data_nascimento_usuario) {
+	public void setData_nascimento_usuario(Date data_nascimento_usuario) {
 		this.data_nascimento_usuario = data_nascimento_usuario;
 	}
 
@@ -168,19 +168,19 @@ public class UsuarioImpl implements Usuario{
 		this.ativo_usuario = ativo_usuario;
 	}
 
-	public String getDt_insert_usuario() {
+	public Date getDt_insert_usuario() {
 		return dt_insert_usuario;
 	}
 
-	public void setDt_insert_usuario(String dt_insert_usuario) {
+	public void setDt_insert_usuario(Date dt_insert_usuario) {
 		this.dt_insert_usuario = dt_insert_usuario;
 	}
 
-	public String getDt_last_update_usuario() {
+	public Date getDt_last_update_usuario() {
 		return dt_last_update_usuario;
 	}
 
-	public void setDt_last_update_usuario(String dt_last_update_usuario) {
+	public void setDt_last_update_usuario(Date dt_last_update_usuario) {
 		this.dt_last_update_usuario = dt_last_update_usuario;
 	}
 
