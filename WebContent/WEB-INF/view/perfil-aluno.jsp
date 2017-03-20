@@ -12,11 +12,6 @@
 <title>Perfil do Aluno</title>
 </head>
 <body>
-<script>
-function myFunction() {
-    confirm("Deseja inativar seu usuário?");
-}
-</script>
 
 <h1>Dados do aluno </h1>
 <p>Nome: ${usuario.nome_usuario}</p>
@@ -38,7 +33,7 @@ function myFunction() {
 
 <form:form action="../aluno/inactivateAluno" modelAttribute="usuario" method="POST">
 <form:hidden path="id_usuario"/>
-<input type="submit" name="Inativar" value="Inativar" onclick="if(!(confirm('Tem certeza que deseja intaivar seu usuário?')))return false">
+<input type="submit" name="Inativar" value="Inativar" onclick="if(!(confirm('Tem certeza que deseja inativar seu usuário?')))return false">
 
 </form:form>
 

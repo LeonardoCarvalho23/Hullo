@@ -4,7 +4,6 @@ package com.hullo.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hullo.entity.AlunoImpl;
-import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
 

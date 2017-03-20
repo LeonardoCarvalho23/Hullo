@@ -133,6 +133,7 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		System.out.println(result + " linha atualizada");
 	}
 	
+	@Override
 	public void inactivateUsuario(AlunoImpl theUsuario){
 		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();

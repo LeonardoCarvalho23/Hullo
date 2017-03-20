@@ -5,7 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
+	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <title>Perfil do professor</title>
 </head>
 <body>
@@ -21,7 +24,11 @@
 <p>Telefone: ${usuario.telefone_usuario}</p>
 <p>Profissão: ${usuario.profissao_usuario}</p>
 
+<form:form action="../professor/inactivateProfessor" modelAttribute="usuario" method="POST">
+<form:hidden path="id_usuario"/>
+<input type="submit" name="Inativar" value="Inativar" onclick="if(!(confirm('Tem certeza que deseja inativar seu usuário?')))return false">
 
+</form:form>
 
 
 </body>
