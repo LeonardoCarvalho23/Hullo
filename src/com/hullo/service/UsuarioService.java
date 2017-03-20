@@ -2,6 +2,7 @@ package com.hullo.service;
 
 import java.util.List;
 
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.Usuario;
 
 public interface UsuarioService<T> {
@@ -17,5 +18,7 @@ public interface UsuarioService<T> {
 	public T getUsuario(String email);
 
 	public void updateUsuario(T theUsuario);
+
+	public void inactivateUsuario(T theUsuario);
 
 }

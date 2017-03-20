@@ -2,6 +2,8 @@ package com.hullo.dao;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AlunoImpl;
+import com.hullo.entity.UsuarioImpl;
 
 @Repository
 public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
@@ -123,6 +126,26 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		theQuery.setParameter("telefone", theUsuario.getTelefone_usuario());
 		theQuery.setParameter("lastUpdate", theUsuario.getDt_last_update_usuario());
 		
+		theQuery.setParameter("id", theUsuario.getId_usuario());
+		
+		int result = theQuery.executeUpdate();
+		
+		System.out.println(result + " linha atualizada");
+	}
+	
+	public void inactivateUsuario(AlunoImpl theUsuario){
+		//get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+						
+		// Cria query que faz busca no banco
+		Query<AlunoImpl> theQuery;
+				
+		//para fazer update apenas dos capos editaveis
+		String hql = "UPDATE AlunoImpl set ativo_usuario = 0, dt_last_update_usuario = :lastUpdate " 
+			            + "WHERE id_usuario = :id";
+		
+		theQuery = currentSession.createQuery(hql);		
+		theQuery.setParameter("lastUpdate", theUsuario.getDt_last_update_usuario());
 		theQuery.setParameter("id", theUsuario.getId_usuario());
 		
 		int result = theQuery.executeUpdate();

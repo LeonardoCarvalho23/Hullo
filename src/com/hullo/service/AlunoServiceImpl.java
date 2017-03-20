@@ -11,6 +11,7 @@ import com.hullo.dao.UsuarioDAO;
 import com.hullo.entity.AlunoImpl;
 
 import com.hullo.entity.Usuario;
+import com.hullo.entity.UsuarioImpl;
 
 @Service
 public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
@@ -57,5 +58,10 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 		alunoDAO.udateUsuario(theUsuario);
 	}
 
+	@Override
+	@Transactional
+	public void inactivateUsuario(AlunoImpl theUsuario){
+		alunoDAO.inactivateUsuario(theUsuario);
+	}
 
 }

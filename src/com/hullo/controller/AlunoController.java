@@ -4,6 +4,8 @@ package com.hullo.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailException;
@@ -130,4 +132,36 @@ public class AlunoController {
 		
 	}
 	
+	//metodo para abrir pagina de update do aluno
+		@PostMapping("/showPerfilAluno")
+		public String showPerfilAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
+
+			// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
+			//get aluno form database
+			AlunoImpl theUsuario = alunoService.getUsuario(id_usuario);
+			
+			//adiciona o usuario ao modelo
+			theModel.addAttribute("usuario", theUsuario);
+			
+			// retorna
+			return "perfil-aluno";
+			
+		}
+		
+		//metodo para inativar aluno
+		@PostMapping("/inactivateAluno")
+		public String inactivateAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, Model theModel){
+			Date current_date = new Date();
+
+			theUsuario.setDt_last_update_usuario(current_date);
+			
+			alunoService.inactivateUsuario(theUsuario);
+			
+			theModel.addAttribute(theUsuario);
+			
+			return "redirect:/usuario/usuarioLogin";
+			
+		}
+	
+		
 }

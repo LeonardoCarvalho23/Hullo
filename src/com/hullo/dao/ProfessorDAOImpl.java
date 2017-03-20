@@ -122,5 +122,11 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		System.out.println(result + " linha atualizada");
 	}
 
+	@Override
+	public void inactivateUsuario(ProfessorImpl theUsuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

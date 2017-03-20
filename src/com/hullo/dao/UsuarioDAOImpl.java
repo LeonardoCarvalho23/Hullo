@@ -128,6 +128,11 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 	public void udateUsuario(UsuarioImpl theUsuario) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void inactivateUsuario(UsuarioImpl theUsuario){
+		
+	}
 	
 }

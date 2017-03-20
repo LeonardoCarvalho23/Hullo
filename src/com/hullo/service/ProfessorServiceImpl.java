@@ -40,6 +40,7 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 	
 	
 	@Override
+	@Transactional
 	public ProfessorImpl getUsuario(int id_usuario) {
 		return professorDAO.getUsuario(id_usuario);
 	}
@@ -54,6 +55,12 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 	@Transactional
 	public void updateUsuario(ProfessorImpl theUsuario) {
 		professorDAO.udateUsuario(theUsuario);
+	}
+
+	@Override
+	public void inactivateUsuario(ProfessorImpl theUsuario) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
