@@ -9,20 +9,15 @@
 <title>Home - Aluno</title>
 </head>
 <body>
-<h1>Dados do aluno</h1>
-<p>Nome: ${usuario.nome_usuario}</p>
-<p>Sobrenome: ${usuario.sobrenome_usuario}</p>
-<p>E-mail: ${usuario.email_usuario}</p>
-<p>Senha: ${usuario.senha_usuario}</p>
-<p>CPF: ${usuario.cpf_usuario}</p>
-<p>Sexo: ${usuario.sexo_usuario}</p>
-<fmt:formatDate value="${usuario.data_nascimento_usuario}" var="dateString" pattern="dd/MM/yyyy" />
-<p>Nascimento: ${dateString}</p>
-<p>Telefone: ${usuario.telefone_usuario}</p>
-<p>Profissão: ${usuario.profissao_usuario}</p>
-<form:form action="../aluno/showFormUpdateAluno" modelAttribute="usuario" method="POST">
+
+<h1>Perfil do Aluno</h1>
+<h1>Bem vindo ${usuario.nome_usuario}!</h1>
+<h2>Aqui você encontrará todas as suas atividades.</h2>
+
+<form:form action="../aluno/showPerfilAluno" modelAttribute="usuario" method="POST">
 <form:hidden path="id_usuario"/>
-<input type="submit" name="Editar" value="Editar">
+<input type="submit" name="Perfil" value="Veja seu perfil">
 </form:form>
+ 
 </body>
 </html>

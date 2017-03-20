@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
@@ -71,5 +73,21 @@ public class ProfessorController {
 		  
 			return "redirect:/usuario/usuarioLogin";
 		}   
-  }  
+  } 
+  
+//metodo para abrir pagina de perfil professor
+	@PostMapping("/showPerfilProfessor")
+	public String showPerfilProfessor(@RequestParam("id_usuario") int id_usuario, Model theModel){
+
+		// este método depende de eu colocar o id do usuario no link perfil, no jsp
+		//get professor form database
+		ProfessorImpl theUsuario = professorService.getUsuario(id_usuario);
+		System.out.println("usuario"+theUsuario);
+		//adiciona o usuario ao modelo
+		theModel.addAttribute("usuario", theUsuario);
+		System.out.println("encontrou usuario");
+		// retorna
+		return "perfil-professor";
+		
+	}
 }

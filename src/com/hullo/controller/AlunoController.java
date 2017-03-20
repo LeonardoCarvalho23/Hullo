@@ -103,4 +103,21 @@ public class AlunoController {
 		
 	}
 	
+	//metodo para abrir pagina de update do aluno
+		@PostMapping("/showPerfilAluno")
+		public String showPerfilAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
+
+			// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
+			//get aluno form database
+			AlunoImpl theUsuario = alunoService.getUsuario(id_usuario);
+			
+			//adiciona o usuario ao modelo
+			theModel.addAttribute("usuario", theUsuario);
+			
+			// retorna
+			return "perfil-aluno";
+			
+		}
+	
+		
 }

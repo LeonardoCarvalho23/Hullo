@@ -40,6 +40,7 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 	
 	
 	@Override
+	@Transactional
 	public ProfessorImpl getUsuario(int id_usuario) {
 		return professorDAO.getUsuario(id_usuario);
 	}
