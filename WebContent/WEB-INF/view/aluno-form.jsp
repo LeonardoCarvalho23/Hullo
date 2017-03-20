@@ -49,6 +49,9 @@ jQuery(function ($) {
 });
 </script> 
 	
+		  
+		  <script src="${pageContext.request.contextPath}/resources/javascript/jquery-3.1.1.js"></script>
+		  <script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 </head>
 
 <body>
@@ -127,17 +130,19 @@ function TestaCPF(strCPF) {
 
 					${errorMessage}
 
-		<form:form action="newAluno" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();">
+		<form:form action="newAluno" modelAttribute="usuarioModel" method="POST">
 
 					
-					<label>*Nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
+					<label>*Nome:</label>
+					<form:input path="usuario.nome_usuario" required="true" maxlength="45"/>
+					
 					
 					<label>*Sobrenome:</label>
-					<form:input path="sobrenome_usuario" required="true" maxlength="45"/>
+					<form:input path="usuario.sobrenome_usuario" required="true" maxlength="45"/>
 					
 					<label>*CPF:</label>
-					<form:input path="cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
-					 placeholder="Apenas numeros" maxlength="14" size="14" required="true"
+					<form:input path="usuario.cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+					 placeholder="xxx.xxx.xxx-xx" maxlength="14" size="14" required="true"
 					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
 					
 					<!-- <label>*CPF:</label>
@@ -145,34 +150,47 @@ function TestaCPF(strCPF) {
 						title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="xxx.xxx.xxx-xx" required="true"/> -->
 					
 					<label>*Email:</label>
-					<form:input type="email" path="email_usuario" required="true" maxlength="45"/>
+					<form:input type="email" path="usuario.email_usuario" required="true" maxlength="45"/>
 					
 					<label>*Senha:</label>
-					<form:input type="password" path="senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/>
+					<form:input type="password" path="usuario.senha_usuario" required="true" maxlength="40"/>
 					
 					<label>*Confirme a Senha:</label>
 					<input type="password" id = "txtConfirmPassword" required/>
 					
 					<label>*Sexo:</label>
-					Feminino <form:radiobutton path="sexo_usuario" value="F" required="true"/>
-					Masculino <form:radiobutton path="sexo_usuario" value="M" />
+					Feminino <form:radiobutton path="usuario.sexo_usuario" value="F" required="true"/>
+					Masculino <form:radiobutton path="usuario.sexo_usuario" value="M" />
+					
 					
 					<label>*Data de Nascimento:</label>
-					<input type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
+					<form:input path="usuario.data_nascimento_usuario" pattern="\d{1,2}/\d{1,2}/\d{4}" title="Digite uma data no formato: dd/mm/aaaa" value="dd/mm/aaaa" required="true"/>
 						<input type="hidden" id="data_nascimento_usuario" name="data_nascimento_usuario" />
 					
 					<label>*Telefone:</label>
-					<form:input path="telefone_usuario" required="true" maxlength="20"/>
+					<form:input path="usuario.telefone_usuario" required="true"/>
 					
-					<label>Profissão:</label>
-					<form:input path="profissao_usuario" size="40"/>
+					<label>Profissao:</label>
+					<form:input path="usuario.profissao_usuario" />
+					
+					<label>*Estado:</label>
+					<form:select path="" id="estado" multiple="false">
+					<td><form:options items="${usuarioModel.estado}" itemLabel="nm_estado"/><td>
+					</form:select>
+						
+					<label>*Cidade:</label>
+					<form:select path="cidade" id="cidade" multiple="false">
+					</form:select>
+						
+						
 					<br><br>
 						<input type="submit" value="Salvar" class="add-button" />
-						
+					
 						<input type="button" value="Voltar"
 							onclick = "window.location.href='../'; return false;"
 							class="add-button"
 							/>		
+						
 					<br><br>
 					*Campos de preenchimento obrigatório
 		</form:form>

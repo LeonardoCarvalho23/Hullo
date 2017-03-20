@@ -61,6 +61,9 @@ public class ProfessorImpl implements Usuario {
 	@Column(name="dt_last_update_usuario")
 	private Date dt_last_update_usuario;
 	
+	@Column(name="cd_cidade_usuario")
+	private int cd_cidade_usuario;
+	
 	
 	public ProfessorImpl(){
 	}
@@ -84,6 +87,14 @@ public class ProfessorImpl implements Usuario {
 		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
 	}
 	
+
+	public int getCidade() {
+		return cd_cidade_usuario;
+	}
+
+	public void setCidade(int cd_cidade_usuario) {
+		this.cd_cidade_usuario = cd_cidade_usuario;
+	}
 
 	public int getId_usuario() {
 		return id_usuario;

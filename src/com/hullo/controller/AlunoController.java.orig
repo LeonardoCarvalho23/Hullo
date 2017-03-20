@@ -28,8 +28,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.*;
 
 import com.hullo.entity.AlunoImpl;
+<<<<<<< HEAD
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
+=======
+>>>>>>> a8392d03f0c7b504f89ee0aa6ae5f292ef5c278d
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.entity.UsuarioModel;
 import com.hullo.service.CidadeServiceImpl;

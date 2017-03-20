@@ -198,7 +198,7 @@ function validaCnpj(cnpj){
 					
 					<label>*CPF:</label>
 					<form:input path="cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
-					 placeholder="Apenas numeros" maxlength="14" size="14" required="true"
+					 placeholder="xxx.xxx.xxx-xx" maxlength="14" size="14" required="true"
 					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
 						 
 					<!-- <label>*CPF:</label>
@@ -208,7 +208,7 @@ function validaCnpj(cnpj){
 					<label>CNPJ:</label>
 					<form:input path="cnpj_usuario" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" id = "cnpj" onblur="validaCnpj(this.value)"
 						title="Digite um CNPJ válido no formato: xx.xxx.xxx/xxxx-xx"  
-						maxlength="18" size="18"  placeholder="Apenas números" />
+						maxlength="18" size="18"  placeholder="xx.xxx.xxx/xxxx-xx" />
 					
 					<!-- <label>CNPJ:</label>
 					<form:input path="cnpj_usuario" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" 
