@@ -16,6 +16,7 @@
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
    		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+   		<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <script>		
 $(function(){
     $('#datepicker').datepicker({ 
@@ -49,9 +50,6 @@ jQuery(function ($) {
 });
 </script> 
 	
-		  
-		  <script src="${pageContext.request.contextPath}/resources/javascript/jquery-3.1.1.js"></script>
-		  <script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 </head>
 
 <body>
@@ -144,10 +142,6 @@ function TestaCPF(strCPF) {
 					<form:input path="usuario.cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
 					 placeholder="xxx.xxx.xxx-xx" maxlength="14" size="14" required="true"
 					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
-					
-					<!-- <label>*CPF:</label>
-					<form:input path="cpf_usuario" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
-						title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="xxx.xxx.xxx-xx" required="true"/> -->
 					
 					<label>*Email:</label>
 					<form:input type="email" path="usuario.email_usuario" required="true" maxlength="45"/>

@@ -15,6 +15,7 @@
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
    		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+   		<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
    		<script>		
 $(function(){
     $('#datepicker').datepicker({ 
@@ -189,54 +190,55 @@ function validaCnpj(cnpj){
 	
 		${errorMessage}
 		
-		<form:form action="newProfessor" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();">
+		<form:form action="newProfessor" modelAttribute="professorModel" method="POST" onsubmit="return checkPasswordMatch();">
 					
-					<label>*Nome:</label><form:input path="nome_usuario" required="true" maxlength="45"/>
+					<label>*Nome:</label><form:input path="usuario.nome_usuario" required="true" maxlength="45"/>
 					
 					<label>*Sobrenome:</label>
-					<form:input path="sobrenome_usuario" required="true" maxlength="45"/>
+					<form:input path="usuario.sobrenome_usuario" required="true" maxlength="45"/>
 					
 					<label>*CPF:</label>
-					<form:input path="cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+					<form:input path="usuario.cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
 					 placeholder="xxx.xxx.xxx-xx" maxlength="14" size="14" required="true"
 					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
 						 
-					<!-- <label>*CPF:</label>
-					<form:input path="cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
-						title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="xxx.xxx.xxx-xx" required="true"/> 
-						 -->
 					<label>CNPJ:</label>
-					<form:input path="cnpj_usuario" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" id = "cnpj" onblur="validaCnpj(this.value)"
+					<form:input path="usuario.cnpj_usuario" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" id = "cnpj" onblur="validaCnpj(this.value)"
 						title="Digite um CNPJ válido no formato: xx.xxx.xxx/xxxx-xx"  
 						maxlength="18" size="18"  placeholder="xx.xxx.xxx/xxxx-xx" />
 					
-					<!-- <label>CNPJ:</label>
-					<form:input path="cnpj_usuario" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" 
-						title="Digite um CNPJ no formato: xx.xxx.xxx/xxxx-xx" placeholder="xx.xxx.xxx/xxxx-xx" /> -->
-					
 					<label>*Email:</label>
-					<form:input type="email" path="email_usuario" required="true" maxlength="45"/>
+					<form:input type="email" path="usuario.email_usuario" required="true" maxlength="45"/>
 					<div style = widht:40>
 					
 					<label>*Senha:</label>
-					<form:input type="password" path="senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/>
+					<form:input type="password" path="usuario.senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/>
 					</div>
 					<label>*Confirme a Senha:</label>
 					<input type="password" id = "txtConfirmPassword" required/>
 					
 					<label>*Sexo:</label>
-					Feminino <form:radiobutton path="sexo_usuario" value="F" required="true"/>
-					Masculino <form:radiobutton path="sexo_usuario" value="M" />
+					Feminino <form:radiobutton path="usuario.sexo_usuario" value="F" required="true"/>
+					Masculino <form:radiobutton path="usuario.sexo_usuario" value="M" />
 					
 					<label>*Data de Nascimento:</label>
 					<input type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
-						<input type="hidden" id="data_nascimento_usuario" name="data_nascimento_usuario" />
+						<input type="hidden" id="usuario.data_nascimento_usuario" name="data_nascimento_usuario" />
 						
 					<label>*Telefone:</label>
-					<form:input path="telefone_usuario" required="true" maxlength="20"/>
+					<form:input path="usuario.telefone_usuario" required="true" maxlength="20"/>
 					
 					<label>Profissão:</label>
-					<form:input path="profissao_usuario" />
+					<form:input path="usuario.profissao_usuario" />
+					
+					<label>*Estado:</label>
+					<form:select path="" id="estado" multiple="false">
+					<td><form:options items="${professorModel.estado}" itemLabel="nm_estado"/><td>
+					</form:select>
+						
+					<label>*Cidade:</label>
+					<form:select path="cidade" id="cidade" multiple="false">
+					</form:select>
 														
 					<input type="submit" value="Salvar" class="add-button" />
 						

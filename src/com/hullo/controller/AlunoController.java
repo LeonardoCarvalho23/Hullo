@@ -67,12 +67,12 @@ public class AlunoController {
 		
 		List<EstadoImpl> estados = estadoService.getEstados();
 		
-		AlunoModel usuarioModel = new AlunoModel();
+		AlunoModel alunoModel = new AlunoModel();
 		
-		usuarioModel.setEstado(estados);
-		usuarioModel.setUsuario(theAluno);
+		alunoModel.setEstado(estados);
+		alunoModel.setUsuario(theAluno);
 		
-		theModel.addAttribute("usuarioModel", usuarioModel);
+		theModel.addAttribute("usuarioModel", alunoModel);
 		
 		return "aluno-form";
 	}

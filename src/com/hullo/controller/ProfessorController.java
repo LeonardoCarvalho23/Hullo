@@ -2,7 +2,9 @@ package com.hullo.controller;
 
 
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,12 +17,22 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hullo.entity.CidadeImpl;
+import com.hullo.entity.EstadoImpl;
 import com.hullo.entity.ProfessorImpl;
+import com.hullo.entity.ProfessorModel;
 import com.hullo.entity.UsuarioImpl;
+import com.hullo.service.CidadeServiceImpl;
+import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
 
 @Controller
@@ -30,6 +42,12 @@ public class ProfessorController {
 	@Autowired
 	@Qualifier("professorServiceImpl")
 	private UsuarioService<ProfessorImpl> professorService;
+	
+	@Autowired
+	private EstadoServiceImpl estadoService;
+	
+	@Autowired
+	private CidadeServiceImpl cidadeService;
 	
 	// --Abaixo, dados para disparo de email
 		@Autowired
@@ -44,22 +62,36 @@ public class ProfessorController {
 	public String showFormNovoUsuario(Model theModel){
 		
 		//create model attribute to bind form data
-		UsuarioImpl theUsuario = new UsuarioImpl();
-		theModel.addAttribute("usuario", theUsuario); //name,value
+		ProfessorImpl theProfessor = new ProfessorImpl();
+		
+		List<EstadoImpl> estados = estadoService.getEstados();
+		
+		ProfessorModel professorModel = new ProfessorModel();
+		
+		professorModel.setEstado(estados);
+		professorModel.setUsuario(theProfessor);
+		
+		theModel.addAttribute("professorModel", professorModel); //name,value
 		
 		return "professor-form";
 	}
 	
 //para gravar novo professor
   @PostMapping("/newProfessor")
-	public String saveUsuario(@ModelAttribute("usuario") ProfessorImpl theProfessor, ModelMap modelMap){
+	public String saveUsuario(@ModelAttribute("professorModel") ProfessorModel professorModel, ModelMap modelMap) throws JsonParseException, JsonMappingException, IOException{
 	  	  
 	  Date current_date = new Date();
 	  
-	  ProfessorImpl validaProfessor = new ProfessorImpl();
+	  ProfessorImpl theProfessor = professorModel.getUsuario();
+		
+	  ObjectMapper mapper = new ObjectMapper();
+		CidadeImpl cidade = mapper.readValue(professorModel.getCidade(), CidadeImpl.class);
+		
+		//seta o id da cidade no usuario
+		theProfessor.setCidade(cidade.getId_Cidade());
 		
 		//validar se ja existe usuario com esse email ou senha
-	  validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
+	  ProfessorImpl validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
 		
 		//se retornar que existe, exibe mensagem de erro
 	  
@@ -101,6 +133,16 @@ public class ProfessorController {
 			return "redirect:/usuario/usuarioLogin";
 		}   
   } 
+  
+  @RequestMapping(value = "/formProfessor/cidades", method = RequestMethod.POST)
+	public @ResponseBody List<CidadeImpl> obterCidade(@RequestBody EstadoImpl estado){
+		
+		//List<CidadeImpl> cidade = cidadeService.getCidades();
+		
+		List<CidadeImpl> cidade = cidadeService.obterCidadesDoEstado(estado);
+		
+		return cidade;
+	}
   
 //metodo para abrir pagina de perfil professor
 	@PostMapping("/showPerfilProfessor")
