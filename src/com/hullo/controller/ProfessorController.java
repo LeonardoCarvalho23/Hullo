@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
@@ -118,6 +117,34 @@ public class ProfessorController {
 		
 	}
 	
+	//metodo para abrir pagina de update do professor
+	@PostMapping("/showFormUpdateProfessor")
+	public String showFormUpdateProfessor(@RequestParam("id_usuario") int id_usuario, Model theModel){
+
+		// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
+		//get aluno form database
+		ProfessorImpl theUsuario = professorService.getUsuario(id_usuario);
+		
+		//adiciona o usuario ao modelo
+		theModel.addAttribute("usuario", theUsuario);
+		
+		// retorna
+		return "professor-update-form";
+	}
+	
+	//metodo para atualizar professor
+	@PostMapping("/updateProfessor")
+	public String updateProfessor(@ModelAttribute("usuario") ProfessorImpl theUsuario, Model theModel){
+			Date current_date = new Date();
+
+			theUsuario.setDt_last_update_usuario(current_date);
+			
+			professorService.updateUsuario(theUsuario);
+			
+			theModel.addAttribute(theUsuario);
+			
+			return "home-professor";
+	}
 	
 	//metodo para inativar professor
 		@PostMapping("/inactivateProfessor")
