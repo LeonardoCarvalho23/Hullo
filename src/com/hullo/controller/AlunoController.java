@@ -135,6 +135,22 @@ public class AlunoController {
 		return cidade;
 	}
 	
+	//metodo para abrir pagina de update do aluno
+	@PostMapping("/showFormUpdateAluno")
+	public String showFormUpdateAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
+
+		// este método depende de eu colocar o id do usuario no link "atualizar", no jsp
+		//get aluno form database
+		AlunoImpl theUsuario = alunoService.getUsuario(id_usuario);
+		
+		//adiciona o usuario ao modelo
+		theModel.addAttribute("usuario", theUsuario);
+		
+		// retorna
+		return "aluno-update-form";
+		
+	}
+	
 	//metodo para atualizar aluno
 	@PostMapping("/updateAluno")
 	public String updateAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, Model theModel){

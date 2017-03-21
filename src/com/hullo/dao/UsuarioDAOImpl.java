@@ -134,5 +134,11 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 	public void inactivateUsuario(UsuarioImpl theUsuario){
 		
 	}
+
+	@Override
+	public UsuarioImpl validaUsuario(String email, int id_usuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

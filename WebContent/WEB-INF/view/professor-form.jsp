@@ -53,6 +53,8 @@ jQuery(function ($) {
 <body>
 
 <script type="text/javascript">
+
+//verifica se senhas digitadas sao iguais
 function checkPasswordMatch() {
     var password = $("#txtNewPassword").val();
     var confirmPassword = $("#txtConfirmPassword").val();

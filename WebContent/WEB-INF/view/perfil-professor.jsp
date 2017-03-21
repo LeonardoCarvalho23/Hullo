@@ -20,9 +20,16 @@
 <p>CPF: ${usuario.cpf_usuario}</p>
 <p>CNPJ: ${usuario.cnpj_usuario}</p>
 <p>Sexo: ${usuario.sexo_usuario}</p>
-<p>Nascimento: ${usuario.data_nascimento_usuario}</p>
+<fmt:formatDate value="${usuario.data_nascimento_usuario}" var="dateString" pattern="dd/MM/yyyy" />
+<p>Nascimento: ${dateString}</p>
 <p>Telefone: ${usuario.telefone_usuario}</p>
-<p>Profissão: ${usuario.profissao_usuario}</p>
+<p>Profissão: ${usuario.profissao_usuario} </p>
+
+<form:form action="../professor/showFormUpdateProfessor" modelAttribute="usuario" method="POST">
+<form:hidden path="id_usuario"/>
+<input type="submit" name="Editar" value="Editar">
+
+</form:form>
 
 <form:form action="../professor/inactivateProfessor" modelAttribute="usuario" method="POST">
 <form:hidden path="id_usuario"/>

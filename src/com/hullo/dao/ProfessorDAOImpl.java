@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.ProfessorImpl;
 
 @Repository
@@ -142,7 +143,29 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 				
 		System.out.println(result + " linha atualizada");
 	}
-		
+
+	//para validar na troca de email, se email ja existe em outro cadastro
+	public ProfessorImpl validaUsuario(String email, int id) {
+			//get current hibernate session
+			Session currentSession = sessionFactory.getCurrentSession();
+			
+			System.out.println("chegou na validacao de email");
+			// Cria query que faz busca no banco pelo email colocado
+			Query<ProfessorImpl> theQuery;
+			//faz busca por outro aluno que tenha o email digitado
+			theQuery = currentSession.createQuery("from ProfessorImpl where email_usuario = '" + email + "' and id_usuario <> '" + id + "'", ProfessorImpl.class);
+					
+			try {
+
+				ProfessorImpl validaProfessor = theQuery.getSingleResult();
+				System.out.println("fez query e achou email");
+				return validaProfessor;
+						
+				} catch (Exception e) {
+					System.out.println("fez query e nao achou email");
+					return null;
+				}
+	}
 	
 
 

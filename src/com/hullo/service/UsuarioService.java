@@ -2,8 +2,6 @@ package com.hullo.service;
 
 import java.util.List;
 
-import com.hullo.entity.AlunoImpl;
-import com.hullo.entity.Usuario;
 
 public interface UsuarioService<T> {
 	
@@ -12,6 +10,8 @@ public interface UsuarioService<T> {
 	public void saveUsuario(T theUsuario);
 
 	public T getUsuario(String email, String senha);
+	
+	public T validaUsuario(String email, int id);
 
 	public T getUsuario(int id_usuario);
 

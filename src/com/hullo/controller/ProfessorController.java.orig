@@ -23,11 +23,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
+=======
+>>>>>>> 26f094956b91647c19a92ee702fca317c74a3c30
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.ProfessorModel;
 import com.hullo.entity.UsuarioImpl;
@@ -91,7 +94,11 @@ public class ProfessorController {
 		theProfessor.setCidade(cidade.getId_Cidade());
 		
 		//validar se ja existe usuario com esse email ou senha
+<<<<<<< HEAD
 	  ProfessorImpl validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
+=======
+	  	validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
+>>>>>>> 26f094956b91647c19a92ee702fca317c74a3c30
 		
 		//se retornar que existe, exibe mensagem de erro
 	  
