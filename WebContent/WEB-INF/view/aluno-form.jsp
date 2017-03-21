@@ -55,6 +55,8 @@ jQuery(function ($) {
 <body>
 
 <script type="text/javascript">
+
+//verifica se senhas digitadas sao iguais
 function checkPasswordMatch() {
     var password = $("#txtNewPassword").val();
     var confirmPassword = $("#txtConfirmPassword").val();
@@ -64,7 +66,6 @@ function checkPasswordMatch() {
     	return false;
     }
     return true
-    
 }
 
 //Verifica se CPF é válido
@@ -112,7 +113,7 @@ function TestaCPF(strCPF) {
 	}
 	
 	document.getElementById("cpf").setCustomValidity('');
-	alert("CPF VALIDO!");
+	//alert("CPF VALIDO!");
 	return true;
 }
        
@@ -128,53 +129,51 @@ function TestaCPF(strCPF) {
 
 					${errorMessage}
 
-		<form:form action="newAluno" modelAttribute="usuarioModel" method="POST">
+		<form:form action="newAluno" modelAttribute="usuarioModel" method="POST" onsubmit="return checkPasswordMatch();">
 
 					
-					<label>*Nome:</label>
-					<form:input path="usuario.nome_usuario" required="true" maxlength="45"/>
+					<p><label>*Nome:</label>
+					<form:input path="usuario.nome_usuario" required="true" maxlength="45"/></p>
 					
 					
-					<label>*Sobrenome:</label>
-					<form:input path="usuario.sobrenome_usuario" required="true" maxlength="45"/>
+					<p><label>*Sobrenome:</label>
+					<form:input path="usuario.sobrenome_usuario" required="true" maxlength="45"/></p>
 					
-					<label>*CPF:</label>
+					<p><label>*CPF:</label>
 					<form:input path="usuario.cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
 					 placeholder="xxx.xxx.xxx-xx" maxlength="14" size="14" required="true"
-					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
+					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" /></p>
 					
-					<label>*Email:</label>
-					<form:input type="email" path="usuario.email_usuario" required="true" maxlength="45"/>
+					<p><label>*Email:</label>
+					<form:input type="email" path="usuario.email_usuario" required="true" maxlength="45"/></p>
 					
-					<label>*Senha:</label>
-					<form:input type="password" path="usuario.senha_usuario" required="true" maxlength="40"/>
+					<p><label>*Senha:</label>
+					<form:input type="password" path="usuario.senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/></p>
 					
-					<label>*Confirme a Senha:</label>
-					<input type="password" id = "txtConfirmPassword" required/>
+					<p><label>*Confirme a Senha:</label>
+					<input type="password" id = "txtConfirmPassword" required/></p>
 					
-					<label>*Sexo:</label>
+					<p><label>*Sexo:</label>
 					Feminino <form:radiobutton path="usuario.sexo_usuario" value="F" required="true"/>
-					Masculino <form:radiobutton path="usuario.sexo_usuario" value="M" />
+					Masculino <form:radiobutton path="usuario.sexo_usuario" value="M" /></p>
 					
+					<p><label>*Data de Nascimento:</label>
+					<form:input path="usuario.data_nascimento_usuario" required="true"/></p>
 					
-					<label>*Data de Nascimento:</label>
-					<form:input path="usuario.data_nascimento_usuario" pattern="\d{1,2}/\d{1,2}/\d{4}" title="Digite uma data no formato: dd/mm/aaaa" value="dd/mm/aaaa" required="true"/>
-						<input type="hidden" id="data_nascimento_usuario" name="data_nascimento_usuario" />
+					<p><label>*Telefone:</label>
+					<form:input path="usuario.telefone_usuario" required="true"/></p>
 					
-					<label>*Telefone:</label>
-					<form:input path="usuario.telefone_usuario" required="true"/>
+					<p><label>Profissao:</label>
+					<form:input path="usuario.profissao_usuario" /></p>
 					
-					<label>Profissao:</label>
-					<form:input path="usuario.profissao_usuario" />
-					
-					<label>*Estado:</label>
+					<p><label>*Estado:</label>
 					<form:select path="" id="estado" multiple="false">
 					<td><form:options items="${usuarioModel.estado}" itemLabel="nm_estado"/><td>
-					</form:select>
+					</form:select></p>
 						
-					<label>*Cidade:</label>
+					<p><label>*Cidade:</label>
 					<form:select path="cidade" id="cidade" multiple="false">
-					</form:select>
+					</form:select></p>
 						
 						
 					<br><br>

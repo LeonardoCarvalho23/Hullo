@@ -211,11 +211,11 @@ function validaCnpj(cnpj){
 					
 					<label>*Email:</label>
 					<form:input type="email" path="usuario.email_usuario" required="true" maxlength="45"/>
-					<div style = widht:40>
+					
 					
 					<label>*Senha:</label>
 					<form:input type="password" path="usuario.senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/>
-					</div>
+					
 					<label>*Confirme a Senha:</label>
 					<input type="password" id = "txtConfirmPassword" required/>
 					

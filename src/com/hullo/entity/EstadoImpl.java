@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Entity
-@Table(name="Estado")
+@Table(name="estado")
 public class EstadoImpl {
 	
 	@Id
