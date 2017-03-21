@@ -19,7 +19,7 @@
    		<script>		
 $(function(){
     $('#datepicker').datepicker({ 
-    	altField: '#data_nascimento_usuario', 
+    	altField: '#usuario\\.data_nascimento_usuario', // é preciso usar // antes do ponto quando o id tem ponto
     	altFormat: 'mm/dd/yy',
     	dateFormat: 'dd/mm/yy'
     });
@@ -225,7 +225,7 @@ function validaCnpj(cnpj){
 					
 					<label>*Data de Nascimento:</label>
 					<input type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
-						<input type="hidden" id="usuario.data_nascimento_usuario" name="data_nascimento_usuario" />
+					<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" /></p>
 						
 					<label>*Telefone:</label>
 					<form:input path="usuario.telefone_usuario" required="true" maxlength="20"/>

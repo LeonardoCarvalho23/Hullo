@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
@@ -7,20 +6,18 @@
 <head>
 	<title>Novo Aluno</title>
 
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
 	<!--  Basic jquery and Bootstrap -->
 		<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-   		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
    		<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <script>		
 $(function(){
-    $('#datepicker').datepicker({ 
-    	altField: '#data_nascimento_usuario', 
+    $("#datepicker").datepicker({ 
+    	altField: '#usuario\\.data_nascimento_usuario', // é preciso usar dois \\ antes do ponto pra funcionar quando o id tem ponto no nome
     	altFormat: 'mm/dd/yy',
     	dateFormat: 'dd/mm/yy'
     });
@@ -48,26 +45,17 @@ jQuery(function ($) {
     };
     $.datepicker.setDefaults($.datepicker.regional['pt']);
 });
-</script> 
-	
-</head>
-
-<body>
-
-<script type="text/javascript">
 
 //verifica se senhas digitadas sao iguais
 function checkPasswordMatch() {
     var password = $("#txtNewPassword").val();
     var confirmPassword = $("#txtConfirmPassword").val();
-
     if (password != confirmPassword){
     	alert ("Senhas não são iguais");
     	return false;
     }
     return true
 }
-
 //Verifica se CPF é válido
 function TestaCPF(strCPF) {
 	strCPF = strCPF.replace(/[^\d]+/g,'');
@@ -116,9 +104,13 @@ function TestaCPF(strCPF) {
 	//alert("CPF VALIDO!");
 	return true;
 }
-       
-</script>
+   
 
+</script> 
+	
+</head>
+
+<body>
 	<div id="wrapper">
 		<div id="header">
 			<h2>Novo Aluno</h2>
@@ -158,7 +150,8 @@ function TestaCPF(strCPF) {
 					Masculino <form:radiobutton path="usuario.sexo_usuario" value="M" /></p>
 					
 					<p><label>*Data de Nascimento:</label>
-					<form:input path="usuario.data_nascimento_usuario" required="true"/></p>
+					<input type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
+					<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" /></p>
 					
 					<p><label>*Telefone:</label>
 					<form:input path="usuario.telefone_usuario" required="true"/></p>
@@ -192,9 +185,3 @@ function TestaCPF(strCPF) {
 </body>
 
 </html>
-
-
-
-
-
-

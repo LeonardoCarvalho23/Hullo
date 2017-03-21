@@ -2,7 +2,6 @@ package com.hullo.controller;
 
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -110,7 +109,7 @@ public class AlunoController {
 			
 		//se nao existe aluno com esses dados, cria o ususario
 		} else {
-			System.out.println("viu que nao ha usuario com os dados");
+			
 			theAluno.setAtivo_usuario("1");
 			theAluno.setDt_insert_usuario(current_date);
 			theAluno.setDt_last_update_usuario(current_date);
@@ -118,6 +117,21 @@ public class AlunoController {
 			
 			//save the aluno
 			alunoService.saveUsuario(theAluno);
+			
+			//Envia email de confirmação
+			 			SimpleMailMessage msg = new SimpleMailMessage();
+			 			
+			 			msg.setTo(theAluno.getEmail_usuario());
+			 			msg.setFrom("noreply@hullo.com.br");
+			 			msg.setSubject("Confirmação de cadastro");
+			 			msg.setText(theAluno.getNome_usuario()+", seu cadastro de aluno foi realizado com sucesso.");
+			 			
+			 			try {
+			 				this.mailSender.send(msg);
+			 				//System.out.println(msg.toString());
+			 			} catch (MailException e) {
+			 				// TODO Auto-generated catch block
+			 			}
 			
 			return "redirect:/usuario/usuarioLogin";
 		}
