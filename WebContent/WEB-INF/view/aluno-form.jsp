@@ -100,6 +100,20 @@ function TestaCPF(strCPF) {
 		return false;
 	}
 	
+	// Elimina CNPJs invalidos conhecidos
+    if (cnpj == "00000000000000" || 
+        cnpj == "11111111111111" || 
+        cnpj == "22222222222222" || 
+        cnpj == "33333333333333" || 
+        cnpj == "44444444444444" || 
+        cnpj == "55555555555555" || 
+        cnpj == "66666666666666" || 
+        cnpj == "77777777777777" || 
+        cnpj == "88888888888888" || 
+        cnpj == "99999999999999"){
+    	alert("CNPJ INVÁLIDO");
+    	return false;
+	
 	document.getElementById("cpf").setCustomValidity('');
 	//alert("CPF VALIDO!");
 	return true;
@@ -151,7 +165,7 @@ function TestaCPF(strCPF) {
 					
 					<p><label>*Data de Nascimento:</label>
 					<input type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
-					<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" /></p>
+					<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" value=""/></p>
 					
 					<p><label>*Telefone:</label>
 					<form:input path="usuario.telefone_usuario" required="true"/></p>

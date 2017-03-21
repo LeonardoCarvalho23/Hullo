@@ -12,7 +12,20 @@
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
    		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script>		
+<script>
+
+//verifica se senhas digitadas sao iguais
+function checkPasswordMatch() {
+    var password = $("#txtNewPassword").val();
+    var confirmPassword = $("#txtConfirmPassword").val();
+    if (password != confirmPassword){
+    	alert ("Senhas não são iguais");
+    	return false;
+    }
+    return true
+}
+
+
 $(function(){
     $('#datepicker').datepicker({ 
     	altField: '#data_nascimento_usuario', 
@@ -54,77 +67,53 @@ jQuery(function ($) {
 	
 	<div id="container">
 		
-		<form:form action="updateAluno" modelAttribute="usuario" method="POST">
+		<form:form action="updateAluno" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();">
 			<!-- campo oculto com o id para ele não perder o contexto/id -->
 			<form:hidden path="id_usuario" />
-			<table>
-				<tbody>
-					<tr>
-						<td><label>Nome:</label></td>
-						<td><form:input path="nome_usuario" value="${usuario.nome_usuario}"/></td>
-					</tr>
-					
-					<tr>
-						<td><label>Sobrenome:</label></td>
-						<td><form:input path="sobrenome_usuario" value="${usuario.sobrenome_usuario}"/></td>
-					</tr>
-					
-					
-					<tr>
-						<td><label>CPF:</label></td>
-						<td><form:input path="cpf_usuario" value="${usuario.cpf_usuario}"/></td>
-					</tr>
-										
-					<tr>
-						<td><label>Senha:</label></td>
-						<td><form:input path="senha_usuario" value="${usuario.senha_usuario}"/></td>
-					</tr>
-					
-					<tr>
-						<td><label>Email:</label></td>
-						<td><form:input path="email_usuario" value="${usuario.email_usuario}"/></td>
-					</tr>	
-									
-					<tr>
-						<td><label>Sexo:</label></td>
-						<td><form:input path="sexo_usuario" value="${usuario.sexo_usuario}"/></td>
-					</tr>
-					
-					<tr>
-						<td><label>Data de Nascimento:</label></td>
-						<fmt:formatDate value="${usuario.data_nascimento_usuario}" var="dateString" pattern="dd/MM/yyyy" />
-						<fmt:formatDate value="${usuario.data_nascimento_usuario}" var="altDateString" pattern="MM/dd/yyyy" />
-						 <td><input type="text" id="datepicker" name="datepicker" value="${dateString}" />
-						 <input type="hidden" id="data_nascimento_usuario" name="data_nascimento_usuario" value="${altDateString}" /></td>
+			
+						<p><label>Nome:</label>
+						<form:input path="nome_usuario" value="${usuario.nome_usuario}"/></p>
 						
-					</tr>
+						<p><label>Sobrenome:</label>
+						<form:input path="sobrenome_usuario" value="${usuario.sobrenome_usuario}"/></p>
+						
+						<p><label>CPF:</label>
+						<form:input path="cpf_usuario" value="${usuario.cpf_usuario}" disabled="true"/></p>
+
+										
+						<p><label>*Senha:</label>
+						<form:input type="password" path="senha_usuario" value="${usuario.senha_usuario}" id = "txtNewPassword" required="true" maxlength="40"/></p>
 					
-					<tr>
-						<td><label>Telefone:</label></td>
-						<td><form:input path="telefone_usuario" value="${usuario.telefone_usuario}"/></td>
-					</tr>
-					
-					<tr>
-						<td><label>Profissao:</label></td>
-						<td><form:input path="profissao_usuario" value="${usuario.profissao_usuario}"/></td>
-					</tr>
-					
-					<tr>
-						<td><label></label></td>
-						<td><input type="submit" value="Atualizar" class="add-button" />
+						<p><label>*Confirme a Senha:</label>
+						<input type="password" id = "txtConfirmPassword" value="${usuario.senha_usuario}" required/></p>
+						
+						<p><label>Email:</label>
+						<form:input path="email_usuario" value="${usuario.email_usuario}"/></p>
+				
+						<p><label>Sexo:</label>
+						Feminino <form:radiobutton path="sexo_usuario" value="F" required="true"/>
+						Masculino <form:radiobutton path="sexo_usuario" value="M" /></p>
+						
+						<p><label>Data de Nascimento:</label>
+						<fmt:formatDate value="${usuario.data_nascimento_usuario}" var="dateString" pattern="dd/MM/yyyy" />
+						<fmt:formatDate value="${usuario.data_nascimento_usuario}" var="altDateString" pattern="MM/dd/yyyy" /></p>
+						
+						<p><input type="text" id="datepicker" name="datepicker" value="${dateString}" />
+						 <input type="hidden" id="data_nascimento_usuario" name="data_nascimento_usuario" value="${altDateString}" /></p>
+						
+						<p><label>Telefone:</label>
+						<form:input path="telefone_usuario" value="${usuario.telefone_usuario}"/></p>
+						
+						<p><label>Profissao:</label>
+						<form:input path="profissao_usuario" value="${usuario.profissao_usuario}"/></p>
+						
+						
+						<input type="submit" value="Atualizar" class="add-button" />
 						
 						<input type="button" value="Voltar"
 							onclick = "window.history.go(-1); return false;"
 							class="add-button"
 							/>		
-						
-						</td>
-											
-						
-					</tr>
-					
-				</tbody>
-			</table>
 			
 		</form:form>
 		<br>
