@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hullo.dao.UsuarioDAO;
 import com.hullo.entity.ProfessorImpl;
-import com.hullo.entity.Usuario;
 
 
 @Service
@@ -45,6 +44,12 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 		return professorDAO.getUsuario(id_usuario);
 	}
 
+	@Override
+	@Transactional
+	public ProfessorImpl validaUsuario(String email, int id_usuario) {
+		return professorDAO.validaUsuario(email, id_usuario);
+	}
+	
 	@Override
 	public ProfessorImpl getUsuario(String email) {
 		// TODO Auto-generated method stub

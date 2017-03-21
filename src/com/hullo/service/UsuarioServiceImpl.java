@@ -60,4 +60,10 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 	public void inactivateUsuario(UsuarioImpl theUsuario){		
 	}
 
+	@Override
+	public UsuarioImpl validaUsuario(String email, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

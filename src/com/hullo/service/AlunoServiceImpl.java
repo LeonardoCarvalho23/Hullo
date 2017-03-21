@@ -64,4 +64,10 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 		alunoDAO.inactivateUsuario(theUsuario);
 	}
 
+	@Override
+	public AlunoImpl validaUsuario(String email, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

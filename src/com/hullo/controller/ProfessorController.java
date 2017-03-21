@@ -58,7 +58,7 @@ public class ProfessorController {
 	  ProfessorImpl validaProfessor = new ProfessorImpl();
 		
 		//validar se ja existe usuario com esse email ou senha
-	  validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
+	  	validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
 		
 		//se retornar que existe, exibe mensagem de erro
 	  
@@ -134,16 +134,31 @@ public class ProfessorController {
 	
 	//metodo para atualizar professor
 	@PostMapping("/updateProfessor")
-	public String updateProfessor(@ModelAttribute("usuario") ProfessorImpl theUsuario, Model theModel){
+	public String updateProfessor(@ModelAttribute("usuario") ProfessorImpl theUsuario, Model theModel, ModelMap modelMap){
 			Date current_date = new Date();
 
 			theUsuario.setDt_last_update_usuario(current_date);
 			
+			//validar se ja existe usuario com esse email
+			ProfessorImpl validaProfessor = professorService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
+			System.out.println("validou email e voltou para controller");
+			
+			if (validaProfessor != null){
+				System.out.println("controller chegou resultado");
+				//exibe mensagem de erro
+				final String errorMessage = 
+						"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro usuario com esse email </div>"; 
+			    modelMap.addAttribute("errorMessage", errorMessage);
+			    System.out.println(errorMessage);
+				return "professor-update-form";
+			}
+			else{
+				System.out.println("controller chegou null");
 			professorService.updateUsuario(theUsuario);
 			
 			theModel.addAttribute(theUsuario);
 			
-			return "home-professor";
+			return "home-professor";}
 	}
 	
 	//metodo para inativar professor

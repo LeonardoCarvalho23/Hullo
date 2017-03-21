@@ -2,7 +2,6 @@ package com.hullo.dao;
 
 import java.util.List;
 
-import com.hullo.entity.AlunoImpl;
 
 public interface UsuarioDAO<T> {
 	
@@ -19,5 +18,7 @@ public interface UsuarioDAO<T> {
 	public void udateUsuario(T theUsuario);
 
 	public void inactivateUsuario(T theUsuario);
+
+	public T validaUsuario(String email, int id_usuario);
 
 }
