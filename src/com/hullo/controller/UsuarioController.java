@@ -99,39 +99,7 @@ public class UsuarioController {
 			}
 		}
 	}
-	
-
-	@PostMapping("/showFormUpdateAluno")
-	public String showFormUpdateAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
-		// o id_usuario deve estar especificado no JSP como campo oculto
-		//get aluno form database
-		Usuario theUsuario = usuarioService.getUsuario(id_usuario);
 		
-		//adiciona o usuario ao modelo
-		theModel.addAttribute("usuario", theUsuario);
-		
-		// retorna
-		return "aluno-update-form";
-		
-	}
-	
-	@PostMapping("/saveAluno")
-	public String saveAluno(@ModelAttribute("usuario") UsuarioImpl theUsuario, Model theModel){
-		Date current_date = new Date();
-		
-		theUsuario.setAtivo_usuario("1");
-		theUsuario.setDt_insert_usuario(current_date);
-		theUsuario.setDt_last_update_usuario(current_date);
-		theUsuario.setTipo_usuario("ALUNO");
-		
-		usuarioService.saveUsuario(theUsuario);
-		
-		theModel.addAttribute(theUsuario);
-		
-		return "home-aluno";
-		
-	}
-	
 	@GetMapping("/retrievePassword")
 	public String retrievePassword(Model theModel){
 		Usuario oUsuario = new UsuarioImpl();

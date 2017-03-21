@@ -2,7 +2,7 @@ package com.hullo.entity;
 
 import java.util.List;
 
-public class UsuarioModel {
+public class AlunoModel {
 
 	private AlunoImpl usuario;
 	private List<EstadoImpl> estado;

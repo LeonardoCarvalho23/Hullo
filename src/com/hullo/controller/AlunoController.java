@@ -31,7 +31,7 @@ import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
 import com.hullo.entity.UsuarioImpl;
-import com.hullo.entity.UsuarioModel;
+import com.hullo.entity.AlunoModel;
 import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
@@ -67,7 +67,7 @@ public class AlunoController {
 		
 		List<EstadoImpl> estados = estadoService.getEstados();
 		
-		UsuarioModel usuarioModel = new UsuarioModel();
+		AlunoModel usuarioModel = new AlunoModel();
 		
 		usuarioModel.setEstado(estados);
 		usuarioModel.setUsuario(theAluno);
@@ -80,13 +80,13 @@ public class AlunoController {
 
 	//Metodo para gravar novo aluno
 	@PostMapping("/newAluno")
-	public String saveUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel, ModelMap modelMap) throws JsonParseException, JsonMappingException, IOException{
+	public String saveUsuario(@ModelAttribute("usuarioModel") AlunoModel usuarioModel, ModelMap modelMap) throws JsonParseException, JsonMappingException, IOException{
 		Date current_date = new Date();
 		
-		//pega o aluno do objeto usuarioModel
+		//pega o aluno do objeto alunoModel
 		AlunoImpl theAluno = usuarioModel.getUsuario();
 		
-		//pega a cidade do objeto usuarioModel (cast de JSON para Objeto)
+		//pega a cidade do objeto alunoModel (cast de JSON para Objeto)
 		ObjectMapper mapper = new ObjectMapper();
 		CidadeImpl cidade = mapper.readValue(usuarioModel.getCidade(), CidadeImpl.class);
 		
@@ -126,7 +126,6 @@ public class AlunoController {
 	
 	
 	@RequestMapping(value = "/formAluno/cidades", method = RequestMethod.POST)
-	
 	public @ResponseBody List<CidadeImpl> obterCidade(@RequestBody EstadoImpl estado){
 		
 		//List<CidadeImpl> cidade = cidadeService.getCidades();
