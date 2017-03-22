@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.*;
 import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
+import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.entity.AlunoModel;
 import com.hullo.service.CidadeServiceImpl;
@@ -133,7 +134,12 @@ public class AlunoController {
 			} catch (MailException e) {
 				// TODO Auto-generated catch block
 			}
-			
+			// envia mensagem de cadastro com sucesso
+			final String okNewAlunoMessage =
+		    		"<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Aluno cadastrado com sucesso. Faça login. </div>";	
+		    modelMap.addAttribute("okNewAlunoMessage", okNewAlunoMessage);
+		    Usuario oUsuario = new UsuarioImpl();
+			modelMap.addAttribute("usuario", oUsuario);
 			return "redirect:/usuario/usuarioLogin";
 		}
 		

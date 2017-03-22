@@ -130,6 +130,10 @@ public class ProfessorController {
 				// TODO Auto-generated catch block
 			}
 		  
+			// envia mensagem de cadastro com sucesso
+			final String okNewProfessorMessage =
+					  "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Professor cadastrado com sucesso. Faça login. </div>";	
+			modelMap.addAttribute("okNewProfessorMessage", okNewProfessorMessage);
 			return "redirect:/usuario/usuarioLogin";
 		}   
   } 
