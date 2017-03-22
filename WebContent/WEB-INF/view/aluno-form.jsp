@@ -168,10 +168,10 @@ function TestaCPF(strCPF) {
 					<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" value=""/></p>
 					
 					<p><label>*Telefone:</label>
-					<form:input path="usuario.telefone_usuario" required="true"/></p>
+					<form:input path="usuario.telefone_usuario" required="true" placeholder="DDDXXXXXXXX" maxlength="11" tittle="Número incluindo DDD, sem traços"/></p>
 					
 					<p><label>Profissao:</label>
-					<form:input path="usuario.profissao_usuario" /></p>
+					<form:input path="usuario.profissao_usuario" maxlength="40"/></p>
 					
 					<p><label>*Estado:</label>
 					<form:select path="" id="estado" multiple="false">

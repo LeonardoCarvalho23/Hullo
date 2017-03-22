@@ -228,10 +228,10 @@ function validaCnpj(cnpj){
 					<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" value=""/></p>
 						
 					<p><label>*Telefone:</label>
-					<form:input path="usuario.telefone_usuario" required="true" maxlength="20"/></p>
+					<form:input path="usuario.telefone_usuario" required="true" maxlength="11" placeholder="DDDXXXXXXXX" tittle="Número incluindo DDD, sem traços"/></p>
 					
 					<p><label>Profissão:</label>
-					<form:input path="usuario.profissao_usuario" /></p>
+					<form:input path="usuario.profissao_usuario" maxlength="40"/></p>
 					
 					<p><label>*Estado:</label>
 					<form:select path="" id="estado" multiple="false">
@@ -240,7 +240,7 @@ function validaCnpj(cnpj){
 						
 					<p><label>*Cidade:</label>
 					<form:select path="cidade" id="cidade" multiple="false">
-					</form:select>
+					</form:select></p>
 														
 					<input type="submit" value="Salvar" class="add-button" />
 						

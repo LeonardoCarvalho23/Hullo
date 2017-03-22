@@ -78,25 +78,27 @@ function checkPasswordMatch() {
 			<form:hidden path="id_usuario" />
 					
 						<p><label>Nome:</label>
-						<form:input path="nome_usuario" value="${usuario.nome_usuario}"/></p>
+						<form:input path="nome_usuario" value="${usuario.nome_usuario}" maxlength="45"/></p>
 						
 						<p><label>Sobrenome:</label>
-						<form:input path="sobrenome_usuario" value="${usuario.sobrenome_usuario}"/></p>
+						<form:input path="sobrenome_usuario" value="${usuario.sobrenome_usuario}" maxlength="45"/></p>
 						
 						<p><label>CPF:</label>
 						<form:input path="cpf_usuario" value="${usuario.cpf_usuario}" disabled="true"/></p>
 
 						<p><label>CNPJ:</label>
-						<form:input path="cnpj_usuario" value="${usuario.cnpj_usuario}"/></p>
+						<form:input path="cnpj_usuario" value="${usuario.cnpj_usuario}" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" id = "cnpj" onblur="validaCnpj(this.value)"
+						title="Digite um CNPJ válido no formato: xx.xxx.xxx/xxxx-xx"  
+						maxlength="18"/></p>
+						
+						<p><label>Email:</label>
+						<form:input path="email_usuario" value="${usuario.email_usuario}" maxlength="45"/></p>
 										
 						<p><label>*Senha:</label>
 						<form:input type="password" path="senha_usuario" value="${usuario.senha_usuario}" id = "txtNewPassword" required="true" maxlength="40"/></p>
 					
 						<p><label>*Confirme a Senha:</label>
 						<input type="password" id = "txtConfirmPassword" value="${usuario.senha_usuario}" required/></p>
-						
-						<p><label>Email:</label>
-						<form:input path="email_usuario" value="${usuario.email_usuario}"/></p>
 				
 						<p><label>Sexo:</label>
 						Feminino <form:radiobutton path="sexo_usuario" value="F" required="true"/>
@@ -110,10 +112,10 @@ function checkPasswordMatch() {
 						 <input type="hidden" id="data_nascimento_usuario" name="data_nascimento_usuario" value="${altDateString}" /></p>
 						
 						<p><label>Telefone:</label>
-						<form:input path="telefone_usuario" value="${usuario.telefone_usuario}"/></p>
+						<form:input path="telefone_usuario" value="${usuario.telefone_usuario}" maxlength="11" tittle="Número incluindo DDD, sem traços"/></p>
 						
 						<p><label>Profissao:</label>
-						<form:input path="profissao_usuario" value="${usuario.profissao_usuario}"/></p>
+						<form:input path="profissao_usuario" value="${usuario.profissao_usuario}" maxlength="40"/></p>
 						
 						<br>
 						<label></label>
