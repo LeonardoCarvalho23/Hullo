@@ -26,4 +26,15 @@ public class EstadoDAOImpl {
 		return estados;
 	}
 
+	public EstadoImpl getEstado(int idEstado) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<EstadoImpl> theQuery = currentSession.createQuery("from EstadoImpl where id_estado = " + idEstado, EstadoImpl.class);
+
+		EstadoImpl estado = theQuery.getSingleResult();
+		
+		return estado;
+	}
+
 }

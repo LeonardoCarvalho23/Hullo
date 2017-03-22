@@ -86,14 +86,6 @@ public class AlunoImpl implements Usuario {
 		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
 	}
 
-	public int getCidade() {
-		return cd_cidade_usuario;
-	}
-
-	public void setCidade(int cd_cidade_usuario) {
-		this.cd_cidade_usuario = cd_cidade_usuario;
-	}
-
 	public int getId_usuario() {
 		return id_usuario;
 	}
@@ -212,6 +204,14 @@ public class AlunoImpl implements Usuario {
 
 	public void setDt_last_update_usuario(Date dt_last_update_usuario) {
 		this.dt_last_update_usuario = dt_last_update_usuario;
+	}
+
+	public int getCd_cidade_usuario() {
+		return cd_cidade_usuario;
+	}
+
+	public void setCd_cidade_usuario(int cd_cidade_usuario) {
+		this.cd_cidade_usuario = cd_cidade_usuario;
 	}
 
 	@Override

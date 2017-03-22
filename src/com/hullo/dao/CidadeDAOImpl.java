@@ -36,5 +36,15 @@ public class CidadeDAOImpl {
 		
 		return cidades;
 	}
+	
+	public CidadeImpl getCidade(int idCidade){
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<CidadeImpl> theQuery = currentSession.createQuery("from CidadeImpl where id_cidade = "+ idCidade, CidadeImpl.class);
+
+		CidadeImpl cidade = theQuery.getSingleResult();
+		
+		return cidade;
+	}
 
 }

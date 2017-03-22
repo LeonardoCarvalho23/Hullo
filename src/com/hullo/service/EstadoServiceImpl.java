@@ -21,5 +21,10 @@ public class EstadoServiceImpl {
 		
 		return estadoDAO.getEstados();
 	}
+	
+	public EstadoImpl getEstado(int idEstado)
+	{
+		return estadoDAO.getEstado(idEstado);
+	}
 
 }
