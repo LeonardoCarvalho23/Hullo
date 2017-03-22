@@ -1,11 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <!DOCTYPE html>
-<html>
-
-<head>
-	<title>Novo Aluno</title>
-
+<html lang="pt">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Novo Aluno</title>
 	<!--  Basic jquery and Bootstrap -->
 		<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
@@ -14,9 +14,11 @@
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
    		<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
+   	<!-- CSS Custom -->
+   		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
 <script>		
 $(function(){
-    $("#datepicker").datepicker({ 
+    $('#datepicker').datepicker({ 
     	altField: '#usuario\\.data_nascimento_usuario', // é preciso usar dois \\ antes do ponto pra funcionar quando o id tem ponto no nome
     	altFormat: 'mm/dd/yy',
     	dateFormat: 'dd/mm/yy'
@@ -100,20 +102,6 @@ function TestaCPF(strCPF) {
 		return false;
 	}
 	
-	// Elimina CNPJs invalidos conhecidos
-    if (cnpj == "00000000000000" || 
-        cnpj == "11111111111111" || 
-        cnpj == "22222222222222" || 
-        cnpj == "33333333333333" || 
-        cnpj == "44444444444444" || 
-        cnpj == "55555555555555" || 
-        cnpj == "66666666666666" || 
-        cnpj == "77777777777777" || 
-        cnpj == "88888888888888" || 
-        cnpj == "99999999999999"){
-    	alert("CNPJ INVÁLIDO");
-    	return false;
-	
 	document.getElementById("cpf").setCustomValidity('');
 	//alert("CPF VALIDO!");
 	return true;
@@ -126,75 +114,176 @@ function TestaCPF(strCPF) {
 
 <body>
 	<div id="wrapper">
-		<div id="header">
-			<h2>Novo Aluno</h2>
+	<div id="header">
+			<img class="logo" src="${pageContext.request.contextPath}/resources/images/logo200v2.png" width="100px" >
 		</div>
-	</div>
-	
 	<div id="container">
-
-					${errorMessage}
-
-		<form:form action="newAluno" modelAttribute="usuarioModel" method="POST" onsubmit="return checkPasswordMatch();">
-
-					
-					<p><label>*Nome:</label>
-					<form:input path="usuario.nome_usuario" required="true" maxlength="45"/></p>
-					
-					
-					<p><label>*Sobrenome:</label>
-					<form:input path="usuario.sobrenome_usuario" required="true" maxlength="45"/></p>
-					
-					<p><label>*CPF:</label>
-					<form:input path="usuario.cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+		
+		<form:form class="well form-horizontal" action="newAluno" modelAttribute="usuarioModel" method="POST" onsubmit="return checkPasswordMatch();" >
+		<fieldset>
+		${errorMessage}
+			<!-- Nome do formulário -->
+			<legend>Novo aluno</legend>
+			
+			<!-- Campo nome -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Nome</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  				<form:input placeholder="Nome" class="form-control" path="usuario.nome_usuario" required="true" maxlength="45"/>
+		    			</div>
+		  			</div>
+			</div>
+								
+			<!-- Campo Sobrenome -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Sobrenome</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  				<form:input placeholder="Sobrenome" class="form-control" path="usuario.sobrenome_usuario" required="true" maxlength="45"/>
+		    			</div>
+		  			</div>
+			</div>	
+								
+			<!-- Campo CPF -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">CPF</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		  				<form:input class="form-control" path="usuario.cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
 					 placeholder="xxx.xxx.xxx-xx" maxlength="14" size="14" required="true"
-					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" /></p>
+					  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
+		    			</div>
+		  			</div>
+			</div>	
+							
+			<!-- Campo email -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">E-mail</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+		  				<form:input placeholder="E-mail" class="form-control" type="email" path="usuario.email_usuario" required="true" maxlength="45"/>
+		    			</div>
+		  			</div>
+			</div>	
+
+			<!-- Campo senha -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Senha</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+		  				<form:input placeholder="Senha" class="form-control" type="password" path="usuario.senha_usuario" id="txtNewPassword" required="true" maxlength="40"/>
+		    			</div>
+		  			</div>
+			</div>	
+
+			<!-- Campo confirmação senha -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Confirme sua senha</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+		  				<input placeholder="Confirme sua senha" class="form-control" type="password" id ="txtConfirmPassword" required/>
+		    			</div>
+		  			</div>
+			</div>							
+
+			<!-- Campo sexo -->
+			<div class="form-group">
+                        <label class="col-md-4 control-label">Sexo</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                                    <form:radiobutton path="usuario.sexo_usuario" value="F" required="true"/> Feminino
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <form:radiobutton path="usuario.sexo_usuario" value="M" /> Masculino
+                                </label>
+                            </div>
+                        </div>
+                    </div>					
+
+			<!-- Campo Data nascimento -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Data de nascimento</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+		  				<input class="form-control" type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
+						<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" value=""/>
+
+		    			</div>
+		  			</div>
+			</div>						
+
+			<!-- Campo Telefone -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Telefone</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+		  				<form:input class="form-control" path="usuario.telefone_usuario" required="true" placeholder="DDDXXXXXXXX" maxlength="11" tittle="Número incluindo DDD, sem traços"/>
+		    			</div>
+		  			</div>
+			</div>	
+
+			<!-- Campo Profissão -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Profissão</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+		  				<form:input class="form-control" placeholder="Profissão" path="usuario.profissao_usuario" maxlength="40"/>
+		    			</div>
+		  			</div>
+			</div>					
+
+			<!-- Campo Estado -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Estado</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+		  					<form:select class="form-control" path="" id="estado" multiple="false">
+							<form:options items="${usuarioModel.estado}" itemLabel="nm_estado"/>
+							</form:select>
+		    			</div>
+		  			</div>
+			</div>
+			
+			<!-- Campo Cidade -->
+			<div class="form-group">
+		  		<label class="col-md-4 control-label">Cidade</label>  
+		  			<div class="col-md-4 inputGroupContainer">
+		  				<div class="input-group">
+		  				<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<form:select class="form-control" path="cidade" id="cidade" multiple="false"> </form:select>
+		    			</div>
+		  			</div>
+			</div>	
+								
+			<!-- Botões -->
+			<div class="form-group">
+			  <label class="col-md-4 control-label"></label>
+			  <div class="col-md-4">
+			    <button type="submit" class="btn btn-primary" >Salvar </button>
+			    <input type="button" class="btn btn-primary" value="Voltar" onclick="window.location.href='../'; return false;" />
+			  </div>
+			</div>
 					
-					<p><label>*Email:</label>
-					<form:input type="email" path="usuario.email_usuario" required="true" maxlength="45"/></p>
-					
-					<p><label>*Senha:</label>
-					<form:input type="password" path="usuario.senha_usuario" id = "txtNewPassword" required="true" maxlength="40"/></p>
-					
-					<p><label>*Confirme a Senha:</label>
-					<input type="password" id = "txtConfirmPassword" required/></p>
-					
-					<p><label>*Sexo:</label>
-					Feminino <form:radiobutton path="usuario.sexo_usuario" value="F" required="true"/>
-					Masculino <form:radiobutton path="usuario.sexo_usuario" value="M" /></p>
-					
-					<p><label>*Data de Nascimento:</label>
-					<input type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
-					<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" value=""/></p>
-					
-					<p><label>*Telefone:</label>
-					<form:input path="usuario.telefone_usuario" required="true" placeholder="DDDXXXXXXXX" maxlength="11" tittle="Número incluindo DDD, sem traços"/></p>
-					
-					<p><label>Profissao:</label>
-					<form:input path="usuario.profissao_usuario" maxlength="40"/></p>
-					
-					<p><label>*Estado:</label>
-					<form:select path="" id="estado" multiple="false">
-					<td><form:options items="${usuarioModel.estado}" itemLabel="nm_estado"/><td>
-					</form:select></p>
+								
 						
-					<p><label>*Cidade:</label>
-					<form:select path="cidade" id="cidade" multiple="false">
-					</form:select></p>
-						
-						
-					<br><br>
-						<input type="submit" value="Salvar" class="add-button" />
-					
-						<input type="button" value="Voltar"
-							onclick = "window.location.href='../'; return false;"
-							class="add-button"
-							/>		
-						
-					<br><br>
-					*Campos de preenchimento obrigatório
+		</fieldset>
 		</form:form>
-		<br>
+		</div>
+		<div id="footer"> <p style="display: block; margin: auto; padding: 10px;" align="center">Copyright © 2017 Hullo. Todos os direitos reservados.</p></div>
 	</div>
 </body>
 

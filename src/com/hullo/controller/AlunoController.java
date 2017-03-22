@@ -119,6 +119,21 @@ public class AlunoController {
 			//save the aluno
 			alunoService.saveUsuario(theAluno);
 			
+			//Envia email de confirmação
+			SimpleMailMessage msg = new SimpleMailMessage();
+			
+			msg.setTo(theAluno.getEmail_usuario());
+			msg.setFrom("noreply@hullo.com.br");
+			msg.setSubject("Confirmação de cadastro");
+			msg.setText(theAluno.getNome_usuario()+", seu cadastro de aluno foi realizado com sucesso.");
+			
+			try {
+				this.mailSender.send(msg);
+				//System.out.println(msg.toString());
+			} catch (MailException e) {
+				// TODO Auto-generated catch block
+			}
+			
 			return "redirect:/usuario/usuarioLogin";
 		}
 		

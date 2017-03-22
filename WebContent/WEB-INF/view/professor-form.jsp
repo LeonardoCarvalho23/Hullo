@@ -6,8 +6,6 @@
 <head>
 	<title>Novo Professor</title>
 
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
 <!--  Basic jquery and Bootstrap -->
 		<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
@@ -19,7 +17,7 @@
    		<script>		
 $(function(){
     $('#datepicker').datepicker({ 
-    	altField: '#usuario\\.data_nascimento_usuario', // é preciso usar // antes do ponto quando o id tem ponto
+    	altField: '#usuario\\.data_nascimento_usuario', // é preciso usar \\ antes do ponto quando o id tem ponto
     	altFormat: 'mm/dd/yy',
     	dateFormat: 'dd/mm/yy'
     });
@@ -64,7 +62,6 @@ function checkPasswordMatch() {
     	return false;
     }
     return true
-    
 }
 
 //Verifica se CPF é válido
