@@ -66,4 +66,10 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 		return null;
 	}
 
+	@Override
+	public UsuarioImpl validaUsuario(String email, String cpf) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

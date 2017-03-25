@@ -21,4 +21,6 @@ public interface UsuarioDAO<T> {
 
 	public T validaUsuario(String email, int id_usuario);
 
+	public T validaUsuario(String email, String cpf);
+
 }

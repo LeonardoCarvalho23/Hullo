@@ -140,5 +140,11 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public UsuarioImpl validaUsuario(String email, String cpf) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

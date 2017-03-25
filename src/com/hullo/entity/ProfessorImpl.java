@@ -11,57 +11,54 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="usuario")
+@Table(name="professor")
 public class ProfessorImpl implements Usuario {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_usuario")
+	@Column(name="id_professor")
 	private int id_usuario;
 	
-	@Column(name="nome_usuario")
+	@Column(name="nome_professor")
 	private String nome_usuario;
 	
-	@Column(name="sobrenome_usuario")
+	@Column(name="sobrenome_professor")
 	private String sobrenome_usuario;
 	
-	@Column(name="cpf_usuario")
+	@Column(name="cpf_professor")
 	private String cpf_usuario;
 	
-	@Column(name="cnpj_usuario")
+	@Column(name="cnpj_professor")
 	private String cnpj_usuario;
 	
-	@Column(name="email_usuario")
+	@Column(name="email_professor")
 	private String email_usuario;
 	
-	@Column(name="senha_usuario")
+	@Column(name="senha_professor")
 	private String senha_usuario;
 	
-	@Column(name="sexo_usuario")
+	@Column(name="sexo_professor")
 	private String sexo_usuario;
 	
-	@Column(name="data_nascimento_usuario")
+	@Column(name="data_nascimento_professor")
 	private Date data_nascimento_usuario;
 	
-	@Column(name="telefone_usuario")
+	@Column(name="telefone_professor")
 	private String telefone_usuario;
-	
-	@Column(name="tipo_usuario")
-	private String tipo_usuario;
-	
-	@Column(name="profissao_usuario")
+
+	@Column(name="profissao_professor")
 	private String profissao_usuario;
 	
-	@Column(name="ativo_usuario")
+	@Column(name="ativo_professor")
 	private String ativo_usuario;
 	
-	@Column(name="dt_insert_usuario")
+	@Column(name="dt_insert_professor")
 	private Date dt_insert_usuario;
 	
-	@Column(name="dt_last_update_usuario")
+	@Column(name="dt_last_update_professor")
 	private Date dt_last_update_usuario;
 	
-	@Column(name="cd_cidade_usuario")
+	@Column(name="cd_cidade_professor")
 	private int cd_cidade_usuario;
 	
 	
@@ -80,7 +77,6 @@ public class ProfessorImpl implements Usuario {
 		this.sexo_usuario = usuario.getSexo_usuario();
 		this.data_nascimento_usuario = usuario.getData_nascimento_usuario();
 		this.telefone_usuario = usuario.getTelefone_usuario();
-		this.tipo_usuario = usuario.getTipo_usuario();
 		this.profissao_usuario = usuario.getProfissao_usuario();
 		this.ativo_usuario = usuario.getAtivo_usuario();
 		this.dt_insert_usuario = usuario.getDt_insert_usuario();
@@ -176,14 +172,6 @@ public class ProfessorImpl implements Usuario {
 		this.telefone_usuario = telefone_usuario;
 	}
 
-	public String getTipo_usuario() {
-		return tipo_usuario;
-	}
-
-	public void setTipo_usuario(String tipo_usuario) {
-		this.tipo_usuario = tipo_usuario;
-	}
-
 	public String getProfissao_usuario() {
 		return profissao_usuario;
 	}
@@ -222,7 +210,7 @@ public class ProfessorImpl implements Usuario {
 				+ sobrenome_usuario + ", cpf_usuario=" + cpf_usuario + ", cnpj_usuario=" + cnpj_usuario
 				+ ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario + ", sexo_usuario="
 				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
-				+ telefone_usuario + ", tipo_usuario=" + tipo_usuario + ", profissao_usuario=" + profissao_usuario
+				+ telefone_usuario + ", profissao_usuario=" + profissao_usuario
 				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
 				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
 	}

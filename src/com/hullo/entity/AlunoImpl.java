@@ -10,57 +10,51 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="usuario")
+@Table(name="aluno")
 public class AlunoImpl implements Usuario {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_usuario")
+	@Column(name="id_aluno")
 	private int id_usuario;
 	
-	@Column(name="nome_usuario")
+	@Column(name="nome_aluno")
 	private String nome_usuario;
 	
-	@Column(name="sobrenome_usuario")
+	@Column(name="sobrenome_aluno")
 	private String sobrenome_usuario;
 	
-	@Column(name="cpf_usuario")
+	@Column(name="cpf_aluno")
 	private String cpf_usuario;
 	
-	@Column(name="cnpj_usuario")
-	private String cnpj_usuario;
-	
-	@Column(name="email_usuario")
+	@Column(name="email_aluno")
 	private String email_usuario;
 	
-	@Column(name="senha_usuario")
+	@Column(name="senha_aluno")
 	private String senha_usuario;
 	
-	@Column(name="sexo_usuario")
+	@Column(name="sexo_aluno")
 	private String sexo_usuario;
 	
-	@Column(name="data_nascimento_usuario")
+	@Column(name="data_nascimento_aluno")
 	private Date data_nascimento_usuario;
 	
-	@Column(name="telefone_usuario")
+	@Column(name="telefone_aluno")
 	private String telefone_usuario;
-	
-	@Column(name="tipo_usuario")
-	private String tipo_usuario;
-	
-	@Column(name="profissao_usuario")
+
+	@Column(name="profissao_aluno")
 	private String profissao_usuario;
 	
-	@Column(name="ativo_usuario")
+	@Column(name="ativo_aluno")
 	private String ativo_usuario;
 	
-	@Column(name="dt_insert_usuario")
+	@Column(name="dt_insert_aluno")
 	private Date dt_insert_usuario;
 	
-	@Column(name="dt_last_update_usuario")
+	@Column(name="dt_last_update_aluno")
 	private Date dt_last_update_usuario;
 	
-	@Column(name="cd_cidade_usuario")
+	@Column(name="cd_cidade_aluno")
 	private int cd_cidade_usuario;
 	
 	
@@ -73,13 +67,11 @@ public class AlunoImpl implements Usuario {
 		this.nome_usuario = usuario.getNome_usuario();
 		this.sobrenome_usuario = usuario.getSobrenome_usuario();
 		this.cpf_usuario = usuario.getCpf_usuario();
-		this.cnpj_usuario = usuario.getCnpj_usuario();
 		this.email_usuario = usuario.getEmail_usuario();
 		this.senha_usuario = usuario.getSenha_usuario();
 		this.sexo_usuario = usuario.getSexo_usuario();
 		this.data_nascimento_usuario = usuario.getData_nascimento_usuario();
 		this.telefone_usuario = usuario.getTelefone_usuario();
-		this.tipo_usuario = usuario.getTipo_usuario();
 		this.profissao_usuario = usuario.getProfissao_usuario();
 		this.ativo_usuario = usuario.getAtivo_usuario();
 		this.dt_insert_usuario = usuario.getDt_insert_usuario();
@@ -116,14 +108,6 @@ public class AlunoImpl implements Usuario {
 
 	public void setCpf_usuario(String cpf_usuario) {
 		this.cpf_usuario = cpf_usuario;
-	}
-
-	public String getCnpj_usuario() {
-		return cnpj_usuario;
-	}
-
-	public void setCnpj_usuario(String cnpj_usuario) {
-		this.cnpj_usuario = cnpj_usuario;
 	}
 
 	public String getEmail_usuario() {
@@ -164,14 +148,6 @@ public class AlunoImpl implements Usuario {
 
 	public void setTelefone_usuario(String telefone_usuario) {
 		this.telefone_usuario = telefone_usuario;
-	}
-
-	public String getTipo_usuario() {
-		return tipo_usuario;
-	}
-
-	public void setTipo_usuario(String tipo_usuario) {
-		this.tipo_usuario = tipo_usuario;
 	}
 
 	public String getProfissao_usuario() {
@@ -217,10 +193,10 @@ public class AlunoImpl implements Usuario {
 	@Override
 	public String toString() {
 		return "AlunoImpl [id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", sobrenome_usuario="
-				+ sobrenome_usuario + ", cpf_usuario=" + cpf_usuario + ", cnpj_usuario=" + cnpj_usuario
+				+ sobrenome_usuario + ", cpf_usuario=" + cpf_usuario
 				+ ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario + ", sexo_usuario="
 				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
-				+ telefone_usuario + ", tipo_usuario=" + tipo_usuario + ", profissao_usuario=" + profissao_usuario
+				+ telefone_usuario + ", profissao_usuario=" + profissao_usuario
 				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
 				+ ", dt_last_update_usuario=" + dt_last_update_usuario + ", cd_cidade_usuario=" + cd_cidade_usuario
 				+ "]";

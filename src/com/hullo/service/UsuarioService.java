@@ -9,6 +9,7 @@ public interface UsuarioService<T> {
 
 	public void saveUsuario(T theUsuario);
 
+	//metodo de busca do login
 	public T getUsuario(String email, String senha);
 	
 	public T validaUsuario(String email, int id);
@@ -20,5 +21,8 @@ public interface UsuarioService<T> {
 	public void updateUsuario(T theUsuario);
 
 	public void inactivateUsuario(T theUsuario);
+
+	//metodo validacao na hora de cadastrar
+	public T validaUsuario(String email, String cpf);
 
 }

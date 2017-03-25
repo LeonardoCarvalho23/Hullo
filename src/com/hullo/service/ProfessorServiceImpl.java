@@ -33,8 +33,9 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 
 	@Override
 	@Transactional
-	public ProfessorImpl getUsuario(String email, String cpf) {
-		return professorDAO.getUsuario(email, cpf);
+	public ProfessorImpl getUsuario(String email, String senha) {
+		System.out.println("chegou no service");
+		return professorDAO.getUsuario(email, senha);
 	}
 	
 	
@@ -51,9 +52,9 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 	}
 	
 	@Override
+	@Transactional
 	public ProfessorImpl getUsuario(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		return professorDAO.getUsuario(email);
 	}
 
 	@Override
@@ -69,6 +70,11 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 		
 	}
 
+	@Override
+	@Transactional
+	public ProfessorImpl validaUsuario(String email, String cpf) {
+		return professorDAO.getUsuario(email, cpf);
+	}
 
 
 }

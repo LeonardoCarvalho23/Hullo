@@ -2,7 +2,6 @@ package com.hullo.controller;
 
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -97,11 +96,9 @@ public class AlunoController {
 		//validar se ja existe usuario com esse email ou senha
 		AlunoImpl validaAluno = alunoService.getUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 		
-		System.out.println("validou o usuario");
-		
 		//se retornar que existe, exibe mensagem de erro
 		if (validaAluno != null){
-			System.out.println("viu que ha usuario com os dados");
+			
 			//exibe mensagem de erro
 			final String errorMessage = 
 					"<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Ja exite usuario com esses dados </div>"; 
@@ -115,7 +112,6 @@ public class AlunoController {
 			theAluno.setAtivo_usuario("1");
 			theAluno.setDt_insert_usuario(current_date);
 			theAluno.setDt_last_update_usuario(current_date);
-			theAluno.setTipo_usuario("ALUNO");
 			
 			//save the aluno
 			alunoService.saveUsuario(theAluno);
