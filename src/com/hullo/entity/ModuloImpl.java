@@ -25,7 +25,7 @@ public class ModuloImpl {
 	private float indice_modulo; //para definir ordem dos modulos
 	
 	@Column(name="ativo_modulo")
-	private char ativo_modulo; // 0 = inativo ou 1 = ativo
+	private boolean ativo_modulo; // 0 = inativo ou 1 = ativo
 	
 	@Column(name="dt_insert_modulo")
 	private Date dt_insert_modulo;
@@ -58,11 +58,11 @@ public class ModuloImpl {
 		this.indice_modulo = indice_modulo;
 	}
 
-	public char getAtivo_modulo() {
+	public boolean getAtivo_modulo() {
 		return ativo_modulo;
 	}
 
-	public void setAtivo_modulo(char ativo_modulo) {
+	public void setAtivo_modulo(boolean ativo_modulo) {
 		this.ativo_modulo = ativo_modulo;
 	}
 

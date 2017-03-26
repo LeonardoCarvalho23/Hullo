@@ -16,7 +16,7 @@ public class ModuloService {
 	private ModuloDAOImpl moduloDAO;
 	
 	@Transactional
-	public void saveUsuario(ModuloImpl modulo) {
+	public void saveModulo(ModuloImpl modulo) {
 		moduloDAO.saveModulo(modulo);
 	}
 
