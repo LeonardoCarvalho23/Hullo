@@ -183,7 +183,7 @@ public class AlunoController {
 		
 	}
 	
-	//metodo para abrir pagina de update do aluno
+	//metodo para abrir pagina de perfil do aluno
 		@PostMapping("/showPerfilAluno")
 		public String showPerfilAluno(@RequestParam("id_usuario") int id_usuario, Model theModel){
 

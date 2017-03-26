@@ -88,7 +88,8 @@ CREATE TABLE modulo(
 CREATE TABLE aula(
  id_aula int NOT NULL AUTO_INCREMENT,
  nm_aula varchar(20) NOT NULL,
- indice_aula varchar(2) NOT NULL, -- para definir posiÁ„o da aula 1A, 1B, 2A
+ numero_aula int NOT NULL, -- para definir posi√ß√£o da aula 1, 2, 3, 4 ou 5
+ indice_aula varchar(1) NOT NULL, -- para definir o indice da aula A, B, C...
  revisao_aula varchar(300) NOT NULL,
  conteudo_aula varchar(600) NOT NULL,
  atividade_aula varchar(300) DEFAULT NULL,
@@ -109,7 +110,7 @@ CREATE TABLE aula_realizada(
  nota_model_aula_realizada int DEFAULT NULL,
  nota_practice_aula_realizada int DEFAULT NULL,
  nota_production_aula_realizada int DEFAULT NULL,
- status_ligacao_aula_realizada char (1) DEFAULT NULL, -- 1 = ligacao atendida por aluno, 0 ligacao n„o atendia
+ status_ligacao_aula_realizada char (1) DEFAULT NULL, -- 1 = ligacao atendida por aluno, 0 ligacao n√£o atendia
  dt_criacao_aula_realizada datetime NOT NULL,
  dt_inicio_aula_realizada datetime DEFAULT NULL,
  dt_fim_aula_realizada datetime DEFAULT NULL,
@@ -142,5 +143,6 @@ CREATE TABLE log_professor(
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- usuario
-insert into aluno values (1, "Maria", "da Silva", "111.222.333-44", "maria@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511955556666", "analista de mÌdia social", "1", now(), now(),1);
-insert into professor values (2, "Jo„o", "Lima", "999.888.777-66", NULL, "joao@gmail.com", "123teste", "M", STR_TO_DATE( "02/02/1980", "%d/%m/%Y" ), "5511988887777", NULL, "1", now(), now(),1);
+insert into aluno values (1, "Maria", "da Silva", "111.222.333-44", "maria@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511955556666", "analista de m√≠dia social", "1", now(), now(),1);
+insert into professor values (2, "Jo√£o", "Lima", "999.888.777-66", NULL, "joao@gmail.com", "123teste", "M", STR_TO_DATE( "02/02/1980", "%d/%m/%Y" ), "5511988887777", NULL, "1", now(), now(),1);
+insert into modulo values (1, "Hullo", 1.0, "0", now(), now());

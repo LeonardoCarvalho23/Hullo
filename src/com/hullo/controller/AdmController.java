@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hullo.entity.AlunoImpl;
@@ -35,7 +36,7 @@ public class AdmController {
 		return "main";
 	}
 	
-	@GetMapping("/listaUsuarios")
+	@PostMapping("/listaUsuarios")
 	public String listarUsuarios(Model theModel){
 		
 		//get usuarios from the DAO
@@ -47,7 +48,7 @@ public class AdmController {
 		return "lista-usuarios";
 	}
 	
-	@GetMapping("/listaAlunos")
+	@PostMapping("/listaAlunos")
 	public String listarAlunos(Model theModel){
 		
 		//get usuarios from the DAO
@@ -56,10 +57,10 @@ public class AdmController {
 		//add the usuarios to the model
 		theModel.addAttribute("usuarios", theUsuarios); //name and value
 		
-		return "list-aluno";
+		return "lista-aluno";
 	}
 
-	@GetMapping("/listaProfessores")
+	@PostMapping("/listaProfessores")
 	public String listarProfessores(Model theModel){
 		
 		//get usuarios from the DAO

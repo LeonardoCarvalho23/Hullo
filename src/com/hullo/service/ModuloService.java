@@ -1,0 +1,28 @@
+package com.hullo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.hullo.dao.ModuloDAOImpl;
+import com.hullo.entity.ModuloImpl;
+
+@Service
+public class ModuloService {
+	
+	@Autowired
+	private ModuloDAOImpl moduloDAO;
+	
+	@Transactional
+	public void saveUsuario(ModuloImpl modulo) {
+		moduloDAO.saveModulo(modulo);
+	}
+
+	@Transactional
+	public List<ModuloImpl> getModulos() {
+		return moduloDAO.getModulos();
+	}
+
+}

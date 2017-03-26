@@ -22,7 +22,7 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AlunoImpl> theQuery = currentSession
-				.createQuery("from AlunoImpl where tipo_usuario = 'aluno' order by nome_usuario", AlunoImpl.class);
+				.createQuery("from AlunoImpl order by nome_usuario", AlunoImpl.class);
 
 		List<AlunoImpl> usuarios = theQuery.getResultList();
 

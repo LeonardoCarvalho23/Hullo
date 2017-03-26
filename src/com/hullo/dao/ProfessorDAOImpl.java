@@ -22,7 +22,7 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<ProfessorImpl> theQuery = currentSession.createQuery(
-				"from ProfessorImpl where tipo_usuario = 'professor' order by nome_usuario", ProfessorImpl.class);
+				"from ProfessorImpl order by nome_usuario", ProfessorImpl.class);
 
 		List<ProfessorImpl> usuarios = theQuery.getResultList();
 
