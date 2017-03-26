@@ -30,4 +30,9 @@ public class ModuloServiceImpl {
 		return moduloDAO.getModulos(nomeBusca);
 	}
 
+	@Transactional
+	public boolean validaModulo(float indice_modulo) {
+		return moduloDAO.validaModulo(indice_modulo);
+	}
+
 }

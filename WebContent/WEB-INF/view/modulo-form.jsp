@@ -60,9 +60,9 @@
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-asterisk"></i></span>
-								<form:input class="form-control" path="indice_modulo"
-									id="indice" required="true" maxlength="5" />
+									class="glyphicon glyphicon-th"></i></span>
+								<form:input placeholder="0.0" class="form-control"
+									path="indice_modulo" required="true" maxlength="5" />
 							</div>
 						</div>
 					</div>
@@ -71,8 +71,8 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label">Aula 1</label>
 						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group"> 
-									<input type="button" class="btn btn-primary" value="Nova Aula"
+							<div class="input-group">
+								<input type="button" class="btn btn-primary" value="Nova Aula"
 									onclick="window.location.href='../modulos/aula'; return false;" />
 							</div>
 						</div>

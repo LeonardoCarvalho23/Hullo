@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +39,7 @@ public class ModuloController {
 	@GetMapping("/formModulo")
 	public String formNovoModulo(Model theModel) {
 
-		// crio os objetos que estarao dentro desse model
+		// crio o objeto que esta dentro desse model
 		ModuloImpl modulo = new ModuloImpl();
 
 		// coloco esse modulo no que vai para a pagina
@@ -47,17 +48,23 @@ public class ModuloController {
 		return "modulo-form";
 	}
 
-	// gravrar  novo modulo
+	// gravrar novo modulo
 	@PostMapping("/newModulo")
-	public String saveModulo(@ModelAttribute("modulo") ModuloImpl model) {
+	public String saveModulo(@ModelAttribute("modulo") ModuloImpl model, ModelMap modelMap) {
 		Date current_date = new Date();
 
 		// pega os objetos do ModuloModel
 		ModuloImpl modulo = model;
 
 		// validar se ja existe modulo com esse indice
+		if (moduloService.validaModulo(modulo.getIndice_modulo())) {
 
-		// se retornar que existe, exibe mensagem de erro
+			// exibe mensagem de erro
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Ja exite modulo com esse índice </div>";
+			modelMap.addAttribute("errorMessage", errorMessage);
+
+			return "modulo-form";
+		}
 
 		// adiciona infos ao modulo
 		modulo.setAtivo_modulo(false);
@@ -70,7 +77,7 @@ public class ModuloController {
 		return "redirect:/adm/modulos/lista";
 	}
 
-	//buscar no banco por nome
+	// buscar no banco por nome
 	@PostMapping("/search")
 	public String searchCustomers(@RequestParam("nomeBusca") String nomeBusca, Model theModel) {
 

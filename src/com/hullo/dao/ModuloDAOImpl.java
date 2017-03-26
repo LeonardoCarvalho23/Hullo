@@ -27,13 +27,12 @@ public class ModuloDAOImpl {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<ModuloImpl> Query = currentSession.createQuery("from ModuloImpl order by dt_last_update_modulo",
+		Query<ModuloImpl> Query = currentSession.createQuery("from ModuloImpl order by dt_last_update_modulo DESC",
 				ModuloImpl.class);
 
 		return Query.getResultList();
 
 	}
-
 
 	public List<ModuloImpl> getModulos(String nomeBusca) {
 
@@ -41,16 +40,30 @@ public class ModuloDAOImpl {
 
 		// busca por nome, tudo em lower case
 		Query<ModuloImpl> query = currentSession.createQuery(
-				"from ModuloImpl where lower(nm_modulo) like :nomeModulo order by dt_last_update_modulo",
+				"from ModuloImpl where lower(nm_modulo) like :nomeModulo order by dt_last_update_modulo DESC",
 				ModuloImpl.class);
 		query.setParameter("nomeModulo", "%" + nomeBusca.toLowerCase() + "%");
-		
-		try{	
+
+		try {
 			return query.getResultList();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	public boolean validaModulo(float indice_modulo) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// busca por nome, tudo em lower case
+		Query<ModuloImpl> query = currentSession.createQuery("from ModuloImpl where indice_modulo= " + indice_modulo,
+				ModuloImpl.class);
+
+		List<ModuloImpl> result = query.getResultList();
+		if (result.size() > 0) {
+			return true;
+		}
+		return false;
+
 	}
 
 }

@@ -37,7 +37,7 @@
 				width="100px">
 		</div>
 		<div id="container" class="well form-horizontal"
-			style=" position: relative;">
+			style="position: relative;">
 
 
 			<h3>Lista de Módulos</h3>
@@ -50,10 +50,13 @@
 				class="add-button" /> <br> <br>
 
 			<!--  busca por nome -->
-			<form:form action="search" method="POST">
-                <input type="text" name="nomeBusca" />
-				<input type="submit" value="Buscar" class="btn btn-primary" />
-			</form:form>
+
+
+					<form:form action="search" method="POST">
+						<input type="text" name="nomeBusca" maxlength="45" />
+						<input type="submit" value="Buscar" class="btn btn-primary" />
+					</form:form>
+
 			<br>
 
 			<!-- add out html table here -->
