@@ -10,7 +10,7 @@ import com.hullo.dao.ModuloDAOImpl;
 import com.hullo.entity.ModuloImpl;
 
 @Service
-public class ModuloService {
+public class ModuloServiceImpl {
 	
 	@Autowired
 	private ModuloDAOImpl moduloDAO;
@@ -23,6 +23,11 @@ public class ModuloService {
 	@Transactional
 	public List<ModuloImpl> getModulos() {
 		return moduloDAO.getModulos();
+	}
+
+	@Transactional
+	public List<ModuloImpl> getModulos(String nomeBusca) {
+		return moduloDAO.getModulos(nomeBusca);
 	}
 
 }

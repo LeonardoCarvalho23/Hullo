@@ -69,8 +69,7 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 
 		// Cria query que faz busca no banco
 		Query<AlunoImpl> theQuery;
-		// tirei a busca por aluno para nao correr o risco de um prof se
-		// cadastrar como aluno e zoar o barraco
+
 		theQuery = currentSession.createQuery(
 				"from AlunoImpl where email_usuario = '" + email + "' or cpf_usuario = '" + cpf + "'", AlunoImpl.class);
 

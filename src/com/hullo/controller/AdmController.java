@@ -36,7 +36,7 @@ public class AdmController {
 		return "main";
 	}
 	
-	@PostMapping("/listaUsuarios")
+	@GetMapping("/listaUsuarios")
 	public String listarUsuarios(Model theModel){
 		
 		//get usuarios from the DAO
@@ -48,7 +48,7 @@ public class AdmController {
 		return "lista-usuarios";
 	}
 	
-	@PostMapping("/listaAlunos")
+	@GetMapping("/listaAlunos")
 	public String listarAlunos(Model theModel){
 		
 		//get usuarios from the DAO
@@ -60,7 +60,7 @@ public class AdmController {
 		return "lista-aluno";
 	}
 
-	@PostMapping("/listaProfessores")
+	@GetMapping("/listaProfessores")
 	public String listarProfessores(Model theModel){
 		
 		//get usuarios from the DAO

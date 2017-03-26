@@ -48,14 +48,14 @@
 			<br> <br>
 
 			<!-- ver lista de professores -->
-			<form:form action="../adm/listaProfessores" method="POST">
+			<form:form action="../adm/listaProfessores" method="GET">
 				<input class="btn btn-primary" type="submit" name="Perfil"
 					value="Listar Professores">
 			</form:form>
 			<br> <br>
 
 			<!-- <!-- acesso ao CRUD de material pedagogico -->
-			<form:form action="../adm/modulos/lista" method="POST">
+			<form:form action="../adm/modulos/lista" method="GET">
 				<input class="btn btn-primary" type="submit" name="Perfil"
 					value="Material Pedagógico">
 			</form:form>

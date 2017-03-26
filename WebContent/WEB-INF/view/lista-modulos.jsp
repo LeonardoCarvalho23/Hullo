@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -36,19 +37,25 @@
 				width="100px">
 		</div>
 		<div id="container" class="well form-horizontal"
-			style="height: 400px; widt: 300px; position: relative;">
+			style=" position: relative;">
+
 
 			<h3>Lista de Módulos</h3>
 
 			<br> <br>
 
-
 			<!-- Botao para cadastrar novo modulo -->
 			<input class="btn btn-primary" type="button" value="Novo Módulo"
 				onclick="window.location.href='../modulos/formModulo'; return false;"
-				class="add-button" /> <br>
+				class="add-button" /> <br> <br>
+
+			<!--  busca por nome -->
+			<form:form action="search" method="POST">
+                <input type="text" name="nomeBusca" />
+				<input type="submit" value="Buscar" class="btn btn-primary" />
+			</form:form>
 			<br>
-			
+
 			<!-- add out html table here -->
 			<table>
 				<tr>
