@@ -40,7 +40,7 @@ public class ModuloDAOImpl {
 
 		// busca por nome, tudo em lower case
 		Query<ModuloImpl> query = currentSession.createQuery(
-				"from ModuloImpl where lower(nm_modulo) like :nomeModulo order by dt_last_update_modulo DESC",
+				"from ModuloImpl where lower(nm_modulo) like :nomeModulo order by nm_modulo",
 				ModuloImpl.class);
 		query.setParameter("nomeModulo", "%" + nomeBusca.toLowerCase() + "%");
 
@@ -63,6 +63,21 @@ public class ModuloDAOImpl {
 			return true;
 		}
 		return false;
+
+	}
+
+	public ModuloImpl getModulo(int id_modulo) {
+
+			Session currentSession = sessionFactory.getCurrentSession();
+
+			// Cria query que faz busca no banco
+			Query<ModuloImpl> theQuery;
+			theQuery = currentSession.createQuery("from ModuloImpl where id_modulo='" + id_modulo + "'", ModuloImpl.class);
+
+			// executa query
+			ModuloImpl modulo = theQuery.getSingleResult();
+
+			return modulo;
 
 	}
 

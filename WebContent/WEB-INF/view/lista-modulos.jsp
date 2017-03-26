@@ -52,10 +52,10 @@
 			<!--  busca por nome -->
 
 
-					<form:form action="search" method="POST">
-						<input type="text" name="nomeBusca" maxlength="45" />
-						<input type="submit" value="Buscar" class="btn btn-primary" />
-					</form:form>
+			<form:form action="search" method="POST">
+				<input type="text" name="nomeBusca" maxlength="45" />
+				<input type="submit" value="Buscar" class="btn btn-primary" />
+			</form:form>
 
 			<br>
 
@@ -68,6 +68,7 @@
 					<th>Ativo</th>
 					<th>Data Criação</th>
 					<th>Data Última Atualização</th>
+					<th> </th>
 				</tr>
 
 				<!-- loop over and print usuarios -->
@@ -80,6 +81,13 @@
 						<td>${tempModulo.ativo_modulo}</td>
 						<td>${tempModulo.dt_insert_modulo}</td>
 						<td>${tempModulo.dt_last_update_modulo}</td>
+						<td>
+						
+							<!-- botao de update do modulo --> 
+							<c:url var="viewLink" value="/adm/modulos/showModulo">
+								<c:param name="moduloId" value="${tempModulo.id_modulo}" />
+							</c:url> <!-- mostra o link --> <a href="${viewLink}">Detalhes</a>
+						</td>
 					</tr>
 
 				</c:forEach>

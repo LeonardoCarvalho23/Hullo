@@ -35,4 +35,9 @@ public class ModuloServiceImpl {
 		return moduloDAO.validaModulo(indice_modulo);
 	}
 
+	@Transactional
+	public ModuloImpl getModulo(int id_modulo) {
+		return moduloDAO.getModulo(id_modulo);
+	}
+
 }

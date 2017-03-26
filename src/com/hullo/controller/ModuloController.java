@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hullo.entity.AulaImpl;
 import com.hullo.entity.ModuloImpl;
+import com.hullo.entity.ModuloModel;
 import com.hullo.service.ModuloServiceImpl;
 
 @Controller
@@ -90,4 +92,27 @@ public class ModuloController {
 		return "lista-modulos";
 	}
 
+	// abrir detalhes do modulo
+	@GetMapping("/showModulo")
+	public String showPerfilAluno(@RequestParam("moduloId") int id_modulo, Model theModel) {
+
+		// get aluno form database
+		ModuloImpl modulo = moduloService.getModulo(id_modulo);
+		
+		//cria ModuloModel, objeto com modulo e lista de aulas
+		ModuloModel modeloModel = new ModuloModel();
+		
+		//aqui vai entrar o metodo que busca as aulas desse modulo no banco
+		List<AulaImpl> listaAulas = null;
+		
+		// adiciona os objetos ao modeloModel
+		modeloModel.setModulo(modulo);
+		modeloModel.setListaAulas(listaAulas);
+		
+		theModel.addAttribute("moduloModel", modeloModel);
+
+		// retorna
+		return "view-modulo";
+
+	}
 }
