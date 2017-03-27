@@ -1,11 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html lang="pt">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Novo Aluno</title>
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <link
@@ -23,8 +24,7 @@
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
-
-
+<title>Detalhes do Módulo</title>
 </head>
 
 <body>
@@ -35,27 +35,33 @@
 				width="100px">
 		</div>
 		<div id="container" class="well form-horizontal"
-			style="height: 600px; position: relative;">
+			style="position: relative;">
 
-			<h3>Bem-vindo, ${usuario.nome_usuario}.</h3>
-			<form:form action="../aluno/showPerfilAluno"
-				method="POST">
-				<form:hidden path="id_usuario" />
-				<br>
-				<br>
-				<input class="btn btn-primary"
-					style="position: absolute; bottom: 50px; right: 100px;"
-					type="submit" name="Perfil" value="Meu perfil">
-			</form:form>
+			<legend>Detalhes do Módulo</legend>
+			<p>Id: ${modulo.id_modulo}</p>
+			<p>Nome: ${modulo.nm_modulo}</p>
+			<p>Índice: ${modulo.indice_modulo}</p>
+			<br>
+
+			<p>Aqui vai entrar a lista de aulas desse modulo</p>
+
+			<!-- Botoes -->
+			<div class="form-group">
+				<form:form action="../adm/modulo/formUpdateModulo"
+					modelAttribute="modulo" method="POST">
+					<input type="submit" name="Editar" class="btn btn-primary"
+						value="Editar">
+				</form:form>
+			</div>
 
 		</div>
+		
 		<div id="footer">
 			<p style="display: block; margin: auto; padding: 10px;"
 				align="center">Copyright © 2017 Hullo. Todos os direitos
 				reservados.</p>
-
 		</div>
+		
 	</div>
 </body>
-
 </html>
