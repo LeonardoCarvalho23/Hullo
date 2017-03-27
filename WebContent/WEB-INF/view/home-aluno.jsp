@@ -40,7 +40,6 @@
 			<h3>Bem-vindo, ${usuario.nome_usuario}.</h3>
 			<form:form action="../aluno/showPerfilAluno"
 				method="POST">
-				<form:hidden path="id_usuario" />
 				<br>
 				<br>
 				<input class="btn btn-primary"
