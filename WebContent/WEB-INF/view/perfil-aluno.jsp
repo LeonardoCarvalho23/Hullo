@@ -25,14 +25,12 @@
 <p>Telefone: ${usuario.telefone_usuario}</p>
 <p>Profissão: ${usuario.profissao_usuario} </p>
 
-<form:form action="../aluno/showFormUpdateAluno" modelAttribute="usuario" method="POST">
-<form:hidden path="id_usuario"/>
+<form:form action="../aluno/showFormUpdateAluno" method="POST">
 <input type="submit" name="Editar" value="Editar">
 
 </form:form>
 
-<form:form action="../aluno/inactivateAluno" modelAttribute="usuario" method="POST">
-<form:hidden path="id_usuario"/>
+<form:form action="../aluno/inactivateAluno" method="POST">
 <input type="submit" name="Inativar" value="Inativar" onclick="if(!(confirm('Tem certeza que deseja inativar seu usuário?')))return false">
 
 </form:form>

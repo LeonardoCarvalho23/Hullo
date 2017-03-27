@@ -1,5 +1,7 @@
 package com.hullo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailException;
@@ -21,6 +23,7 @@ import com.hullo.service.UsuarioService;
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
+	
 
 	// --Abaixo, dados para disparo de email
 	@Autowired
@@ -58,15 +61,15 @@ public class UsuarioController {
 	@GetMapping("/usuarioLogin")
 	public String usuarioLogin(Model theModel) {
 		Usuario oUsuario = new UsuarioImpl();
-		theModel.addAttribute("usuario", oUsuario);
+		theModel.addAttribute("usuarioLogin", oUsuario);
 
 		return "usuario-login";
 	}
 
 	@PostMapping("/getUsuario")
-	public String loginUsuario(@ModelAttribute("usuario") UsuarioImpl theUsuario, Model model) {
-		// Acima, acrescentei o "Model model" para poder repassar a mensagem de
-		// erro quando o login falha
+	public String loginUsuario(@ModelAttribute("usuarioLogin") UsuarioImpl theUsuario, HttpSession session, Model model) {
+		// Acima, acrescentei o "Model model" para poder repassar a mensagem de erro quando o login falha
+		// O HttpSession session é para guardar a sessão do usuário logado.
 		// Pega o Model e retira os parâmetros para variáveis
 		String email = theUsuario.getEmail_usuario();
 		String senha = theUsuario.getSenha_usuario();
@@ -77,8 +80,10 @@ public class UsuarioController {
 		AlunoImpl loggedAluno = alunoService.getUsuario(email, senha);
 
 		if (loggedAluno != null) {
-			// login feito com sucesso
-			model.addAttribute("usuario", loggedAluno);
+			//login feito com sucesso
+			//model.addAttribute("usuario", loggedAluno);
+			//Abaixo, adiciona o objeto AlunoImpl à sessão Http
+			session.setAttribute("usuario", loggedAluno);
 			return "home-aluno";
 		}
 
@@ -88,6 +93,8 @@ public class UsuarioController {
 		if (loggedProfessor != null) {
 			// login feito com sucesso
 			model.addAttribute("usuario", loggedProfessor);
+			//Abaixo, adiciona o objeto ProfessorImpl à sessão Http
+			session.setAttribute("loggedProfessor", loggedProfessor);
 			return "home-professor";
 		}
 

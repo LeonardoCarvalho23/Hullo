@@ -25,7 +25,7 @@
     	  <img class="logo" src="${pageContext.request.contextPath}/resources/images/logo200v2.png" width="200px" >
     	  <p></p>
 				<div class="loginmodal-container">
-				  <form:form action="getUsuario" modelAttribute="usuario" method="POST">
+				  <form:form action="getUsuario" modelAttribute="usuarioLogin" method="POST">
 					<form:input path="email_usuario" placeholder="E-mail"/>
 					<form:input path="senha_usuario" placeholder="Senha" type="password" />
 					<div class="login-help">

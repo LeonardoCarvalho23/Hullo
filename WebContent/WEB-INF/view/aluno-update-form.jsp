@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Novo Aluno</title>
+		<title>Editar perfil</title>
 	<!--  Basic jquery and Bootstrap -->
 		<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
@@ -58,9 +58,7 @@ jQuery(function ($) {
 		</div>
 	<div id="container">
 		
-		<form:form class="well form-horizontal" action="updateAluno" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();" >
-		<!-- campo oculto com o id para ele não perder o contexto/id -->
-			<form:hidden path="id_usuario" />
+ 		<form:form class="well form-horizontal" modelAttribute="usuario" action="updateAluno" onsubmit="return checkPasswordMatch();" >
 		<fieldset>
 			<!-- Nome do formulário -->
 			<legend>Editar perfil de aluno</legend>
@@ -71,7 +69,7 @@ jQuery(function ($) {
 		  			<div class="col-md-4 inputGroupContainer">
 		  				<div class="input-group">
 		  				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-		  				<form:input placeholder="Nome" class="form-control" path="nome_usuario" required="true" maxlength="45" value="${usuario.nome_usuario}"/>
+		  				<form:input placeholder="Nome" class="form-control"  path="nome_usuario" maxlength="45" value="${usuario.nome_usuario}" />
 		    			</div>
 		  			</div>
 			</div>
@@ -173,7 +171,7 @@ jQuery(function ($) {
 		  				<form:input class="form-control" placeholder="Profissão" path="profissao_usuario" maxlength="40" value="${usuario.profissao_usuario}"/>
 		    			</div>
 		  			</div>
-			</div>					
+			</div>	 				
 
 
 								
