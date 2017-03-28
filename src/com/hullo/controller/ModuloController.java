@@ -101,32 +101,42 @@ public class ModuloController {
 
 		// get modulo do banco
 		ModuloImpl modulo = moduloService.getModulo(id_modulo);
-		
-		//cria ModuloModel, objeto com modulo e lista de aulas
+
+		// cria ModuloModel, objeto com modulo e lista de aulas
 		ModuloModel moduloModel = new ModuloModel();
-		
-		//aqui vai entrar o metodo que busca as aulas desse modulo no banco
+
+		// aqui vai entrar o metodo que busca as aulas desse modulo no banco
 		List<AulaImpl> listaAulas = null;
-		
+
 		// adiciona os objetos ao modeloModel
 		moduloModel.setModulo(modulo);
 		moduloModel.setListaAulas(listaAulas);
-		
+
 		theModel.addAttribute("moduloModel", moduloModel);
 
 		// retorna
 		return "view-modulo";
 
 	}
-	
-	//mostrar form de update do modulo
+
+	// mostrar form de update do modulo
 	@PostMapping("/formUpdateModulo")
-	public String showFormUpdateModulo(@RequestParam("id_modulo") int id_modulo, Model theModel) {
-		
+	public String showFormUpdateModulo(@RequestParam("modulo.id_modulo") int id_modulo, Model theModel) {
+
 		ModuloImpl modulo = moduloService.getModulo(id_modulo);
-		
-		theModel.addAttribute(modulo);
-		
+
+		// cria ModuloModel, objeto com modulo e lista de aulas
+		ModuloModel moduloModel = new ModuloModel();
+
+		// aqui vai entrar o metodo que busca as aulas desse modulo no banco
+		List<AulaImpl> listaAulas = null;
+
+		// adiciona os objetos ao modeloModel
+		moduloModel.setModulo(modulo);
+		moduloModel.setListaAulas(listaAulas);
+
+		theModel.addAttribute("moduloModel", moduloModel);
+
 		return "modulo-update-form";
 	}
 }

@@ -40,11 +40,6 @@
 			<legend>Detalhes do Módulo</legend>
 
 			<div class="form-group">
-				<label class="col-md-4 control-label">Id:</label>
-				${moduloModel.modulo.id_modulo}
-			</div>
-
-			<div class="form-group">
 				<label class="col-md-4 control-label">Nome: </label>
 				${moduloModel.modulo.nm_modulo}
 			</div>
@@ -62,8 +57,8 @@
 			<!-- Botoes -->
 			<div class="form-group">
 			<label class="col-md-4 control-label"></label> 
-					<form:form action="../modulos/formUpdateModulo" modelAttribute="modulo"  method="POST">
-					<%-- <form:hidden path="id_modulo"/> --%>
+					<form:form action="../modulos/formUpdateModulo" modelAttribute="moduloModel"  method="POST">
+					<form:hidden path="modulo.id_modulo" value="${moduloModel.modulo.id_modulo}"/>
 						<input type="submit" name="Editar" value="Editar" class="btn btn-primary">
 					</form:form>
 			</div>
@@ -83,6 +78,5 @@
 			© 2017 Hullo. Todos os direitos reservados.</p>
 	</div>
 
-	</div>
 </body>
 </html>
