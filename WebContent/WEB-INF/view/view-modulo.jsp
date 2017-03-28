@@ -38,30 +38,51 @@
 			style="position: relative;">
 
 			<legend>Detalhes do Módulo</legend>
-			<p>Id: ${modulo.id_modulo}</p>
-			<p>Nome: ${modulo.nm_modulo}</p>
-			<p>Índice: ${modulo.indice_modulo}</p>
-			<br>
 
-			<p>Aqui vai entrar a lista de aulas desse modulo</p>
+			<div class="form-group">
+				<label class="col-md-4 control-label">Id:</label>
+				${moduloModel.modulo.id_modulo}
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-4 control-label">Nome: </label>
+				${moduloModel.modulo.nm_modulo}
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-4 control-label">Índice:</label>
+				${moduloModel.modulo.indice_modulo}
+			</div>
+
+
+			<div>Aqui vai entrar a lista de aulas desse modulo</div>
+
+
 
 			<!-- Botoes -->
 			<div class="form-group">
-				<form:form action="../adm/modulo/formUpdateModulo"
-					modelAttribute="modulo" method="POST">
-					<input type="submit" name="Editar" class="btn btn-primary"
-						value="Editar">
-				</form:form>
+			<label class="col-md-4 control-label"></label> 
+					<form:form action="../modulos/formUpdateModulo" modelAttribute="modulo"  method="POST">
+					<%-- <form:hidden path="id_modulo"/> --%>
+						<input type="submit" name="Editar" value="Editar" class="btn btn-primary">
+					</form:form>
 			</div>
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label"></label> <input type="button"
+					class="btn btn-primary" value="Voltar"
+					onclick="window.location.href='../modulos/lista'; return false;" />
+			</div>
+		</div>
 
-		</div>
-		
-		<div id="footer">
-			<p style="display: block; margin: auto; padding: 10px;"
-				align="center">Copyright © 2017 Hullo. Todos os direitos
-				reservados.</p>
-		</div>
-		
+
+	</div>
+
+	<div id="footer">
+		<p style="display: block; margin: auto; padding: 10px;" align="center">Copyright
+			© 2017 Hullo. Todos os direitos reservados.</p>
+	</div>
+
 	</div>
 </body>
 </html>

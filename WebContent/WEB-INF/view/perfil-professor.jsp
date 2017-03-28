@@ -28,7 +28,6 @@
 <form:form action="../professor/showFormUpdateProfessor" modelAttribute="usuario" method="POST">
 <form:hidden path="id_usuario"/>
 <input type="submit" name="Editar" value="Editar">
-
 </form:form>
 
 <form:form action="../professor/inactivateProfessor" modelAttribute="usuario" method="POST">

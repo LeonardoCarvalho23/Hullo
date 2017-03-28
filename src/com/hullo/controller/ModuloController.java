@@ -3,6 +3,8 @@ package com.hullo.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hullo.entity.AulaImpl;
 import com.hullo.entity.ModuloImpl;
 import com.hullo.entity.ModuloModel;
+import com.hullo.entity.ProfessorImpl;
 import com.hullo.service.ModuloServiceImpl;
 
 @Controller
@@ -94,25 +97,36 @@ public class ModuloController {
 
 	// abrir detalhes do modulo
 	@GetMapping("/showModulo")
-	public String showPerfilAluno(@RequestParam("moduloId") int id_modulo, Model theModel) {
+	public String showModulo(@RequestParam("id_modulo") int id_modulo, Model theModel) {
 
-		// get aluno form database
+		// get modulo do banco
 		ModuloImpl modulo = moduloService.getModulo(id_modulo);
 		
 		//cria ModuloModel, objeto com modulo e lista de aulas
-		ModuloModel modeloModel = new ModuloModel();
+		ModuloModel moduloModel = new ModuloModel();
 		
 		//aqui vai entrar o metodo que busca as aulas desse modulo no banco
 		List<AulaImpl> listaAulas = null;
 		
 		// adiciona os objetos ao modeloModel
-		modeloModel.setModulo(modulo);
-		modeloModel.setListaAulas(listaAulas);
+		moduloModel.setModulo(modulo);
+		moduloModel.setListaAulas(listaAulas);
 		
-		theModel.addAttribute("moduloModel", modeloModel);
+		theModel.addAttribute("moduloModel", moduloModel);
 
 		// retorna
 		return "view-modulo";
 
+	}
+	
+	//mostrar form de update do modulo
+	@PostMapping("/formUpdateModulo")
+	public String showFormUpdateModulo(@RequestParam("id_modulo") int id_modulo, Model theModel) {
+		
+		ModuloImpl modulo = moduloService.getModulo(id_modulo);
+		
+		theModel.addAttribute(modulo);
+		
+		return "modulo-update-form";
 	}
 }

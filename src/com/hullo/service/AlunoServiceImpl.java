@@ -41,7 +41,6 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 		return alunoDAO.getUsuario(id_usuario);
 	}
 
-	//implementado so por obrigacao por enquanto
 	@Override
 	@Transactional
 	public AlunoImpl getUsuario(String email) {
@@ -61,11 +60,13 @@ public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 	}
 
 	@Override
+	@Transactional
 	public AlunoImpl validaUsuario(String email, int id) {
 		return alunoDAO.validaUsuario(email, id);
 	}
 
 	@Override
+	@Transactional
 	public AlunoImpl validaUsuario(String email, String cpf) {
 		return alunoDAO.validaUsuario(email, cpf);
 	}

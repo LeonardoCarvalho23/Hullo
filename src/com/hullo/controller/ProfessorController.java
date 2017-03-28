@@ -188,7 +188,6 @@ public class ProfessorController {
 		// validar se ja existe usuario com esse email
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theUsuario.getEmail_usuario(),
 				theUsuario.getId_usuario());
-		System.out.println("validou email e voltou para controller");
 
 		if (validaProfessor != null) {
 
@@ -198,7 +197,8 @@ public class ProfessorController {
 
 			return "professor-update-form";
 		} else {
-			System.out.println("controller chegou null");
+
+			theUsuario.setDt_last_update_usuario(current_date);
 			professorService.updateUsuario(theUsuario);
 
 			theModel.addAttribute(theUsuario);

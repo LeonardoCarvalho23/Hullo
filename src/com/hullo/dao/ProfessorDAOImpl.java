@@ -202,11 +202,9 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		try {
 
 			ProfessorImpl validaProfessor = theQuery.getSingleResult();
-			System.out.println("fez query e achou email");
 			return validaProfessor;
 
 		} catch (Exception e) {
-			System.out.println("fez query e nao achou email");
 			return null;
 		}
 	}

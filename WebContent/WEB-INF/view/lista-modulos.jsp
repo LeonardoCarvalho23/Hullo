@@ -85,7 +85,7 @@
 						
 							<!-- botao de update do modulo --> 
 							<c:url var="viewLink" value="/adm/modulos/showModulo">
-								<c:param name="moduloId" value="${tempModulo.id_modulo}" />
+								<c:param name="id_modulo" value="${tempModulo.id_modulo}" />
 							</c:url> <!-- mostra o link --> <a href="${viewLink}">Detalhes</a>
 						</td>
 					</tr>
