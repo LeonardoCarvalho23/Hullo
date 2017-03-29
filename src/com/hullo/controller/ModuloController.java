@@ -3,8 +3,6 @@ package com.hullo.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hullo.entity.AulaImpl;
 import com.hullo.entity.ModuloImpl;
 import com.hullo.entity.ModuloModel;
-import com.hullo.entity.ProfessorImpl;
 import com.hullo.service.ModuloServiceImpl;
 
 @Controller
@@ -138,5 +135,37 @@ public class ModuloController {
 		theModel.addAttribute("moduloModel", moduloModel);
 
 		return "modulo-update-form";
+	}
+
+	// metodo para atualizar modulo
+	@RequestMapping("/updateModulo")
+	public String updateModulo(@ModelAttribute("moduloModel") ModuloModel moduloModel, ModelMap modelMap) {
+		
+		System.out.println("peguei o modulo id = " + moduloModel.getModulo().getId_modulo());
+		System.out.println("peguei o modulo indice = " + moduloModel.getModulo().getIndice_modulo());
+		System.out.println("peguei o modulo nome = " + moduloModel.getModulo().getNm_modulo());
+		
+		ModuloImpl modulo = moduloModel.getModulo();
+
+		// validar se ja existe modulo com esse indice
+		boolean validaModulo = moduloService.validaModulo(moduloModel.getModulo().getIndice_modulo(), moduloModel.getModulo().getId_modulo());
+
+		if (validaModulo) {
+
+			// exibe mensagem de erro
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro modulo com esse índice </div>";
+			modelMap.addAttribute("errorMessage", errorMessage);
+			return "modulo-update-form";
+
+		} else {
+
+			// Atualiza a sessão com os dados inseridos no formulario
+			Date current_date = new Date();
+			modulo.setDt_last_update_modulo(current_date);
+			moduloService.updateModulo(modulo);
+
+			
+			return "view-modulo";
+		}
 	}
 }

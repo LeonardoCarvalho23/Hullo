@@ -34,7 +34,8 @@
 		<div id="container">
 
 			<form:form class="well form-horizontal" action="updateModulo" modelAttribute="moduloModel"
-				method="POST">
+				 method="POST">
+				<form:hidden path="modulo.id_modulo"/>
 				<fieldset>${errorMessage}
 					<!-- Nome do formulário -->
 					<legend>Novo Módulo</legend>
@@ -47,7 +48,7 @@
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-user"></i></span>
 								<form:input class="form-control"
-									path="modulo.nm_modulo" value="${moduloModel.modulo.nm_modulo}" required="true" maxlength="45" />
+									path="modulo.nm_modulo" required="true" maxlength="45" />
 							</div>
 						</div>
 					</div>

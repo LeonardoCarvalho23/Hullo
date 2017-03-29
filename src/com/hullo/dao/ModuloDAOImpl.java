@@ -54,7 +54,7 @@ public class ModuloDAOImpl {
 	public boolean validaModulo(float indice_modulo) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		// busca por nome, tudo em lower case
+		// busca por indice do modulo
 		Query<ModuloImpl> query = currentSession.createQuery("from ModuloImpl where indice_modulo= " + indice_modulo,
 				ModuloImpl.class);
 
@@ -79,6 +79,45 @@ public class ModuloDAOImpl {
 
 			return modulo;
 
+	}
+
+	public boolean validaModulo(float indice_modulo, int id_modulo) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// busca por indice, se nao for do mesmo id do modulo
+		Query<ModuloImpl> query = currentSession.createQuery("from ModuloImpl where id_modulo <> " + id_modulo + " and indice_modulo= " + indice_modulo,
+				ModuloImpl.class);
+
+		List<ModuloImpl> result = query.getResultList();
+		if (result.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public void updateModulo(ModuloImpl modulo) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// Cria query que faz busca no banco
+		Query<ModuloImpl> theQuery;
+
+		// para fazer update apenas dos capos editaveis
+		String hql = "UPDATE ModuloImpl set nm_modulo = :nome, indice_modulo= :indice, dt_last_update_modulo = :lastUpdate "
+				+ "WHERE id_modulo = :id";
+		theQuery = currentSession.createQuery(hql);
+
+		// adicionando valores para as variaveis do update
+		theQuery.setParameter("nome", modulo.getNm_modulo());
+		theQuery.setParameter("indice", modulo.getIndice_modulo());
+		theQuery.setParameter("lastUpdate", modulo.getDt_last_update_modulo());
+		theQuery.setParameter("id", modulo.getId_modulo());
+
+		int result = theQuery.executeUpdate();
+
+		System.out.println(result + " linha atualizada");
+		
 	}
 
 }
