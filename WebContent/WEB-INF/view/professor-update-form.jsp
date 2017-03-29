@@ -74,8 +74,6 @@ function checkPasswordMatch() {
 	${errorMessage}
 		
 		<form:form action="updateProfessor" modelAttribute="usuario" method="POST" onsubmit="return checkPasswordMatch();">
-			<!-- campo oculto com o id para ele não perder o contexto/id -->
-			<form:hidden path="id_usuario" />
 					
 						<p><label>Nome:</label>
 						<form:input path="nome_usuario" value="${usuario.nome_usuario}" maxlength="45"/></p>

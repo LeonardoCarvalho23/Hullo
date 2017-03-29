@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailException;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -34,6 +37,7 @@ import com.hullo.service.UsuarioService;
 
 @Controller
 @RequestMapping("/professor")
+@SessionAttributes("usuario")
 public class ProfessorController {
 
 	@Autowired
@@ -146,62 +150,36 @@ public class ProfessorController {
 
 	// metodo para abrir pagina de perfil professor
 	@PostMapping("/showPerfilProfessor")
-	public String showPerfilProfessor(@RequestParam("id_usuario") int id_usuario, Model theModel) {
-
-		// este método depende de eu colocar o id do usuario no link perfil, no
-		// jsp
-		// get professor form database
-		ProfessorImpl theUsuario = professorService.getUsuario(id_usuario);
-
-		// adiciona o usuario ao modelo
-		theModel.addAttribute("usuario", theUsuario);
-
-		// retorna
+	public String showPerfilProfessor(HttpSession session) {
 		return "perfil-professor";
-
 	}
 
 	// metodo para abrir pagina de update do professor
-	@PostMapping("/showFormUpdateProfessor")
-	public String showFormUpdateProfessor(@RequestParam("id_usuario") int id_usuario, Model theModel) {
-
-		// este método depende de eu colocar o id do usuario no link
-		// "atualizar", no jsp
-		// get aluno form database
-		ProfessorImpl theUsuario = professorService.getUsuario(id_usuario);
-
-		// adiciona o usuario ao modelo
-		theModel.addAttribute("usuario", theUsuario);
-
-		// retorna
+	@RequestMapping("/showFormUpdateProfessor")
+	public String showFormUpdateProfessor(HttpSession session) {
 		return "professor-update-form";
 	}
 
 	// metodo para atualizar professor
-	@PostMapping("/updateProfessor")
-	public String updateProfessor(@ModelAttribute("usuario") ProfessorImpl theUsuario, Model theModel,
-			ModelMap modelMap) {
-		Date current_date = new Date();
-
-		theUsuario.setDt_last_update_usuario(current_date);
+	@RequestMapping("/updateProfessor")
+	public String updateProfessor(@ModelAttribute("usuario") ProfessorImpl theUsuario, HttpSession session,	ModelMap modelMap) {
 
 		// validar se ja existe usuario com esse email
-		ProfessorImpl validaProfessor = professorService.validaUsuario(theUsuario.getEmail_usuario(),
-				theUsuario.getId_usuario());
+		ProfessorImpl validaProfessor = professorService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
 
 		if (validaProfessor != null) {
 
 			// exibe mensagem de erro
 			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro usuario com esse email </div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
-
 			return "professor-update-form";
+			
 		} else {
-
+			
+			// Atualiza a sessão com os dados inseridos no formulario
+			Date current_date = new Date();
 			theUsuario.setDt_last_update_usuario(current_date);
 			professorService.updateUsuario(theUsuario);
-
-			theModel.addAttribute(theUsuario);
 
 			return "home-professor";
 		}
@@ -217,7 +195,6 @@ public class ProfessorController {
 		professorService.inactivateUsuario(theUsuario);
 
 		theModel.addAttribute(theUsuario);
-		System.out.println("entrou aqui inativar");
 		return "redirect:/usuario/usuarioLogin";
 
 	}

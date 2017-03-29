@@ -150,30 +150,18 @@ public class AlunoController {
 
 		return cidade;
 	}
+	
+	// metodo para abrir pagina perfil do aluno
+	@RequestMapping("/showPerfilAluno")
+	public String showPerfilAluno(HttpSession session) {
+		return "perfil-aluno";
+	}
 
 	// metodo para abrir a pagina de update do aluno
 	@RequestMapping("/showFormUpdateAluno")
 	public String showFormUpdateAluno(HttpSession session) {
 		return "aluno-update-form";
 	}
-
-	// metodo para abrir pagina de update do aluno MÉTODO ANTIGO
-	/*
-	 * @PostMapping("/showFormUpdateAluno") public String
-	 * showFormUpdateAluno(@RequestParam("id_usuario") int id_usuario, Model
-	 * theModel){
-	 * 
-	 * // este método depende de eu colocar o id do usuario no link "atualizar",
-	 * no jsp //get aluno form database AlunoImpl theUsuario =
-	 * alunoService.getUsuario(id_usuario);
-	 * 
-	 * //adiciona o usuario ao modelo theModel.addAttribute("usuario",
-	 * theUsuario);
-	 * 
-	 * // retorna return "aluno-update-form";
-	 * 
-	 * }
-	 */
 
 	// metodo para atualizar aluno
 	@RequestMapping("/updateAluno")
@@ -198,52 +186,8 @@ public class AlunoController {
 
 			return "home-aluno";
 		}
-
 	}
 
-	/*
-	 * //metodo para atualizar aluno ANTIGO
-	 * 
-	 * @PostMapping("/updateAluno") public String
-	 * updateAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, Model
-	 * theModel, HttpSession session){ Date current_date = new Date();
-	 * 
-	 * theUsuario.setDt_last_update_usuario(current_date);
-	 * 
-	 * alunoService.updateUsuario(theUsuario);
-	 * 
-	 * theModel.addAttribute(theUsuario);
-	 * 
-	 * return "home-aluno";
-	 * 
-	 * }
-	 */
-
-	// metodo para abrir pagina de update do aluno
-	@RequestMapping("/showPerfilAluno")
-	public String showPerfilAluno(HttpSession session) {
-		return "perfil-aluno";
-	}
-
-	/*
-	 * //metodo para abrir pagina de update do aluno (VERSÃO ANTIGA, SEM O
-	 * HTTPSESSION
-	 * 
-	 * @PostMapping("/showPerfilAluno") public String
-	 * showPerfilAluno(@RequestParam("id_usuario") int id_usuario, Model
-	 * theModel){
-	 * 
-	 * // este método depende de eu colocar o id do usuario no link "atualizar",
-	 * no jsp //get aluno form database AlunoImpl theUsuario =
-	 * alunoService.getUsuario(id_usuario);
-	 * 
-	 * //adiciona o usuario ao modelo theModel.addAttribute("usuario",
-	 * theUsuario);
-	 * 
-	 * // retorna return "perfil-aluno";
-	 * 
-	 * }
-	 */
 
 	// metodo para inativar aluno
 	@PostMapping("/inactivateAluno")

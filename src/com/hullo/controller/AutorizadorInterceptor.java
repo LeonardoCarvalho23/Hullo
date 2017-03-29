@@ -18,7 +18,6 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 	      if(uri.contains("usuario") ||
 	          uri.endsWith("formAluno") ||
 	          uri.endsWith("formProfessor") ||
-	          uri.contains("adm") ||
 	                   uri.contains("resources")){
 	        return true;
 	      }

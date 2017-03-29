@@ -92,14 +92,16 @@ public class UsuarioController {
 
 		if (loggedProfessor != null) {
 			// login feito com sucesso
-			model.addAttribute("usuario", loggedProfessor);
 			//Abaixo, adiciona o objeto ProfessorImpl à sessão Http
-			session.setAttribute("loggedProfessor", loggedProfessor);
+			session.setAttribute("usuario", loggedProfessor);
 			return "home-professor";
 		}
 
 		// verifica se eh o adm
 		if (senha.equals("adm") & email.equals("adm")) {
+			UsuarioImpl loggedAdmin = new UsuarioImpl();
+			loggedAdmin.setNome_usuario("Administrador");
+			session.setAttribute("usuario", loggedAdmin);
 			return "main";
 		}
 

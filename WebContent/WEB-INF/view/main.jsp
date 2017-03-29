@@ -36,7 +36,7 @@
 		<div id="container" class="well form-horizontal"
 			style="height: 400px; position: relative;">
 
-			<h3>Bem-vindo, Administrador</h3>
+			<h3>Bem-vindo, ${usuario.nome_usuario}.</h3>
 
 			<br> <br>
 

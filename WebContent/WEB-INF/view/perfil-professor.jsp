@@ -26,12 +26,10 @@
 <p>Profissão: ${usuario.profissao_usuario} </p>
 
 <form:form action="../professor/showFormUpdateProfessor" modelAttribute="usuario" method="POST">
-<form:hidden path="id_usuario"/>
 <input type="submit" name="Editar" value="Editar">
 </form:form>
 
 <form:form action="../professor/inactivateProfessor" modelAttribute="usuario" method="POST">
-<form:hidden path="id_usuario"/>
 <input type="submit" name="Inativar" value="Inativar" onclick="if(!(confirm('Tem certeza que deseja inativar seu usuário?')))return false">
 
 </form:form>
