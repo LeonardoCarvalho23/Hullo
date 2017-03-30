@@ -1,5 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -35,12 +35,13 @@
 		</div>
 		<div id="container">
 
-			<form:form class="well form-horizontal" action="newModulo"
-				modelAttribute="modulo" method="POST">
+			<form:form class="well form-horizontal" action="newAula"
+				modelAttribute="aula" method="POST">
+				<form:hidden path="id_modulo_aula"/>
 				<fieldset>
 					${errorMessage}
 					<!-- Nome do formulário -->
-					<legend>Novo Módulo</legend>
+					<legend>Nova Aula</legend>
 
 					<!-- Campo nome -->
 					<div class="form-group">
@@ -50,7 +51,20 @@
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-user"></i></span>
 								<form:input placeholder="Nome" class="form-control"
-									path="nm_modulo" required="true" maxlength="45" />
+									path="nm_aula" required="true" maxlength="45" />
+							</div>
+						</div>
+					</div>
+					
+										<!-- Campo indice -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Número</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-th"></i></span>
+								<form:input placeholder="0.0" class="form-control"
+									path="numero_aula" required="true" maxlength="5" />
 							</div>
 						</div>
 					</div>
@@ -63,7 +77,7 @@
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
 								<form:input placeholder="0.0" class="form-control"
-									path="indice_modulo" required="true" maxlength="5" />
+									path="indice_aula" required="true" maxlength="5" />
 							</div>
 						</div>
 					</div>
@@ -74,7 +88,7 @@
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-primary">Salvar</button>
 							<input type="button" class="btn btn-primary" value="Voltar"
-								onclick="window.location.href='../modulos/lista'; return false;" />
+								onclick="window.location.href='../modulos/showModulo'; return false;" />
 						</div>
 					</div>
 
