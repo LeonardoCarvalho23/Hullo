@@ -18,6 +18,7 @@ import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
+import com.hullo.service.LogServiceImpl;
 import com.hullo.service.UsuarioService;
 
 @Controller
@@ -47,6 +48,9 @@ public class UsuarioController {
 	@Autowired
 	@Qualifier("professorServiceImpl")
 	private UsuarioService<ProfessorImpl> professorService;
+	
+	@Autowired
+	private LogServiceImpl logService;
 
 	@GetMapping("/showFormNewUsuario")
 	public String showFormNovoUsuario(Model theModel) {
@@ -81,9 +85,10 @@ public class UsuarioController {
 
 		if (loggedAluno != null) {
 			//login feito com sucesso
-			//model.addAttribute("usuario", loggedAluno);
 			//Abaixo, adiciona o objeto AlunoImpl à sessão Http
 			session.setAttribute("usuario", loggedAluno);
+			//Guarda no log o horário do login
+			logService.saveAlunoLog(loggedAluno.getId_usuario());
 			return "home-aluno";
 		}
 
@@ -94,6 +99,8 @@ public class UsuarioController {
 			// login feito com sucesso
 			//Abaixo, adiciona o objeto ProfessorImpl à sessão Http
 			session.setAttribute("usuario", loggedProfessor);
+			//Guarda no log o horário do login
+			logService.saveProfessorLog(loggedProfessor.getId_usuario());
 			return "home-professor";
 		}
 
@@ -123,21 +130,28 @@ public class UsuarioController {
 		// Pega o email passado no modelo e busca o objeto
 		String email = theUsuario.getEmail_usuario();
 		String senha = null;
+		String nome = null;
+		
+		// coloca um usuario no model pra retornar ao login
+		Usuario oUsuario = new UsuarioImpl();
+		model.addAttribute("usuarioLogin", oUsuario);
 		
 		//busca por aluno e depois por professor e se encontrar, coloca os valores
-		AlunoImpl visitor = alunoService.getUsuario(email);
+		AlunoImpl aluno = alunoService.getUsuario(email);
 				
-		if (visitor == null){
-			ProfessorImpl visitor2 = professorService.getUsuario(email);
-				if  (visitor2 != null){
-					senha = visitor2.getSenha_usuario();
-					email = visitor2.getEmail_usuario();
+		if (aluno == null){
+			ProfessorImpl professor = professorService.getUsuario(email);
+				if  (professor != null){
+					senha = professor.getSenha_usuario();
+					email = professor.getEmail_usuario();
+					nome = professor.getNome_usuario();
 				}
 		}
 		
 		else{
-			senha = visitor.getSenha_usuario();
-			email = visitor.getEmail_usuario();
+			senha = aluno.getSenha_usuario();
+			email = aluno.getEmail_usuario();
+			nome = aluno.getNome_usuario();
 		}
 		
 		
@@ -155,7 +169,7 @@ public class UsuarioController {
 			msg.setTo(email);
 			msg.setFrom("noreply@hullo.com.br");
 			msg.setSubject("Recuperação de senha");
-			msg.setText(visitor.getNome_usuario() + ", sua senha é " + senha + ".");
+			msg.setText(nome + ", sua senha é " + senha + ".");
 
 			try {
 				this.mailSender.send(msg);

@@ -130,24 +130,12 @@ CREATE TABLE aula_realizada(
   REFERENCES professor(id_professor)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-CREATE TABLE log_professor(
- id_log_professor int NOT NULL AUTO_INCREMENT,
- dt_login_professor datetime NOT NULL,
- dt_logout_professor datetime NOT NULL,
- id_professor_log_professor int NOT NULL,
- CONSTRAINT PK_log_professor
- PRIMARY KEY (id_log_professor),
- CONSTRAINT FK_log_professor_professor
- FOREIGN KEY (id_professor_log_professor)
- REFERENCES professor(id_professor)
+CREATE TABLE log_usuario(
+ id_log_usuario int NOT NULL AUTO_INCREMENT,
+ id_professor_log int DEFAULT NULL,
+ id_aluno_log int DEFAULT NULL,
+ dt_login datetime DEFAULT NULL,
+ dt_logout datetime DEFAULT NULL,
+ CONSTRAINT PK_log_usuario
+ PRIMARY KEY (id_log_usuario)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
--- usuario
-insert into aluno values (1, "Maria", "da Silva", "111.222.333-44", "maria@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511955556666", "analista de mídia social", "1", now(), now(),1);
-
-insert into professor values (1, "Ronald", "Lima", "526.618.451-51", NULL, "ronald@gmail.com", "123teste", "M", STR_TO_DATE( "23/07/1986", "%d/%m/%Y" ), "5511988887777", NULL, "1", now(), now(),1);
-insert into professor values (2, "João", "Lima", "999.888.777-66", NULL, "joao@gmail.com", "123teste", "M", STR_TO_DATE( "02/02/1980", "%d/%m/%Y" ), "5511988887777", NULL, "1", now(), now(),1);
-
-insert into modulo values (1, "Hullo", 1.0, "0", now(), now());
-insert into modulo values (2, "Introductions 1", 2.0 , "0", now(), now())
-insert into modulo values (3, "Greetings 1", 1.1 , "0", now(), now())
