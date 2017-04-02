@@ -62,7 +62,7 @@ public class AlunoController {
 
 	@GetMapping("/formAluno")
 	public String showFormNovoUsuario(Model theModel) {
-
+		System.out.println("Entrou no formulario de novo aluno");
 		AlunoImpl theAluno = new AlunoImpl();
 
 		List<EstadoImpl> estados = estadoService.getEstados();
@@ -79,8 +79,7 @@ public class AlunoController {
 
 	// Metodo para gravar novo aluno
 	@PostMapping("/newAluno")
-	public String saveUsuario(@ModelAttribute("usuarioModel") AlunoModel usuarioModel, ModelMap modelMap)
-			throws JsonParseException, JsonMappingException, IOException {
+	public String saveUsuario(@ModelAttribute("usuarioModel") AlunoModel usuarioModel, ModelMap modelMap) throws JsonParseException, JsonMappingException, IOException {
 		Date current_date = new Date();
 
 		// pega o aluno do objeto alunoModel
@@ -94,7 +93,8 @@ public class AlunoController {
 		theAluno.setCd_cidade_usuario(cidade.getId_Cidade());
 
 		// validar se ja existe usuario com esse email ou senha
-		AlunoImpl validaAluno = alunoService.getUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
+		System.out.println("Chegou na hora de validar usuario");
+		AlunoImpl validaAluno = alunoService.validaUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 
 		// se retornar que existe, exibe mensagem de erro
 		if (validaAluno != null) {
@@ -139,13 +139,13 @@ public class AlunoController {
 
 	}
 
-	@RequestMapping(value = "/formAluno/cidades", method = RequestMethod.POST)
+	@RequestMapping(value = "formAluno/cidades", method = RequestMethod.POST)
 	public @ResponseBody List<CidadeImpl> obterCidade(@RequestBody EstadoImpl estado) {
-
+		System.out.println("Estado: " + estado);
 		// List<CidadeImpl> cidade = cidadeService.getCidades();
 
 		List<CidadeImpl> cidade = cidadeService.obterCidadesDoEstado(estado);
-
+		System.out.println("Cidade: " + cidade);
 		return cidade;
 	}
 	

@@ -16,8 +16,10 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 	      String uri = request.getRequestURI();
 	      if(uri.contains("usuario") ||
-	          uri.endsWith("formAluno") ||
-	          uri.endsWith("formProfessor") ||
+	          uri.contains("formAluno") ||
+	          uri.contains("newAluno") ||
+	          uri.contains("newProfessor") ||
+	          uri.contains("formProfessor") ||
 	                   uri.contains("resources")){
 	        return true;
 	      }

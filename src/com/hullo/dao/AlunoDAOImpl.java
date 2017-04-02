@@ -72,7 +72,7 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 
 		theQuery = currentSession.createQuery(
 				"from AlunoImpl where email_usuario = '" + email + "' or cpf_usuario = '" + cpf + "'", AlunoImpl.class);
-
+		System.out.println("Chegou no validaUsuario do AlunoDAO");
 		try {
 			// ve se tem mais de um aluno com os dados
 			List<AlunoImpl> alunos = theQuery.getResultList();
