@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.ProfessorImpl;
@@ -78,11 +79,18 @@ public class UsuarioController {
 		String email = theUsuario.getEmail_usuario();
 		String senha = theUsuario.getSenha_usuario();
 
-		// novo metodo de busca de usuarios para login
-
-		// primeiro busca por aluno
+		// busca por aluno e professor
 		AlunoImpl loggedAluno = alunoService.getUsuario(email, senha);
-
+		ProfessorImpl loggedProfessor = professorService.getUsuario(email, senha);
+		
+		//checa se o usuário possui cadastro como aluno E TAMBÉM como professor
+		if ((loggedAluno != null) && (loggedProfessor != null)){
+			session.setAttribute("usuario_aluno", loggedAluno);
+			session.setAttribute("usuario_professor", loggedProfessor);
+			return "select-profile";
+		}
+		
+		//login aluno
 		if (loggedAluno != null) {
 			//login feito com sucesso
 			//Abaixo, adiciona o objeto AlunoImpl à sessão Http
@@ -92,9 +100,7 @@ public class UsuarioController {
 			return "home-aluno";
 		}
 
-		// busca por professor
-		ProfessorImpl loggedProfessor = professorService.getUsuario(email, senha);
-
+		// login professor
 		if (loggedProfessor != null) {
 			// login feito com sucesso
 			//Abaixo, adiciona o objeto ProfessorImpl à sessão Http
@@ -117,6 +123,27 @@ public class UsuarioController {
 		model.addAttribute("errorMessage", errorMessage);
 		return "usuario-login";
 	}
+	
+	// mapeamento com parâmetro para usuario escolher se loga como professor ou aluno
+	@RequestMapping(value="/getUsuario", params="userType")
+	public String selectUsuario(@RequestParam("userType") String userType, HttpSession session){
+		//guarda em variaveis os dados da sessão para uso no log
+		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario_aluno");
+		ProfessorImpl professor = (ProfessorImpl) session.getAttribute("usuario_professor");
+		
+		if (userType.equals("aluno")){
+			session.setAttribute("usuario", session.getAttribute("usuario_aluno"));
+			//salva o log de login
+			logService.saveAlunoLog(aluno.getId_usuario());
+			return "home-aluno";
+		} else {
+			session.setAttribute("usuario", session.getAttribute("usuario_professor"));
+			//salva o log de login
+			logService.saveProfessorLog(professor.getId_usuario());
+			return "home-professor";
+		}
+	}
+	
 
 	@GetMapping("/retrievePassword")
 	public String retrievePassword(Model theModel) {

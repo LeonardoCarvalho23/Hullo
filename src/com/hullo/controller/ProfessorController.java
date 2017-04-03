@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
 import com.hullo.entity.ProfessorImpl;
@@ -42,6 +43,10 @@ public class ProfessorController {
 	@Autowired
 	@Qualifier("professorServiceImpl")
 	private UsuarioService<ProfessorImpl> professorService;
+	
+	@Autowired
+	@Qualifier("alunoServiceImpl")
+	private UsuarioService<AlunoImpl> alunoService;
 
 	@Autowired
 	private EstadoServiceImpl estadoService;
@@ -95,17 +100,26 @@ public class ProfessorController {
 		// validar se ja existe usuario com esse email ou senha
 		ProfessorImpl validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(),
 				theProfessor.getCpf_usuario());
+		AlunoImpl validaAluno = alunoService.getUsuario(theProfessor.getEmail_usuario());
 
 		// se retornar que existe, exibe mensagem de erro
 
 		if (validaProfessor != null) {
 
 			// exibe mensagem de erro
-			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Ja exite usuario com esses dados </div>";
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Já existe usuario com o mesmo e-mail ou cpf. </div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
 
 			return "professor-form";
+			
+		// se houver aluno, checa se a senha é igual. Se não for, devolve erro	
+		} else if ((validaAluno!=null) && !(validaAluno.getSenha_usuario().equals(theProfessor.getSenha_usuario()))){
+			// exibe mensagem de erro
+				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>A senha deve ser a mesma do perfil de aluno já cadastrado.</div>";
+				modelMap.addAttribute("errorMessage", errorMessage);
 
+				return "professor-form";
+			
 			// se nao existe professor com esses dados, cria o ususario
 		} else {
 			theProfessor.setAtivo_usuario("1");
