@@ -82,6 +82,11 @@
 
 				</fieldset>
 			</form:form>
+			<form:form class="well form-horizontal" action="../modulos/formAula"
+				modelAttribute="modulo" method="GET">
+				<button type="submit" class="btn btn-primary">Nova Aula</button>
+			</form:form>
+			
 		</div>
 		<div id="footer">
 			<p style="display: block; margin: auto; padding: 10px;"

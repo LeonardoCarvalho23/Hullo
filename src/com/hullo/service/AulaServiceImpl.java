@@ -14,7 +14,11 @@ public class AulaServiceImpl {
 	private AulaDAOImpl aulaDAO;
 	
 	@Transactional
-	public void saveAula(AulaImpl aula) {
-		aulaDAO.saveModulo(aula);
+	public void saveAula(AulaServiceImpl aula) {
+		aulaDAO.saveAula(aula);
 	}
+
+	/*public boolean validaAula(float indice_aula) {
+		return aulaDAO.validaAula(indice_aula, id_aula);
+	}*/
 }

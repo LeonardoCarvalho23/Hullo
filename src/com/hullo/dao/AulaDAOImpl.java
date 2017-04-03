@@ -1,11 +1,16 @@
 package com.hullo.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AulaImpl;
+import com.hullo.entity.ModuloImpl;
+import com.hullo.service.AulaServiceImpl;
 
 @Repository
 public class AulaDAOImpl {
@@ -13,10 +18,30 @@ public class AulaDAOImpl {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void saveModulo(AulaImpl aula) {
+	
+	public boolean validaAula(float indice_aula) {
+		Session currentSession = sessionFactory.getCurrentSession();
 
+		// busca por indice do modulo
+		Query<AulaImpl> query = currentSession.createQuery("from AulaImpl where indice_aula= " + indice_aula,
+				AulaImpl.class);
+
+		List<AulaImpl> result = query.getResultList();
+		if (result.size() > 0) {
+			return true;
+		}
+		return false;
+
+	}
+
+	public void saveAula(AulaServiceImpl aula) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		currentSession.saveOrUpdate(aula);
+		
 	}
+
+	
+
+	
 }
