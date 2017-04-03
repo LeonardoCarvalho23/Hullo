@@ -127,12 +127,19 @@ public class UsuarioController {
 	// mapeamento com parâmetro para usuario escolher se loga como professor ou aluno
 	@RequestMapping(value="/getUsuario", params="userType")
 	public String selectUsuario(@RequestParam("userType") String userType, HttpSession session){
-		System.out.println("O valor da variavel userType é " +userType);
+		//guarda em variaveis os dados da sessão para uso no log
+		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario_aluno");
+		ProfessorImpl professor = (ProfessorImpl) session.getAttribute("usuario_professor");
+		
 		if (userType.equals("aluno")){
 			session.setAttribute("usuario", session.getAttribute("usuario_aluno"));
+			//salva o log de login
+			logService.saveAlunoLog(aluno.getId_usuario());
 			return "home-aluno";
 		} else {
 			session.setAttribute("usuario", session.getAttribute("usuario_professor"));
+			//salva o log de login
+			logService.saveProfessorLog(professor.getId_usuario());
 			return "home-professor";
 		}
 	}
