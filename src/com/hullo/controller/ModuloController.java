@@ -16,14 +16,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hullo.entity.AulaImpl;
 import com.hullo.entity.ModuloImpl;
 import com.hullo.entity.ModuloModel;
+import com.hullo.service.AulaServiceImpl;
 import com.hullo.service.ModuloServiceImpl;
 
 @Controller
-@RequestMapping("/adm/modulos")
+@RequestMapping("/modulos")
 public class ModuloController {
 
 	@Autowired
 	private ModuloServiceImpl moduloService;
+	
+	@Autowired
+	private AulaServiceImpl aulaService;
 
 	@GetMapping("/lista")
 	public String listarModulos(Model theModel) {
@@ -52,7 +56,7 @@ public class ModuloController {
 
 	// gravrar novo modulo
 	@PostMapping("/newModulo")
-	public String saveModulo(@ModelAttribute("modulo") ModuloImpl model, ModelMap modelMap) {
+	public String saveModulo(@ModelAttribute("modulo") ModuloImpl model, ModelMap modelMap, Model newModel) {
 		Date current_date = new Date();
 
 		// pega os objetos do ModuloModel
@@ -75,8 +79,9 @@ public class ModuloController {
 
 		// salva o modulo
 		moduloService.saveModulo(modulo);
-
-		return "redirect:/adm/modulos/lista";
+		
+		//abre a pagina de edicao de modulo onde pode adicionar as aulas
+		return showFormUpdateModulo(modulo.getId_modulo(), newModel);
 	}
 
 	// buscar no banco por nome
@@ -103,7 +108,7 @@ public class ModuloController {
 		ModuloModel moduloModel = new ModuloModel();
 
 		// aqui vai entrar o metodo que busca as aulas desse modulo no banco
-		List<AulaImpl> listaAulas = null;
+		List<AulaImpl> listaAulas = aulaService.getAulas(id_modulo);
 
 		// adiciona os objetos ao modeloModel
 		moduloModel.setModulo(modulo);
@@ -112,7 +117,7 @@ public class ModuloController {
 		theModel.addAttribute("moduloModel", moduloModel);
 
 		// retorna
-		return "view-modulo";
+		return "modulo-update-form";
 
 	}
 

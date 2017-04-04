@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AulaImpl;
-import com.hullo.entity.ModuloImpl;
-import com.hullo.service.AulaServiceImpl;
 
 @Repository
 public class AulaDAOImpl {
@@ -34,11 +32,22 @@ public class AulaDAOImpl {
 
 	}
 
-	public void saveAula(AulaServiceImpl aula) {
+	public void saveAula(AulaImpl aula) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		currentSession.saveOrUpdate(aula);
 		
+	}
+
+	//listar aulas de um modulo
+	public List<AulaImpl> getAulas(int id_modulo) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<AulaImpl> Query = currentSession.createQuery("from AulaImpl where id_modulo_aula= " + id_modulo,
+				AulaImpl.class);
+
+		return Query.getResultList();
 	}
 
 	

@@ -82,10 +82,10 @@
 
 				</fieldset>
 			</form:form>
-			<form:form class="well form-horizontal" action="../modulos/formAula"
+			<%-- <form:form class="well form-horizontal" action="../modulos/formAula"
 				modelAttribute="modulo" method="GET">
 				<button type="submit" class="btn btn-primary">Nova Aula</button>
-			</form:form>
+			</form:form> --%>
 			
 		</div>
 		<div id="footer">

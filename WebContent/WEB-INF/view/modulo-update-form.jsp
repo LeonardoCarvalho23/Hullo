@@ -1,11 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-<title>Editar professor</title>
-<title>Novo Modulo</title>
+<title>Editar Módulo</title>
+<title>Editar Modulo</title>
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <link
@@ -33,12 +34,12 @@
 		</div>
 		<div id="container">
 
-			<form:form class="well form-horizontal" action="updateModulo" modelAttribute="moduloModel"
-				 method="POST">
-				<form:hidden path="modulo.id_modulo"/>
+			<form:form class="well form-horizontal" action="updateModulo"
+				modelAttribute="moduloModel" method="POST">
+				<form:hidden path="modulo.id_modulo" />
 				<fieldset>${errorMessage}
 					<!-- Nome do formulário -->
-					<legend>Novo Módulo</legend>
+					<legend>Editar Módulo</legend>
 
 					<!-- Campo nome -->
 					<div class="form-group">
@@ -47,8 +48,8 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-user"></i></span>
-								<form:input class="form-control"
-									path="modulo.nm_modulo" required="true" maxlength="45" />
+								<form:input class="form-control" path="modulo.nm_modulo"
+									required="true" maxlength="45" />
 							</div>
 						</div>
 					</div>
@@ -65,6 +66,21 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- para mostrar lista de aulas desse modulo -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Aulas do modulo</label><br>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<c:forEach var="tempAula" items="${moduloModel.listaAulas}">
+									<p>Numero: ${tempAula.numero_aula}</p>
+									<p>Indice: ${tempAula.indice_aula}</p>
+									 <p>Nome: ${tempAula.nm_aula}</p><br>
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+
 					<!-- Botões -->
 					<div class="form-group">
 						<label class="col-md-4 control-label"></label>
@@ -74,11 +90,17 @@
 								onclick="window.location.href='../modulos/lista'; return false;" />
 						</div>
 					</div>
-
-
-
 				</fieldset>
+
 			</form:form>
+
+			<form:form class="well form-horizontal" action="../modulos/formAula"
+				modelAttribute="moduloModel" method="POST">
+				<form:hidden path="modulo.id_modulo"
+					value="${moduloModel.modulo.id_modulo}" />
+				<button type="submit" class="btn btn-primary">Nova Aula</button>
+			</form:form>
+
 		</div>
 		<div id="footer">
 			<p style="display: block; margin: auto; padding: 10px;"

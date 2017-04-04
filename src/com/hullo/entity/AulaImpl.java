@@ -30,7 +30,7 @@ public class AulaImpl {
 	@Column(name="revisao_aula")
 	private String revisao_aula;
 	
-	@Column(name="coneudo_aula")
+	@Column(name="conteudo_aula")
 	private String conteudo_aula;
 	
 	@Column(name="atividade_aula")

@@ -55,7 +55,7 @@
 			<br> <br>
 
 			<!-- <!-- acesso ao CRUD de material pedagogico -->
-			<form:form action="../adm/modulos/lista" method="GET">
+			<form:form action="../modulos/lista" method="GET">
 				<input class="btn btn-primary" type="submit" name="Perfil"
 					value="Material Pedagógico">
 			</form:form>

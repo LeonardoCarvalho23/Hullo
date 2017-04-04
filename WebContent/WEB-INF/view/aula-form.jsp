@@ -37,7 +37,8 @@
 
 			<form:form class="well form-horizontal" action="newAula"
 				modelAttribute="aula" method="POST">
-				<form:hidden path="id_modulo_aula"/>
+				<form:hidden path="id_modulo_aula" />
+
 				<fieldset>
 					${errorMessage}
 					<!-- Nome do formulário -->
@@ -55,15 +56,15 @@
 							</div>
 						</div>
 					</div>
-					
-										<!-- Campo indice -->
+
+					<!-- Campo numero -->
 					<div class="form-group">
 						<label class="col-md-4 control-label">Número</label>
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
-								<form:input placeholder="0.0" class="form-control"
+								<form:input placeholder="1" class="form-control"
 									path="numero_aula" required="true" maxlength="5" />
 							</div>
 						</div>
@@ -76,8 +77,34 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
-								<form:input placeholder="0.0" class="form-control"
+								<form:input placeholder="A" class="form-control"
 									path="indice_aula" required="true" maxlength="5" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Campo revisao -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Revisao</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-th"></i></span>
+								<form:input class="form-control" path="revisao_aula"
+									required="true" maxlength="5" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Campo conteudo -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Conteudo</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-th"></i></span>
+								<form:input class="form-control" path="conteudo_aula"
+									required="true" maxlength="5" />
 							</div>
 						</div>
 					</div>
@@ -87,6 +114,8 @@
 						<label class="col-md-4 control-label"></label>
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-primary">Salvar</button>
+
+							<!-- voltar -->
 							<input type="button" class="btn btn-primary" value="Voltar"
 								onclick="window.location.href='../modulos/showModulo'; return false;" />
 						</div>
