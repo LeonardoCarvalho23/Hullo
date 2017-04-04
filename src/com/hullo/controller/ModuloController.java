@@ -29,6 +29,7 @@ public class ModuloController {
 	@Autowired
 	private AulaServiceImpl aulaService;
 
+	//lista de todos os modulos cadastrados
 	@GetMapping("/lista")
 	public String listarModulos(Model theModel) {
 
@@ -54,12 +55,12 @@ public class ModuloController {
 		return "modulo-form";
 	}
 
-	// gravrar novo modulo
+	// gravar novo modulo
 	@PostMapping("/newModulo")
 	public String saveModulo(@ModelAttribute("modulo") ModuloImpl model, ModelMap modelMap, Model newModel) {
 		Date current_date = new Date();
 
-		// pega os objetos do ModuloModel
+		//pega o objeto modulo do model
 		ModuloImpl modulo = model;
 
 		// validar se ja existe modulo com esse indice
@@ -81,7 +82,7 @@ public class ModuloController {
 		moduloService.saveModulo(modulo);
 		
 		//abre a pagina de edicao de modulo onde pode adicionar as aulas
-		return showFormUpdateModulo(modulo.getId_modulo(), newModel);
+		return showModulo(modulo.getId_modulo(), newModel);
 	}
 
 	// buscar no banco por nome
@@ -97,17 +98,17 @@ public class ModuloController {
 		return "lista-modulos";
 	}
 
-	// abrir detalhes do modulo
+	// abrir detalhes do modulo e para fazer update
 	@GetMapping("/showModulo")
 	public String showModulo(@RequestParam("id_modulo") int id_modulo, Model theModel) {
 
-		// get modulo do banco
+		//get modulo do banco
 		ModuloImpl modulo = moduloService.getModulo(id_modulo);
 
-		// cria ModuloModel, objeto com modulo e lista de aulas
+		//cria ModuloModel, objeto com modulo e lista de aulas
 		ModuloModel moduloModel = new ModuloModel();
 
-		// aqui vai entrar o metodo que busca as aulas desse modulo no banco
+		//busca as aulas desse modulo no banco
 		List<AulaImpl> listaAulas = aulaService.getAulas(id_modulo);
 
 		// adiciona os objetos ao modeloModel
@@ -116,12 +117,12 @@ public class ModuloController {
 
 		theModel.addAttribute("moduloModel", moduloModel);
 
-		// retorna
+		//retorna pagina de update de modulo, com lista de aulas ja cadastradas
 		return "modulo-update-form";
 
 	}
 
-	// mostrar form de update do modulo
+	/*// mostrar form de update do modulo
 	@PostMapping("/formUpdateModulo")
 	public String showFormUpdateModulo(@RequestParam("modulo.id_modulo") int id_modulo, Model theModel) {
 
@@ -140,16 +141,13 @@ public class ModuloController {
 		theModel.addAttribute("moduloModel", moduloModel);
 
 		return "modulo-update-form";
-	}
+	}*/
 
 	// metodo para atualizar modulo
 	@RequestMapping("/updateModulo")
 	public String updateModulo(@ModelAttribute("moduloModel") ModuloModel moduloModel, ModelMap modelMap) {
 		
-		System.out.println("peguei o modulo id = " + moduloModel.getModulo().getId_modulo());
-		System.out.println("peguei o modulo indice = " + moduloModel.getModulo().getIndice_modulo());
-		System.out.println("peguei o modulo nome = " + moduloModel.getModulo().getNm_modulo());
-		
+		//pego modulo do objeto moduloModel
 		ModuloImpl modulo = moduloModel.getModulo();
 
 		// validar se ja existe modulo com esse indice
@@ -168,9 +166,11 @@ public class ModuloController {
 			Date current_date = new Date();
 			modulo.setDt_last_update_modulo(current_date);
 			moduloService.updateModulo(modulo);
-
 			
 			return "view-modulo";
 		}
 	}
+	
+	//tem que criar metood para ativar modulo
+	//com validacao de que tem as 5 aulas base
 }

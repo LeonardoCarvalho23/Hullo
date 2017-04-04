@@ -97,7 +97,7 @@
 
 			<!-- Botao Voltar -->
 			<input class="btn btn-primary" type="button" value="Voltar"
-				onclick="window.location.href='../main'; return false;"
+				onclick="window.location.href='../adm/main'; return false;"
 				class="add-button" />
 
 		</div>

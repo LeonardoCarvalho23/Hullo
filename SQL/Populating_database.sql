@@ -7,3 +7,6 @@ insert into professor values (2, "João", "Lima", "999.888.777-66", NULL, "joao@g
 insert into modulo values (1, "Hullo", 1.0, "0", now(), now());
 insert into modulo values (2, "Introductions 1", 2.0 , "0", now(), now());
 insert into modulo values (3, "Greetings 1", 1.1 , "0", now(), now());
+
+insert into aula values (1, "hullo", 1, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (2, "how are you?", 2, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);

@@ -26,7 +26,7 @@ public class AulaController {
 	@PostMapping("/formAula")
 	public String formNovaAula(@RequestParam("modulo.id_modulo") int id_modulo, Model theModel) {
 
-		// crio o objeto que esta dentro desse model
+		// crio o objeto que estara dentro desse model
 		AulaImpl aula = new AulaImpl();
 
 		// adiciono o modulo da aula
@@ -35,23 +35,33 @@ public class AulaController {
 		// coloco essa aula no model que vai para a pagina
 		theModel.addAttribute("aula", aula);
 
+		//retorna pagina de cadastro de aulas
 		return "aula-form";
 	}
 
-	// gravar novo modulo
+	// gravar nova aula
 	@PostMapping("/newAula")
 	public String saveAula(@ModelAttribute("aula") AulaImpl model) {
 
+		//data atual para gravar no insert
 		Date current_date = new Date();
+		
+		//pego aula que vem do model
 		AulaImpl aula = model;
 
-		aula.setAtivo_aula(false);
+		//tem que adicionar validacao de numero/indice
+		
+		
+		
+		//adiciono algumas infos
+		aula.setAtivo_aula(true);
 		aula.setDt_insert_aula(current_date);
 		aula.setDt_last_update_aula(current_date);
 
+		//salvo a aula
 		aulaService.saveAula(aula);
 
-		// direcionamento provisorio
+		// direcionamento provisorio - tem que mudar para exibir o modulo da aula
 		return "lista-modulos";
 	}
 

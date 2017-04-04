@@ -115,7 +115,7 @@
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-primary">Salvar</button>
 
-							<!-- voltar -->
+							<!-- voltar esta errado! -->
 							<input type="button" class="btn btn-primary" value="Voltar"
 								onclick="window.location.href='../modulos/showModulo'; return false;" />
 						</div>
