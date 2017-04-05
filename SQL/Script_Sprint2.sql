@@ -132,10 +132,10 @@ CREATE TABLE aula_realizada(
 
 CREATE TABLE log_usuario(
  id_log_usuario int NOT NULL AUTO_INCREMENT,
- id_professor_log int DEFAULT NULL,
- id_aluno_log int DEFAULT NULL,
- dt_login datetime DEFAULT NULL,
- dt_logout datetime DEFAULT NULL,
+ id_professor_log_usuario int DEFAULT NULL,
+ id_aluno_log_usuario int DEFAULT NULL,
+ dt_login_log_usuario datetime DEFAULT NULL,
+ dt_logout_log_usuario datetime DEFAULT NULL,
  CONSTRAINT PK_log_usuario
  PRIMARY KEY (id_log_usuario)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

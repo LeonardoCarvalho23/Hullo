@@ -17,16 +17,16 @@ public class LogImpl {
 	@Column(name="id_log_usuario")
 	private int id;
 	
-	@Column(name="id_professor_log")
+	@Column(name="id_professor_log_usuario")
 	private int id_professor;
 	
-	@Column(name="id_aluno_log")
+	@Column(name="id_aluno_log_usuario")
 	private int id_aluno;
 	
-	@Column(name="dt_login")
+	@Column(name="dt_login_log_usuario")
 	private Date dt_login;
 	
-	@Column(name="dt_logout")
+	@Column(name="dt_logout_log_usuario")
 	private Date dt_logout;
 
 	public void setId_professor(int id_professor) {
