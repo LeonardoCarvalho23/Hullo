@@ -73,10 +73,34 @@
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<c:forEach var="tempAula" items="${moduloModel.listaAulas}">
-									<p>Numero: ${tempAula.numero_aula}</p>
-									<p>Indice: ${tempAula.indice_aula}</p>
-									 <p>Nome: ${tempAula.nm_aula}</p><br>
+									<p>
+										Aula: ${tempAula.numero_aula} ${tempAula.indice_aula} -
+										
+										<!-- botao de update da aula-->
+										<c:url var="viewLink" value="/modulos/showAula">
+											<c:param name="id_aula" value="${tempAula.id_aula}" />
+										</c:url>
+										<!-- mostra o link -->
+										<a href="${viewLink}">${tempAula.nm_aula}</a>
+									</p>
 								</c:forEach>
+							</div>
+						</div>
+					</div>
+
+					<!-- Campo ativo -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Módulo Ativo</label>
+						<div class="col-md-4">
+							<div class="radio">
+								<label> <form:radiobutton path="modulo.ativo_modulo"
+										value="1" /> Sim
+								</label>
+							</div>
+							<div class="radio">
+								<label> <form:radiobutton path="modulo.ativo_modulo"
+										value="0" /> Nâo
+								</label><br>
 							</div>
 						</div>
 					</div>
@@ -91,7 +115,6 @@
 						</div>
 					</div>
 				</fieldset>
-
 			</form:form>
 
 			<form:form class="well form-horizontal" action="../modulos/formAula"
@@ -100,13 +123,11 @@
 					value="${moduloModel.modulo.id_modulo}" />
 				<button type="submit" class="btn btn-primary">Nova Aula</button>
 			</form:form>
-
 		</div>
-		<div id="footer">
-			<p style="display: block; margin: auto; padding: 10px;"
-				align="center">Copyright © 2017 Hullo. Todos os direitos
-				reservados.</p>
-		</div>
+	</div>
+	<div id="footer">
+		<p style="display: block; margin: auto; padding: 10px;" align="center">Copyright
+			© 2017 Hullo. Todos os direitos reservados.</p>
 	</div>
 </body>
 

@@ -24,7 +24,7 @@
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
-<title>Detalhes do Módulo</title>
+<title>Detalhes da Aula</title>
 </head>
 
 <body>
@@ -37,38 +37,20 @@
 		<div id="container" class="well form-horizontal"
 			style="position: relative;">
 
-			<legend>Detalhes do Módulo</legend>
+			<legend>Detalhes da Aula</legend>
 
 			<div class="form-group">
 				<label class="col-md-4 control-label">Nome: </label>
-				${moduloModel.modulo.nm_modulo}
+				${aula.nm_aula}
 			</div>
 
 			<div class="form-group">
 				<label class="col-md-4 control-label">Índice:</label>
-				${moduloModel.modulo.indice_modulo}
+				${aula.indice_aula}
 			</div>
 
 
-			<div>Aqui vai entrar a lista de aulas desse modulo</div>
-
-
-
-			<!-- Botoes -->
-			<div class="form-group">
-			<label class="col-md-4 control-label"></label> 
-					<form:form action="../modulos/updateModulo" modelAttribute="moduloModel"  method="POST">
-					<form:hidden path="modulo.id_modulo" value="${moduloModel.modulo.id_modulo}"/>
-						<input type="submit" name="Editar" value="Editar" class="btn btn-primary">
-					</form:form>
-			</div>
-			
-			<div class="form-group">
-				<label class="col-md-4 control-label"></label> <input type="button"
-					class="btn btn-primary" value="Voltar"
-					onclick="window.location.href='../modulos/lista'; return false;" />
-			</div>
-		</div>
+			<div>DEMAIS CAMPOS</div>
 
 
 	</div>

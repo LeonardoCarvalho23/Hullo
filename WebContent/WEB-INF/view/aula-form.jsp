@@ -109,15 +109,18 @@
 						</div>
 					</div>
 
+
 					<!-- Botões -->
 					<div class="form-group">
 						<label class="col-md-4 control-label"></label>
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-primary">Salvar</button>
+							
 
 							<!-- voltar esta errado! -->
 							<input type="button" class="btn btn-primary" value="Voltar"
 								onclick="window.location.href='../modulos/showModulo'; return false;" />
+
 						</div>
 					</div>
 

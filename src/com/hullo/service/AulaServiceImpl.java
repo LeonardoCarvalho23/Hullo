@@ -27,6 +27,11 @@ public class AulaServiceImpl {
 		return aulaDAO.getAulas(id_modulo);
 	}
 
+	@Transactional
+	public AulaImpl getAula(int id_aula) {
+		return aulaDAO.getAula(id_aula);
+	}
+
 	/*public boolean validaAula(float indice_aula) {
 		return aulaDAO.validaAula(indice_aula, id_aula);
 	}*/

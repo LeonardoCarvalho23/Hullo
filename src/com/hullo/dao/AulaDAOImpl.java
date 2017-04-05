@@ -16,7 +16,6 @@ public class AulaDAOImpl {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	
 	public boolean validaAula(float indice_aula) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
@@ -36,21 +35,28 @@ public class AulaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		currentSession.saveOrUpdate(aula);
-		
 	}
 
-	//listar aulas de um modulo
+	// listar aulas de um modulo
 	public List<AulaImpl> getAulas(int id_modulo) {
-		
+
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<AulaImpl> Query = currentSession.createQuery("from AulaImpl where id_modulo_aula= " + id_modulo,
-				AulaImpl.class);
+		Query<AulaImpl> Query = currentSession.createQuery(
+				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula", AulaImpl.class);
 
 		return Query.getResultList();
 	}
 
-	
+	public AulaImpl getAula(int id_aula) {
 
-	
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// busca por indice do modulo
+		Query<AulaImpl> query = currentSession.createQuery("from AulaImpl where id_aula= " + id_aula, AulaImpl.class);
+
+		AulaImpl result = query.getSingleResult();
+
+		return result;
+	}
 }

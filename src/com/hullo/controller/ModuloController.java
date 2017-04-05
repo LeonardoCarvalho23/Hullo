@@ -25,11 +25,11 @@ public class ModuloController {
 
 	@Autowired
 	private ModuloServiceImpl moduloService;
-	
+
 	@Autowired
 	private AulaServiceImpl aulaService;
 
-	//lista de todos os modulos cadastrados
+	// lista de todos os modulos cadastrados
 	@GetMapping("/lista")
 	public String listarModulos(Model theModel) {
 
@@ -60,7 +60,7 @@ public class ModuloController {
 	public String saveModulo(@ModelAttribute("modulo") ModuloImpl model, ModelMap modelMap, Model newModel) {
 		Date current_date = new Date();
 
-		//pega o objeto modulo do model
+		// pega o objeto modulo do model
 		ModuloImpl modulo = model;
 
 		// validar se ja existe modulo com esse indice
@@ -80,9 +80,9 @@ public class ModuloController {
 
 		// salva o modulo
 		moduloService.saveModulo(modulo);
-		
-		//abre a pagina de edicao de modulo onde pode adicionar as aulas
-		return showModulo(modulo.getId_modulo(), newModel);
+
+		// abre a pagina de edicao de modulo onde pode adicionar as aulas
+		return showModulo(modulo.getId_modulo(), newModel, modelMap);
 	}
 
 	// buscar no banco por nome
@@ -100,15 +100,15 @@ public class ModuloController {
 
 	// abrir detalhes do modulo e para fazer update
 	@GetMapping("/showModulo")
-	public String showModulo(@RequestParam("id_modulo") int id_modulo, Model theModel) {
+	public String showModulo(@RequestParam("id_modulo") int id_modulo, Model theModel, ModelMap modelMap) {
 
-		//get modulo do banco
+		// get modulo do banco
 		ModuloImpl modulo = moduloService.getModulo(id_modulo);
 
-		//cria ModuloModel, objeto com modulo e lista de aulas
+		// cria ModuloModel, objeto com modulo e lista de aulas
 		ModuloModel moduloModel = new ModuloModel();
 
-		//busca as aulas desse modulo no banco
+		// busca as aulas desse modulo no banco
 		List<AulaImpl> listaAulas = aulaService.getAulas(id_modulo);
 
 		// adiciona os objetos ao modeloModel
@@ -117,60 +117,96 @@ public class ModuloController {
 
 		theModel.addAttribute("moduloModel", moduloModel);
 
-		//retorna pagina de update de modulo, com lista de aulas ja cadastradas
+		// retorna pagina de update de modulo, com lista de aulas ja cadastradas
 		return "modulo-update-form";
 
 	}
 
-	/*// mostrar form de update do modulo
-	@PostMapping("/formUpdateModulo")
-	public String showFormUpdateModulo(@RequestParam("modulo.id_modulo") int id_modulo, Model theModel) {
-
-		ModuloImpl modulo = moduloService.getModulo(id_modulo);
-
-		// cria ModuloModel, objeto com modulo e lista de aulas
-		ModuloModel moduloModel = new ModuloModel();
-
-		// aqui vai entrar o metodo que busca as aulas desse modulo no banco
-		List<AulaImpl> listaAulas = null;
-
-		// adiciona os objetos ao modeloModel
-		moduloModel.setModulo(modulo);
-		moduloModel.setListaAulas(listaAulas);
-
-		theModel.addAttribute("moduloModel", moduloModel);
-
-		return "modulo-update-form";
-	}*/
-
 	// metodo para atualizar modulo
 	@RequestMapping("/updateModulo")
-	public String updateModulo(@ModelAttribute("moduloModel") ModuloModel moduloModel, ModelMap modelMap) {
-		
-		//pego modulo do objeto moduloModel
+	public String updateModulo(@ModelAttribute("moduloModel") ModuloModel moduloModel, ModelMap modelMap,
+			Model newModel) {
+
+		// pego modulo do objeto moduloModel
 		ModuloImpl modulo = moduloModel.getModulo();
 
 		// validar se ja existe modulo com esse indice
-		boolean validaModulo = moduloService.validaModulo(moduloModel.getModulo().getIndice_modulo(), moduloModel.getModulo().getId_modulo());
+		boolean validaModulo = moduloService.validaModulo(moduloModel.getModulo().getIndice_modulo(),
+				moduloModel.getModulo().getId_modulo());
 
 		if (validaModulo) {
 
 			// exibe mensagem de erro
-			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro modulo com esse índice </div>";
+			String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro modulo com esse índice </div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
-			return "modulo-update-form";
+			return showModulo(modulo.getId_modulo(), newModel, modelMap);
 
 		} else {
 
-			// Atualiza a sessão com os dados inseridos no formulario
+			// Atualiza com os dados inseridos no formulario
 			Date current_date = new Date();
 			modulo.setDt_last_update_modulo(current_date);
-			moduloService.updateModulo(modulo);
-			
-			return "view-modulo";
+
+			// boolean para validar se tem 5 aulas base
+			boolean validaAulas = true;
+
+			// se eu quero ativar o modulo, tenho que validar a aula
+			if (modulo.getAtivo_modulo()) {
+				validaAulas = validaAulasBase(aulaService.getAulas(modulo.getId_modulo()));
+			}
+
+			// se nao quero ativar modulo, vai direto salvar
+			if (validaAulas) {
+
+				moduloService.updateModulo(modulo);
+
+				String errorMessage = "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Modulo salvo com sucesso</div>";
+				modelMap.addAttribute("errorMessage", errorMessage);
+
+				return showModulo(modulo.getId_modulo(), newModel, modelMap);
+			}
+
+			// se quis ativar modulo, mas o valida aulas retornou False
+			else {
+				String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Para ativar o módulo, primeiro cadastre as 5 aulas base</div>";
+				modelMap.addAttribute("errorMessage", errorMessage);
+
+				return showModulo(modulo.getId_modulo(), newModel, modelMap);
+			}
 		}
 	}
-	
-	//tem que criar metood para ativar modulo
-	//com validacao de que tem as 5 aulas base
+
+	// validacao se tem 5 aulas base no modulo
+	private boolean validaAulasBase(List<AulaImpl> listaAulas) {
+		boolean um = false;
+		boolean dois = false;
+		boolean tres = false;
+		boolean quatro = false;
+		boolean cinco = false;
+
+		for (AulaImpl aula : listaAulas) {
+			if (aula.getNumero_aula() == 1) {
+				System.out.println("achou 1");
+				um = true;
+			}
+			if (aula.getNumero_aula() == 2) {
+				System.out.println("achou 2");
+				dois = true;
+			}
+			if (aula.getNumero_aula() == 3)
+				tres = true;
+			if (aula.getNumero_aula() == 4)
+				quatro = true;
+			if (aula.getNumero_aula() == 5)
+				cinco = true;
+		}
+
+		System.out.println("aula 5 = " + cinco);
+		if (um == dois && dois == tres && tres == quatro && quatro == cinco && cinco == true) {
+			return true;
+		}
+
+		return false;
+	}
+
 }
