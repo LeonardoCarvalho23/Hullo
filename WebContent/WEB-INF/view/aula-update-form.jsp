@@ -35,15 +35,14 @@
 		</div>
 		<div id="container">
 
-			<form:form class="well form-horizontal" action="newAula"
+			<form:form class="well form-horizontal" action="updateAula"
 				modelAttribute="aula" method="POST">
-				<form:hidden path="id_modulo_aula" />
-
+				
 				<fieldset>
-					${errorMessage}
+					
 					<!-- Nome do formulário -->
-					<legend>Nova Aula</legend>
-
+					<legend>Atualizar Aula</legend>
+					
 					<!-- Campo nome -->
 					<div class="form-group">
 						<label class="col-md-4 control-label">Nome</label>
@@ -51,6 +50,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-user"></i></span>
+									
 								<form:input placeholder="Nome" class="form-control"
 									path="nm_aula" required="true" maxlength="45" />
 							</div>
@@ -85,7 +85,7 @@
 
 					<!-- Campo revisao -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">Revisao</label>
+						<label class="col-md-4 control-label">Revisão</label>
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i
@@ -98,7 +98,7 @@
 
 					<!-- Campo conteudo -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">Conteudo</label>
+						<label class="col-md-4 control-label">Conteúdo</label>
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i
@@ -110,7 +110,9 @@
 					</div>
 
 
-					<!-- Botões -->
+					
+
+				<!-- Botões -->
 					<div class="form-group">
 						<label class="col-md-4 control-label"></label>
 						<div class="col-md-4">
@@ -123,7 +125,6 @@
 
 						</div>
 					</div>
-
 
 
 				</fieldset>

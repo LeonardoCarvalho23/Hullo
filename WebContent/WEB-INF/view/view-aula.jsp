@@ -43,14 +43,32 @@
 				<label class="col-md-4 control-label">Nome: </label>
 				${aula.nm_aula}
 			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label">Número:</label>
+				${aula.numero_aula}
+			</div>
 
 			<div class="form-group">
 				<label class="col-md-4 control-label">Índice:</label>
 				${aula.indice_aula}
 			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label">Revisão:</label>
+				${aula.revisao_aula}
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label">Conteúdo:</label>
+				${aula.conteudo_aula}
+			</div>
+			
 
-
-			<div>DEMAIS CAMPOS</div>
+			<div class="form-group">
+					<label class="col-md-4 control-label"></label> 
+					
+					<form:form action="../modulos/showFormUpdateAula" method="POST">
+					<input type="submit" name="Editar" value="Editar">
+					</form:form>
+			</div>
 
 
 	</div>

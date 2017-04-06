@@ -32,7 +32,10 @@ public class AulaServiceImpl {
 		return aulaDAO.getAula(id_aula);
 	}
 
-	/*public boolean validaAula(float indice_aula) {
-		return aulaDAO.validaAula(indice_aula, id_aula);
-	}*/
+	public void updateAula(AulaImpl aula) {
+		aulaDAO.updateAula(aula);
+	}
+
+	
+	
 }

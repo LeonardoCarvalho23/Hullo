@@ -2,6 +2,8 @@ package com.hullo.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.AulaImpl;
+import com.hullo.entity.AulaModel;
+import com.hullo.entity.ModuloImpl;
+import com.hullo.entity.ModuloModel;
+import com.hullo.entity.ProfessorImpl;
 import com.hullo.service.AulaServiceImpl;
 
 @Controller
@@ -80,5 +87,46 @@ public class AulaController {
 		return "view-aula";
 
 	}
+	
+	// metodo para abrir pagina de update do professor
+		/*@RequestMapping("/showFormUpdateAula")
+		public String showFormUpdateAula(@RequestParam("id_aula") int id_aula, Model theModel, ModelMap modelMap) {
+			return "aula-update-form";
+		}*/
+		
+		// metodo para abrir pagina de update do professor
+				@RequestMapping("/showFormUpdateAula")
+				public String showFormUpdateAula() {
+					return "aula-update-form";
+				}
+	
+	// metodo para atualizar aula
+		@RequestMapping("/updateAula")
+		public String updateAula(@ModelAttribute("aula") AulaImpl theAula, ModelMap modelMap) {
+
+			// pego modulo do objeto moduloModel
+			//AulaImpl aula = aula.getAula();
+
+			// validar se ja existe modulo com esse indice
+			/*boolean validaAula = aulaService.validaAula(aulaModel.getAula().getIndice_aula(),
+					aulaModel.getAula().getId_aula());
+
+			if (validaAula) {
+
+				// exibe mensagem de erro
+				String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro modulo com esse índice </div>";
+				modelMap.addAttribute("errorMessage", errorMessage);
+				return showAula(aula.getId_aula(), newModel, modelMap);
+
+			} else {*/
+
+				// Atualiza com os dados inseridos no formulario
+				Date current_date = new Date();
+				theAula.setDt_last_update_aula(current_date);
+				aulaService.updateAula(theAula);
+				return "view-aula";
+				
+			//}
+		}
 
 }

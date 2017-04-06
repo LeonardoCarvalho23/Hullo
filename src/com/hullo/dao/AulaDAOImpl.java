@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AulaImpl;
+import com.hullo.entity.ModuloImpl;
 
 @Repository
 public class AulaDAOImpl {
@@ -58,5 +59,28 @@ public class AulaDAOImpl {
 		AulaImpl result = query.getSingleResult();
 
 		return result;
+	}
+
+	public void updateAula(AulaImpl aula) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// Cria query que faz busca no banco
+		Query<AulaImpl> theQuery;
+
+		// para fazer update apenas dos capos editaveis
+		String hql = "UPDATE AulaImpl set nm_aula = :nome, indice_aula= :indice, ativo_aula= :ativo, dt_last_update_aula = :lastUpdate "
+				+ "WHERE id_aula = :id";
+		theQuery = currentSession.createQuery(hql);
+
+		// adicionando valores para as variaveis do update
+		theQuery.setParameter("nome", aula.getNm_aula());
+		theQuery.setParameter("indice", aula.getIndice_aula());
+		theQuery.setParameter("ativo", aula.isAtivo_aula());
+		theQuery.setParameter("lastUpdate", aula.getDt_last_update_aula());
+		theQuery.setParameter("id", aula.getId_aula());
+
+		int result = theQuery.executeUpdate();
+
+		System.out.println(result + " linha atualizada");
 	}
 }
