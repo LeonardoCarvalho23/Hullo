@@ -60,12 +60,12 @@
 				<label class="col-md-4 control-label">Conteúdo:</label>
 				${aula.conteudo_aula}
 			</div>
-			
+			<input type="hidden" value="${aula.id_aula}"/>
 
 			<div class="form-group">
 					<label class="col-md-4 control-label"></label> 
 					
-					<form:form action="../modulos/showFormUpdateAula" method="POST">
+					<form:form action="../modulos/showFormUpdateAula" method="POST" modelAttribute="aula">
 					<input type="submit" name="Editar" value="Editar">
 					</form:form>
 			</div>

@@ -1,12 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Novo Modulo</title>
+<title>Editar Aula</title>
+<title>Editar Aula</title>
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <link
@@ -25,117 +25,56 @@
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
 </head>
-
 <body>
 	<div id="wrapper">
 		<div id="header">
-			<img class="logo"
-				src="${pageContext.request.contextPath}/resources/images/logo200v2.png"
-				width="100px">
+			<h2>Editar aula</h2>
 		</div>
-		<div id="container">
+	</div>
+	
+	<div id="container">
+	${errorMessage}
+		
+		<form:form action="updateAula" modelAttribute="aula" method="POST" >
+					
+						<p><label>Nome:</label>
+						<form:input path="nm_aula" value="${aula.nm_aula}" maxlength="45" required="true"/></p>
+						
+						<p><label>Número:</label>
+						<form:input path="numero_aula" value="${aula.numero_aula}" type="number" min="1" max="5" 
+						required="true" placeholder="1"/></p>
+						
+						<p><label>Índice:</label>
+						<form:input path="indice_aula" value="${aula.indice_aula}" required="true"/></p>
 
-			<form:form class="well form-horizontal" action="updateAula"
-				modelAttribute="aula" method="POST">
-				
-				<fieldset>
-					
-					<!-- Nome do formulário -->
-					<legend>Atualizar Aula</legend>
-					
-					<!-- Campo nome -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Nome</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-user"></i></span>
+						<p><label>Revisão:</label>
+						<form:input path="revisao_aula" value="${aula.revisao_aula}" 
+						required="true" maxlength="5"/></p>
+						
+						<p><label>Conteúdo:</label>
+						<form:input path="conteudo_aula" value="${aula.conteudo_aula}" required="true" maxlength="5" /></p>
+										
 									
-								<form:input placeholder="Nome" class="form-control"
-									path="nm_aula" required="true" maxlength="45" />
-							</div>
-						</div>
-					</div>
-
-					<!-- Campo numero -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Número</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input type="number" min="1" max="5" placeholder="1" class="form-control"
-									path="numero_aula" required="true" maxlength="5" />
-							</div>
-						</div>
-					</div>
-
-					<!-- Campo indice -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Índice</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input placeholder="A" class="form-control"
-									path="indice_aula" required="true" maxlength="5" />
-							</div>
-						</div>
-					</div>
-
-					<!-- Campo revisao -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Revisão</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input class="form-control" path="revisao_aula"
-									required="true" maxlength="5" />
-							</div>
-						</div>
-					</div>
-
-					<!-- Campo conteudo -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Conteúdo</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input class="form-control" path="conteudo_aula"
-									required="true" maxlength="5" />
-							</div>
-						</div>
-					</div>
-
-
-					
-
-				<!-- Botões -->
-					<div class="form-group">
-						<label class="col-md-4 control-label"></label>
-						<div class="col-md-4">
-							<button type="submit" class="btn btn-primary">Salvar</button>
-							
-
-							<!-- voltar esta errado! -->
-							<input type="button" class="btn btn-primary" value="Voltar"
-								onclick="window.location.href='../modulos/showModulo'; return false;" />
-
-						</div>
-					</div>
-
-
-				</fieldset>
-			</form:form>
-		</div>
-		<div id="footer">
-			<p style="display: block; margin: auto; padding: 10px;"
-				align="center">Copyright © 2017 Hullo. Todos os direitos
-				reservados.</p>
-		</div>
+						
+						<label></label>
+						<input type="submit" value="Salvar" class="add-button" />
+						
+						<input type="button" value="Voltar"
+							onclick = "window.history.go(-1); return false;"
+							class="add-button"
+							/>		
+						<br>
+						*Campos obrigatórios
+			
+		</form:form> 
+		<br>
 	</div>
 </body>
 
 </html>
+
+
+
+
+
+

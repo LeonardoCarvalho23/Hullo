@@ -108,7 +108,7 @@ public class ModuloController {
 		// cria ModuloModel, objeto com modulo e lista de aulas
 		ModuloModel moduloModel = new ModuloModel();
 
-		// busca as aulas desse modulo no banco
+		// busca as aulas desse modulo no banco	
 		List<AulaImpl> listaAulas = aulaService.getAulas(id_modulo);
 
 		// adiciona os objetos ao modeloModel

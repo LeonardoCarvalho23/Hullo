@@ -37,7 +37,7 @@
 
 			<form:form class="well form-horizontal" action="newAula"
 				modelAttribute="aula" method="POST">
-				<form:hidden path="id_modulo_aula" />
+				<form:hidden path="id_modulo_aula" value=/>
 
 				<fieldset>
 					${errorMessage}
@@ -85,7 +85,7 @@
 
 					<!-- Campo revisao -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">Revisao</label>
+						<label class="col-md-4 control-label">Revisão</label>
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i
@@ -98,7 +98,7 @@
 
 					<!-- Campo conteudo -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">Conteudo</label>
+						<label class="col-md-4 control-label">Conteúdo</label>
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i

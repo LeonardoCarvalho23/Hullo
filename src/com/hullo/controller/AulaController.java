@@ -76,7 +76,7 @@ public class AulaController {
 	// abrir detalhes da aula e para fazer update
 	@GetMapping("/showAula")
 	public String showAula(@RequestParam("id_aula") int id_aula, Model theModel, ModelMap modelMap) {
-
+		
 		// get aula do banco
 		AulaImpl aula = aulaService.getAula(id_aula);
 
@@ -85,48 +85,26 @@ public class AulaController {
 
 		// retorna pagina que exibe a aula
 		return "view-aula";
-
-	}
-	
-	// metodo para abrir pagina de update do professor
-		/*@RequestMapping("/showFormUpdateAula")
-		public String showFormUpdateAula(@RequestParam("id_aula") int id_aula, Model theModel, ModelMap modelMap) {
-			return "aula-update-form";
-		}*/
 		
-		// metodo para abrir pagina de update do professor
-				@RequestMapping("/showFormUpdateAula")
-				public String showFormUpdateAula() {
-					return "aula-update-form";
-				}
+
+	}	
+		
+	// metodo para abrir pagina de update da aula
+		@RequestMapping("/showFormUpdateAula")
+		public String showFormUpdateAula() {
+			return "aula-update-form";
+		}
 	
 	// metodo para atualizar aula
 		@RequestMapping("/updateAula")
 		public String updateAula(@ModelAttribute("aula") AulaImpl theAula, ModelMap modelMap) {
 
-			// pego modulo do objeto moduloModel
-			//AulaImpl aula = aula.getAula();
-
-			// validar se ja existe modulo com esse indice
-			/*boolean validaAula = aulaService.validaAula(aulaModel.getAula().getIndice_aula(),
-					aulaModel.getAula().getId_aula());
-
-			if (validaAula) {
-
-				// exibe mensagem de erro
-				String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro modulo com esse índice </div>";
-				modelMap.addAttribute("errorMessage", errorMessage);
-				return showAula(aula.getId_aula(), newModel, modelMap);
-
-			} else {*/
-
-				// Atualiza com os dados inseridos no formulario
 				Date current_date = new Date();
 				theAula.setDt_last_update_aula(current_date);
 				aulaService.updateAula(theAula);
-				return "view-aula";
-				
-			//}
-		}
+				return "view-aula";				
+			
+		}	
+		
 
 }
