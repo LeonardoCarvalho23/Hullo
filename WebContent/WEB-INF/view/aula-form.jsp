@@ -37,7 +37,7 @@
 
 			<form:form class="well form-horizontal" action="newAula"
 				modelAttribute="aula" method="POST">
-				<form:hidden path="id_modulo_aula" value=/>
+				<form:hidden path="id_modulo_aula" />
 
 				<fieldset>
 					${errorMessage}

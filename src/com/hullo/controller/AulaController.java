@@ -91,7 +91,7 @@ public class AulaController {
 		
 	// metodo para abrir pagina de update da aula
 		@RequestMapping("/showFormUpdateAula")
-		public String showFormUpdateAula() {
+		public String showFormUpdateAula(@ModelAttribute("aula") AulaImpl theAula) {
 			return "aula-update-form";
 		}
 	
