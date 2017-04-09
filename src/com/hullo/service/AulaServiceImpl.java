@@ -32,10 +32,16 @@ public class AulaServiceImpl {
 		return aulaDAO.getAula(id_aula);
 	}
 
+	@Transactional
 	public void updateAula(AulaImpl aula) {
+		System.out.println("service"+aula);
 		aulaDAO.updateAula(aula);
 	}
 
 	
+	@Transactional
+	public boolean validaAula(char indice_aula, int numero_aula) {
+		return aulaDAO.validaAula(indice_aula, numero_aula);
+	}
 	
 }

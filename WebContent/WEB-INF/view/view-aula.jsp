@@ -61,14 +61,22 @@
 				${aula.conteudo_aula}
 			</div>
 			<input type="hidden" value="${aula.id_aula}"/>
+			<input type="hidden"value="${aula.id_modulo_aula}" />
 
 			<div class="form-group">
 					<label class="col-md-4 control-label"></label> 
 					
-					<form:form action="../modulos/showFormUpdateAula" method="POST" modelAttribute="aula">
-					<input type="submit" name="Editar" value="Editar">
-					</form:form>
+			<form:form action="../modulos/showFormUpdateAula" method="POST" modelAttribute="${aula.id_aula}">							
+				<input type="submit" name="Editar" value="Editar" class="btn btn-primary">
+			</form:form>
+			
+			
+					
+			<input type="button" value="Voltar" onclick = "window.history.go(-1); return false;"
+							class="btn btn-primary"	/>
 			</div>
+			
+			
 
 
 	</div>
