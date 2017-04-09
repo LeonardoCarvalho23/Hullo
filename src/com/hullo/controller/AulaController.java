@@ -62,7 +62,7 @@ public class AulaController {
 		AulaImpl aula = model;
 
 		// tem que adicionar validacao de numero/indice
-		AulaImpl validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula(), model.getId_modulo_aula());
+		AulaImpl validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula(), model.getId_modulo_aula(), model.getId_aula());
 		
 		if (validaAula != null) {
 
@@ -126,7 +126,7 @@ public class AulaController {
 			
 			
 			// // validar se ja existe aula com esse id
-			AulaImpl validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula(), model.getId_modulo_aula());
+			AulaImpl validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula(), model.getId_modulo_aula(), model.getId_aula());
 			
 			if (validaAula != null ) {
 

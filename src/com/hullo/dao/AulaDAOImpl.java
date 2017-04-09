@@ -98,16 +98,19 @@ public class AulaDAOImpl {
 		
 		
 		
-		public AulaImpl validaAula(char indice_aula, int numero_aula, int id_modulo_aula) {
+		public AulaImpl validaAula(char indice_aula, int numero_aula, int id_modulo_aula, int id_aula) {
 			Session currentSession = sessionFactory.getCurrentSession();
 
 			// busca por indice e NUMERO
 						
 			Query<AulaImpl> query = currentSession.createQuery(		
 					"from AulaImpl where indice_aula = '" + indice_aula + "' and numero_aula = '" 
-					+ numero_aula + "'and id_modulo_aula = '" + id_modulo_aula + "'",
+					+ numero_aula + "'and id_modulo_aula = '" + id_modulo_aula + "' and id_aula <> '" + id_aula + "'",
 					AulaImpl.class);
+			/*Query<AulaImpl> query = currentSession.createQuery( "select id_aula from AulaImpl where indice_aula = '" + indice_aula + "' and numero_aula = '" 
+					+ numero_aula + "'and id_modulo_aula = '" + id_modulo_aula + "'", AulaImpl.class);*/
 						
+			System.out.println("query"+query);
 			try {
 				// ve se tem mais de uma aula com os dados
 				List<AulaImpl> aulas = query.getResultList();
