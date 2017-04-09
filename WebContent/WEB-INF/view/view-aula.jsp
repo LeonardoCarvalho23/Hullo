@@ -1,12 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detalhes Aula</title>
+
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <link
@@ -24,7 +24,6 @@
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
-<title>Detalhes da Aula</title>
 </head>
 
 <body>
@@ -38,6 +37,7 @@
 			style="position: relative;">
 
 			<legend>Detalhes da Aula</legend>
+			
 
 			<div class="form-group">
 				<label class="col-md-4 control-label">Nome: </label>
@@ -60,23 +60,21 @@
 				<label class="col-md-4 control-label">Conteúdo:</label>
 				${aula.conteudo_aula}
 			</div>
-			<input type="hidden" value="${aula.id_aula}"/>
-			<input type="hidden"value="${aula.id_modulo_aula}" />
+			
 
 			<div class="form-group">
 					<label class="col-md-4 control-label"></label> 
 					
-			<form:form action="../modulos/showFormUpdateAula" method="POST" modelAttribute="${aula.id_aula}">							
+			<form:form action="../modulos/showFormUpdateAula" method="POST" >						
 				<input type="submit" name="Editar" value="Editar" class="btn btn-primary">
 			</form:form>
-			
 			
 					
 			<input type="button" value="Voltar" onclick = "window.history.go(-1); return false;"
 							class="btn btn-primary"	/>
 			</div>
 			
-			
+		</div>
 
 
 	</div>

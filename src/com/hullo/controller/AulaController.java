@@ -62,9 +62,9 @@ public class AulaController {
 		AulaImpl aula = model;
 
 		// tem que adicionar validacao de numero/indice
-		boolean validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula());
+		AulaImpl validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula(), model.getId_modulo_aula());
 		
-		if (validaAula) {
+		if (validaAula != null) {
 
 			// exibe mensagem de erro
 			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outra aula com esse Numero e Indice </div>";
@@ -92,32 +92,27 @@ public class AulaController {
 		
 		// get aula do banco
 		AulaImpl aula = aulaService.getAula(id_aula);
-		System.out.println("valor do id_aula"+ aula.getId_aula());	
+		
 		//adiciona ao model
 		theModel.addAttribute("aula", aula);
 
 		// retorna pagina que exibe a aula
 		return "aula-update-form";
+		//return "view-aula";
 		
 
 	}	
 		
 	// metodo para abrir pagina de update da aula
-		/*@RequestMapping("/showFormUpdateAula")
-		public String showFormUpdateAula(@RequestParam("id_aula") int id_aula, Model theModel, ModelMap modelMap) {
-			// get aula do banco
-			theModel.get
-			AulaImpl aula = aulaService.getAula(id_aula);
-
-			//adiciona ao model
+		@RequestMapping("/showFormUpdateAula")
+		//public String showFormUpdateAula(@ModelAttribute("aula") AulaImpl model, Model theModel, ModelMap modelMap) {
+		public String showFormUpdateAula(HttpSession session, AulaImpl model, Model theModel) {
+			AulaImpl aula = model;
 			theModel.addAttribute("aula", aula);
-
-			
-			System.out.println("valor do id_aula"+ aula.getId_aula());
-			System.out.println("valor do id_modulo"+ aula.getId_modulo_aula());
+			System.out.println("id showFormUpdateAula" + aula.getId_aula());
 			
 			return "aula-update-form";
-		}*/
+		}
 	
 	
 		
@@ -129,10 +124,11 @@ public class AulaController {
 			// pego aula que vem do model
 			AulaImpl aula = model;
 			
-			// // validar se ja existe aula com esse id
-			boolean validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula());
 			
-			if (validaAula) {
+			// // validar se ja existe aula com esse id
+			AulaImpl validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula(), model.getId_modulo_aula());
+			
+			if (validaAula != null ) {
 
 				// exibe mensagem de erro
 				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outra aula com esse Numero e Indice </div>";
@@ -144,6 +140,7 @@ public class AulaController {
 				// Atualiza a sessão com os dados inseridos no formulario
 				Date current_date = new Date();
 				model.setDt_last_update_aula(current_date);
+				model.setAtivo_aula(true);
 				aulaService.updateAula(model);
 				
 				return moduloController.showModulo(aula.getId_modulo_aula(), theModel, modelMap);

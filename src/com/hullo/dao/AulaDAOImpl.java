@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.AulaImpl;
 import com.hullo.entity.ModuloImpl;
 import com.hullo.entity.ProfessorImpl;
@@ -98,20 +98,27 @@ public class AulaDAOImpl {
 		
 		
 		
-		public boolean validaAula(char indice_aula, int numero_aula) {
+		public AulaImpl validaAula(char indice_aula, int numero_aula, int id_modulo_aula) {
 			Session currentSession = sessionFactory.getCurrentSession();
 
 			// busca por indice e NUMERO
 						
-			Query<AulaImpl> query = currentSession.createQuery(
-					"from AulaImpl where indice_aula = '" + indice_aula + "' and numero_aula = '" + numero_aula + "'",
+			Query<AulaImpl> query = currentSession.createQuery(		
+					"from AulaImpl where indice_aula = '" + indice_aula + "' and numero_aula = '" 
+					+ numero_aula + "'and id_modulo_aula = '" + id_modulo_aula + "'",
 					AulaImpl.class);
+						
+			try {
+				// ve se tem mais de uma aula com os dados
+				List<AulaImpl> aulas = query.getResultList();
+				
+				// devolve o primeiro da lista
+				AulaImpl validaAula = aulas.get(0);
+				return validaAula;
 
-			List<AulaImpl> result = query.getResultList();
-			if (result.size() > 0) {
-				return true;
+			} catch (Exception e) {
+				return null;
 			}
-			return false;
 
 		}
 }
