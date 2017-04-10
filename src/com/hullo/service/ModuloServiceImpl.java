@@ -50,5 +50,10 @@ public class ModuloServiceImpl {
 		moduloDAO.updateModulo(modulo);
 		
 	}
+	
+	@Transactional
+	public ModuloImpl getPrimeiroModulo() {
+		return moduloDAO.getPrimeiroModulo();
+	}
 
 }

@@ -36,6 +36,10 @@ public class AulaServiceImpl {
 		aulaDAO.updateAula(aula);
 	}
 
+	@Transactional
+	public AulaImpl getPrimeiraAula(int id_modulo){
+		return aulaDAO.getPrimeiraAula(id_modulo);
+	}
 	
 	
 }

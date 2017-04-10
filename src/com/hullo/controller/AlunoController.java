@@ -33,6 +33,7 @@ import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.entity.AlunoModel;
+import com.hullo.service.AulaRealizadaServiceImpl;
 import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
@@ -49,6 +50,9 @@ public class AlunoController {
 	@Autowired
 	@Qualifier("professorServiceImpl")
 	private UsuarioService<ProfessorImpl> professorService;
+	
+	@Autowired
+	private AulaRealizadaServiceImpl aulaRealizadaService;
 
 	@Autowired
 	private EstadoServiceImpl estadoService;
@@ -101,7 +105,7 @@ public class AlunoController {
 		System.out.println("Chegou na hora de validar usuario");
 		AlunoImpl validaAluno = alunoService.validaUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 		ProfessorImpl validaProfessor = professorService.getUsuario(theAluno.getEmail_usuario());
-		System.out.println("Compara senhas " + validaProfessor.getSenha_usuario() + " " + theAluno.getSenha_usuario());
+
 		// se retornar que existe, exibe mensagem de erro
 		if (validaAluno != null) {
 
@@ -129,6 +133,9 @@ public class AlunoController {
 
 			// save the aluno
 			alunoService.saveUsuario(theAluno);
+			
+			//gera a primeira aula do aluno
+			aulaRealizadaService.montarAulaRealizada(theAluno.getEmail_usuario());
 
 			// Envia email de confirmação
 			SimpleMailMessage msg = new SimpleMailMessage();

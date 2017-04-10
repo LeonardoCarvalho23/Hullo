@@ -52,7 +52,7 @@ CREATE TABLE aluno (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE professor (
-  id_professor int NOT NULL AUTO_INCREMENT,
+  id_professor SMALLINT(5) NOT NULL AUTO_INCREMENT,
   nome_professor varchar(45) NOT NULL,
   sobrenome_professor varchar(45) NOT NULL,
   cpf_professor varchar(14) NOT NULL,
@@ -114,13 +114,13 @@ CREATE TABLE aula_realizada(
  dt_criacao_aula_realizada datetime NOT NULL,
  dt_inicio_aula_realizada datetime DEFAULT NULL,
  dt_fim_aula_realizada datetime DEFAULT NULL,
- id_aula_aula_aula_realizada int NOT NULL,
+ id_aula_aula_realizada int NOT NULL,
  id_aluno_aula_realizada int NOT NULL,
- id_professor_aula_realizada int DEFAULT NULL,
+ id_professor_aula_realizada SMALLINT(5) not NULL,
  CONSTRAINT PK_aula_realizada
   PRIMARY KEY (id_aula_realizada),
  CONSTRAINT FK_aula_realizada_aula
-  FOREIGN KEY (id_aula_aula_aula_realizada)
+  FOREIGN KEY (id_aula_aula_realizada)
   REFERENCES aula(id_aula),
  CONSTRAINT FK_aula_realizada_aluno
   FOREIGN KEY (id_aluno_aula_realizada)

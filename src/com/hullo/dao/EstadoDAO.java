@@ -1,10 +1,10 @@
 package com.hullo.dao;
 
-public class EstadoDTO {
+public class EstadoDAO {
 	
 	private String value;
 	private String label;
-	public EstadoDTO(String sg_estado, String nm_estado) {
+	public EstadoDAO(String sg_estado, String nm_estado) {
 		value = sg_estado;
 		label = nm_estado;
 	}

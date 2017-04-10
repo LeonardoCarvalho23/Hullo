@@ -60,6 +60,18 @@ public class AulaDAOImpl {
 
 		return result;
 	}
+	
+	public AulaImpl getPrimeiraAula(int id_modulo){
+
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<AulaImpl> Query = currentSession.createQuery(
+				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula", AulaImpl.class);
+
+		List<AulaImpl> aulas = Query.getResultList();
+		
+		return aulas.get(0);
+	}
 
 	public void updateAula(AulaImpl aula) {
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -83,4 +95,6 @@ public class AulaDAOImpl {
 
 		System.out.println(result + " linha atualizada");
 	}
+	
+	
 }

@@ -120,5 +120,18 @@ public class ModuloDAOImpl {
 		System.out.println(result + " linha atualizada");
 		
 	}
+	
+	public ModuloImpl getPrimeiroModulo() {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<ModuloImpl> Query = currentSession.createQuery("from ModuloImpl order by indice_modulo",
+				ModuloImpl.class);
+
+		List<ModuloImpl> modulo = Query.getResultList();
+		
+		return modulo.get(0);
+
+	}
 
 }
