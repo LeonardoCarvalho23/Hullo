@@ -75,8 +75,6 @@ public class AulaDAOImpl {
 		return aulas.get(0);
 	}
 
-	public void updateAula(AulaImpl aula) {
-		Session currentSession = sessionFactory.getCurrentSession();
 	
 	
 	// para fazer update da aula ja existente
@@ -137,7 +135,12 @@ public class AulaDAOImpl {
 				return null;
 			}
 
+<<<<<<< HEAD
+		System.out.println(result + " linha atualizada");
+	}
+	
+	
+=======
 		}
-	
-	
+>>>>>>> b8af803cfc35343e8eb90651738c2e9ff95ec520
 }

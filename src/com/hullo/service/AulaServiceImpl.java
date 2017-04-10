@@ -32,7 +32,9 @@ public class AulaServiceImpl {
 		return aulaDAO.getAula(id_aula);
 	}
 
+	@Transactional
 	public void updateAula(AulaImpl aula) {
+		System.out.println("service"+aula);
 		aulaDAO.updateAula(aula);
 	}
 
@@ -41,5 +43,9 @@ public class AulaServiceImpl {
 		return aulaDAO.getPrimeiraAula(id_modulo);
 	}
 	
+	@Transactional
+	public AulaImpl validaAula(char indice_aula, int numero_aula, int id_modulo_aula, int id_aula) {
+		return aulaDAO.validaAula(indice_aula, numero_aula, id_modulo_aula, id_aula );
+	}
 	
 }

@@ -1,6 +1,7 @@
 package com.hullo.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -45,6 +46,7 @@ public class AulaController {
 		// coloco essa aula no model que vai para a pagina
 		theModel.addAttribute("aula", aula);
 
+		
 		// retorna pagina de cadastro de aulas
 		return "aula-form";
 	}
@@ -60,17 +62,28 @@ public class AulaController {
 		AulaImpl aula = model;
 
 		// tem que adicionar validacao de numero/indice
+		AulaImpl validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula(), model.getId_modulo_aula(), model.getId_aula());
+		
+		if (validaAula != null) {
 
-		// adiciono algumas infos
-		aula.setAtivo_aula(true);
-		aula.setDt_insert_aula(current_date);
-		aula.setDt_last_update_aula(current_date);
+			// exibe mensagem de erro
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outra aula com esse Numero e Indice </div>";
+			modelMap.addAttribute("errorMessage", errorMessage);
+			return "aula-form";
+			
+		} else {
 
-		// salvo a aula
-		aulaService.saveAula(aula);
-
-		// direciona para o modulo que acaba de gravar a aula
-		return moduloController.showModulo(aula.getId_modulo_aula(), theModel, modelMap);
+			// adiciono algumas infos
+			aula.setAtivo_aula(true);
+			aula.setDt_insert_aula(current_date);
+			aula.setDt_last_update_aula(current_date);
+	
+			// salvo a aula
+			aulaService.saveAula(aula);
+	
+			// direciona para o modulo que acaba de gravar a aula
+			return moduloController.showModulo(aula.getId_modulo_aula(), theModel, modelMap);
+		}
 	}
 
 	// abrir detalhes da aula e para fazer update
@@ -79,32 +92,60 @@ public class AulaController {
 		
 		// get aula do banco
 		AulaImpl aula = aulaService.getAula(id_aula);
-
+		
 		//adiciona ao model
 		theModel.addAttribute("aula", aula);
 
 		// retorna pagina que exibe a aula
-		return "view-aula";
+		return "aula-update-form";
+		//return "view-aula";
 		
 
 	}	
 		
 	// metodo para abrir pagina de update da aula
 		@RequestMapping("/showFormUpdateAula")
-		public String showFormUpdateAula(@ModelAttribute("aula") AulaImpl theAula) {
+		//public String showFormUpdateAula(@ModelAttribute("aula") AulaImpl model, Model theModel, ModelMap modelMap) {
+		public String showFormUpdateAula(HttpSession session, AulaImpl model, Model theModel) {
+			AulaImpl aula = model;
+			theModel.addAttribute("aula", aula);
+			System.out.println("id showFormUpdateAula" + aula.getId_aula());
+			
 			return "aula-update-form";
 		}
 	
-	// metodo para atualizar aula
+	
+		
+		// metodo para atualizar aula
 		@RequestMapping("/updateAula")
-		public String updateAula(@ModelAttribute("aula") AulaImpl theAula, ModelMap modelMap) {
+		public String updateAula(@ModelAttribute("aula") AulaImpl model, Model theModel, ModelMap modelMap) {
 
-				Date current_date = new Date();
-				theAula.setDt_last_update_aula(current_date);
-				aulaService.updateAula(theAula);
-				return "view-aula";				
 			
-		}	
+			// pego aula que vem do model
+			AulaImpl aula = model;
+			
+			
+			// // validar se ja existe aula com esse id
+			AulaImpl validaAula = aulaService.validaAula(model.getIndice_aula(), model.getNumero_aula(), model.getId_modulo_aula(), model.getId_aula());
+			
+			if (validaAula != null ) {
+
+				// exibe mensagem de erro
+				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outra aula com esse Numero e Indice </div>";
+				modelMap.addAttribute("errorMessage", errorMessage);
+				return "aula-update-form";
+				
+			} else {
+				
+				// Atualiza a sessão com os dados inseridos no formulario
+				Date current_date = new Date();
+				model.setDt_last_update_aula(current_date);
+				model.setAtivo_aula(true);
+				aulaService.updateAula(model);
+				
+				return moduloController.showModulo(aula.getId_modulo_aula(), theModel, modelMap);
+			}
+		}
 		
 
 }
