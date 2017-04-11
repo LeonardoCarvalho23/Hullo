@@ -129,18 +129,17 @@
 				</div>
 			</form:form>
 
-<%-- 			<form:form class="well form-horizontal"
-				action="../modulos/deleteModulo" modelAttribute="aula" method="POST">
+ 			<form:form class="well form-horizontal"
+				action="../modulos/deleteModulo" modelAttribute="moduloModel" method="POST">
 				<div class="form-group">
 					<label class="col-md-4 control-label"></label>
 					<div class="col-md-4">
-						<form:hidden path="id_aula" value="${aula.id_aula}" />
-						<form:hidden path="id_modulo_aula" value="${aula.id_modulo_aula}" />
+						<form:hidden path="modulo.id_modulo" value="${moduloModel.modulo.id_modulo}" />
 						<input type="submit" value="Excluir" class="btn btn-primary"
-							onclick="if(!(confirm('Tem certeza que deseja excluir essa aula?')))return false">
+							onclick="if(!(confirm('Tem certeza que deseja excluir esse modulo e todas as suas aulas?')))return false">
 					</div>
 				</div>
-			</form:form> --%>
+			</form:form>
 
 		</div>
 	</div>

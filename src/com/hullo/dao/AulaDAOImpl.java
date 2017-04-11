@@ -120,11 +120,34 @@ public class AulaDAOImpl {
 
 	}
 
+	// para deletar uma aula
 	public void deleteAula(AulaImpl aula) {
-		
+
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		currentSession.delete(aula);
+
+	}
+
+	// deletar todas as aulas de um modulo
+	@SuppressWarnings("unchecked")
+	public void deleteAulasModulo(int id_modulo) {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// Cria query que faz busca no banco
+		Query<AulaImpl> theQuery;
+		
+		// para fazer update apenas dos capos editaveis
+		String hql = "DELETE from AulaImpl where id_modulo_aula=:id_modulo";
+
+		theQuery = currentSession.createQuery(hql);
+
+		// adicionando valores para as variaveis do update
+		theQuery.setParameter("id_modulo", id_modulo);
+
+		int result = theQuery.executeUpdate();
+		System.out.println(result + " linhas atualizadas");
 
 	}
 }

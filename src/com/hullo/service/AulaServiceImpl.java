@@ -45,8 +45,12 @@ public class AulaServiceImpl {
 
 	@Transactional
 	public void deleteAula(AulaImpl aula) {
-		aulaDAO.deleteAula(aula);
-		
+		aulaDAO.deleteAula(aula);	
+	}
+	
+	@Transactional
+	public void deleteAulasModulo(int id_modulo){
+		aulaDAO.deleteAulasModulo(id_modulo);
 	}
 	
 }

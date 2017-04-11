@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.AulaImpl;
 import com.hullo.service.AulaServiceImpl;
 
@@ -141,8 +140,6 @@ public class AulaController {
 	public String deleteAula(@ModelAttribute("aula") AulaImpl aula, Model theModel) {
 
 		int id_modulo = aula.getId_modulo_aula();
-		
-		System.out.println("peguei o modulo " + id_modulo);
 		
 		aulaService.deleteAula(aula);
 
