@@ -90,10 +90,10 @@ CREATE TABLE aula(
  nm_aula varchar(20) NOT NULL,
  numero_aula int NOT NULL, -- para definir posição da aula 1, 2, 3, 4 ou 5
  indice_aula varchar(1) NOT NULL, -- para definir o indice da aula A, B, C...
- revisao_aula varchar(300) NOT NULL,
- conteudo_aula varchar(600) NOT NULL,
- atividade_aula varchar(300) DEFAULT NULL,
- teaser_aula varchar(200) DEFAULT NULL,
+ revisao_aula longtext NOT NULL,
+ conteudo_aula longtext NOT NULL,
+ atividade_aula longtext DEFAULT NULL,
+ teaser_aula longtext DEFAULT NULL,
  ativo_aula char (1) DEFAULT 1, -- 0 = inativo ou 1 = ativo
  dt_insert_aula datetime NOT NULL,
  dt_last_update_aula datetime NOT NULL,

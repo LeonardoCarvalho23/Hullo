@@ -21,6 +21,8 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
+<!-- CK Editor -->
+	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
@@ -103,14 +105,14 @@
 					<!-- Campo conteudo -->
 					<div class="form-group">
 						<label class="col-md-4 control-label">Conteúdo</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input class="form-control" path="conteudo_aula"
-									value="${aula.conteudo_aula}" required="true" maxlength="5" />
+						<div style="padding: 40px;">
+								<form:textarea class="form-control" path="conteudo_aula"
+									value="${aula.conteudo_aula}" required="true" />
+									<!-- Script para carregar o editor -->
+									<script>
+									CKEDITOR.replace( 'conteudo_aula' );
+        							</script>
 							</div>
-						</div>
 					</div>
 
 
