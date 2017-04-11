@@ -29,6 +29,13 @@
 	<p>Telefone: ${usuario.telefone_usuario}</p>
 	<p>Profissão: ${usuario.profissao_usuario}</p>
 
+	<form:form action="../usuario/getUsuario" modelAttribute="usuario"
+		method="POST">
+		<form:hidden path="email_usuario" value="${usuario.email_usuario}" />
+		<form:hidden path="senha_usuario" value="${usuario.senha_usuario}" />
+		<input type="submit" name="Voltar" value="Voltar">
+	</form:form>
+	
 	<form:form action="../aluno/showFormUpdateAluno" method="POST">
 		<input type="submit" name="Editar" value="Editar">
 	</form:form>

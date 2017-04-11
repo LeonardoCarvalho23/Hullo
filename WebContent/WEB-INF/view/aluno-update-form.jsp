@@ -224,7 +224,7 @@
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-primary">Salvar</button>
 							<input type="button" class="btn btn-primary" value="Voltar"
-								onclick="window.location.href='../'; return false;" />
+								onclick="window.location.href='../aluno/showPerfilAluno'; return false;" />
 						</div>
 					</div>
 

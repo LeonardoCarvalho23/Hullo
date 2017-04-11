@@ -162,13 +162,13 @@ public class ProfessorController {
 	}
 
 	// metodo para abrir pagina de perfil professor
-	@PostMapping("/showPerfilProfessor")
+	@RequestMapping("/showPerfilProfessor")
 	public String showPerfilProfessor(HttpSession session) {
 		return "perfil-professor";
 	}
 
 	// metodo para abrir pagina de update do professor
-	@RequestMapping("/showFormUpdateProfessor")
+	@PostMapping("/showFormUpdateProfessor")
 	public String showFormUpdateProfessor(HttpSession session) {
 		return "professor-update-form";
 	}

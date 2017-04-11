@@ -67,7 +67,7 @@ public class AlunoController {
 
 	@GetMapping("/formAluno")
 	public String showFormNovoUsuario(Model theModel) {
-		System.out.println("Entrou no formulario de novo aluno");
+		
 		AlunoImpl theAluno = new AlunoImpl();
 
 		List<EstadoImpl> estados = estadoService.getEstados();
@@ -98,10 +98,10 @@ public class AlunoController {
 		theAluno.setCd_cidade_usuario(cidade.getId_Cidade());
 
 		// validar se ja existe usuario com esse email ou senha, tanto professor quanto aluno
-		System.out.println("Chegou na hora de validar usuario");
+		
 		AlunoImpl validaAluno = alunoService.validaUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 		ProfessorImpl validaProfessor = professorService.getUsuario(theAluno.getEmail_usuario());
-		System.out.println("Compara senhas " + validaProfessor.getSenha_usuario() + " " + theAluno.getSenha_usuario());
+		
 		// se retornar que existe, exibe mensagem de erro
 		if (validaAluno != null) {
 
@@ -122,7 +122,7 @@ public class AlunoController {
 		}	
 		// se nao existe aluno com esses dados, cria o ususario
 		else {
-			System.out.println("viu que nao ha usuario com os dados");
+			
 			theAluno.setAtivo_usuario("1");
 			theAluno.setDt_insert_usuario(current_date);
 			theAluno.setDt_last_update_usuario(current_date);

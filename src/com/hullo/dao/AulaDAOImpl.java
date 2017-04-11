@@ -43,7 +43,7 @@ public class AulaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaImpl> Query = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula", AulaImpl.class);
+				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula", AulaImpl.class);
 
 		return Query.getResultList();
 	}
