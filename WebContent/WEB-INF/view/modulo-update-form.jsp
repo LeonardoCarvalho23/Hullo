@@ -75,7 +75,7 @@
 								<c:forEach var="tempAula" items="${moduloModel.listaAulas}">
 									<p>
 										Aula: ${tempAula.numero_aula} ${tempAula.indice_aula} -
-										
+
 										<!-- botao de update da aula-->
 										<c:url var="viewLink" value="/modulos/showAula">
 											<c:param name="id_aula" value="${tempAula.id_aula}" />
@@ -119,10 +119,29 @@
 
 			<form:form class="well form-horizontal" action="../modulos/formAula"
 				modelAttribute="moduloModel" method="POST">
-				<form:hidden path="modulo.id_modulo"
-					value="${moduloModel.modulo.id_modulo}" />
-				<button type="submit" class="btn btn-primary">Nova Aula</button>
+				<div class="form-group">
+					<label class="col-md-4 control-label"></label>
+					<div class="col-md-4">
+						<form:hidden path="modulo.id_modulo"
+							value="${moduloModel.modulo.id_modulo}" />
+						<button type="submit" class="btn btn-primary">Nova Aula</button>
+					</div>
+				</div>
 			</form:form>
+
+<%-- 			<form:form class="well form-horizontal"
+				action="../modulos/deleteModulo" modelAttribute="aula" method="POST">
+				<div class="form-group">
+					<label class="col-md-4 control-label"></label>
+					<div class="col-md-4">
+						<form:hidden path="id_aula" value="${aula.id_aula}" />
+						<form:hidden path="id_modulo_aula" value="${aula.id_modulo_aula}" />
+						<input type="submit" value="Excluir" class="btn btn-primary"
+							onclick="if(!(confirm('Tem certeza que deseja excluir essa aula?')))return false">
+					</div>
+				</div>
+			</form:form> --%>
+
 		</div>
 	</div>
 	<div id="footer">
