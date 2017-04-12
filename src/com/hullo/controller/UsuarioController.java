@@ -150,7 +150,7 @@ public class UsuarioController {
 		if((boolean)session.getAttribute("online"))
 		session.setAttribute("online", false);
 		else session.setAttribute("online", true);
-		return null;
+		return "home-professor";
 	}
 	
 	@GetMapping("/retrievePassword")
