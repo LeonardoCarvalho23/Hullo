@@ -106,6 +106,53 @@ public class AlunoController {
 		
 		AlunoImpl validaAluno = alunoService.validaUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 		ProfessorImpl validaProfessor = professorService.getUsuario(theAluno.getEmail_usuario());
+<<<<<<< HEAD
+
+		// se retornar que existe, exibe mensagem de erro
+		if (validaAluno != null) {
+
+			// exibe mensagem de erro
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Já existe aluno com o mesmo e-mail ou CPF.</div>";
+			modelMap.addAttribute("errorMessage", errorMessage);
+
+			return "aluno-form";
+			
+		// se houver professor, checa se a senha é igual. Se não for, devolve erro	
+		} else if ((validaProfessor != null) && !(validaProfessor.getSenha_usuario().equals(theAluno.getSenha_usuario()))) {
+			
+			// exibe mensagem de erro
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Senha deve ser a mesma do perfil de professor cadastrado.</div>";
+			modelMap.addAttribute("errorMessage", errorMessage);
+
+			return "aluno-form";
+		}	
+		// se nao existe aluno com esses dados, cria o ususario
+		else {
+			System.out.println("viu que nao ha usuario com os dados");
+			theAluno.setAtivo_usuario("1");
+			theAluno.setDt_insert_usuario(current_date);
+			theAluno.setDt_last_update_usuario(current_date);
+
+			// save the aluno
+			alunoService.saveUsuario(theAluno);
+			
+			//gera a primeira aula do aluno
+			aulaRealizadaService.montarAulaRealizada(theAluno.getEmail_usuario());
+
+			// Envia email de confirmação
+			SimpleMailMessage msg = new SimpleMailMessage();
+
+			msg.setTo(theAluno.getEmail_usuario());
+			msg.setFrom("noreply@hullo.com.br");
+			msg.setSubject("Confirmação de cadastro");
+			msg.setText(theAluno.getNome_usuario() + ", seu cadastro de aluno foi realizado com sucesso.");
+
+			try {
+				this.mailSender.send(msg);
+				// System.out.println(msg.toString());
+			} catch (MailException e) {
+				// TODO Auto-generated catch block
+=======
 		
 			if (isCPF(theAluno.getCpf_usuario())){
 				
@@ -166,6 +213,7 @@ public class AlunoController {
 				modelMap.addAttribute("errorMessage", errorMessage);
 		
 				return "aluno-form";
+>>>>>>> aa2a8d1e7b9ec08d717458c3f8304094bdb29b3c
 			}
 
 	}

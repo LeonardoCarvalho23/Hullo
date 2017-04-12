@@ -209,4 +209,14 @@ public class ModuloController {
 		return false;
 	}
 
+	//para excluir modulo e todas as suas aulas
+	@PostMapping("/deleteModulo")
+	public String formNovaAula(@RequestParam("modulo.id_modulo") int id_modulo, Model theModel) {
+		
+		aulaService.deleteAulasModulo(id_modulo);
+		
+		moduloService.deleteModulo(id_modulo);
+		
+		return listarModulos(theModel);
+	}
 }

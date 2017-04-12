@@ -36,7 +36,7 @@
 		<div id="container" class="well form-horizontal"
 			style="position: relative;">
 
-			<legend>Detalhes da Aula</legend>
+			Detalhes da Aula
 			
 
 			<div class="form-group">

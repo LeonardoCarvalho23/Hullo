@@ -56,4 +56,9 @@ public class ModuloServiceImpl {
 		return moduloDAO.getPrimeiroModulo();
 	}
 
+	@Transactional
+	public void deleteModulo(int id_modulo) {
+		moduloDAO.deleteModulo(id_modulo);
+	}
+
 }

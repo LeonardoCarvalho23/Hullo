@@ -34,7 +34,6 @@ public class AulaServiceImpl {
 
 	@Transactional
 	public void updateAula(AulaImpl aula) {
-		System.out.println("service"+aula);
 		aulaDAO.updateAula(aula);
 	}
 
@@ -46,6 +45,16 @@ public class AulaServiceImpl {
 	@Transactional
 	public AulaImpl validaAula(char indice_aula, int numero_aula, int id_modulo_aula, int id_aula) {
 		return aulaDAO.validaAula(indice_aula, numero_aula, id_modulo_aula, id_aula );
+	}
+
+	@Transactional
+	public void deleteAula(AulaImpl aula) {
+		aulaDAO.deleteAula(aula);	
+	}
+	
+	@Transactional
+	public void deleteAulasModulo(int id_modulo){
+		aulaDAO.deleteAulasModulo(id_modulo);
 	}
 	
 }

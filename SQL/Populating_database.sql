@@ -10,3 +10,5 @@ insert into modulo values (3, "Greetings 1", 1.1 , "0", now(), now());
 
 insert into aula values (1, "hullo", 1, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);
 insert into aula values (2, "how are you?", 2, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (3, "I am", 1, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 2);
+insert into aula values (4, "He is", 2, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 2);

@@ -66,8 +66,8 @@ function TestaCPF(strCPF) {
 	
 	
 	if (strCPF == "00000000000"){
-		document.getElementById("cpf").setCustomValidity('Invalid');
-		alert("CPF INVALIDO");
+		document.getElementById("cpf").setCustomValidity('CPF Inválido');
+		document.getElementById("cpf").style.color = "red";
 		return false;
 	}
 	
@@ -81,8 +81,8 @@ function TestaCPF(strCPF) {
 	}
 	
 	if (Resto != parseInt(strCPF.substring(9, 10))){
-		document.getElementById("cpf").setCustomValidity('Invalid');
-		alert("CPF INVALIDO");
+		document.getElementById("cpf").setCustomValidity('CPF Inválido');
+		document.getElementById("cpf").style.color = "red";
 		return false;
 	}
 	
@@ -97,13 +97,13 @@ function TestaCPF(strCPF) {
 	}
 	
 	if (Resto != parseInt(strCPF.substring(10, 11))){
-		document.getElementById("cpf").setCustomValidity('Invalid');
-		alert("CPF INVALIDO");
+		document.getElementById("cpf").setCustomValidity('CPF Inválido');
+		document.getElementById("cpf").style.color = "red";
 		return false;
 	}
 	
 	document.getElementById("cpf").setCustomValidity('');
-	//alert("CPF VALIDO!");
+	document.getElementById("cpf").style.color = "black";
 	return true;
 }
    

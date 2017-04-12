@@ -1,7 +1,7 @@
 package com.hullo.testdb;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +34,7 @@ public class TestDBServlet extends HttpServlet {
 		
 	//get connection to database
 	try{
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 		System.out.println("connecting to db...");
 		Class.forName(driver);
 		Connection myConn = DriverManager.getConnection(jdbcUrl, user, pass);

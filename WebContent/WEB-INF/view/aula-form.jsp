@@ -24,6 +24,10 @@
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
+
+<!-- CK Editor -->
+	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+	
 </head>
 
 <body>
@@ -36,7 +40,7 @@
 		<div id="container">
 
 			<form:form class="well form-horizontal" action="newAula"
-				modelAttribute="aula" method="POST">
+				modelAttribute="aula" method="post">
 				<form:hidden path="id_modulo_aula" />
 
 				<fieldset>
@@ -77,7 +81,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
-								<form:input placeholder="A" class="form-control"
+								<form:input placeholder="" class="form-control"
 									path="indice_aula" required="true" maxlength="5" />
 							</div>
 						</div>
@@ -99,16 +103,15 @@
 					<!-- Campo conteudo -->
 					<div class="form-group">
 						<label class="col-md-4 control-label">Conteúdo</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input class="form-control" path="conteudo_aula"
-									required="true" maxlength="5" />
+						<div style="padding: 40px;">
+								<form:textarea path="conteudo_aula"
+									required="true" />
+									<!-- Script para carregar o editor -->
+									<script>
+									CKEDITOR.replace( 'conteudo_aula' );
+        							</script>
 							</div>
-						</div>
 					</div>
-
 
 					<!-- Botões -->
 					<div class="form-group">

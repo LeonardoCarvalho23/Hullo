@@ -21,6 +21,8 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
+<!-- CK Editor -->
+	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
@@ -38,7 +40,7 @@
 			<form:form class="well form-horizontal" action="updateAula"
 				modelAttribute="aula" method="POST">
 				<form:hidden path="id_modulo_aula" />
-				<form:hidden path="id_aula"/>
+				<form:hidden path="id_aula" />
 
 				<fieldset>
 					${errorMessage}
@@ -53,7 +55,8 @@
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-user"></i></span>
 								<form:input placeholder="Nome" class="form-control"
-									path="nm_aula" value="${aula.nm_aula}" required="true" maxlength="45" />
+									path="nm_aula" value="${aula.nm_aula}" required="true"
+									maxlength="45" />
 							</div>
 						</div>
 					</div>
@@ -65,8 +68,9 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
-								<form:input type="number" min="1" max="5" placeholder="1" class="form-control"
-									path="numero_aula" value="${aula.numero_aula}" required="true" maxlength="5" />
+								<form:input type="number" min="1" max="5" placeholder="1"
+									class="form-control" path="numero_aula"
+									value="${aula.numero_aula}" required="true" maxlength="5" />
 							</div>
 						</div>
 					</div>
@@ -79,7 +83,8 @@
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
 								<form:input placeholder="A" class="form-control"
-									path="indice_aula" value="${aula.indice_aula}" required="true" maxlength="5" />
+									path="indice_aula" value="${aula.indice_aula}" required="true"
+									maxlength="5" />
 							</div>
 						</div>
 					</div>
@@ -100,36 +105,46 @@
 					<!-- Campo conteudo -->
 					<div class="form-group">
 						<label class="col-md-4 control-label">Conteúdo</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input class="form-control" path="conteudo_aula" value="${aula.conteudo_aula}"
-									required="true" maxlength="5" />
+						<div style="padding: 40px;">
+								<form:textarea class="form-control" path="conteudo_aula"
+									value="${aula.conteudo_aula}" required="true" />
+									<!-- Script para carregar o editor -->
+									<script>
+									CKEDITOR.replace( 'conteudo_aula' );
+        							</script>
 							</div>
-						</div>
 					</div>
-					
+
 
 					<!-- Botões -->
 					<div class="form-group">
 						<label class="col-md-4 control-label"></label>
 						<div class="col-md-4">
-							<input type="submit" class="btn btn-primary" value="Salvar"/>
-							
-							
-							<input type="button" value="Voltar"
-							onclick = "window.history.go(-1); return false;"
-							class="btn btn-primary"
-							/>
+							<input type="submit" class="btn btn-primary" value="Salvar" /> <input
+								type="button" value="Voltar"
+								onclick="window.history.go(-1); return false;"
+								class="btn btn-primary" />
 
 						</div>
 					</div>
 
-
-
 				</fieldset>
 			</form:form>
+
+			<form:form class="well form-horizontal"
+				action="../modulos/deleteAula" modelAttribute="aula" method="POST">
+				<div class="form-group">
+					<label class="col-md-4 control-label"></label>
+					<div class="col-md-4">
+						<form:hidden path="id_aula" value="${aula.id_aula}" />
+						<form:hidden path="id_modulo_aula" value="${aula.id_modulo_aula}" />
+						<input type="submit" value="Excluir" class="btn btn-primary"
+							onclick="if(!(confirm('Tem certeza que deseja excluir essa aula?')))return false">
+					</div>
+				</div>
+			</form:form>
+
+
 		</div>
 		<div id="footer">
 			<p style="display: block; margin: auto; padding: 10px;"

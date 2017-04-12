@@ -115,9 +115,28 @@ public class ModuloDAOImpl {
 		theQuery.setParameter("lastUpdate", modulo.getDt_last_update_modulo());
 		theQuery.setParameter("id", modulo.getId_modulo());
 
-		int result = theQuery.executeUpdate();
+		theQuery.executeUpdate();
+		
+	}
 
-		System.out.println(result + " linha atualizada");
+	@SuppressWarnings("unchecked")
+	public void deleteModulo(int id_modulo) {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// Cria query que faz busca no banco
+		Query<ModuloImpl> theQuery;
+
+		// para fazer update apenas dos capos editaveis
+		String hql = "DELETE from ModuloImpl WHERE id_modulo = :id";
+		
+		theQuery = currentSession.createQuery(hql);
+
+		// adicionando valores para as variaveis do update
+		theQuery.setParameter("id", id_modulo);
+
+		int result = theQuery.executeUpdate();
+		System.out.println(result + " linhas atualizadas");
 		
 	}
 	
