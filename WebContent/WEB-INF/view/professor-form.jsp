@@ -70,8 +70,8 @@ function TestaCPF(strCPF) {
 	
 	
 	if (strCPF == "00000000000"){
-		document.getElementById("cpf").setCustomValidity('Invalid');
-		alert("CPF INVALIDO");
+		document.getElementById("cpf").setCustomValidity('CPF Inválido');
+		document.getElementById("cpf").style.color = "red";
 		return false;
 	}
 	
@@ -85,8 +85,8 @@ function TestaCPF(strCPF) {
 	}
 	
 	if (Resto != parseInt(strCPF.substring(9, 10))){
-		document.getElementById("cpf").setCustomValidity('Invalid');
-		alert("CPF INVALIDO");
+		document.getElementById("cpf").setCustomValidity('CPF Inválido');
+		document.getElementById("cpf").style.color = "red";
 		return false;
 	}
 	
@@ -101,23 +101,27 @@ function TestaCPF(strCPF) {
 	}
 	
 	if (Resto != parseInt(strCPF.substring(10, 11))){
-		document.getElementById("cpf").setCustomValidity('Invalid');
-		alert("CPF INVALIDO");
+		document.getElementById("cpf").setCustomValidity('CPF Inválido');
+		document.getElementById("cpf").style.color = "red";
 		return false;
 	}
 	
 	document.getElementById("cpf").setCustomValidity('');
-	//alert("CPF VALIDO!");
+	document.getElementById("cpf").style.color = "black";
 	return true;
 }
 
 function validaCnpj(cnpj){
 	cnpj = cnpj.replace(/[^\d]+/g,'');
 	 
-   // if(cnpj == '') return false;
+    if(cnpj == '') return true;
      
-    if (cnpj.length != 14)
-        return false;
+    if (cnpj.length != 14){
+    	document.getElementById("cnpj").setCustomValidity('CNPJ Inválido');
+		document.getElementById("cnpj").style.color = "red";
+		return false;
+    }
+        
  
     // Elimina CNPJs invalidos conhecidos
     if (cnpj == "00000000000000" || 
@@ -130,7 +134,8 @@ function validaCnpj(cnpj){
         cnpj == "77777777777777" || 
         cnpj == "88888888888888" || 
         cnpj == "99999999999999"){
-    	alert("CNPJ INVÁLIDO");
+    	document.getElementById("cnpj").setCustomValidity('CNPJ Inválido');
+		document.getElementById("cnpj").style.color = "red";
     	return false;
     }
         
@@ -148,7 +153,8 @@ function validaCnpj(cnpj){
     }
     resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
     if (resultado != digitos.charAt(0)){
-    	alert("CNPJ INVÁLIDO");
+    	document.getElementById("cnpj").setCustomValidity('CNPJ Inválido');
+		document.getElementById("cnpj").style.color = "red";
     	return false;
     }
         
@@ -164,11 +170,13 @@ function validaCnpj(cnpj){
     }
     resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
     if (resultado != digitos.charAt(1)){
-    	alert("CNPJ INVÁLIDO");
+    	document.getElementById("cnpj").setCustomValidity('CNPJ Inválido');
+		document.getElementById("cnpj").style.color = "red";
     	return false;
     }
     else{
-    	//alert ("CNPJ OK!");
+    	document.getElementById("cnpj").setCustomValidity('');
+    	document.getElementById("cnpj").style.color = "black";
     	return true;
     }
            
