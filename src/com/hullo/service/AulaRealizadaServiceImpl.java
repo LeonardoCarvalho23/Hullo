@@ -46,7 +46,7 @@ public class AulaRealizadaServiceImpl {
 		
 		AlunoImpl aluno = alunoService.getUsuario(email);
 		
-		AulaRealizadaImpl aulaRealizada = new AulaRealizadaImpl(aluno.getId_usuario(), aula.getId_aula());
+		AulaRealizadaImpl aulaRealizada = new AulaRealizadaImpl(aula.getId_aula(),aluno.getId_usuario());
 		
 		aulaRealizadaDAO.saveAulaRealizada(aulaRealizada);
 	}

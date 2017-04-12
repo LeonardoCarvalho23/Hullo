@@ -74,10 +74,6 @@ public class AulaDAOImpl {
 		
 		return aulas.get(0);
 	}
-
-	public void updateAula(AulaImpl aula) {
-		Session currentSession = sessionFactory.getCurrentSession();
-	
 	
 	// para fazer update da aula ja existente
 		@SuppressWarnings("unchecked")

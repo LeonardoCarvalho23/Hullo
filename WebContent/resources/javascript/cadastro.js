@@ -6,6 +6,16 @@ $(document).ready(function (){
 		obterCidades();
 	});
 	
+	var online = $("#sessionVar").val();
+	
+	if(online == "false"){
+		$('#status').bootstrapToggle('off');
+		}
+	
+	    $('#status').change(function(){
+	    	$("#o").trigger("click");
+	    });
+	
 	function obterCidades() {
 
 		var estado = $("#estado").val();
@@ -26,5 +36,7 @@ $(document).ready(function (){
 			}
 		});
 	}
+	
+	
 	
 });

@@ -105,6 +105,7 @@ public class UsuarioController {
 			// login feito com sucesso
 			//Abaixo, adiciona o objeto ProfessorImpl à sessão Http
 			session.setAttribute("usuario", loggedProfessor);
+			session.setAttribute("online", false);
 			//Guarda no log o horário do login
 			logService.saveProfessorLog(loggedProfessor.getId_usuario());
 			return "home-professor";
@@ -144,7 +145,14 @@ public class UsuarioController {
 		}
 	}
 	
-
+	@PostMapping("/online")
+	public String online(HttpSession session) {
+		if((boolean)session.getAttribute("online"))
+		session.setAttribute("online", false);
+		else session.setAttribute("online", true);
+		return null;
+	}
+	
 	@GetMapping("/retrievePassword")
 	public String retrievePassword(Model theModel) {
 		Usuario oUsuario = new UsuarioImpl();
