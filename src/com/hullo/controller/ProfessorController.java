@@ -100,14 +100,13 @@ public class ProfessorController {
 
 		// seta o id da cidade no usuario
 		theProfessor.setCidade(cidade.getId_Cidade());
-
+		
 		// validar se ja existe usuario com esse email ou senha
-		ProfessorImpl validaProfessor = professorService.getUsuario(theProfessor.getEmail_usuario(),
-				theProfessor.getCpf_usuario());
+		ProfessorImpl validaProfessor = professorService.validaUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
 		AlunoImpl validaAluno = alunoService.getUsuario(theProfessor.getEmail_usuario());
-
+	
 		// se retornar que existe, exibe mensagem de erro
-
+		
 		if (validaProfessor != null) {
 
 			// exibe mensagem de erro

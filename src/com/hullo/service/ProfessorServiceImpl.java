@@ -73,7 +73,7 @@ public class ProfessorServiceImpl implements UsuarioService<ProfessorImpl> {
 	@Override
 	@Transactional
 	public ProfessorImpl validaUsuario(String email, String cpf) {
-		return professorDAO.getUsuario(email, cpf);
+		return professorDAO.validaUsuario(email, cpf);
 	}
 
 

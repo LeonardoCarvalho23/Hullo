@@ -84,6 +84,7 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 			List<ProfessorImpl> professores = theQuery.getResultList();
 			// devolve o primeiro da lista
 			ProfessorImpl validaProfessor = professores.get(0);
+			System.out.println("chegou no valida");
 			return validaProfessor;
 
 		} catch (Exception e) {
