@@ -139,6 +139,10 @@ public class AlunoController {
 					// save the aluno
 					alunoService.saveUsuario(theAluno);
 		
+					//gera a primeira aula do aluno
+					aulaRealizadaService.montarAulaRealizada(theAluno.getEmail_usuario());
+					 
+					
 					// Envia email de confirmação
 					SimpleMailMessage msg = new SimpleMailMessage();
 		
