@@ -21,7 +21,8 @@ $(function(){
     $('#datepicker').datepicker({ 
     	altField: '#usuario\\.data_nascimento_usuario', // é preciso usar dois \\ antes do ponto pra funcionar quando o id tem ponto no nome
     	altFormat: 'mm/dd/yy',
-    	dateFormat: 'dd/mm/yy'
+    	dateFormat: 'dd/mm/yy',
+    	maxDate: new Date //funcao que impede datas futuras
     });
 });
 /* Portuguese initialisation for the jQuery UI date picker plugin. */
@@ -48,6 +49,22 @@ jQuery(function ($) {
     $.datepicker.setDefaults($.datepicker.regional['pt']);
 });
 
+function checkFuture(data){
+	
+	var date = new Date(data.split('/').reverse().join('/'));
+	var novaData = new Date();
+	
+	if(date > novaData){
+    	document.getElementById("datepicker").setCustomValidity('Data Inválida');
+		document.getElementById("datepicker").style.color = "red";
+		return false;
+    }
+	document.getElementById("datepicker").setCustomValidity('');
+	document.getElementById("datepicker").style.color = "black";
+	return true;
+	
+}
+
 //verifica se senhas digitadas sao iguais
 function checkPasswordMatch() {
     var password = $("#txtNewPassword").val();
@@ -58,6 +75,7 @@ function checkPasswordMatch() {
     }
     return true
 }
+
 //Verifica se CPF é válido
 function TestaCPF(strCPF) {
 	strCPF = strCPF.replace(/[^\d]+/g,'');
@@ -216,7 +234,7 @@ function TestaCPF(strCPF) {
 		  			<div class="col-md-4 inputGroupContainer">
 		  				<div class="input-group">
 		  				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-		  				<input class="form-control" type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" required />
+		  				<input class="form-control" type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" onblur="checkFuture(this.value)" required />
 						<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario" value=""/>
 
 		    			</div>

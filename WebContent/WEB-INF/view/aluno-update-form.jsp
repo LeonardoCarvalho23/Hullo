@@ -27,7 +27,8 @@
 		$('#datepicker').datepicker({
 			altField : '#data_nascimento_usuario',
 			altFormat : 'mm/dd/yy',
-			dateFormat : 'dd/mm/yy'
+			dateFormat : 'dd/mm/yy',
+			maxDate: new Date //funcao que impede datas futuras
 		});
 	});
 	/* Portuguese initialisation for the jQuery UI date picker plugin. */
@@ -58,6 +59,34 @@
 		};
 		$.datepicker.setDefaults($.datepicker.regional['pt']);
 	});
+	
+function checkFuture(data){
+		
+		var date = new Date(data.split('/').reverse().join('/'));
+		var novaData = new Date();
+		
+		if(date > novaData){
+	    	document.getElementById("datepicker").setCustomValidity('Data Inválida');
+			document.getElementById("datepicker").style.color = "red";
+			return false;
+	    }
+		document.getElementById("datepicker").setCustomValidity('');
+		document.getElementById("datepicker").style.color = "black";
+		return true;
+		
+	}
+
+//verifica se senhas digitadas sao iguais
+function checkPasswordMatch() {
+    var password = $("#txtNewPassword").val();
+    var confirmPassword = $("#txtConfirmPassword").val();
+    if (password != confirmPassword){
+    	alert ("Senhas não são iguais");
+    	return false;
+    }
+    return true
+}
+	
 </script>
 
 </head>
@@ -176,7 +205,7 @@
 									var="dateString" pattern="dd/MM/yyyy" />
 								<fmt:formatDate value="${usuario.data_nascimento_usuario}"
 									var="altDateString" pattern="MM/dd/yyyy" />
-								<input class="form-control" id="datepicker" name="datepicker"
+								<input class="form-control" id="datepicker" name="datepicker" onblur="checkFuture(this.value)"
 									placeholder="dd/mm/aaaa" value="${dateString}" /> <input
 									type="hidden" id="data_nascimento_usuario"
 									name="data_nascimento_usuario" value="${altDateString}" />
