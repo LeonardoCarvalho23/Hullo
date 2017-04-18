@@ -156,6 +156,7 @@ public class ModuloController {
 			}
 
 			// se nao quero ativar modulo, vai direto salvar
+			// e de quiser ativar, ja validou se tem 5 aulas base
 			if (validaAulas) {
 
 				moduloService.updateModulo(modulo);

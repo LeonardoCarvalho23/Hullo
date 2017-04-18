@@ -104,14 +104,14 @@ public class ModuloDAOImpl {
 		Query<ModuloImpl> theQuery;
 
 		// para fazer update apenas dos capos editaveis
-		String hql = "UPDATE ModuloImpl set nm_modulo = :nome, indice_modulo= :indice, dt_last_update_modulo = :lastUpdate "
+		String hql = "UPDATE ModuloImpl set nm_modulo = :nome, indice_modulo= :indice, ativo_modulo= :ativo, dt_last_update_modulo = :lastUpdate "
 				+ "WHERE id_modulo = :id";
 		theQuery = currentSession.createQuery(hql);
 
 		// adicionando valores para as variaveis do update
 		theQuery.setParameter("nome", modulo.getNm_modulo());
 		theQuery.setParameter("indice", modulo.getIndice_modulo());
-		//theQuery.setParameter("ativo", modulo.getAtivo_modulo());
+		theQuery.setParameter("ativo", modulo.getAtivo_modulo());
 		theQuery.setParameter("lastUpdate", modulo.getDt_last_update_modulo());
 		theQuery.setParameter("id", modulo.getId_modulo());
 
@@ -144,7 +144,7 @@ public class ModuloDAOImpl {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<ModuloImpl> Query = currentSession.createQuery("from ModuloImpl order by indice_modulo",
+		Query<ModuloImpl> Query = currentSession.createQuery("from ModuloImpl where ativo_modulo = 1 order by indice_modulo",
 				ModuloImpl.class);
 
 		List<ModuloImpl> modulo = Query.getResultList();

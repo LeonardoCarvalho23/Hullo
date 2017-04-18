@@ -22,7 +22,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <!-- CK Editor -->
-	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
@@ -68,9 +68,9 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
-								<form:input type="number" min="1" max="5" placeholder="1"
-									class="form-control" path="numero_aula"
-									value="${aula.numero_aula}" required="true" maxlength="5" />
+								<form:input pattern="[1-5]{1}" class="form-control"
+									path="numero_aula" value="${aula.numero_aula}" required="true"
+									maxlength="1" title="Número de 1 a 5" />
 							</div>
 						</div>
 					</div>
@@ -84,21 +84,22 @@
 									class="glyphicon glyphicon-th"></i></span>
 								<form:input placeholder="A" class="form-control"
 									path="indice_aula" value="${aula.indice_aula}" required="true"
-									maxlength="5" />
+									pattern="[A-Za-z]{1}" title="Apenas uma letra de A a Z"
+									maxlength="1" />
 							</div>
 						</div>
 					</div>
 
-					<!-- Campo revisao -->
+					<!-- Campo teaser -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">Revisão</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input class="form-control" path="revisao_aula"
-									required="true" value="${aula.revisao_aula}" maxlength="5" />
-							</div>
+						<label class="col-md-4 control-label">Teaser</label>
+						<div style="padding: 40px;">
+							<form:textarea class="form-control" path="teaser_aula"
+								value="${aula.teaser_aula}" required="true" />
+							<!-- Script para carregar o editor -->
+							<script>
+								CKEDITOR.replace('teaser_aula');
+							</script>
 						</div>
 					</div>
 
@@ -106,15 +107,40 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label">Conteúdo</label>
 						<div style="padding: 40px;">
-								<form:textarea class="form-control" path="conteudo_aula"
-									value="${aula.conteudo_aula}" required="true" />
-									<!-- Script para carregar o editor -->
-									<script>
-									CKEDITOR.replace( 'conteudo_aula' );
-        							</script>
-							</div>
+							<form:textarea class="form-control" path="conteudo_aula"
+								value="${aula.conteudo_aula}" required="true" />
+							<!-- Script para carregar o editor -->
+							<script>
+								CKEDITOR.replace('conteudo_aula');
+							</script>
+						</div>
 					</div>
 
+					<!-- Campo atividade -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Atividade</label>
+						<div style="padding: 40px;">
+							<form:textarea class="form-control" path="atividade_aula"
+								value="${aula.atividade_aula}" required="true" />
+							<!-- Script para carregar o editor -->
+							<script>
+								CKEDITOR.replace('atividade_aula');
+							</script>
+						</div>
+					</div>
+
+					<!-- Campo revisao -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Revisão</label>
+						<div style="padding: 40px;">
+							<form:textarea class="form-control" path="revisao_aula"
+								value="${aula.revisao_aula}" required="true" />
+							<!-- Script para carregar o editor -->
+							<script>
+								CKEDITOR.replace('revisao_aula');
+							</script>
+						</div>
+					</div>
 
 					<!-- Botões -->
 					<div class="form-group">

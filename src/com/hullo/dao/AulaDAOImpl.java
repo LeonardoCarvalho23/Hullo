@@ -48,6 +48,7 @@ public class AulaDAOImpl {
 		return Query.getResultList();
 	}
 
+	//pegar uma aula especifica
 	public AulaImpl getAula(int id_aula) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -65,7 +66,7 @@ public class AulaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaImpl> Query = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula", AulaImpl.class);
+				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula", AulaImpl.class);
 
 		List<AulaImpl> aulas = Query.getResultList();
 		

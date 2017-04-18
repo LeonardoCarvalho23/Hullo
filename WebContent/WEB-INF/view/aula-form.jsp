@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Novo Modulo</title>
+<title>Nova Aula</title>
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <link
@@ -26,8 +26,8 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
 
 <!-- CK Editor -->
-	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-	
+<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+
 </head>
 
 <body>
@@ -68,8 +68,9 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
-								<form:input type="number" min="1" max="5" placeholder="1" class="form-control"
-									path="numero_aula" required="true" maxlength="5" />
+								<form:input pattern="[1-5]{1}" placeholder="1"
+									class="form-control" path="numero_aula" required="true"
+									maxlength="1" title="Número de 1 a 5" />
 							</div>
 						</div>
 					</div>
@@ -81,22 +82,22 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
-								<form:input placeholder="" class="form-control"
-									path="indice_aula" required="true" maxlength="5" />
+								<form:input pattern="[A-Za-z]{1}" placeholder="A"
+									class="form-control" path="indice_aula" required="true"
+									maxlength="1" title="Letra de A a Z" />
 							</div>
 						</div>
 					</div>
-
-					<!-- Campo revisao -->
+					
+					<!-- Campo teaser -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">Revisão</label>
-						<div class="col-md-4 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-th"></i></span>
-								<form:input class="form-control" path="revisao_aula"
-									required="true" maxlength="5" />
-							</div>
+						<label class="col-md-4 control-label">Teaser</label>
+						<div style="padding: 40px;">
+							<form:textarea path="teaser_aula" required="true" />
+							<!-- Script para carregar o editor -->
+							<script>
+								CKEDITOR.replace('teaser_aula');
+							</script>
 						</div>
 					</div>
 
@@ -104,24 +105,48 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label">Conteúdo</label>
 						<div style="padding: 40px;">
-								<form:textarea path="conteudo_aula"
-									required="true" />
-									<!-- Script para carregar o editor -->
-									<script>
-									CKEDITOR.replace( 'conteudo_aula' );
-        							</script>
-							</div>
+							<form:textarea path="conteudo_aula" required="true" />
+							<!-- Script para carregar o editor -->
+							<script>
+								CKEDITOR.replace('conteudo_aula');
+							</script>
+						</div>
+					</div>
+
+					<!-- Campo atividade -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Atividade</label>
+						<div style="padding: 40px;">
+							<form:textarea path="atividade_aula" required="true" />
+							<!-- Script para carregar o editor -->
+							<script>
+								CKEDITOR.replace('atividade_aula');
+							</script>
+						</div>
+					</div>
+
+					<!-- Campo revisao -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Revisão</label>
+						<div style="padding: 40px;">
+							<form:textarea path="revisao_aula" required="true" />
+							<!-- Script para carregar o editor -->
+							<script>
+								CKEDITOR.replace('revisao_aula');
+							</script>
+						</div>
 					</div>
 
 					<!-- Botões -->
 					<div class="form-group">
 						<label class="col-md-4 control-label"></label>
 						<div class="col-md-4">
-							<button type="submit" class="btn btn-primary">Salvar</button>						
+							<button type="submit" class="btn btn-primary">Salvar</button>
 
-							
-							<input type="button" value="Voltar" onclick = "window.history.go(-1); return false;"
-							class="btn btn-primary"	/>
+
+							<input type="button" value="Voltar"
+								onclick="window.history.go(-1); return false;"
+								class="btn btn-primary" />
 
 						</div>
 					</div>
