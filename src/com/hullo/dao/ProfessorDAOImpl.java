@@ -143,7 +143,7 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		// para fazer update apenas dos capos editaveis
 		String hql = "UPDATE ProfessorImpl set nome_usuario = :nome, sobrenome_usuario = :sobrenome, email_usuario = :email, "
 				+ "senha_usuario = :senha, sexo_usuario = :sexo, data_nascimento_usuario = :data, telefone_usuario = :telefone, "
-				+ "profissao_usuario = :profissao, profissao_usuario = :profissao, dt_last_update_usuario = :lastUpdate "
+				+ "profissao_usuario = :profissao, cnpj_usuario = :cnpj, dt_last_update_usuario = :lastUpdate "
 				+ "WHERE id_usuario = :id";
 		theQuery = currentSession.createQuery(hql);
 
@@ -156,6 +156,7 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		theQuery.setParameter("data", theUsuario.getData_nascimento_usuario());
 		theQuery.setParameter("profissao", theUsuario.getProfissao_usuario());
 		theQuery.setParameter("telefone", theUsuario.getTelefone_usuario());
+		theQuery.setParameter("cnpj", theUsuario.getCnpj_usuario());
 		theQuery.setParameter("lastUpdate", theUsuario.getDt_last_update_usuario());
 
 		theQuery.setParameter("id", theUsuario.getId_usuario());

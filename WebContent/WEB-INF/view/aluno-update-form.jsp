@@ -224,7 +224,7 @@ function checkPasswordMatch() {
 									class="glyphicon glyphicon-earphone"></i></span>
 								<form:input class="form-control" path="telefone_usuario"
 									required="true" placeholder="DDDXXXXXXXX" maxlength="11"
-									tittle="Número incluindo DDD, sem traços"
+									tittle="Número incluindo DDD, sem traços" pattern="[0-9]+$"
 									value="${usuario.telefone_usuario}" />
 							</div>
 						</div>
