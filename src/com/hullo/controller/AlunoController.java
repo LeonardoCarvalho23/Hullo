@@ -34,7 +34,6 @@ import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.entity.AlunoModel;
-import com.hullo.service.AulaRealizadaServiceImpl;
 import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
@@ -52,8 +51,8 @@ public class AlunoController {
 	@Qualifier("professorServiceImpl")
 	private UsuarioService<ProfessorImpl> professorService;
 	
-	@Autowired
-	private AulaRealizadaServiceImpl aulaRealizadaService;
+	//@Autowired
+	//private AulaRealizadaServiceImpl aulaRealizadaService;
 
 	@Autowired
 	private EstadoServiceImpl estadoService;
@@ -140,7 +139,7 @@ public class AlunoController {
 					alunoService.saveUsuario(theAluno);
 		
 					//gera a primeira aula do aluno
-					aulaRealizadaService.montarAulaRealizada(theAluno.getEmail_usuario());
+					//aulaRealizadaService.montarAulaRealizada(theAluno.getEmail_usuario());
 					 
 					
 					// Envia email de confirmação

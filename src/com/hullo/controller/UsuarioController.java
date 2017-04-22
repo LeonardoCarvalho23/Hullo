@@ -87,6 +87,7 @@ public class UsuarioController {
 		if ((loggedAluno != null) && (loggedProfessor != null)){
 			session.setAttribute("usuario_aluno", loggedAluno);
 			session.setAttribute("usuario_professor", loggedProfessor);
+			session.setAttribute("online", false);
 			return "select-profile";
 		}
 		
@@ -106,6 +107,7 @@ public class UsuarioController {
 			//Abaixo, adiciona o objeto ProfessorImpl à sessão Http
 			session.setAttribute("usuario", loggedProfessor);
 			session.setAttribute("online", false);
+			
 			//Guarda no log o horário do login
 			logService.saveProfessorLog(loggedProfessor.getId_usuario());
 			return "home-professor";

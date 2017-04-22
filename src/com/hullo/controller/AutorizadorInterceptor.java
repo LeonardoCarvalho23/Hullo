@@ -20,6 +20,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 	          uri.contains("newAluno") ||
 	          uri.contains("newProfessor") ||
 	          uri.contains("formProfessor") ||
+	          uri.contains("twilio") ||
+	          uri.contains("welcome") ||
 	                   uri.contains("resources")){
 	        return true;
 	      }
