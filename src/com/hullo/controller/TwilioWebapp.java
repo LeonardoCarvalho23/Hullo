@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 
@@ -78,22 +79,26 @@ public class TwilioWebapp extends HttpServlet {
 
         // Generate voice TwiML
 	@PostMapping("/voice")
-	public void postVoice(HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
+	public void postVoice(@RequestParam("To") String to, HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
 
-            VoiceResponse voiceTwimlResponse;
-            String to = "5511987720698";
-           
-                Dial.Builder dialBuilder = new Dial.Builder()
-                        .callerId("551149507002");
-                dialBuilder = dialBuilder.number(new Number.Builder(to).build());
-                voiceTwimlResponse = new VoiceResponse.Builder()
-                        .dial(dialBuilder.build())
-                        .build();
+		//cria a String to (para)
+		//String to = "5511987720698";
+		//cria o objeto number
+		Number number = new Number.Builder(to).build();
+		//cria a String callerId
+		String callerId = "551149507002";
+		//Cria o objeto dialBuilder e define seus parâmetros
+		Dial.Builder dialBuilder = new Dial.Builder();
+		dialBuilder.callerId(callerId);
+		dialBuilder.number(number);
+		
+		//cria o objeto VoiceResponse
+		VoiceResponse voiceTwimlResponse = new VoiceResponse.Builder().dial(dialBuilder.build()).build();
 
             response.setContentType("text/xml");
             response.getWriter().print(voiceTwimlResponse.toXml());       
     } 
-	
+	//Exibe a página com os controles para a chamada
 	@RequestMapping("/ligacao")
 	public String fazerLigacao(){
 		return "twiliowebapp";
