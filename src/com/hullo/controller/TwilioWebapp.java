@@ -48,6 +48,7 @@ public class TwilioWebapp extends HttpServlet {
 	public static final String APPLICATION_SID = "AP5f8a739c058a2ee4874b0122957bab73";
 
 
+	// Generate token in JSON format
 	@GetMapping("/ligacao/token")
 	public void getToken(HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
         
