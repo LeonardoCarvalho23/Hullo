@@ -84,9 +84,9 @@
 
 	<!-- Add support for web resources: physical directory in the project and url mapping to subdirectories -->
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
-	
+ 
 	<!-- Interceptador para garantir que somente usuarios logados acessem o sistema -->
-	<mvc:interceptors>
+ 	<mvc:interceptors>
     <bean class="com.hullo.controller.AutorizadorInterceptor" />
 	</mvc:interceptors>
 </beans>
