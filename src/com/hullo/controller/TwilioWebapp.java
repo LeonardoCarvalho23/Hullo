@@ -1,6 +1,7 @@
 package com.hullo.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 //import static spark.Spark.get;
 //import static spark.Spark.post;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +29,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
-
+import com.twilio.Twilio;
 // Token generation imports
 import com.twilio.jwt.Jwt;
 import com.twilio.jwt.client.ClientCapability;
 import com.twilio.jwt.client.IncomingClientScope;
 import com.twilio.jwt.client.OutgoingClientScope;
 import com.twilio.jwt.client.Scope;
-
+import com.twilio.rest.api.v2010.account.Call;
 // TwiML generation imports
 import com.twilio.twiml.VoiceResponse;
 import com.twilio.twiml.Dial;
@@ -110,11 +112,11 @@ public class TwilioWebapp extends HttpServlet {
 		
 		//cria o objeto VoiceResponse
 		VoiceResponse voiceTwimlResponse = new VoiceResponse.Builder()
-				.record(record)
+				//.record(record)
 				.dial(dialBuilder.build()).build();
 
             response.setContentType("text/xml");
-            response.getWriter().print(voiceTwimlResponse.toXml());       
+            response.getWriter().print(voiceTwimlResponse.toXml());      
     } 
 	
 	// Recebe os dados finais da ligacao
@@ -127,14 +129,22 @@ public class TwilioWebapp extends HttpServlet {
 			//@RequestParam("RecordingUrl") String recordingUrl,
 			HttpServletRequest request, HttpServletResponse response) {
 		
+		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+		Call call = Call.fetcher(callSid).fetch();
+		DateTime startTime = call.getStartTime();
+		DateTime endTime = call.getEndTime();
+		BigDecimal price = call.getPrice();
+		
+		
 		System.out.println(
 				"\nPós ligação"+
 				"\nDuração: "+callDuration+
 				"\nSid: "+callSid+
 				"\nStatus chamada: "+callStatus+
-				"\nGravação: " /*+recordingUrl*/);
-		
-		//return "callback";
+				"\nGravação: " /*+recordingUrl*/+
+				"\nInício: "+startTime+
+				"\nTérmino: "+endTime+
+				"\nCusto: "+price);		
 	}
 	
 	
