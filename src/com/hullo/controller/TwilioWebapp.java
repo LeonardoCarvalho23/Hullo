@@ -14,12 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
 
@@ -36,6 +39,7 @@ import com.twilio.jwt.client.Scope;
 import com.twilio.twiml.VoiceResponse;
 import com.twilio.twiml.Dial;
 import com.twilio.twiml.Number;
+import com.twilio.twiml.Record;
 import com.twilio.twiml.Client;
 import com.twilio.twiml.Say;
 import com.twilio.twiml.TwiMLException;
@@ -80,25 +84,60 @@ public class TwilioWebapp extends HttpServlet {
 
         // Generate voice TwiML
 	@PostMapping("/voice")
-	public void postVoice(@RequestParam("To") String to, HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
+	public void postVoice(
+			@RequestParam("To") String to,
+			@RequestParam("CallSid") String callSid,
+			@RequestParam("CallStatus") String callStatus,
+			
+			HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
 
+		
+		System.out.println("To: "+ to +"\nCallSid: " + callSid + "\nCallStatus: " + callStatus);
 		//cria a String to (para)
 		//String to = "5511987720698";
 		//cria o objeto number
 		Number number = new Number.Builder(to).build();
 		//cria a String callerId
 		String callerId = "551149507002";
+		// Use <Record> to record the caller's message
+	    Record record = new Record.Builder().build();
+		
 		//Cria o objeto dialBuilder e define seus parâmetros
 		Dial.Builder dialBuilder = new Dial.Builder();
 		dialBuilder.callerId(callerId);
 		dialBuilder.number(number);
 		
+		
 		//cria o objeto VoiceResponse
-		VoiceResponse voiceTwimlResponse = new VoiceResponse.Builder().dial(dialBuilder.build()).build();
+		VoiceResponse voiceTwimlResponse = new VoiceResponse.Builder()
+				.record(record)
+				.dial(dialBuilder.build()).build();
 
             response.setContentType("text/xml");
             response.getWriter().print(voiceTwimlResponse.toXml());       
     } 
+	
+	// Recebe os dados finais da ligacao
+	@PostMapping("/callback")
+	@ResponseStatus(value=HttpStatus.OK)
+	public void statusCallback(
+			@RequestParam("CallDuration") String callDuration,
+			@RequestParam("CallSid") String callSid,
+			@RequestParam("CallStatus") String callStatus,
+			//@RequestParam("RecordingUrl") String recordingUrl,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println(
+				"\nPós ligação"+
+				"\nDuração: "+callDuration+
+				"\nSid: "+callSid+
+				"\nStatus chamada: "+callStatus+
+				"\nGravação: " /*+recordingUrl*/);
+		
+		//return "callback";
+	}
+	
+	
 	//Exibe a página com os controles para a chamada
 	@RequestMapping("/ligacao")
 	public String fazerLigacao(){
