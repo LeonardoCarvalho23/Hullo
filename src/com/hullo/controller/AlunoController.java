@@ -286,7 +286,7 @@ public class AlunoController {
 		// Verifica se os digitos calculados conferem com os digitos informados.
 		      if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
 		         return(true);
-		      else return(0);//aqui
+		      else return(false);
 		    } catch (InputMismatchException erro) {
 		        return(false);
 		    }
