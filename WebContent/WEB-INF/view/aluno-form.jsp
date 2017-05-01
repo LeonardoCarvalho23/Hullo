@@ -247,7 +247,7 @@ function TestaCPF(strCPF) {
 		  			<div class="col-md-4 inputGroupContainer">
 		  				<div class="input-group">
 		  				<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-		  				<form:input class="form-control" path="usuario.telefone_usuario" required="true" placeholder="DDDXXXXXXXX" 
+		  				<form:input class="form-control" path="usuario.telefone_usuario" required="true" placeholder="DDXXXXXXXXX" 
 		  				pattern="[0-9]+$" maxlength="11" tittle="Número incluindo DDD, sem traços"/>
 		    			</div>
 		  			</div>
