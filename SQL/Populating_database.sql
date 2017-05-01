@@ -31,19 +31,13 @@ insert into aula_realizada (id_aula_realizada,
                             id_aula_aula_realizada,
                             id_aluno_aula_realizada,
                             id_professor_aula_realizada) 
-	values (1, 4, 4, 4, 1, STR_TO_DATE( "30/04/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "30/04/2017 13:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "30/04/2017 13:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 1, 1);
+	values (1, 4, 4, 4, 1, STR_TO_DATE( "28/04/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "29/04/2017 13:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "29/04/2017 13:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 1, 1);
 
--- aulas realizadas
-insert into aula_realizada (id_aula_realizada, 
-							nota_model_aula_realizada, 
-							nota_practice_aula_realizada, 
-                            nota_production_aula_realizada, 
-                            status_ligacao_aula_realizada,
+insert into aula_realizada (id_aula_realizada,
+							id_anterior_aula_realizada,
                             dt_criacao_aula_realizada,
-                            dt_inicio_aula_realizada,
-                            dt_fim_aula_realizada,
                             id_aula_aula_realizada,
                             id_aluno_aula_realizada,
                             id_professor_aula_realizada) 
-	values (2, 4, 3, 5, 1, STR_TO_DATE( "30/04/2017 01:15:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "01/05/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "01/05/2017 10:15:10", "%d/%m/%Y %H:%i:%s" ), 2, 1, 2);
+	values (2, 1, STR_TO_DATE( "30/04/2017 11:15:10", "%d/%m/%Y %H:%i:%s" ), 2, 1, 1);
     

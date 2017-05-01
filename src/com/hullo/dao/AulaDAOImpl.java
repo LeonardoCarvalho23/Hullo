@@ -163,6 +163,22 @@ public class AulaDAOImpl {
 		System.out.println(result + " linhas atualizadas");
 
 	}
+
+	@SuppressWarnings("null")
+	public List<AulaImpl> getAulasAnteriorAtual(int id_aula_aula_realizada, int id_anterior_aula_realizada) {
+		
+		//buscando conteudo das aulas no banco
+		AulaImpl aulaAnterior = getAula(id_anterior_aula_realizada);
+		AulaImpl aulaAtual = getAula(id_aula_aula_realizada);
+		
+		List<AulaImpl> result = null;
+		
+		result.add(aulaAnterior);
+		result.add(aulaAtual);
+		
+		return result;
+	}
+
 	
 	
 }

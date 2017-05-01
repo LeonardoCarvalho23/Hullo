@@ -52,5 +52,17 @@ public class AulaRealizadaServiceImpl {
 		
 		aulaRealizadaDAO.savePrimeiraAulaRealizada(aulaRealizada);
 	}
+	
+	//buscar proxima aula
+	@Transactional
+	public AulaRealizadaImpl getProximaAula() {		
+		return aulaRealizadaDAO.getProximaAula();
+	}
+
+	//buscar aula_realizada por ID
+	@Transactional
+	public AulaRealizadaImpl getAulaRealizada(Integer id_aula_realizada) {
+		return aulaRealizadaDAO.getAulaRealizada(id_aula_realizada);
+	}
 
 }

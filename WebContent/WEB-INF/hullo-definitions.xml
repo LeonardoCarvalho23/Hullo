@@ -36,7 +36,11 @@
         <property name="password" value="vA$6tg0o" /> -->
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hullo" />
         <property name="user" value="root" />
+<<<<<<< HEAD
         <property name="password" value="admin" />
+=======
+        <property name="password" value="root" />
+>>>>>>> f9694407cae9de75fc600a889d385fa99c25e35b
 
         <!-- these are connection pool properties for C3P0 -->
         <property name="minPoolSize" value="3" />

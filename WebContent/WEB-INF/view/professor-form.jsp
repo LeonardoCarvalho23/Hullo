@@ -217,183 +217,220 @@ function validaCnpj(cnpj){
 		</div>
 	<div id="container">
 
-		<form:form class="well form-horizontal" action="newProfessor" modelAttribute="professorModel" method="POST" onsubmit="return checkPasswordMatch();">
-		<fieldset>
-		${errorMessage}
-			<!-- Nome do formulário -->
-			<legend>Novo Professor</legend>		
+			<form:form class="well form-horizontal" action="newProfessor"
+				modelAttribute="professorModel" method="POST"
+				onsubmit="return checkPasswordMatch();">
+				<fieldset>
+					${errorMessage}
+					<!-- Nome do formulário -->
+					<legend>Novo Professor</legend>
 					<!-- Campo nome -->
 					<div class="form-group">
-				  		<label class="col-md-4 control-label">Nome</label>  
-				  			<div class="col-md-4 inputGroupContainer">
-				  				<div class="input-group">
-				  				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  				<form:input placeholder="Nome" class="form-control" path="usuario.nome_usuario" required="true" maxlength="45"/>
-				    			</div>
-				  			</div>
+						<label class="col-md-4 control-label">Nome</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span>
+								<form:input placeholder="Nome" class="form-control"
+									path="usuario.nome_usuario" required="true" maxlength="45" />
+							</div>
+						</div>
 					</div>
-					
+
 					<!-- Campo Sobrenome -->
 					<div class="form-group">
-				  		<label class="col-md-4 control-label">Sobrenome</label>  
-				  			<div class="col-md-4 inputGroupContainer">
-				  				<div class="input-group">
-				  				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  				<form:input placeholder="Sobrenome" class="form-control" path="usuario.sobrenome_usuario" required="true" maxlength="45"/>
-				    			</div>
-				  			</div>
+						<label class="col-md-4 control-label">Sobrenome</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span>
+								<form:input placeholder="Sobrenome" class="form-control"
+									path="usuario.sobrenome_usuario" required="true" maxlength="45" />
+							</div>
+						</div>
 					</div>
-					
-					
+
+
 					<!-- Campo CPF -->
 					<div class="form-group">
-				  		<label class="col-md-4 control-label">CPF</label>  
-				  			<div class="col-md-4 inputGroupContainer">
-				  				<div class="input-group">
-				  				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  				<form:input class="form-control" path="usuario.cpf_usuario" id = "cpf" onblur="TestaCPF(this.value)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
-							 placeholder="xxx.xxx.xxx-xx" maxlength="14" size="14" required="true"
-							  title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
-				    			</div>
-				  			</div>
+						<label class="col-md-4 control-label">CPF</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span>
+								<form:input class="form-control" path="usuario.cpf_usuario"
+									id="cpf" onblur="TestaCPF(this.value)"
+									pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+									placeholder="xxx.xxx.xxx-xx" maxlength="14" size="14"
+									required="true"
+									title="Digite um CPF válido no formato: xxx.xxx.xxx-xx" />
+							</div>
+						</div>
 					</div>
-					
+
 					<!-- Campo CNPJ -->
 					<div class="form-group">
-				  		<label class="col-md-4 control-label">CNPJ</label>  
-				  			<div class="col-md-4 inputGroupContainer">
-				  				<div class="input-group">
-				  				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  				<form:input class="form-control" path="usuario.cnpj_usuario" id = "cnpj" onblur="validaCnpj(this.value)" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}"
-							 placeholder="xx.xxx.xxx/xxxx-xx" maxlength="18" size="18"
-							  title="Digite um CNPJ válido no formato: xx.xxx.xxx/xxxx-xx" />
-				    			</div>
-				  			</div>
-					</div>				 
-					
+						<label class="col-md-4 control-label">CNPJ</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span>
+								<form:input class="form-control" path="usuario.cnpj_usuario"
+									id="cnpj" onblur="validaCnpj(this.value)"
+									pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}"
+									placeholder="xx.xxx.xxx/xxxx-xx" maxlength="18" size="18"
+									title="Digite um CNPJ válido no formato: xx.xxx.xxx/xxxx-xx" />
+							</div>
+						</div>
+					</div>
+
 					<!-- Campo email -->
 					<div class="form-group">
-				  		<label class="col-md-4 control-label">E-mail</label>  
-				  			<div class="col-md-4 inputGroupContainer">
-				  				<div class="input-group">
-				  				<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-				  				<form:input placeholder="E-mail" class="form-control" type="email" path="usuario.email_usuario" required="true" maxlength="45"/>
-				    			</div>
-				  			</div>
-					</div>	
-					
+						<label class="col-md-4 control-label">E-mail</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-envelope"></i></span>
+								<form:input placeholder="E-mail" class="form-control"
+									type="email" path="usuario.email_usuario" required="true"
+									maxlength="45" />
+							</div>
+						</div>
+					</div>
+
 					<!-- Campo senha -->
 					<div class="form-group">
-				  		<label class="col-md-4 control-label">Senha</label>  
-				  			<div class="col-md-4 inputGroupContainer">
-				  				<div class="input-group">
-				  				<span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
-				  				<form:input placeholder="Senha" class="form-control" type="password" path="usuario.senha_usuario" id="txtNewPassword" required="true" maxlength="40"/>
-				    			</div>
-				  			</div>
-					</div>	
-										
-				<!-- Campo confirmação senha -->
-				<div class="form-group">
-			  		<label class="col-md-4 control-label">Confirme sua senha</label>  
-			  			<div class="col-md-4 inputGroupContainer">
-			  				<div class="input-group">
-			  				<span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
-			  				<input placeholder="Confirme sua senha" class="form-control" type="password" id ="txtConfirmPassword" required/>
-			    			</div>
-			  			</div>
-				</div>	
+						<label class="col-md-4 control-label">Senha</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-asterisk"></i></span>
+								<form:input placeholder="Senha" class="form-control"
+									type="password" path="usuario.senha_usuario"
+									id="txtNewPassword" required="true" maxlength="40" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Campo confirmação senha -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Confirme sua senha</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-asterisk"></i></span> <input
+									placeholder="Confirme sua senha" class="form-control"
+									type="password" id="txtConfirmPassword" required />
+							</div>
+						</div>
+					</div>
 					<!-- Campo sexo -->
-			<div class="form-group">
-                        <label class="col-md-4 control-label">Sexo</label>
-                        <div class="col-md-4">
-                            <div class="radio">
-                                <label>
-                                    <form:radiobutton path="usuario.sexo_usuario" value="F" required="true"/> Feminino
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <form:radiobutton path="usuario.sexo_usuario" value="M" /> Masculino
-                                </label>
-                            </div>
-                        </div>
-                    </div>					
+					<div class="form-group">
+						<label class="col-md-4 control-label">Sexo</label>
+						<div class="col-md-4">
+							<div class="radio">
+								<label> <form:radiobutton path="usuario.sexo_usuario"
+										value="F" required="true" /> Feminino
+								</label>
+							</div>
+							<div class="radio">
+								<label> <form:radiobutton path="usuario.sexo_usuario"
+										value="M" /> Masculino
+								</label>
+							</div>
+						</div>
+					</div>
 
-			<!-- Campo Data nascimento -->
-			<div class="form-group">
-		  		<label class="col-md-4 control-label">Data de nascimento</label>  
-		  			<div class="col-md-4 inputGroupContainer">
-		  				<div class="input-group">
-		  				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-		  				<input class="form-control" type="text" id="datepicker" name="datepicker" placeholder="dd/mm/aaaa" onblur="checkFuture(this.value)" required />
-						<input type="hidden" id="usuario.data_nascimento_usuario" name="usuario.data_nascimento_usuario"  value=""/>
+					<!-- Campo Data nascimento -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Data de nascimento</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-calendar"></i></span> <input
+									class="form-control" type="text" id="datepicker"
+									name="datepicker" placeholder="dd/mm/aaaa"
+									onblur="checkFuture(this.value)" required /> <input
+									type="hidden" id="usuario.data_nascimento_usuario"
+									name="usuario.data_nascimento_usuario" value="" />
 
-		    			</div>
-		  			</div>
-			</div>						
+							</div>
+						</div>
+					</div>
 
-			<!-- Campo Telefone -->
-			<div class="form-group">
-		  		<label class="col-md-4 control-label">Telefone</label>  
-		  			<div class="col-md-4 inputGroupContainer">
-		  				<div class="input-group">
-		  				<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-		  				<form:input class="form-control" type="tel" path="usuario.telefone_usuario" required="true" placeholder="DDXXXXXXXXX" 
-		  				maxlength="11" tittle="Número incluindo DDD, sem traços"  pattern="[0-9]+$"/>
-		    			</div>
-		  			</div>
-		  			
-		  			
-			</div>	
-			
-			<!-- Campo Profissão -->
-			<div class="form-group">
-		  		<label class="col-md-4 control-label">Profissão</label>  
-		  			<div class="col-md-4 inputGroupContainer">
-		  				<div class="input-group">
-		  				<span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-		  				<form:input class="form-control" placeholder="Profissão" path="usuario.profissao_usuario" maxlength="40"/>
-		    			</div>
-		  			</div>
-			</div>					
+					<!-- Campo Telefone -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Telefone</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-earphone"></i></span>
+								<form:input class="form-control" type="tel"
+									path="usuario.telefone_usuario" required="true"
+									placeholder="DDXXXXXXXXX" maxlength="11"
+									tittle="Número incluindo DDD, sem traços" pattern="[0-9]+$" />
+							</div>
+						</div>
 
-			<!-- Campo Estado -->
-			<div class="form-group">
-		  		<label class="col-md-4 control-label">Estado</label>  
-		  			<div class="col-md-4 inputGroupContainer">
-		  				<div class="input-group">
-		  				<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-		  					<form:select class="form-control" path="" id="estado" multiple="false">
-							<form:options items="${professorModel.estado}" itemLabel="nm_estado"/>
-							</form:select>
-		    			</div>
-		  			</div>
-			</div>
-			
-			<!-- Campo Cidade -->
-			<div class="form-group">
-		  		<label class="col-md-4 control-label">Cidade</label>  
-		  			<div class="col-md-4 inputGroupContainer">
-		  				<div class="input-group">
-		  				<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-							<form:select class="form-control" path="cidade" id="cidade" multiple="false"> </form:select>
-		    			</div>
-		  			</div>
-			</div>
-			<!-- Botões -->
-			<div class="form-group">
-			  <label class="col-md-4 control-label"></label>
-			  <div class="col-md-4">
-			    <button type="submit" class="btn btn-primary" >Salvar </button>
-			    <input type="button" class="btn btn-primary" value="Voltar" onclick="window.location.href='../'; return false;" />
-			  </div>
-			</div>
-					
-								
-						
-		</fieldset>
-		</form:form>
+
+					</div>
+
+					<!-- Campo Profissão -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Profissão</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-briefcase"></i></span>
+								<form:input class="form-control" placeholder="Profissão"
+									path="usuario.profissao_usuario" maxlength="40" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Campo Estado -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Estado</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-home"></i></span>
+								<form:select class="form-control" path="" id="estado"
+									multiple="false">
+									<form:options items="${professorModel.estado}"
+										itemLabel="nm_estado" />
+								</form:select>
+							</div>
+						</div>
+					</div>
+
+					<!-- Campo Cidade -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Cidade</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-home"></i></span>
+								<form:select class="form-control" path="cidade" id="cidade"
+									multiple="false">
+								</form:select>
+							</div>
+						</div>
+					</div>
+					<!-- Botões -->
+					<div class="form-group">
+						<label class="col-md-4 control-label"></label>
+						<div class="col-md-4">
+							<button type="submit" class="btn btn-primary">Salvar</button>
+							<input type="button" class="btn btn-primary" value="Voltar"
+								onclick="window.location.href='../'; return false;" />
+						</div>
+					</div>
+
+
+
+				</fieldset>
+			</form:form>
 		</div>
 		<div id="footer"> <p style="display: block; margin: auto; padding: 10px;" align="center">Copyright © 2017 Hullo. Todos os direitos reservados.</p></div>
 	</div>

@@ -1,6 +1,7 @@
 package com.hullo.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -107,65 +108,73 @@ public class AlunoController {
 		AlunoImpl validaAluno = alunoService.validaUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 		ProfessorImpl validaProfessor = professorService.getUsuario(theAluno.getEmail_usuario());
 		
-			if (isCPF(theAluno.getCpf_usuario())){
-				
-				
-				
-				// se retornar que existe, exibe mensagem de erro
-				if (validaAluno != null) {
+			//valida idade	
+			if(calculaIdade(theAluno.getData_nascimento_usuario())){
 		
-					// exibe mensagem de erro
-					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Já existe aluno com o mesmo e-mail ou CPF.</div>";
-					modelMap.addAttribute("errorMessage", errorMessage);
-		
-					return "aluno-form";
-					
-				// se houver professor, checa se a senha é igual. Se não for, devolve erro	
-				} else if ((validaProfessor != null) && !(validaProfessor.getSenha_usuario().equals(theAluno.getSenha_usuario()))) {
-					
-					// exibe mensagem de erro
-					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Senha deve ser a mesma do perfil de professor cadastrado.</div>";
-					modelMap.addAttribute("errorMessage", errorMessage);
-		
-					return "aluno-form";
-				}	
-				// se nao existe aluno com esses dados, cria o ususario
-				else {
-					theAluno.setTelefone_usuario("55" + theAluno.getTelefone_usuario());
-					theAluno.setAtivo_usuario("1");
-					theAluno.setDt_insert_usuario(current_date);
-					theAluno.setDt_last_update_usuario(current_date);
-		
-					// save the aluno
-					alunoService.saveUsuario(theAluno);
-		
-					//gera a primeira aula do aluno
-					aulaRealizadaService.montarPrimeiraAulaRealizada(theAluno.getEmail_usuario());
-					 
-					// Envia email de confirmação
-					SimpleMailMessage msg = new SimpleMailMessage();
-		
-					msg.setTo(theAluno.getEmail_usuario());
-					msg.setFrom("noreply@hullo.com.br");
-					msg.setSubject("Confirmação de cadastro");
-					msg.setText(theAluno.getNome_usuario() + ", seu cadastro de aluno foi realizado com sucesso.");
-		
-					try {
-						this.mailSender.send(msg);
-						// System.out.println(msg.toString());
-					} catch (MailException e) {
-						// TODO Auto-generated catch block
+				if (isCPF(theAluno.getCpf_usuario())){	
+									
+					// se retornar que existe, exibe mensagem de erro
+					if (validaAluno != null) {
+			
+						// exibe mensagem de erro
+						final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Já existe aluno com o mesmo e-mail ou CPF.</div>";
+						modelMap.addAttribute("errorMessage", errorMessage);
+			
+						return "aluno-form";
+						
+					// se houver professor, checa se a senha é igual. Se não for, devolve erro	
+					} else if ((validaProfessor != null) && !(validaProfessor.getSenha_usuario().equals(theAluno.getSenha_usuario()))) {
+						
+						// exibe mensagem de erro
+						final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Senha deve ser a mesma do perfil de professor cadastrado.</div>";
+						modelMap.addAttribute("errorMessage", errorMessage);
+			
+						return "aluno-form";
+					}	
+					// se nao existe aluno com esses dados, cria o ususario
+					else {
+						theAluno.setTelefone_usuario("55" + theAluno.getTelefone_usuario());
+						theAluno.setAtivo_usuario("1");
+						theAluno.setDt_insert_usuario(current_date);
+						theAluno.setDt_last_update_usuario(current_date);
+			
+						// save the aluno
+						alunoService.saveUsuario(theAluno);
+			
+						//gera a primeira aula do aluno
+						aulaRealizadaService.montarPrimeiraAulaRealizada(theAluno.getEmail_usuario());
+						 
+						// Envia email de confirmação
+						SimpleMailMessage msg = new SimpleMailMessage();
+			
+						msg.setTo(theAluno.getEmail_usuario());
+						msg.setFrom("noreply@hullo.com.br");
+						msg.setSubject("Confirmação de cadastro");
+						msg.setText(theAluno.getNome_usuario() + ", seu cadastro de aluno foi realizado com sucesso.");
+			
+						try {
+							this.mailSender.send(msg);
+							// System.out.println(msg.toString());
+						} catch (MailException e) {
+							// TODO Auto-generated catch block
+						}
+						// envia mensagem de cadastro com sucesso
+						final String okNewAlunoMessage = "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Aluno cadastrado com sucesso. Faça login. </div>";
+						modelMap.addAttribute("okNewAlunoMessage", okNewAlunoMessage);
+						Usuario oUsuario = new UsuarioImpl();
+						modelMap.addAttribute("usuario", oUsuario);
+						return "redirect:/usuario/usuarioLogin";
 					}
-					// envia mensagem de cadastro com sucesso
-					final String okNewAlunoMessage = "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Aluno cadastrado com sucesso. Faça login. </div>";
-					modelMap.addAttribute("okNewAlunoMessage", okNewAlunoMessage);
-					Usuario oUsuario = new UsuarioImpl();
-					modelMap.addAttribute("usuario", oUsuario);
-					return "redirect:/usuario/usuarioLogin";
+				}else{
+					// exibe mensagem de erro
+					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CPF inválido.</div>";
+					modelMap.addAttribute("errorMessage", errorMessage);
+			
+					return "aluno-form";
 				}
 			}else{
 				// exibe mensagem de erro
-				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CPF inválido.</div>";
+				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Idade mínima 18 anos.</div>";
 				modelMap.addAttribute("errorMessage", errorMessage);
 		
 				return "aluno-form";
@@ -201,22 +210,32 @@ public class AlunoController {
 
 		// // validar se ja existe usuario com esse email
 		AlunoImpl validaAluno = alunoService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
-
-		if (validaAluno != null) {
-
+				
+		//valida idade	
+		if(calculaIdade(theUsuario.getData_nascimento_usuario())){
+		
+				if (validaAluno != null) {
+		
+					// exibe mensagem de erro
+					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro usuario com esse email </div>";
+					modelMap.addAttribute("errorMessage", errorMessage);
+					return "aluno-update-form";
+					
+				} else {
+					
+					// Atualiza a sessão com os dados inseridos no formulario
+					Date current_date = new Date();
+					theUsuario.setDt_last_update_usuario(current_date);
+					alunoService.updateUsuario(theUsuario);
+		
+					return "home-aluno";
+				}
+		}else{
 			// exibe mensagem de erro
-			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro usuario com esse email </div>";
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Idade mínima 18 anos.</div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
+	
 			return "aluno-update-form";
-			
-		} else {
-			
-			// Atualiza a sessão com os dados inseridos no formulario
-			Date current_date = new Date();
-			theUsuario.setDt_last_update_usuario(current_date);
-			alunoService.updateUsuario(theUsuario);
-
-			return "home-aluno";
 		}
 	}
 
@@ -292,9 +311,28 @@ public class AlunoController {
 		    }
 		  }
 	
-	/*public static boolean isMaior(String idade) {
-		
-		
-	}*/
+	public static boolean calculaIdade(java.util.Date dataNasc) {
+
+	    Calendar dataNascimento = Calendar.getInstance();  
+	    dataNascimento.setTime(dataNasc); 
+	    Calendar hoje = Calendar.getInstance();  
+
+	    int idade = hoje.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR); 
+
+	    if (hoje.get(Calendar.MONTH) < dataNascimento.get(Calendar.MONTH)) {
+	      idade--;  
+	    } 
+	    else 
+	    { 
+	        if (hoje.get(Calendar.MONTH) == dataNascimento.get(Calendar.MONTH) && hoje.get(Calendar.DAY_OF_MONTH) < dataNascimento.get(Calendar.DAY_OF_MONTH)) {
+	            idade--; 
+	        }
+	    }
+	    
+	    System.out.println("idade "+ idade);
+
+	    if (idade >= 18) return true;
+	    else return false;
+	}
 
 }
