@@ -198,6 +198,12 @@ public class ProfessorController {
 	public String showPerfilProfessor(HttpSession session) {
 		return "perfil-professor";
 	}
+	
+	// metodo para abrir pagina home do professor
+	@RequestMapping("/showHomeProfessor")
+	public String showHomeProfessor(HttpSession session) {
+		return "home-professor";
+	}
 
 	// metodo para abrir pagina de update do professor
 	@PostMapping("/showFormUpdateProfessor")

@@ -1,6 +1,5 @@
 package com.hullo.dao;
 
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -40,42 +39,42 @@ public class AulaRealizadaDAOImpl {
 		currentSession.saveOrUpdate(aulaRealizada);
 	}
 
-	//buscar proxima aula realizada, baseadi na sua data de criacao
+	// buscar proxima aula realizada, baseadi na sua data de criacao
 	public AulaRealizadaImpl getProximaAula() {
 		Session currentSession = sessionFactory.getCurrentSession();
-		
-		//achar o dia anterior paa consulta das aulas
+
+		// achar o dia anterior paa consulta das aulas
 		Calendar cal = GregorianCalendar.getInstance();
-		cal.add( Calendar.DAY_OF_YEAR, -2);
+		cal.add(Calendar.DAY_OF_YEAR, -2);
 		Date date = cal.getTime();
-		
+
 		System.out.println("data que uso para busca " + date);
-			
+
 		// busca proxima aula baseado na data atual
-		Query<AulaRealizadaImpl> query = currentSession.createQuery("from AulaRealizadaImpl where dt_criacao_aula_realizada >= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada", AulaRealizadaImpl.class);
+		Query<AulaRealizadaImpl> query = currentSession.createQuery(
+				"from AulaRealizadaImpl where dt_criacao_aula_realizada >= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
+				AulaRealizadaImpl.class);
 		query.setParameter("date", date);
-		
-		List<AulaRealizadaImpl> listaAulas = query.getResultList();
-		
-		System.out.println("dt criacao aula_realizada que veio do banco = " + listaAulas.get(0).getDt_criacao_aula_realizada());
-		
-		if (listaAulas.isEmpty()){
-			System.out.println("viu que nao tem proxima aula realizada");
+
+		try {
+			//busca a proxima aula no banco
+			List<AulaRealizadaImpl> listaAulas = query.getResultList();
+			return listaAulas.get(0);
+		} catch (Exception e) {
+			//se nao tem aula, retorna null
 			return null;
 		}
-		
-		
-		return listaAulas.get(0);
 	}
 
-	//pegar uma aula especifica
-		public AulaRealizadaImpl getAulaRealizada(int id_aula_realizada) {
+	// pegar uma aula especifica
+	public AulaRealizadaImpl getAulaRealizada(int id_aula_realizada) {
 
-			Session currentSession = sessionFactory.getCurrentSession();
+		Session currentSession = sessionFactory.getCurrentSession();
 
-			// busca por indice da aula realizada
-			Query<AulaRealizadaImpl> query = currentSession.createQuery("from AulaRealizadaImpl where id_aula_realizada= " + id_aula_realizada, AulaRealizadaImpl.class);
+		// busca por indice da aula realizada
+		Query<AulaRealizadaImpl> query = currentSession.createQuery(
+				"from AulaRealizadaImpl where id_aula_realizada= " + id_aula_realizada, AulaRealizadaImpl.class);
 
-			return query.getSingleResult();
-		}
+		return query.getSingleResult();
+	}
 }
