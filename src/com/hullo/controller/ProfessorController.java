@@ -1,6 +1,7 @@
 package com.hullo.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -106,72 +107,79 @@ public class ProfessorController {
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
 		AlunoImpl validaAluno = alunoService.getUsuario(theProfessor.getEmail_usuario());
 	
-		// se retornar que existe, exibe mensagem de erro
+		//valida idade	
+		if(calculaIdade(theProfessor.getData_nascimento_usuario())){
 		
-		if (isCPF(theProfessor.getCpf_usuario())){
-			
-			if(isCNPJ(theProfessor.getCnpj_usuario())){
-		
-				if (validaProfessor != null) {
-		
-					// exibe mensagem de erro
-					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Já existe usuario com o mesmo e-mail ou cpf. </div>";
-					modelMap.addAttribute("errorMessage", errorMessage);
-		
-					return "professor-form";
+				if (isCPF(theProfessor.getCpf_usuario())){
 					
-				// se houver aluno, checa se a senha é igual. Se não for, devolve erro	
-				} else if ((validaAluno!=null) && !(validaAluno.getSenha_usuario().equals(theProfessor.getSenha_usuario()))){
-					// exibe mensagem de erro
-						final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>A senha deve ser a mesma do perfil de aluno já cadastrado.</div>";
+					if(isCNPJ(theProfessor.getCnpj_usuario())){
+				
+						if (validaProfessor != null) {
+				
+							// exibe mensagem de erro
+							final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Já existe usuario com o mesmo e-mail ou cpf. </div>";
+							modelMap.addAttribute("errorMessage", errorMessage);
+				
+							return "professor-form";
+							
+						// se houver aluno, checa se a senha é igual. Se não for, devolve erro	
+						} else if ((validaAluno!=null) && !(validaAluno.getSenha_usuario().equals(theProfessor.getSenha_usuario()))){
+							// exibe mensagem de erro
+								final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>A senha deve ser a mesma do perfil de aluno já cadastrado.</div>";
+								modelMap.addAttribute("errorMessage", errorMessage);
+				
+								return "professor-form";
+							
+							// se nao existe professor com esses dados, cria o ususario
+						} else {
+							theProfessor.setAtivo_usuario("1");
+							theProfessor.setDt_insert_usuario(current_date);
+							theProfessor.setDt_last_update_usuario(current_date);
+				
+							// save the professor
+							professorService.saveUsuario(theProfessor);
+				
+							// Envia email de confirmação
+							SimpleMailMessage msg = new SimpleMailMessage();
+				
+							msg.setTo(theProfessor.getEmail_usuario());
+							msg.setFrom("noreply@hullo.com.br");
+							msg.setSubject("Confirmação de cadastro");
+							msg.setText(theProfessor.getNome_usuario() + ", seu cadastro de professor foi realizado com sucesso.");
+				
+							try {
+								this.mailSender.send(msg);
+								// System.out.println(msg.toString());
+							} catch (MailException e) {
+								// TODO Auto-generated catch block
+							}
+				
+							// envia mensagem de cadastro com sucesso
+							final String okNewProfessorMessage = "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Professor cadastrado com sucesso. Faça login. </div>";
+							modelMap.addAttribute("okNewProfessorMessage", okNewProfessorMessage);
+							return "redirect:/usuario/usuarioLogin";
+						}
+					}else{
+						// exibe mensagem de erro
+						final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CNPJ inválido.</div>";
 						modelMap.addAttribute("errorMessage", errorMessage);
-		
+				
 						return "professor-form";
-					
-					// se nao existe professor com esses dados, cria o ususario
-				} else {
-					theProfessor.setAtivo_usuario("1");
-					theProfessor.setDt_insert_usuario(current_date);
-					theProfessor.setDt_last_update_usuario(current_date);
-		
-					// save the professor
-					professorService.saveUsuario(theProfessor);
-		
-					// Envia email de confirmação
-					SimpleMailMessage msg = new SimpleMailMessage();
-		
-					msg.setTo(theProfessor.getEmail_usuario());
-					msg.setFrom("noreply@hullo.com.br");
-					msg.setSubject("Confirmação de cadastro");
-					msg.setText(theProfessor.getNome_usuario() + ", seu cadastro de professor foi realizado com sucesso.");
-		
-					try {
-						this.mailSender.send(msg);
-						// System.out.println(msg.toString());
-					} catch (MailException e) {
-						// TODO Auto-generated catch block
 					}
-		
-					// envia mensagem de cadastro com sucesso
-					final String okNewProfessorMessage = "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Professor cadastrado com sucesso. Faça login. </div>";
-					modelMap.addAttribute("okNewProfessorMessage", okNewProfessorMessage);
-					return "redirect:/usuario/usuarioLogin";
+				}else{
+					// exibe mensagem de erro
+					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CPF inválido.</div>";
+					modelMap.addAttribute("errorMessage", errorMessage);
+			
+					return "professor-form";
 				}
-			}else{
-				// exibe mensagem de erro
-				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CNPJ inválido.</div>";
-				modelMap.addAttribute("errorMessage", errorMessage);
-		
-				return "professor-form";
-			}
 		}else{
 			// exibe mensagem de erro
-			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CPF inválido.</div>";
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Idade mínima 18 anos.</div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
 	
 			return "professor-form";
 		}
-		
 	}
 
 	@RequestMapping(value = "/formProfessor/cidades", method = RequestMethod.POST)
@@ -204,23 +212,34 @@ public class ProfessorController {
 		// validar se ja existe usuario com esse email
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
 		AlunoImpl validaAluno = alunoService.getUsuario(theUsuario.getEmail_usuario());
+	
+		//valida idade	
+		if(calculaIdade(theUsuario.getData_nascimento_usuario())){
 
-		if (validaProfessor != null || validaAluno!= null) {
-
+				if (validaProfessor != null || validaAluno!= null) {
+		
+					// exibe mensagem de erro
+					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro usuario com esse email </div>";
+					modelMap.addAttribute("errorMessage", errorMessage);
+					return "professor-update-form";
+					
+				} else {
+					
+					// Atualiza a sessão com os dados inseridos no formulario
+					Date current_date = new Date();
+					theUsuario.setDt_last_update_usuario(current_date);
+					professorService.updateUsuario(theUsuario);
+		
+					return "home-professor";
+				}										
+		}else{
 			// exibe mensagem de erro
-			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro usuario com esse email </div>";
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Idade mínima 18 anos.</div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
+	
 			return "professor-update-form";
-			
-		} else {
-			
-			// Atualiza a sessão com os dados inseridos no formulario
-			Date current_date = new Date();
-			theUsuario.setDt_last_update_usuario(current_date);
-			professorService.updateUsuario(theUsuario);
-
-			return "home-professor";
-		}
+		}	
+	
 	}
 
 	// metodo para inativar professor
@@ -356,5 +375,29 @@ public class ProfessorController {
 		        return(false);
 		    }
 	}	
+	
+	public static boolean calculaIdade(java.util.Date dataNasc) {
+
+	    Calendar dataNascimento = Calendar.getInstance();  
+	    dataNascimento.setTime(dataNasc); 
+	    Calendar hoje = Calendar.getInstance();  
+
+	    int idade = hoje.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR); 
+
+	    if (hoje.get(Calendar.MONTH) < dataNascimento.get(Calendar.MONTH)) {
+	      idade--;  
+	    } 
+	    else 
+	    { 
+	        if (hoje.get(Calendar.MONTH) == dataNascimento.get(Calendar.MONTH) && hoje.get(Calendar.DAY_OF_MONTH) < dataNascimento.get(Calendar.DAY_OF_MONTH)) {
+	            idade--; 
+	        }
+	    }
+	    
+	    System.out.println("idade "+ idade);
+
+	    if (idade >= 18) return true;
+	    else return false;
+	}
 	
 }
