@@ -41,12 +41,12 @@
 			style="height: 600px; position: relative; display: table; width: 100%;">
 
 			<div id="controls">
-				<div id="info">
+				<!-- <div id="info">
 					<div id="client-name"></div>
-				</div>
+				</div> -->
 				<div id="call-controls">
 					<!-- <p class="instructions">Make a Call:</p> -->
-					<input id="phone-number" type="text" />
+					<input id="phone-number" type="hidden" value="${aulaRealizadaModel.aluno.telefone_usuario}" />
 					<button id="button-call">Call Student</button>
 					<button id="button-hangup">Hangup</button>
 				</div>

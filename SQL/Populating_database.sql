@@ -1,5 +1,5 @@
 -- alunos
-insert into aluno values (1, "Maria", "da Silva", "154.135.576-80", "maria@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511955556666", "analista de mídia social", "1", now(), now(),1);
+insert into aluno values (1, "Maria", "da Silva", "154.135.576-80", "maria@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511985445903", "analista de mídia social", "1", now(), now(),1);
 insert into aluno values (2, "Ana", "Maria", "074.464.473-97", "ana@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511955556666", "analista de mídia social", "1", now(), now(),1);
 
 -- professores
