@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="pt">
@@ -52,15 +53,93 @@
 				<div id="log"></div>
 			</div>
 
-			<!-- Resultados da aula anterior do aluno -->
+			<form:form class="well form-horizontal" action="encerrarAula"
+				modelAttribute="aulaRealizadaModel" method="POST">
 
-			<!-- Script Aula atual -->
+				<!-- Resultados da aula anterior do aluno -->
+				<legend>Last Class results</legend>
+				
+				<div class="form-group">
+					<label class="col-md-4 control-label">Nome da Aula:</label>
+					${aulaRealizadaModel.aulaAnterior.nm_aula}
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-4 control-label">Model</label>
+					${aulaRealizadaModel.aulaRealizadaAnterior.nota_model_aula_realizada}
+				</div>
 
-			<!-- Objetivos da Aula Atual -->
+				<div class="form-group">
+					<label class="col-md-4 control-label">Practice</label>
+					${aulaRealizadaModel.aulaRealizadaAnterior.nota_practice_aula_realizada}
+				</div>
 
-			<!-- Botoes -->
+				<div class="form-group">
+					<label class="col-md-4 control-label">Production</label>
+					${aulaRealizadaModel.aulaRealizadaAnterior.nota_production_aula_realizada}
+				</div>
 
+				<!-- Script Aula atual -->
+				<legend>Class Script</legend>
+				<p>Last Class Review:
+					${aulaRealizadaModel.aulaAnterior.revisao_aula}</p>
+				<p>Class Name: ${aulaRealizadaModel.aulaAtual.nm_aula}</p>
+				<p>Class Content: ${aulaRealizadaModel.aulaAtual.conteudo_aula}</p>
 
+				<!-- Objetivos da Aula Atual -->
+				<legend>Grade your student!</legend>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Model</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-stats"></i></span>
+							<form:input placeholder="Nota" class="form-control"
+								path="aulaRealizadaAtual.nota_model_aula_realizada"
+								required="true" maxlength="1"
+								value="${aulaRealizadaModel.aulaRealizadaAtual.nota_model_aula_realizada}" />
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Practice</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-stats"></i></span>
+							<form:input placeholder="Nota" class="form-control"
+								path="aulaRealizadaAtual.nota_practice_aula_realizada"
+								required="true" maxlength="1"
+								value="${aulaRealizadaModel.aulaRealizadaAtual.nota_practice_aula_realizada}" />
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Production</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-stats"></i></span>
+							<form:input placeholder="Nota" class="form-control"
+								path="aulaRealizadaAtual.nota_production_aula_realizada"
+								required="true" maxlength="1"
+								value="${aulaRealizadaModel.aulaRealizadaAtual.nota_production_aula_realizada}" />
+						</div>
+					</div>
+				</div>
+
+				<!-- Botao para encerrar e fazer update na aula_realizada -->
+				<div class="form-group">
+					<label class="col-md-4 control-label"></label>
+					<div class="col-md-4">
+						<button type="submit" class="btn btn-primary">Encerrar
+							Aula</button>
+					</div>
+				</div>
+			</form:form>
 		</div>
 		<div id="footer">
 			<p style="display: block; margin: auto; padding: 10px;"

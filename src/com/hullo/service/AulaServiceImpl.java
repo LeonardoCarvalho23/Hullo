@@ -56,5 +56,10 @@ public class AulaServiceImpl {
 	public void deleteAulasModulo(int id_modulo){
 		aulaDAO.deleteAulasModulo(id_modulo);
 	}
+
+	@Transactional
+	public List<AulaImpl> getAulasAnteriorAtual(int id_aula_aula_realizada, int id_anterior_aula_realizada) {
+		return aulaDAO.getAulasAnteriorAtual(id_aula_aula_realizada, id_anterior_aula_realizada);
+	}
 	
 }

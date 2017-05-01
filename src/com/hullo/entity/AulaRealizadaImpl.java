@@ -18,14 +18,17 @@ public class AulaRealizadaImpl {
 	@Column(name = "id_aula_realizada")
 	private int id_aula_realizada;
 	
+	@Column(name = "id_anterior_aula_realizada")
+	private Integer id_anterior_aula_realizada;
+	
 	@Column(name = "nota_model_aula_realizada")
-	private int nota_model_aula_realizada;
+	private Integer nota_model_aula_realizada;
 	
 	@Column(name = "nota_practice_aula_realizada")
-	private int nota_practice_aula_realizada;
+	private Integer nota_practice_aula_realizada;
 	
 	@Column(name = "nota_production_aula_realizada")
-	private int nota_production_aula_realizada;
+	private Integer nota_production_aula_realizada;
 	
 	@Column(name = "status_ligacao_aula_realizada")
 	private String status_ligacao_aula_realizada;
@@ -66,27 +69,35 @@ public class AulaRealizadaImpl {
 		this.id_aula_realizada = id_aula_realizada;
 	}
 
-	public int getNota_model_aula_realizada() {
+	public Integer getId_anterior_aula_realizada() {
+		return id_anterior_aula_realizada;
+	}
+	
+	public void setId_anterior_aula_realizada(Integer id_anterior_aula_realizada) {
+		this.id_anterior_aula_realizada = id_anterior_aula_realizada;
+	}
+	
+	public Integer getNota_model_aula_realizada() {
 		return nota_model_aula_realizada;
 	}
 
-	public void setNota_model_aula_realizada(int nota_model_aula_realizada) {
+	public void setNota_model_aula_realizada(Integer nota_model_aula_realizada) {
 		this.nota_model_aula_realizada = nota_model_aula_realizada;
 	}
 
-	public int getNota_practice_aula_realizada() {
+	public Integer getNota_practice_aula_realizada() {
 		return nota_practice_aula_realizada;
 	}
 
-	public void setNota_practice_aula_realizada(int nota_practice_aula_realizada) {
+	public void setNota_practice_aula_realizada(Integer nota_practice_aula_realizada) {
 		this.nota_practice_aula_realizada = nota_practice_aula_realizada;
 	}
 
-	public int getNota_production_aula_realizada() {
+	public Integer getNota_production_aula_realizada() {
 		return nota_production_aula_realizada;
 	}
 
-	public void setNota_production_aula_realizada(int nota_production_aula_realizada) {
+	public void setNota_production_aula_realizada(Integer nota_production_aula_realizada) {
 		this.nota_production_aula_realizada = nota_production_aula_realizada;
 	}
 
