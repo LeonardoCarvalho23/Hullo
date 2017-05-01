@@ -31,6 +31,9 @@ public class AulaRealizadaImpl {
 	@Column(name = "nota_production_aula_realizada")
 	private Integer nota_production_aula_realizada;
 	
+	@Column(name = "comentario_aula_realizada")
+	private String comentario_aula_realizada;
+	
 	@Column(name = "status_aula_realizada")
 	private String status_ligacao_aula_realizada;
 	
@@ -114,6 +117,36 @@ public class AulaRealizadaImpl {
 		this.nota_production_aula_realizada = nota_production_aula_realizada;
 	}
 
+	public String getComentario_aula_realizada() {
+		return comentario_aula_realizada;
+	}
+	public void setComentario_aula_realizada(String comentario_aula_realizada) {
+		this.comentario_aula_realizada = comentario_aula_realizada;
+	}
+	public String getSid_chamada_aula_realizada() {
+		return sid_chamada_aula_realizada;
+	}
+	public void setSid_chamada_aula_realizada(String sid_chamada_aula_realizada) {
+		this.sid_chamada_aula_realizada = sid_chamada_aula_realizada;
+	}
+	public String getDuracao_chamada_aula_realizada() {
+		return duracao_chamada_aula_realizada;
+	}
+	public void setDuracao_chamada_aula_realizada(String duracao_chamada_aula_realizada) {
+		this.duracao_chamada_aula_realizada = duracao_chamada_aula_realizada;
+	}
+	public BigInteger getCusto_chamada_aula_realizada() {
+		return custo_chamada_aula_realizada;
+	}
+	public void setCusto_chamada_aula_realizada(BigInteger custo_chamada_aula_realizada) {
+		this.custo_chamada_aula_realizada = custo_chamada_aula_realizada;
+	}
+	public String getStatus_chamada_aula_realizada() {
+		return status_chamada_aula_realizada;
+	}
+	public void setStatus_chamada_aula_realizada(String status_chamada_aula_realizada) {
+		this.status_chamada_aula_realizada = status_chamada_aula_realizada;
+	}
 	public String getStatus_ligacao_aula_realizada() {
 		return status_ligacao_aula_realizada;
 	}

@@ -2,6 +2,8 @@ package com.hullo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -39,15 +41,31 @@ public class MinistrarAulaController {
 
 	// abrir pagina com dados da aula a ministrar
 	@PostMapping("/ministrarAula")
-	public String ministrarAula(@ModelAttribute("usuario") ProfessorImpl professor, Model model) {
+	public String ministrarAula(HttpSession session, Model model) {
+		ProfessorImpl professor = (ProfessorImpl) session.getAttribute("usuario");
+		System.out.println(professor.toString());
 		
-		//crio o model que vai receber a infos para exibir na pagina
+		//crio o model que vai receber a infos para exibir na pagina com os objetos:
+		// aulaRealizadaAtual =
+		// aulaRealizadaAnterior =
+		// aulaAtual =
+		// aulatAnterior = 
 		AulaRealizadaModel aulaRealizadaModel = new AulaRealizadaModel();
 		
 		System.out.println("chegou no controller ministrar aula");
 
 		// buscar qual a proxima aula realizada e adiciona ao model
 		AulaRealizadaImpl aulaRealizadaAtual = aulaRealizadaService.getProximaAula();
+		
+		//se nao retornou nnehuma aula, abre pagina que nao ha aulas disponiveis
+		if(aulaRealizadaAtual == null){
+			return "sem-aulas-disponiveis";
+		}
+		
+		System.out.println("id do professor: " + professor.getId_usuario());
+		
+		//se voltou aula realizada, coloco o id do professor atual nela e adiciono ao model
+		aulaRealizadaAtual.setId_professor_aula_realizada(professor.getId_usuario());
 		aulaRealizadaModel.setAulaRealizadaAtual(aulaRealizadaAtual);
 		
 		System.out.println("buscou a aula realizada de id = " + aulaRealizadaAtual.getId_aula_realizada());

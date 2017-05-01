@@ -52,12 +52,18 @@ public class AulaRealizadaDAOImpl {
 		System.out.println("data que uso para busca " + date);
 			
 		// busca proxima aula baseado na data atual
-		Query<AulaRealizadaImpl> query = currentSession.createQuery("from AulaRealizadaImpl where dt_criacao_aula_realizada >= :date order by dt_criacao_aula_realizada", AulaRealizadaImpl.class);
+		Query<AulaRealizadaImpl> query = currentSession.createQuery("from AulaRealizadaImpl where dt_criacao_aula_realizada >= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada", AulaRealizadaImpl.class);
 		query.setParameter("date", date);
 		
 		List<AulaRealizadaImpl> listaAulas = query.getResultList();
 		
 		System.out.println("dt criacao aula_realizada que veio do banco = " + listaAulas.get(0).getDt_criacao_aula_realizada());
+		
+		if (listaAulas.isEmpty()){
+			System.out.println("viu que nao tem proxima aula realizada");
+			return null;
+		}
+		
 		
 		return listaAulas.get(0);
 	}
