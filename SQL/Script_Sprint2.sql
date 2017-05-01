@@ -108,13 +108,17 @@ CREATE TABLE aula(
 CREATE TABLE aula_realizada(
  id_aula_realizada int NOT NULL AUTO_INCREMENT,
  id_anterior_aula_realizada int DEFAULT NULL,
+ sid_chamada_aula_realizada varchar(34) DEFAULT NULL,
+ duracao_chamada_aula_realizada varchar(4) DEFAULT NULL,
+ custo_chamada_aula_realizada BIGINT DEFAULT NULL,
+ status_chamada_aula_realizada varchar(20) DEFAULT NULL,
  nota_model_aula_realizada int DEFAULT NULL,
  nota_practice_aula_realizada int DEFAULT NULL,
  nota_production_aula_realizada int DEFAULT NULL,
- status_ligacao_aula_realizada char (1) DEFAULT NULL, -- 1 = ligacao atendida por aluno, 0 ligacao não atendia
+ status_aula_realizada char (1) DEFAULT NULL, -- 1 = ligacao atendida por aluno, 0 ligacao não atendia
  dt_criacao_aula_realizada datetime NOT NULL,
- dt_inicio_aula_realizada datetime DEFAULT NULL,
- dt_fim_aula_realizada datetime DEFAULT NULL,
+ dt_inicio_chamada_aula_realizada datetime DEFAULT NULL,
+ dt_fim_chamada_aula_realizada datetime DEFAULT NULL,
  id_aula_aula_realizada int NOT NULL,
  id_aluno_aula_realizada int NOT NULL,
  id_professor_aula_realizada SMALLINT(5) not NULL,

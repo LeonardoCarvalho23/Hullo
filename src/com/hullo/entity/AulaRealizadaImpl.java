@@ -1,5 +1,6 @@
 package com.hullo.entity;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,16 +28,16 @@ public class AulaRealizadaImpl {
 	@Column(name = "nota_production_aula_realizada")
 	private int nota_production_aula_realizada;
 	
-	@Column(name = "status_ligacao_aula_realizada")
+	@Column(name = "status_aula_realizada")
 	private String status_ligacao_aula_realizada;
 	
 	@Column(name = "dt_criacao_aula_realizada")
 	private Date dt_criacao_aula_realizada;
 	
-	@Column(name = "dt_inicio_aula_realizada")
+	@Column(name = "dt_inicio_chamada_aula_realizada")
 	private Date dt_inicio_aula_realizada;
 	
-	@Column(name = "dt_fim_aula_realizada")
+	@Column(name = "dt_fim_chamada_aula_realizada")
 	private Date dt_fim_aula_realizada;
 	
 	@Column(name = "id_aula_aula_realizada")
@@ -47,6 +48,18 @@ public class AulaRealizadaImpl {
 	
 	@Column(name = "id_professor_aula_realizada")
 	private int id_professor_aula_realizada;
+	
+	@Column(name = "sid_chamada_aula_realizada")
+	private String sid_chamada_aula_realizada;
+	
+	@Column(name = "duracao_chamada_aula_realizada")
+	private String duracao_chamada_aula_realizada;
+	
+	@Column (name = "custo_chamada_aula_realizada")
+	private BigInteger custo_chamada_aula_realizada;
+	
+	@Column (name = "status_chamada_aula_realizada")
+	private String status_chamada_aula_realizada;
 
 	public AulaRealizadaImpl(){
 		

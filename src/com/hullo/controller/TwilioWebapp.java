@@ -37,6 +37,7 @@ import com.twilio.jwt.client.IncomingClientScope;
 import com.twilio.jwt.client.OutgoingClientScope;
 import com.twilio.jwt.client.Scope;
 import com.twilio.rest.api.v2010.account.Call;
+import com.twilio.rest.api.v2010.account.Call.Status;
 // TwiML generation imports
 import com.twilio.twiml.VoiceResponse;
 import com.twilio.twiml.Dial;
@@ -108,13 +109,14 @@ public class TwilioWebapp extends HttpServlet {
 		Dial.Builder dialBuilder = new Dial.Builder();
 		dialBuilder.callerId(callerId);
 		dialBuilder.number(number);
+		dialBuilder.timeLimit(315);
+		dialBuilder.timeout(15);
 		
 		
 		//cria o objeto VoiceResponse
 		VoiceResponse voiceTwimlResponse = new VoiceResponse.Builder()
 				//.record(record)
 				.dial(dialBuilder.build()).build();
-
             response.setContentType("text/xml");
             response.getWriter().print(voiceTwimlResponse.toXml());      
     } 
@@ -125,8 +127,6 @@ public class TwilioWebapp extends HttpServlet {
 	public void statusCallback(
 			@RequestParam("CallDuration") String callDuration,
 			@RequestParam("CallSid") String callSid,
-			@RequestParam("CallStatus") String callStatus,
-			//@RequestParam("RecordingUrl") String recordingUrl,
 			HttpServletRequest request, HttpServletResponse response) {
 		
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
@@ -134,13 +134,14 @@ public class TwilioWebapp extends HttpServlet {
 		DateTime startTime = call.getStartTime();
 		DateTime endTime = call.getEndTime();
 		BigDecimal price = call.getPrice();
+		Status status = call.getStatus();
 		
 		
 		System.out.println(
 				"\nPós ligação"+
 				"\nDuração: "+callDuration+
 				"\nSid: "+callSid+
-				"\nStatus chamada: "+callStatus+
+				"\nStatus chamada: "+status+
 				"\nGravação: " /*+recordingUrl*/+
 				"\nInício: "+startTime+
 				"\nTérmino: "+endTime+
