@@ -87,7 +87,7 @@ CREATE TABLE modulo(
 
 CREATE TABLE aula(
  id_aula int NOT NULL AUTO_INCREMENT,
- nm_aula varchar(20) NOT NULL,
+ nm_aula varchar(30) NOT NULL,
  numero_aula int NOT NULL, -- para definir posição da aula 1, 2, 3, 4 ou 5
  indice_aula varchar(1) NOT NULL, -- para definir o indice da aula A, B, C...
  revisao_aula longtext NOT NULL,
@@ -107,6 +107,7 @@ CREATE TABLE aula(
 
 CREATE TABLE aula_realizada(
  id_aula_realizada int NOT NULL AUTO_INCREMENT,
+ id_anterior_aula_realizada int DEFAULT NULL,
  nota_model_aula_realizada int DEFAULT NULL,
  nota_practice_aula_realizada int DEFAULT NULL,
  nota_production_aula_realizada int DEFAULT NULL,

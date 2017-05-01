@@ -33,13 +33,15 @@ public class AulaRealizadaServiceImpl {
 		return aulaRealizadaDAO.getAulasRealizadas();
 	}
 	
-	@Transactional
+/*	@Transactional
 	public void saveAulaRealizada(AulaRealizadaImpl aulaRealizada)
 	{
 		aulaRealizadaDAO.saveAulaRealizada(aulaRealizada);
-	}
+	}*/
+	
+	//montar a primeira aula do curso
 	@Transactional
-	public void montarAulaRealizada(String email){
+	public void montarPrimeiraAulaRealizada(String email){
 		ModuloImpl modulo = moduloService.getPrimeiroModulo();
 		
 		AulaImpl aula = aulaService.getPrimeiraAula(modulo.getId_modulo());
@@ -48,7 +50,7 @@ public class AulaRealizadaServiceImpl {
 		
 		AulaRealizadaImpl aulaRealizada = new AulaRealizadaImpl(aula.getId_aula(),aluno.getId_usuario());
 		
-		aulaRealizadaDAO.saveAulaRealizada(aulaRealizada);
+		aulaRealizadaDAO.savePrimeiraAulaRealizada(aulaRealizada);
 	}
 
 }

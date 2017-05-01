@@ -34,6 +34,7 @@ import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.entity.AlunoModel;
+import com.hullo.service.AulaRealizadaServiceImpl;
 import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
@@ -51,8 +52,8 @@ public class AlunoController {
 	@Qualifier("professorServiceImpl")
 	private UsuarioService<ProfessorImpl> professorService;
 	
-	//@Autowired
-	//private AulaRealizadaServiceImpl aulaRealizadaService;
+	@Autowired
+	private AulaRealizadaServiceImpl aulaRealizadaService;
 
 	@Autowired
 	private EstadoServiceImpl estadoService;
@@ -130,7 +131,7 @@ public class AlunoController {
 				}	
 				// se nao existe aluno com esses dados, cria o ususario
 				else {
-					
+					theAluno.setTelefone_usuario("55" + theAluno.getTelefone_usuario());
 					theAluno.setAtivo_usuario("1");
 					theAluno.setDt_insert_usuario(current_date);
 					theAluno.setDt_last_update_usuario(current_date);
@@ -139,9 +140,8 @@ public class AlunoController {
 					alunoService.saveUsuario(theAluno);
 		
 					//gera a primeira aula do aluno
-					//aulaRealizadaService.montarAulaRealizada(theAluno.getEmail_usuario());
+					aulaRealizadaService.montarPrimeiraAulaRealizada(theAluno.getEmail_usuario());
 					 
-					
 					// Envia email de confirmação
 					SimpleMailMessage msg = new SimpleMailMessage();
 		

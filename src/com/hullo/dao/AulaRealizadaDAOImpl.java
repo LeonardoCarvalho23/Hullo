@@ -1,5 +1,6 @@
 package com.hullo.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -25,8 +26,11 @@ public class AulaRealizadaDAOImpl {
 		return aulasRealizadas;
 	}
 
-	public void saveAulaRealizada(AulaRealizadaImpl aulaRealizada) {
+	public void savePrimeiraAulaRealizada(AulaRealizadaImpl aulaRealizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
+		Date current_date = new Date();
+		
+		aulaRealizada.setDt_criacao_aula_realizada(current_date);
 		
 		currentSession.saveOrUpdate(aulaRealizada);
 	}

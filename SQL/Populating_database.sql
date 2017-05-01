@@ -12,8 +12,38 @@ insert into modulo values (2, "Introductions 1", 2.0 , "0", now(), now());
 insert into modulo values (3, "Greetings 1", 1.1 , "0", now(), now());
 
 -- aulas
-insert into aula values (1, "hullo", 1, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);
-insert into aula values (2, "how are you?", 2, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);
-insert into aula values (3, "I am", 3, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);
-insert into aula values (4, "She is", 4, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);
-insert into aula values (5, "They are", 5, "A", "review this class", "this is the content", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (1, "hullo", 1, "A", "review class 1", "this is the content class 1", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (2, "how are you?", 2, "A", "review class 2", "this is the content class 2", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (3, "I am", 3, "A", "review class 3", "this is the content class 3", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (4, "She is", 4, "A", "review class 4", "this is the content class 4", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (5, "They are", 5, "A", "review class 5", "this is the content class 5", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (6, "They are second class", 1, "B", "review class 1B", "this is the content class 1B", "nice activity", "teaser?", "1", now(), now(), 1);
+
+-- aulas realizadas
+insert into aula_realizada (id_aula_realizada, 
+							nota_model_aula_realizada, 
+							nota_practice_aula_realizada, 
+                            nota_production_aula_realizada, 
+                            status_ligacao_aula_realizada,
+                            dt_criacao_aula_realizada,
+                            dt_inicio_aula_realizada,
+                            dt_fim_aula_realizada,
+                            id_aula_aula_realizada,
+                            id_aluno_aula_realizada,
+                            id_professor_aula_realizada) 
+	values (1, 4, 4, 4, 1, STR_TO_DATE( "30/04/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "30/04/2017 13:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "30/04/2017 13:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 1, 1);
+
+-- aulas realizadas
+insert into aula_realizada (id_aula_realizada, 
+							nota_model_aula_realizada, 
+							nota_practice_aula_realizada, 
+                            nota_production_aula_realizada, 
+                            status_ligacao_aula_realizada,
+                            dt_criacao_aula_realizada,
+                            dt_inicio_aula_realizada,
+                            dt_fim_aula_realizada,
+                            id_aula_aula_realizada,
+                            id_aluno_aula_realizada,
+                            id_professor_aula_realizada) 
+	values (2, 4, 3, 5, 1, STR_TO_DATE( "30/04/2017 01:15:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "01/05/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "01/05/2017 10:15:10", "%d/%m/%Y %H:%i:%s" ), 2, 1, 2);
+    
