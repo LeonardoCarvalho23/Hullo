@@ -87,6 +87,7 @@
 	    }
 	    return true
 	}
+	
 	function validaCnpj(cnpj){
 		cnpj = cnpj.replace(/[^\d]+/g,'');
 		 
@@ -157,7 +158,7 @@
 	    }
 	           
 	    
-	}	
+	}
 	
 </script>
 

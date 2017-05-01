@@ -215,6 +215,8 @@ public class ProfessorController {
 	
 		//valida idade	
 		if(calculaIdade(theUsuario.getData_nascimento_usuario())){
+			
+			if(isCNPJ(theUsuario.getCnpj_usuario())){
 
 				if (validaProfessor != null || validaAluno!= null) {
 		
@@ -232,13 +234,20 @@ public class ProfessorController {
 		
 					return "home-professor";
 				}										
+			}else{
+				// exibe mensagem de erro
+				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CNPJ inválido.</div>";
+				modelMap.addAttribute("errorMessage", errorMessage);
+	
+				return "professor-update-form";
+			}
 		}else{
 			// exibe mensagem de erro
 			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Idade mínima 18 anos.</div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
-	
+		
 			return "professor-update-form";
-		}	
+		}
 	
 	}
 
