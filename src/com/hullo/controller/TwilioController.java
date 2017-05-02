@@ -49,7 +49,7 @@ import com.twilio.twiml.TwiMLException;
 
 @Controller
 @RequestMapping("/twilioWebApp")
-public class TwilioWebapp extends HttpServlet {
+public class TwilioController extends HttpServlet {
 	
 	//Adicionando as credenciais
 	public static final String ACCOUNT_SID = "AC8963db92d979cf31fbdb8df728e70966";
@@ -65,7 +65,8 @@ public class TwilioWebapp extends HttpServlet {
         //afterAfter(new LoggingFilter());
            
 		// Generate a random username for the connecting client
-            String identity = "ProfessorGirafales";
+		
+            String identity = "Aluno";
 
         // Generate capability token
             List<Scope> scopes = new ArrayList<>();

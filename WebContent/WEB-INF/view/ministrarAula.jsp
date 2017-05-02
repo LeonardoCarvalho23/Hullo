@@ -41,12 +41,13 @@
 			style="height: 600px; position: relative; display: table; width: 100%;">
 
 			<div id="controls">
-				<div id="info">
-					<div id="client-name"></div>
-				</div>
+				 <div id="info">
+					<div id="client-name" style="display: none;"></div>
+					<p><b>Your student's name is: ${aulaRealizadaModel.aluno.nome_usuario}</b></p>
+				</div> 
 				<div id="call-controls">
 					<!-- <p class="instructions">Make a Call:</p> -->
-					<input id="phone-number" type="text" />
+					<input id="phone-number" type="hidden" value="${aulaRealizadaModel.aluno.telefone_usuario}" />
 					<button id="button-call">Call Student</button>
 					<button id="button-hangup">Hangup</button>
 				</div>
@@ -55,15 +56,19 @@
 
 			<form:form class="well form-horizontal" action="encerrarAula"
 				modelAttribute="aulaRealizadaModel" method="POST">
+				<!-- id do professor que esta ministrando a aula, para guardar na finalizacao da aula -->
+				<form:hidden path="aulaRealizadaAtual.id_professor_aula_realizada" />
+				<!-- id da aula_realizada_atual, para guardar na finalizacao da aula -->
+				<form:hidden path="aulaRealizadaAtual.id_aula_realizada" />
 
 				<!-- Resultados da aula anterior do aluno -->
 				<legend>Last Class results</legend>
-				
+
 				<div class="form-group">
 					<label class="col-md-4 control-label">Nome da Aula:</label>
 					${aulaRealizadaModel.aulaAnterior.nm_aula}
 				</div>
-				
+
 				<div class="form-group">
 					<label class="col-md-4 control-label">Model</label>
 					${aulaRealizadaModel.aulaRealizadaAnterior.nota_model_aula_realizada}
@@ -77,6 +82,11 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label">Production</label>
 					${aulaRealizadaModel.aulaRealizadaAnterior.nota_production_aula_realizada}
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Overall Comments</label>
+					${aulaRealizadaModel.aulaRealizadaAnterior.comentario_aula_realizada}
 				</div>
 
 				<!-- Script Aula atual -->

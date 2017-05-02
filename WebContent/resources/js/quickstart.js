@@ -1,6 +1,6 @@
 ﻿$(function () {
   log('Requesting Capability Token...');
-  $.getJSON(document.location + '/token')
+  $.getJSON('../twilioWebApp/ligacao/token')
     .done(function (data) {
       log('Got a token.');
       console.log('Token: ' + data.token);

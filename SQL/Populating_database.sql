@@ -1,5 +1,5 @@
 -- alunos
-insert into aluno values (1, "Maria", "da Silva", "154.135.576-80", "maria@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511955556666", "analista de mídia social", "1", now(), now(),1);
+insert into aluno values (1, "Maria", "da Silva", "154.135.576-80", "maria@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511985445903", "analista de mídia social", "1", now(), now(),1);
 insert into aluno values (2, "Ana", "Maria", "074.464.473-97", "ana@gmail.com", "teste123", "F", STR_TO_DATE( "01/01/1990", "%d/%m/%Y" ), "5511955556666", "analista de mídia social", "1", now(), now(),1);
 
 -- professores
@@ -23,21 +23,37 @@ insert into aula values (6, "They are second class", 1, "B", "review class 1B", 
 insert into aula_realizada (id_aula_realizada, 
 							nota_model_aula_realizada, 
 							nota_practice_aula_realizada, 
-                            nota_production_aula_realizada, 
-                            status_ligacao_aula_realizada,
+                            nota_production_aula_realizada,
+                            comentario_aula_realizada,
+                            status_aula_realizada,
                             dt_criacao_aula_realizada,
-                            dt_inicio_aula_realizada,
-                            dt_fim_aula_realizada,
+                            dt_inicio_chamada_aula_realizada,
+                            dt_fim_chamada_aula_realizada,
                             id_aula_aula_realizada,
                             id_aluno_aula_realizada,
                             id_professor_aula_realizada) 
-	values (1, 4, 4, 4, 1, STR_TO_DATE( "28/04/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "29/04/2017 13:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "29/04/2017 13:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 1, 1);
+	values (1, 5, 4, 4, "aluno conseguiu entender e reproduzir bem as estruturas, necessita melhorar um pouco o sotaque", 1, STR_TO_DATE( "28/04/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "29/04/2017 13:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "29/04/2017 13:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 1, 1);
 
+insert into aula_realizada (id_aula_realizada, 
+							nota_model_aula_realizada, 
+							nota_practice_aula_realizada, 
+                            nota_production_aula_realizada,
+                            comentario_aula_realizada,
+                            status_aula_realizada,
+                            dt_criacao_aula_realizada,
+                            dt_inicio_chamada_aula_realizada,
+                            dt_fim_chamada_aula_realizada,
+                            id_aula_aula_realizada,
+                            id_aluno_aula_realizada,
+                            id_professor_aula_realizada) 
+	values (2, 4, 3, 3, "aluno conseguiu reproduzir a produzir maior parte, problema com o verbo", 1, STR_TO_DATE( "30/04/2017 08:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "30/04/2017 18:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "30/04/2017 18:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 2, 1);
+
+    
 insert into aula_realizada (id_aula_realizada,
 							id_anterior_aula_realizada,
                             dt_criacao_aula_realizada,
                             id_aula_aula_realizada,
                             id_aluno_aula_realizada,
                             id_professor_aula_realizada) 
-	values (2, 1, STR_TO_DATE( "30/04/2017 11:15:10", "%d/%m/%Y %H:%i:%s" ), 2, 1, 1);
+	values (3, 1, STR_TO_DATE( "30/04/2017 11:15:10", "%d/%m/%Y %H:%i:%s" ), 2, 1, 1);
     

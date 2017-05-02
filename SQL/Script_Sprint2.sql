@@ -115,6 +115,7 @@ CREATE TABLE aula_realizada(
  nota_model_aula_realizada int DEFAULT NULL,
  nota_practice_aula_realizada int DEFAULT NULL,
  nota_production_aula_realizada int DEFAULT NULL,
+ comentario_aula_realizada varchar(200) DEFAULT NULL,
  status_aula_realizada char (1) DEFAULT NULL, -- 1 = ligacao atendida por aluno, 0 ligacao não atendia
  dt_criacao_aula_realizada datetime NOT NULL,
  dt_inicio_chamada_aula_realizada datetime DEFAULT NULL,
@@ -122,7 +123,7 @@ CREATE TABLE aula_realizada(
  id_aula_aula_realizada int NOT NULL,
  id_aluno_aula_realizada int NOT NULL,
  id_professor_aula_realizada SMALLINT(5) not NULL,
- CONSTRAINT PK_aula_realizada
+ CONSTRAINT PK_aula_realizada 
   PRIMARY KEY (id_aula_realizada),
  CONSTRAINT FK_aula_realizada_aula
   FOREIGN KEY (id_aula_aula_realizada)
