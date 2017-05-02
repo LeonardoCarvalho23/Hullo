@@ -87,4 +87,59 @@ public class AulaRealizadaDAOImpl {
 			int result = query.executeUpdate();
 			System.out.println(result + " linha atualizada");
 		}
+		
+		/* METODO ENCERRAR AULA + CRIAR NOVA AULA
+				//@Override
+				public void concludedAulaRealizada(AulaRealizadaImpl aulaRealizadaAtual) {
+					// get current hibernate session
+					Session currentSession = sessionFactory.getCurrentSession();
+					
+					System.out.println("concludedAulaRealizada dao");
+
+					// Cria query que faz busca no banco
+					Query<AulaRealizadaImpl> theQuery;
+
+					// para fazer update apenas dos capos editaveis
+					String hql = "UPDATE AulaRealizadaImpl set sid_chamada_aula_realizada = :sid_chamada_aula_realizada, duracao_chamada_aula_realizada = :duracao_chamada_aula_realizada,"
+							+ "custo_chamada_aula_realizada = :custo_chamada_aula_realizada, "
+							+ "status_chamada_aula_realizada = :status_chamada_aula_realizada, nota_model_aula_realizada = :nota_model_aula_realizada, nota_practice_aula_realizada = :nota_practice_aula_realizada,"
+							+ "nota_production_aula_realizada = :nota_production_aula_realizada, "
+							+ "comentario_aula_realizada = :comentario_aula_realizada, status_ligacao_aula_realizada = :status_ligacao_aula_realizada, id_professor_aula_realizada = :id_professor_aula_realizada " 
+							+ "WHERE id_aula_realizada = :id";
+					theQuery = currentSession.createQuery(hql);
+
+					// adicionando valores para as variaveis do update
+					theQuery.setParameter("sid_chamada_aula_realizada", aulaRealizadaAtual.getSid_chamada_aula_realizada());
+					theQuery.setParameter("duracao_chamada_aula_realizada", aulaRealizadaAtual.getDuracao_chamada_aula_realizada());
+					theQuery.setParameter("custo_chamada_aula_realizada", aulaRealizadaAtual.getCusto_chamada_aula_realizada());
+					theQuery.setParameter("status_chamada_aula_realizada", aulaRealizadaAtual.getStatus_chamada_aula_realizada());
+					theQuery.setParameter("nota_model_aula_realizada", aulaRealizadaAtual.getNota_model_aula_realizada());
+					theQuery.setParameter("nota_practice_aula_realizada", aulaRealizadaAtual.getNota_practice_aula_realizada());
+					theQuery.setParameter("nota_production_aula_realizada", aulaRealizadaAtual.getNota_production_aula_realizada());
+					theQuery.setParameter("comentario_aula_realizada", aulaRealizadaAtual.getComentario_aula_realizada());
+					theQuery.setParameter("status_ligacao_aula_realizada", aulaRealizadaAtual.getStatus_ligacao_aula_realizada());
+					theQuery.setParameter("id_professor_aula_realizada", aulaRealizadaAtual.getId_professor_aula_realizada());
+					
+					theQuery.setParameter("id", aulaRealizadaAtual.getId_aula_realizada());
+
+					int result = theQuery.executeUpdate();
+					
+					System.out.println("id aula realizada" + aulaRealizadaAtual.getId_aula_realizada() );
+
+					System.out.println(result + " linha atualizada");
+					
+				}
+				
+				public void saveProximaAulaRealizada(AulaRealizadaImpl aulaRealizada) {
+					Session currentSession = sessionFactory.getCurrentSession();
+					Date current_date = new Date();
+
+					aulaRealizada.setDt_criacao_aula_realizada(current_date);		
+					
+
+					currentSession.saveOrUpdate(aulaRealizada);
+					
+				}
+				
+		*/
 }

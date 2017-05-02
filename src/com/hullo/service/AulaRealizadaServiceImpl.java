@@ -70,5 +70,53 @@ public class AulaRealizadaServiceImpl {
 		aulaRealizadaDAO.updateAulaRealizada(id_aula, callSid);
 		
 	}
-
+	
+	/* METODO ENCERRAR AULA + CRIAR NOVA AULA
+	
+	@Transactional
+	public void concludedAulaRealizada(AulaRealizadaImpl aulaRealizadaAtual) {
+		
+		System.out.println("concludedAulaRealizada service");
+		
+		// salvas os dados na aula atual
+		aulaRealizadaDAO.concludedAulaRealizada(aulaRealizadaAtual);		
+			
+	}
+	
+	//descobrir qual numero e indice
+	
+	@Transactional
+	public void createProximaAulaRealizada(AulaRealizadaImpl aulaRealizadaAtual) {
+	
+			AulaImpl aulaAtual = new AulaImpl();
+			aulaAtual.setId_aula(aulaRealizadaAtual.getId_aula_aula_realizada());
+			
+			System.out.println("getId_aula_aula_realizada" + aulaRealizadaAtual.getId_aula_aula_realizada());
+				
+			AulaImpl proximaAula = new AulaImpl(); 
+			AulaRealizadaImpl proximaAulaRealizada = new AulaRealizadaImpl();
+			// cria proxima aula
+			if(aulaRealizadaAtual.getNota_model_aula_realizada() >=3 && 
+			   aulaRealizadaAtual.getNota_practice_aula_realizada() >=3 && 
+			   aulaRealizadaAtual.getNota_production_aula_realizada()>=3 ){
+				
+				// manda o modulo e numero de aula atual pra buscar no dao o proximo
+				proximaAula = aulaService.getProximoAulaPorNumero(aulaAtual.getId_modulo_aula(), aulaAtual.getNumero_aula());			
+				System.out.println("entrou no if"+proximaAula.getId_aula());
+				
+				
+			}else{
+				proximaAula = aulaService.getProximoAulaPorIndice(aulaAtual.getId_modulo_aula(), aulaAtual.getNumero_aula(), aulaAtual.getIndice_aula());
+				System.out.println("entrou no else"+proximaAula.getId_aula());
+				
+				
+			}	
+			
+			proximaAulaRealizada.setId_aula_aula_realizada(proximaAula.getId_aula());
+			proximaAulaRealizada.setId_aluno_aula_realizada(aulaRealizadaAtual.getId_aluno_aula_realizada());
+			System.out.println("proxima aula "+proximaAula.getId_aula());
+			
+			aulaRealizadaDAO.saveProximaAulaRealizada(proximaAulaRealizada);
+	}	
+	*/
 }

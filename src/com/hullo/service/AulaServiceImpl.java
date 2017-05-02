@@ -61,5 +61,17 @@ public class AulaServiceImpl {
 	public List<AulaImpl> getAulasAnteriorAtual(int id_aula_aula_realizada, int id_anterior_aula_realizada) {
 		return aulaDAO.getAulasAnteriorAtual(id_aula_aula_realizada, id_anterior_aula_realizada);
 	}
+	/* METODO ENCERRAR AULA + CRIAR NOVA AULA
+	@Transactional
+	public AulaImpl getProximoAulaPorNumero(int id_modulo, int numero_aula){
+		System.out.println("getProximoAulaPorNumero aula service");
+		return aulaDAO.getProximoAulaPorNumero(id_modulo, numero_aula);
+	}
 	
+	@Transactional
+	public AulaImpl getProximoAulaPorIndice(int id_modulo, int numero_aula, char indice_aula){
+		System.out.println("getProximoAulaPorIndice aula service");
+		return aulaDAO.getProximoAulaPorIndice(id_modulo, numero_aula, indice_aula);
+	}
+	*/
 }
