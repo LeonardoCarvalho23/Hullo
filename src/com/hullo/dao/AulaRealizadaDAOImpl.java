@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hullo.entity.AulaImpl;
 import com.hullo.entity.AulaRealizadaImpl;
@@ -77,5 +78,13 @@ public class AulaRealizadaDAOImpl {
 			Query<AulaRealizadaImpl> query = currentSession.createQuery("from AulaRealizadaImpl where id_aula_realizada= " + id_aula_realizada, AulaRealizadaImpl.class);
 
 			return query.getSingleResult();
+		}
+		@SuppressWarnings("unchecked")
+		public void updateAulaRealizada(int id_aula, String callSid) {
+			System.out.println("Sid chegou no DAO: "+callSid);
+			Session currentSession = sessionFactory.getCurrentSession();
+			Query<AulaRealizadaImpl> query = currentSession.createQuery("UPDATE AulaRealizadaImpl set sid_chamada_aula_realizada="+callSid+" WHERE id_aula_realizada="+id_aula);
+			int result = query.executeUpdate();
+			System.out.println(result + " linha atualizada");
 		}
 }

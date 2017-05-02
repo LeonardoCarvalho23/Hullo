@@ -52,7 +52,9 @@
   document.getElementById('button-call').onclick = function () {
     // get the phone number to connect the call to
     var params = {
-      To: document.getElementById('phone-number').value
+      To: document.getElementById('phone-number').value,
+   // HULLO: adicionado parâmatro com ID da aula realizada
+      IdAula: document.getElementById('aulaRealizadaAtual.id_aula_realizada').value
     };
 
     console.log('Calling ' + params.To + '...');

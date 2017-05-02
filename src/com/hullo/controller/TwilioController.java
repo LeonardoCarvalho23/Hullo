@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
+import com.hullo.service.AulaRealizadaServiceImpl;
 import com.twilio.Twilio;
 // Token generation imports
 import com.twilio.jwt.Jwt;
@@ -56,7 +58,9 @@ public class TwilioController extends HttpServlet {
 	public static final String AUTH_TOKEN = "03cf87dad37d23d8f45472b33f6d977a";
 	public static final String APPLICATION_SID = "AP5f8a739c058a2ee4874b0122957bab73";
 
-
+	@Autowired
+	private AulaRealizadaServiceImpl aulaRealizadaService;
+	
 	// Generate token in JSON format
 	@GetMapping("/ligacao/token")
 	public void getToken(HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
@@ -89,14 +93,23 @@ public class TwilioController extends HttpServlet {
         // Generate voice TwiML
 	@PostMapping("/voice")
 	public void postVoice(
+			@RequestParam("IdAula") int id_aula,
 			@RequestParam("To") String to,
 			@RequestParam("CallSid") String callSid,
 			@RequestParam("CallStatus") String callStatus,
-			
 			HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
-
 		
-		System.out.println("To: "+ to +"\nCallSid: " + callSid + "\nCallStatus: " + callStatus);
+		// Testa se recebeu tudo
+		System.out.println("Pré-ligação: \nIdAula: "+id_aula+"\nTo: "+ to +"\nCallSid: " + callSid + "\nCallStatus: " + callStatus);
+		
+		//Atualiza a aula para incluir o CallSid
+		try {
+			aulaRealizadaService.updateAulaRealizada(id_aula, callSid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//cria a String to (para)
 		//String to = "5511987720698";
 		//cria o objeto number

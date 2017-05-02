@@ -65,4 +65,10 @@ public class AulaRealizadaServiceImpl {
 		return aulaRealizadaDAO.getAulaRealizada(id_aula_realizada);
 	}
 
+	public void updateAulaRealizada(int id_aula, String callSid) {
+		System.out.println("SID Chegou no Service");
+		aulaRealizadaDAO.updateAulaRealizada(id_aula, callSid);
+		
+	}
+
 }
