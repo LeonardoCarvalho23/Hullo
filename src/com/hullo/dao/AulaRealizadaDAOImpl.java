@@ -1,6 +1,8 @@
 package com.hullo.dao;
 
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,12 +11,13 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hullo.entity.AulaImpl;
 import com.hullo.entity.AulaRealizadaImpl;
+import com.twilio.rest.api.v2010.account.Call.Status;
 
 @Repository
 public class AulaRealizadaDAOImpl {
@@ -79,14 +82,35 @@ public class AulaRealizadaDAOImpl {
 
 			return query.getSingleResult();
 		}
+		
+	//Atualiza aula acrescentando CALLSID quando chamada é iniciada
 		@SuppressWarnings("unchecked")
 		public void updateAulaRealizada(int id_aula, String callSid) {
 			System.out.println("Sid chegou no DAO: "+callSid);
 			Session currentSession = sessionFactory.getCurrentSession();
-			Query<AulaRealizadaImpl> query = currentSession.createQuery("UPDATE AulaRealizadaImpl set sid_chamada_aula_realizada="+callSid+" WHERE id_aula_realizada="+id_aula);
-			int result = query.executeUpdate();
+			Query<AulaRealizadaImpl> theQuery;
+			String sql = "UPDATE AulaRealizadaImpl set sid_chamada_aula_realizada='"+callSid+"' WHERE id_aula_realizada="+id_aula;
+			theQuery = currentSession.createQuery(sql);
+			int result = theQuery.executeUpdate();
 			System.out.println(result + " linha atualizada");
 		}
+		
+		//Atualiza aula APÓS conclusão da chamada
+				@SuppressWarnings("unchecked")
+				public void updateAulaRealizada(String callSid, String callDuration, Status status, DateTime startTime,
+				DateTime endTime, BigDecimal price) {
+					Session currentSession = sessionFactory.getCurrentSession();
+					Query<AulaRealizadaImpl> theQuery;
+					
+					////Converte as datas recebidas
+					DateTime.parse("2016-01-01'T'09:28:00Z");
+					
+					
+					String sql = "UPDATE AulaRealizadaImpl set duracao_chamada_aula_realizada="+callDuration+", status_chamada_aula_realizada='"+status+"', dt_inicio_chamada_aula_realizada='"+startTime+"', dt_fim_chamada_aula_realizada='"+endTime+"', custo_chamada_aula_realizada="+price+"  WHERE sid_chamada_aula_realizada='"+callSid+"'";
+					theQuery = currentSession.createQuery(sql);
+					int result = theQuery.executeUpdate();
+					System.out.println(result + " linha atualizada");
+				}
 		
 		/* METODO ENCERRAR AULA + CRIAR NOVA AULA
 				//@Override

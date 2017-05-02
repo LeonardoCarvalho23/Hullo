@@ -1,7 +1,9 @@
 package com.hullo.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.AulaImpl;
 import com.hullo.entity.AulaRealizadaImpl;
 import com.hullo.entity.ModuloImpl;
+import com.twilio.rest.api.v2010.account.Call.Status;
 
 @Service
 public class AulaRealizadaServiceImpl {
@@ -64,10 +67,19 @@ public class AulaRealizadaServiceImpl {
 	public AulaRealizadaImpl getAulaRealizada(Integer id_aula_realizada) {
 		return aulaRealizadaDAO.getAulaRealizada(id_aula_realizada);
 	}
-
+	
+	//atualiza SID da aula quando a chamada é iniciada
+	@Transactional
 	public void updateAulaRealizada(int id_aula, String callSid) {
-		System.out.println("SID Chegou no Service");
 		aulaRealizadaDAO.updateAulaRealizada(id_aula, callSid);
+		
+	}
+	
+	//atualiza dados da aula quando a chamada é finalizada
+	@Transactional
+	public void updateAulaRealizada(String callSid, String callDuration, Status status, DateTime startTime,
+			DateTime endTime, BigDecimal price) {
+		aulaRealizadaDAO.updateAulaRealizada(callSid, callDuration, status, startTime, endTime, price);
 		
 	}
 	

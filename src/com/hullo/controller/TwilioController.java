@@ -2,6 +2,7 @@ package com.hullo.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 //import static spark.Spark.get;
 //import static spark.Spark.post;
@@ -83,7 +84,7 @@ public class TwilioController extends HttpServlet {
             HashMap<String, String> json = new HashMap<>();
             json.put("identity", identity);
             json.put("token", token);
-
+     
             // Render JSON response
             response.setContentType("application/json");
             Gson gson = new Gson();
@@ -143,6 +144,7 @@ public class TwilioController extends HttpServlet {
 			@RequestParam("CallSid") String callSid,
 			HttpServletRequest request, HttpServletResponse response) {
 		
+		//chama os demais dados da chamada
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		Call call = Call.fetcher(callSid).fetch();
 		DateTime startTime = call.getStartTime();
@@ -150,6 +152,9 @@ public class TwilioController extends HttpServlet {
 		BigDecimal price = call.getPrice();
 		Status status = call.getStatus();
 		
+		//Atualiza as informações da chamada pós ligação
+		aulaRealizadaService.updateAulaRealizada(callSid, callDuration, status, startTime,
+				endTime, price);
 		
 		System.out.println(
 				"\nPós ligação"+
