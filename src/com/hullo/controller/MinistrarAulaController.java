@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -88,5 +89,26 @@ public class MinistrarAulaController {
 
 		return "ministrarAula";
 	}
+	
+	/* METODO ENCERRAR AULA + CRIAR NOVA AULA
+	// metodo para encerrar aula
+			@PostMapping("/encerrarAula")
+			public String concludedAulaRealizada(@ModelAttribute("aulaRealizadaModel") AulaRealizadaModel aulaRealizadaModel, Model theModel, HttpSession session) {
+				
+				// pego modulo do objeto moduloModel
+				AulaRealizadaImpl aulaRealizadaImpl = aulaRealizadaModel.getAulaRealizadaAtual();			
+				ProfessorImpl professor = (ProfessorImpl) session.getAttribute("usuario");
+				
+				aulaRealizadaImpl.setId_professor_aula_realizada(professor.getId_usuario());
+					
+				aulaRealizadaService.concludedAulaRealizada(aulaRealizadaImpl);		
+				
+				theModel.addAttribute(aulaRealizadaModel);
+				
+				aulaRealizadaService.createProximaAulaRealizada(aulaRealizadaImpl);	
+				
+				return "ministrarAula";
 
+			}
+	*/
 }

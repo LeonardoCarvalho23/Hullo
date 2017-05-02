@@ -41,9 +41,10 @@
 			style="height: 600px; position: relative; display: table; width: 100%;">
 
 			<div id="controls">
-				<!-- <div id="info">
-					<div id="client-name"></div>
-				</div> -->
+				 <div id="info">
+					<div id="client-name" style="display: none;"></div>
+					<p><b>Your student's name is: ${aulaRealizadaModel.aluno.nome_usuario}</b></p>
+				</div> 
 				<div id="call-controls">
 					<!-- <p class="instructions">Make a Call:</p> -->
 					<input id="phone-number" type="hidden" value="${aulaRealizadaModel.aluno.telefone_usuario}" />
