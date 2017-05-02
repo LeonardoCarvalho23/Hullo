@@ -70,5 +70,10 @@ public class AdmController {
 		
 		return "list-professor";
 	}
+	
+	@GetMapping("/cronometro")
+	public String testCronometro(){
+		return "stopwatchTest";
+	}
 
 }
