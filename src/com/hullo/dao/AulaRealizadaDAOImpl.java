@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +58,7 @@ public class AulaRealizadaDAOImpl {
 
 		// busca proxima aula baseado na data atual
 		Query<AulaRealizadaImpl> query = currentSession.createQuery(
-				"from AulaRealizadaImpl where dt_criacao_aula_realizada >= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
+				"from AulaRealizadaImpl where dt_criacao_aula_realizada <= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
 				AulaRealizadaImpl.class);
 		query.setParameter("date", date);
 
@@ -97,16 +98,12 @@ public class AulaRealizadaDAOImpl {
 		
 		//Atualiza aula APÓS conclusão da chamada
 				@SuppressWarnings("unchecked")
-				public void updateAulaRealizada(String callSid, String callDuration, Status status, DateTime startTime,
-				DateTime endTime, BigDecimal price) {
+				public void updateAulaRealizada(String callSid, String callDuration, Status status, String startTimeConv,
+				String endTimeConv, BigDecimal price) {
 					Session currentSession = sessionFactory.getCurrentSession();
-					Query<AulaRealizadaImpl> theQuery;
+					Query<AulaRealizadaImpl> theQuery;					
 					
-					////Converte as datas recebidas
-					DateTime.parse("2016-01-01'T'09:28:00Z");
-					
-					
-					String sql = "UPDATE AulaRealizadaImpl set duracao_chamada_aula_realizada="+callDuration+", status_chamada_aula_realizada='"+status+"', dt_inicio_chamada_aula_realizada='"+startTime+"', dt_fim_chamada_aula_realizada='"+endTime+"', custo_chamada_aula_realizada="+price+"  WHERE sid_chamada_aula_realizada='"+callSid+"'";
+					String sql = "UPDATE AulaRealizadaImpl set duracao_chamada_aula_realizada="+callDuration+", status_chamada_aula_realizada='"+status+"', dt_inicio_chamada_aula_realizada='"+startTimeConv+"', dt_fim_chamada_aula_realizada='"+endTimeConv+"', custo_chamada_aula_realizada="+price+"  WHERE sid_chamada_aula_realizada='"+callSid+"'";
 					theQuery = currentSession.createQuery(sql);
 					int result = theQuery.executeUpdate();
 					System.out.println(result + " linha atualizada");

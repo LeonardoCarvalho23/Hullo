@@ -2,6 +2,9 @@ package com.hullo.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 //import static spark.Spark.get;
@@ -10,13 +13,18 @@ import java.text.SimpleDateFormat;
 //import static spark.Spark.afterAfter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -54,7 +62,7 @@ import com.twilio.twiml.TwiMLException;
 @RequestMapping("/twilioWebApp")
 public class TwilioController extends HttpServlet {
 	
-	//Adicionando as credenciais
+	//Adiciona as credenciais geradas para nossa conta no Twilio
 	public static final String ACCOUNT_SID = "AC8963db92d979cf31fbdb8df728e70966";
 	public static final String AUTH_TOKEN = "03cf87dad37d23d8f45472b33f6d977a";
 	public static final String APPLICATION_SID = "AP5f8a739c058a2ee4874b0122957bab73";
@@ -66,12 +74,9 @@ public class TwilioController extends HttpServlet {
 	@GetMapping("/ligacao/token")
 	public void getToken(HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
         
-		// Log all requests and responses
-        //afterAfter(new LoggingFilter());
-           
-		// Generate a random username for the connecting client
-		
-            String identity = "Aluno";
+	// O JS (quickstart.js) do Twilio gera um nome aleatório de cliente. Aqui, estou setando como "Aluno".
+	// Podemos eliminar essa exigência no futuro.
+    String identity = "Aluno";
 
         // Generate capability token
             List<Scope> scopes = new ArrayList<>();
@@ -89,11 +94,14 @@ public class TwilioController extends HttpServlet {
             response.setContentType("application/json");
             Gson gson = new Gson();
             response.getWriter().print(gson.toJson(json));
+
         }
 
-        // Generate voice TwiML
+    // Generate voice TwiML
+	// TwiML é a linguagem do Twilio, com a qual nos comunicamos com ele via XML
 	@PostMapping("/voice")
 	public void postVoice(
+			// este paramatro IdAula foi acrescentado ao JS do Twilio (quickstart.js)
 			@RequestParam("IdAula") int id_aula,
 			@RequestParam("To") String to,
 			@RequestParam("CallSid") String callSid,
@@ -103,7 +111,7 @@ public class TwilioController extends HttpServlet {
 		// Testa se recebeu tudo
 		System.out.println("Pré-ligação: \nIdAula: "+id_aula+"\nTo: "+ to +"\nCallSid: " + callSid + "\nCallStatus: " + callStatus);
 		
-		//Atualiza a aula para incluir o CallSid
+		//Atualiza a aulaRealizada para incluir o CallSid
 		try {
 			aulaRealizadaService.updateAulaRealizada(id_aula, callSid);
 		} catch (Exception e) {
@@ -111,21 +119,20 @@ public class TwilioController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//cria a String to (para)
-		//String to = "5511987720698";
 		//cria o objeto number
 		Number number = new Number.Builder(to).build();
 		//cria a String callerId
 		String callerId = "551149507002";
 		// Use <Record> to record the caller's message
+		// Não estamos setando isso ainda, tá dando pau
 	    Record record = new Record.Builder().build();
 		
 		//Cria o objeto dialBuilder e define seus parâmetros
 		Dial.Builder dialBuilder = new Dial.Builder();
 		dialBuilder.callerId(callerId);
 		dialBuilder.number(number);
-		dialBuilder.timeLimit(315);
-		dialBuilder.timeout(15);
+		dialBuilder.timeLimit(315); // duração de 5min da chamada
+		dialBuilder.timeout(15); // desliga se não atender após 15s
 		
 		
 		//cria o objeto VoiceResponse
@@ -142,19 +149,29 @@ public class TwilioController extends HttpServlet {
 	public void statusCallback(
 			@RequestParam("CallDuration") String callDuration,
 			@RequestParam("CallSid") String callSid,
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) throws ParseException {
 		
 		//chama os demais dados da chamada
+		// inicia conexão com twilio
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+		
 		Call call = Call.fetcher(callSid).fetch();
 		DateTime startTime = call.getStartTime();
 		DateTime endTime = call.getEndTime();
 		BigDecimal price = call.getPrice();
 		Status status = call.getStatus();
 		
+		// Converte as datas que chegam em RFC 2822 para o datetime do MySQL
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d = sdf.parse(startTime.toString());
+		String startTimeConv = output.format(d);
+		d = sdf.parse(endTime.toString());
+		String endTimeConv = output.format(d);
+	
 		//Atualiza as informações da chamada pós ligação
-		aulaRealizadaService.updateAulaRealizada(callSid, callDuration, status, startTime,
-				endTime, price);
+		aulaRealizadaService.updateAulaRealizada(callSid, callDuration, status, startTimeConv,
+				endTimeConv, price);
 		
 		System.out.println(
 				"\nPós ligação"+

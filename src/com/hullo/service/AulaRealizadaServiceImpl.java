@@ -1,9 +1,11 @@
 package com.hullo.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -77,9 +79,9 @@ public class AulaRealizadaServiceImpl {
 	
 	//atualiza dados da aula quando a chamada é finalizada
 	@Transactional
-	public void updateAulaRealizada(String callSid, String callDuration, Status status, DateTime startTime,
-			DateTime endTime, BigDecimal price) {
-		aulaRealizadaDAO.updateAulaRealizada(callSid, callDuration, status, startTime, endTime, price);
+	public void updateAulaRealizada(String callSid, String callDuration, Status status, String startTimeConv,
+			String endTimeConv, BigDecimal price) {
+		aulaRealizadaDAO.updateAulaRealizada(callSid, callDuration, status, startTimeConv, endTimeConv, price);
 		
 	}
 	
