@@ -64,5 +64,5 @@ insert into aula_realizada (id_aula_realizada,
                             id_aula_aula_realizada,
                             id_aluno_aula_realizada,
                             id_professor_aula_realizada) 
-	values (3, 2, STR_TO_DATE( "30/04/2017 21:15:10", "%d/%m/%Y %H:%i:%s" ), 5, 1, 1);
+	values (4, 2, STR_TO_DATE( "30/04/2017 21:15:10", "%d/%m/%Y %H:%i:%s" ), 5, 1, 1);
     
