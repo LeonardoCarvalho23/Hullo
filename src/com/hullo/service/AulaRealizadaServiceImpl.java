@@ -18,117 +18,79 @@ import com.twilio.rest.api.v2010.account.Call.Status;
 
 @Service
 public class AulaRealizadaServiceImpl {
-	
+
 	@Autowired
 	private AulaRealizadaDAOImpl aulaRealizadaDAO;
-	
+
 	@Autowired
 	private AulaServiceImpl aulaService;
-	
+
 	@Autowired
 	private ModuloServiceImpl moduloService;
-	
+
 	@Autowired
 	@Qualifier("alunoServiceImpl")
 	private UsuarioService<AlunoImpl> alunoService;
-	
-	public List<AulaRealizadaImpl> getAulasRealizadas(){
+
+	public List<AulaRealizadaImpl> getAulasRealizadas() {
 		return aulaRealizadaDAO.getAulasRealizadas();
 	}
-	
-/*	@Transactional
-	public void saveAulaRealizada(AulaRealizadaImpl aulaRealizada)
-	{
-		aulaRealizadaDAO.saveAulaRealizada(aulaRealizada);
-	}*/
-	
-	//montar a primeira aula do curso
+
+	// montar a primeira aula do curso
 	@Transactional
-	public void montarPrimeiraAulaRealizada(String email){
+	public void montarPrimeiraAulaRealizada(String email) {
 		ModuloImpl modulo = moduloService.getPrimeiroModulo();
-		
+
 		AulaImpl aula = aulaService.getPrimeiraAula(modulo.getId_modulo());
-		
+
 		AlunoImpl aluno = alunoService.getUsuario(email);
-		
-		AulaRealizadaImpl aulaRealizada = new AulaRealizadaImpl(aula.getId_aula(),aluno.getId_usuario());
-		
+
+		AulaRealizadaImpl aulaRealizada = new AulaRealizadaImpl(aula.getId_aula(), aluno.getId_usuario());
+
 		aulaRealizadaDAO.savePrimeiraAulaRealizada(aulaRealizada);
 	}
-	
-	//buscar proxima aula
+
+	// buscar proxima aula
 	@Transactional
-	public AulaRealizadaImpl getProximaAula() {		
+	public AulaRealizadaImpl getProximaAula() {
 		return aulaRealizadaDAO.getProximaAula();
 	}
 
-	//buscar aula_realizada por ID
+	// buscar aula_realizada por ID
 	@Transactional
 	public AulaRealizadaImpl getAulaRealizada(Integer id_aula_realizada) {
 		return aulaRealizadaDAO.getAulaRealizada(id_aula_realizada);
 	}
-	
-	//atualiza SID da aula quando a chamada é iniciada
+
+	// atualiza SID da aula quando a chamada é iniciada
 	@Transactional
 	public void updateAulaRealizada(int id_aula, String callSid) {
 		aulaRealizadaDAO.updateAulaRealizada(id_aula, callSid);
-		
+
 	}
-	
-	//atualiza dados da aula quando a chamada é finalizada
+
+	// atualiza dados da aula quando a chamada é finalizada
 	@Transactional
 	public void updateAulaRealizada(String callSid, String callDuration, Status status, DateTime startTime,
 			DateTime endTime, BigDecimal price) {
 		aulaRealizadaDAO.updateAulaRealizada(callSid, callDuration, status, startTime, endTime, price);
-		
 	}
-	
-	/* METODO ENCERRAR AULA + CRIAR NOVA AULA
-	
+
+	// encerrar aula apos concluida pelo professor
 	@Transactional
 	public void concludedAulaRealizada(AulaRealizadaImpl aulaRealizadaAtual) {
-		
+
 		System.out.println("concludedAulaRealizada service");
-		
+
 		// salvas os dados na aula atual
-		aulaRealizadaDAO.concludedAulaRealizada(aulaRealizadaAtual);		
-			
+		aulaRealizadaDAO.concludedAulaRealizada(aulaRealizadaAtual);
+
 	}
-	
-	//descobrir qual numero e indice
-	
+
+	// metodo para criar proxima aula realizada, baseado na aula anterior
 	@Transactional
-	public void createProximaAulaRealizada(AulaRealizadaImpl aulaRealizadaAtual) {
-	
-			AulaImpl aulaAtual = new AulaImpl();
-			aulaAtual.setId_aula(aulaRealizadaAtual.getId_aula_aula_realizada());
-			
-			System.out.println("getId_aula_aula_realizada" + aulaRealizadaAtual.getId_aula_aula_realizada());
-				
-			AulaImpl proximaAula = new AulaImpl(); 
-			AulaRealizadaImpl proximaAulaRealizada = new AulaRealizadaImpl();
-			// cria proxima aula
-			if(aulaRealizadaAtual.getNota_model_aula_realizada() >=3 && 
-			   aulaRealizadaAtual.getNota_practice_aula_realizada() >=3 && 
-			   aulaRealizadaAtual.getNota_production_aula_realizada()>=3 ){
-				
-				// manda o modulo e numero de aula atual pra buscar no dao o proximo
-				proximaAula = aulaService.getProximoAulaPorNumero(aulaAtual.getId_modulo_aula(), aulaAtual.getNumero_aula());			
-				System.out.println("entrou no if"+proximaAula.getId_aula());
-				
-				
-			}else{
-				proximaAula = aulaService.getProximoAulaPorIndice(aulaAtual.getId_modulo_aula(), aulaAtual.getNumero_aula(), aulaAtual.getIndice_aula());
-				System.out.println("entrou no else"+proximaAula.getId_aula());
-				
-				
-			}	
-			
-			proximaAulaRealizada.setId_aula_aula_realizada(proximaAula.getId_aula());
-			proximaAulaRealizada.setId_aluno_aula_realizada(aulaRealizadaAtual.getId_aluno_aula_realizada());
-			System.out.println("proxima aula "+proximaAula.getId_aula());
-			
-			aulaRealizadaDAO.saveProximaAulaRealizada(proximaAulaRealizada);
-	}	
-	*/
+	public void createProximaAulaRealizada(AulaRealizadaImpl proximaAulaRealizada) {
+		 aulaRealizadaDAO.saveProximaAulaRealizada(proximaAulaRealizada);
+	}
+
 }

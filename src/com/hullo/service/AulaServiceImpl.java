@@ -57,10 +57,19 @@ public class AulaServiceImpl {
 		aulaDAO.deleteAulasModulo(id_modulo);
 	}
 
+	//metodo para buscar proxima aula linear pelo id da atual
 	@Transactional
-	public List<AulaImpl> getAulasAnteriorAtual(int id_aula_aula_realizada, int id_anterior_aula_realizada) {
-		return aulaDAO.getAulasAnteriorAtual(id_aula_aula_realizada, id_anterior_aula_realizada);
+	public AulaImpl getProximaAulaLinear(int id_aula_aula_realizada) {
+		return aulaDAO.getProximaAulaLinear(id_aula_aula_realizada);
 	}
+
+	@Transactional
+	public AulaImpl getProximaAulaParalela(int id_aula_aula_realizada) {
+		return aulaDAO.getProximaAulaParalela(id_aula_aula_realizada);
+	}
+	
+	
+		
 	/* METODO ENCERRAR AULA + CRIAR NOVA AULA
 	@Transactional
 	public AulaImpl getProximoAulaPorNumero(int id_modulo, int numero_aula){

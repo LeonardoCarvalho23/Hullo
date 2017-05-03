@@ -8,7 +8,7 @@ insert into professor values (2, "João", "Lima", "999.888.777-66", "73.688.624/0
 
 -- modulos
 insert into modulo values (1, "Hullo", 1.0, "1", now(), now());
-insert into modulo values (2, "Introductions 1", 2.0 , "0", now(), now());
+insert into modulo values (2, "Introductions 1", 2.0 , "1", now(), now());
 insert into modulo values (3, "Greetings 1", 1.1 , "0", now(), now());
 
 -- aulas
@@ -18,6 +18,7 @@ insert into aula values (3, "I am", 3, "A", "review class 3", "this is the conte
 insert into aula values (4, "She is", 4, "A", "review class 4", "this is the content class 4", "nice activity", "teaser?", "1", now(), now(), 1);
 insert into aula values (5, "They are", 5, "A", "review class 5", "this is the content class 5", "nice activity", "teaser?", "1", now(), now(), 1);
 insert into aula values (6, "They are second class", 1, "B", "review class 1B", "this is the content class 1B", "nice activity", "teaser?", "1", now(), now(), 1);
+insert into aula values (7, "hullo", 1, "A", "review class 1", "this is the content class 1", "nice activity", "teaser?", "1", now(), now(), 2);
 
 -- aulas realizadas
 insert into aula_realizada (id_aula_realizada, 
@@ -56,4 +57,12 @@ insert into aula_realizada (id_aula_realizada,
                             id_aluno_aula_realizada,
                             id_professor_aula_realizada) 
 	values (3, 1, STR_TO_DATE( "30/04/2017 11:15:10", "%d/%m/%Y %H:%i:%s" ), 2, 1, 1);
+
+	insert into aula_realizada (id_aula_realizada,
+							id_anterior_aula_realizada,
+                            dt_criacao_aula_realizada,
+                            id_aula_aula_realizada,
+                            id_aluno_aula_realizada,
+                            id_professor_aula_realizada) 
+	values (3, 2, STR_TO_DATE( "30/04/2017 21:15:10", "%d/%m/%Y %H:%i:%s" ), 5, 1, 1);
     

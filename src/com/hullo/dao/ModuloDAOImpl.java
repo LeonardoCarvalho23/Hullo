@@ -40,8 +40,7 @@ public class ModuloDAOImpl {
 
 		// busca por nome, tudo em lower case
 		Query<ModuloImpl> query = currentSession.createQuery(
-				"from ModuloImpl where lower(nm_modulo) like :nomeModulo order by nm_modulo",
-				ModuloImpl.class);
+				"from ModuloImpl where lower(nm_modulo) like :nomeModulo order by nm_modulo", ModuloImpl.class);
 		query.setParameter("nomeModulo", "%" + nomeBusca.toLowerCase() + "%");
 
 		try {
@@ -68,16 +67,16 @@ public class ModuloDAOImpl {
 
 	public ModuloImpl getModulo(int id_modulo) {
 
-			Session currentSession = sessionFactory.getCurrentSession();
+		Session currentSession = sessionFactory.getCurrentSession();
 
-			// Cria query que faz busca no banco
-			Query<ModuloImpl> theQuery;
-			theQuery = currentSession.createQuery("from ModuloImpl where id_modulo='" + id_modulo + "'", ModuloImpl.class);
+		// Cria query que faz busca no banco
+		Query<ModuloImpl> theQuery;
+		theQuery = currentSession.createQuery("from ModuloImpl where id_modulo='" + id_modulo + "'", ModuloImpl.class);
 
-			// executa query
-			ModuloImpl modulo = theQuery.getSingleResult();
+		// executa query
+		ModuloImpl modulo = theQuery.getSingleResult();
 
-			return modulo;
+		return modulo;
 
 	}
 
@@ -85,7 +84,8 @@ public class ModuloDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// busca por indice, se nao for do mesmo id do modulo
-		Query<ModuloImpl> query = currentSession.createQuery("from ModuloImpl where id_modulo <> " + id_modulo + " and indice_modulo= " + indice_modulo,
+		Query<ModuloImpl> query = currentSession.createQuery(
+				"from ModuloImpl where id_modulo <> " + id_modulo + " and indice_modulo= " + indice_modulo,
 				ModuloImpl.class);
 
 		List<ModuloImpl> result = query.getResultList();
@@ -97,7 +97,7 @@ public class ModuloDAOImpl {
 
 	@SuppressWarnings("unchecked")
 	public void updateModulo(ModuloImpl modulo) {
-		
+
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// Cria query que faz busca no banco
@@ -116,7 +116,7 @@ public class ModuloDAOImpl {
 		theQuery.setParameter("id", modulo.getId_modulo());
 
 		theQuery.executeUpdate();
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -129,7 +129,7 @@ public class ModuloDAOImpl {
 
 		// para fazer update apenas dos capos editaveis
 		String hql = "DELETE from ModuloImpl WHERE id_modulo = :id";
-		
+
 		theQuery = currentSession.createQuery(hql);
 
 		// adicionando valores para as variaveis do update
@@ -137,20 +137,42 @@ public class ModuloDAOImpl {
 
 		int result = theQuery.executeUpdate();
 		System.out.println(result + " linhas atualizadas");
-		
+
 	}
-	
+
 	public ModuloImpl getPrimeiroModulo() {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<ModuloImpl> Query = currentSession.createQuery("from ModuloImpl where ativo_modulo = 1 order by indice_modulo",
-				ModuloImpl.class);
+		Query<ModuloImpl> Query = currentSession
+				.createQuery("from ModuloImpl where ativo_modulo = 1 order by indice_modulo", ModuloImpl.class);
 
 		List<ModuloImpl> modulo = Query.getResultList();
-		
+
 		return modulo.get(0);
 
+	}
+
+	//retorna o proximo modulo do curso linear, de acordo com o indice do modulo atual
+	public ModuloImpl getProxModulo(float indice_modulo) {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//busco os modulos ativos com indice maior que o atual
+		Query<ModuloImpl> Query = currentSession
+				.createQuery("from ModuloImpl where ativo_modulo = 1 and indice_modulo > " + indice_modulo
+						+ " order by indice_modulo", ModuloImpl.class);
+		try {
+			//tento encontrar o proximo modulo
+			List<ModuloImpl> modulos = Query.getResultList();
+			return modulos.get(0);
+
+		} catch (
+
+		Exception e) {
+			//se for o ultimo modulo, terminou o curso
+			return null;
+		}
 	}
 
 }
