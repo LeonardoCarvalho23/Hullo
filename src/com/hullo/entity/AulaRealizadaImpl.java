@@ -35,7 +35,7 @@ public class AulaRealizadaImpl {
 	private String comentario_aula_realizada;
 	
 	@Column(name = "status_aula_realizada")
-	private String status_ligacao_aula_realizada;
+	private String status_aula_realizada;
 	
 	@Column(name = "dt_criacao_aula_realizada")
 	private Date dt_criacao_aula_realizada;
@@ -148,11 +148,11 @@ public class AulaRealizadaImpl {
 		this.status_chamada_aula_realizada = status_chamada_aula_realizada;
 	}
 	public String getStatus_ligacao_aula_realizada() {
-		return status_ligacao_aula_realizada;
+		return status_aula_realizada;
 	}
 
 	public void setStatus_ligacao_aula_realizada(String status_ligacao_aula_realizada) {
-		this.status_ligacao_aula_realizada = status_ligacao_aula_realizada;
+		this.status_aula_realizada = status_ligacao_aula_realizada;
 	}
 
 	public Date getDt_criacao_aula_realizada() {
@@ -208,7 +208,7 @@ public class AulaRealizadaImpl {
 		return "AulaRealizadaImpl [id_aula_realizada=" + id_aula_realizada + ", nota_model_aula_realizada="
 				+ nota_model_aula_realizada + ", nota_practice_aula_realizada=" + nota_practice_aula_realizada
 				+ ", nota_production_aula_realizada=" + nota_production_aula_realizada
-				+ ", status_ligacao_aula_realizada=" + status_ligacao_aula_realizada + ", dt_criacao_aula_realizada="
+				+ ", status_ligacao_aula_realizada=" + status_aula_realizada + ", dt_criacao_aula_realizada="
 				+ dt_criacao_aula_realizada + ", dt_inicio_aula_realizada=" + dt_inicio_aula_realizada
 				+ ", dt_fim_aula_realizada=" + dt_fim_aula_realizada + ", id_aula_aula_realizada="
 				+ id_aula_aula_realizada + ", id_aluno_aula_realizada=" + id_aluno_aula_realizada

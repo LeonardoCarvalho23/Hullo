@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AulaImpl;
+import com.hullo.entity.ModuloImpl;
+import com.hullo.service.ModuloServiceImpl;
 
 @Repository
 public class AulaDAOImpl {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Autowired
+	private ModuloServiceImpl moduloService;
 
 	public boolean validaAula(float indice_aula) {
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -43,12 +48,13 @@ public class AulaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaImpl> Query = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula", AulaImpl.class);
+				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula",
+				AulaImpl.class);
 
 		return Query.getResultList();
 	}
 
-	//pegar uma aula especifica
+	// pegar uma aula especifica
 	public AulaImpl getAula(int id_aula) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -60,19 +66,20 @@ public class AulaDAOImpl {
 
 		return result;
 	}
-	
-	public AulaImpl getPrimeiraAula(int id_modulo){
+
+	public AulaImpl getPrimeiraAula(int id_modulo) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaImpl> Query = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula", AulaImpl.class);
+				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula",
+				AulaImpl.class);
 
 		List<AulaImpl> aulas = Query.getResultList();
-		
+
 		return aulas.get(0);
 	}
-	
+
 	// para fazer update da aula ja existente
 	@SuppressWarnings("unchecked")
 	public void updateAula(AulaImpl aula) {
@@ -111,12 +118,6 @@ public class AulaDAOImpl {
 				"from AulaImpl where indice_aula = '" + indice_aula + "' and numero_aula = '" + numero_aula
 						+ "'and id_modulo_aula = '" + id_modulo_aula + "' and id_aula <> '" + id_aula + "'",
 				AulaImpl.class);
-		/*
-		 * Query<AulaImpl> query = currentSession.createQuery(
-		 * "select id_aula from AulaImpl where indice_aula = '" + indice_aula +
-		 * "' and numero_aula = '" + numero_aula + "'and id_modulo_aula = '" +
-		 * id_modulo_aula + "'", AulaImpl.class);
-		 */
 
 		System.out.println("query" + query);
 		try {
@@ -150,7 +151,7 @@ public class AulaDAOImpl {
 
 		// Cria query que faz busca no banco
 		Query<AulaImpl> theQuery;
-		
+
 		// para fazer update apenas dos capos editaveis
 		String hql = "DELETE from AulaImpl where id_modulo_aula=:id_modulo";
 
@@ -164,50 +165,116 @@ public class AulaDAOImpl {
 
 	}
 
-	@SuppressWarnings("null")
-	public List<AulaImpl> getAulasAnteriorAtual(int id_aula_aula_realizada, int id_anterior_aula_realizada) {
-		
-		//buscando conteudo das aulas no banco
-		AulaImpl aulaAnterior = getAula(id_anterior_aula_realizada);
-		AulaImpl aulaAtual = getAula(id_aula_aula_realizada);
-		
-		List<AulaImpl> result = null;
-		
-		result.add(aulaAnterior);
-		result.add(aulaAtual);
-		
-		return result;
-	}
-	
-	/* METODO ENCERRAR AULA + CRIAR NOVA AULA
-	
-	public AulaImpl getProximoAulaPorNumero(int id_modulo, int numero_aula){
+	// para buscar proxima aula linear do curso
+	public AulaImpl getProximaAulaLinear(int id_aula_aula_realizada) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<AulaImpl> Query = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= " + id_modulo + "and numero_aula <> " + numero_aula + " order by numero_aula, indice_aula", AulaImpl.class);	
-	
+		// busca aula atual por id da aula
+		Query<AulaImpl> query = currentSession.createQuery("from AulaImpl where id_aula= " + id_aula_aula_realizada,
+				AulaImpl.class);
 
-		List<AulaImpl> aulas = Query.getResultList();
-		System.out.println("getProximoAulaPorNumero dao");
-		
+		AulaImpl aulaAtual = query.getSingleResult();
+
+		// se minha aula atual e a ultima desse modulo
+		if (aulaAtual.getNumero_aula() == 5) {
+
+			try {
+				// preciso buscar as informacoes do modulo para descobrir qual e
+				// o proximo
+				ModuloImpl moduloAtual = moduloService.getModulo(aulaAtual.getId_modulo_aula());
+
+				// busco o proximo modulo de acordo com o indice do modulo atual
+				ModuloImpl proxModulo = moduloService.getProxModulo(moduloAtual.getIndice_modulo());
+
+				// pego a primeira aula do proximo modulo
+				Query<AulaImpl> query2 = currentSession.createQuery(
+						"from AulaImpl where id_modulo_aula= :modulo order by numero_aula, indice_aula",
+						AulaImpl.class);
+				query2.setParameter("modulo", proxModulo.getId_modulo());
+
+				List<AulaImpl> aulas = query2.getResultList();
+
+				return aulas.get(0);
+
+			} catch (Exception e) {
+				// se nao tem proximo modulo ou se da pau nas outras buscas
+				return null;
+			}
+		}
+
+		// se minha aula nao e a 5, pego a proxima aula do modulo
+		Query<AulaImpl> query2 = currentSession.createQuery(
+				"from AulaImpl where id_modulo_aula= :modulo and numero_aula > :numero order by numero_aula, indice_aula",
+				AulaImpl.class);
+		query2.setParameter("modulo", aulaAtual.getId_modulo_aula());
+		query2.setParameter("numero", aulaAtual.getNumero_aula());
+
+		List<AulaImpl> aulas = query2.getResultList();
+		System.out.println("id da proxima aula no dao = " + aulas.get(0).getId_aula());
 		return aulas.get(0);
 	}
-	
-	public AulaImpl getProximoAulaPorIndice(int id_modulo, int numero_aula, char indice_aula){
 
+	public AulaImpl getProximaAulaParalela(int id_aula_aula_realizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<AulaImpl> Query = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= " + id_modulo + "and numero_aula = " + numero_aula + "and indice_aula <> " + indice_aula + " order by numero_aula, indice_aula", AulaImpl.class);	
-	
+		// busca aula atual por id da aula
+		Query<AulaImpl> query = currentSession.createQuery("from AulaImpl where id_aula= " + id_aula_aula_realizada,
+				AulaImpl.class);
 
-		List<AulaImpl> aulas = Query.getResultList();
-		System.out.println("getProximoAulaPorIndice dao");
-		return aulas.get(0);
+		AulaImpl aulaAtual = query.getSingleResult();
+		
+		//verifico se ha aula paralela para esse numero desse modulo com indice maior que o atual
+		try{
+			
+			Query<AulaImpl> query2 = currentSession.createQuery("from AulaImpl where id_modulo_aula= :modulo and "
+					+ "numero_aula= :numero and indice_aula> :indice order by indice_aula",
+					AulaImpl.class);
+			query2.setParameter("modulo", aulaAtual.getId_modulo_aula());
+			query2.setParameter("numero", aulaAtual.getNumero_aula());
+			query2.setParameter("indice", aulaAtual.getIndice_aula());
+
+			List<AulaImpl> aulas = query2.getResultList();
+			
+			return aulas.get(0);
+			
+		} catch (Exception e) {
+			// se nao tem aula paralela o aluno faz a mesma aula
+			return aulaAtual;
+		}
 	}
-	*/
-	
-	
+
+	/*
+	 * METODO ENCERRAR AULA + CRIAR NOVA AULA
+	 * 
+	 * public AulaImpl getProximoAulaPorNumero(int id_modulo, int numero_aula){
+	 * 
+	 * Session currentSession = sessionFactory.getCurrentSession();
+	 * 
+	 * Query<AulaImpl> Query = currentSession.createQuery(
+	 * "from AulaImpl where id_modulo_aula= " + id_modulo +
+	 * "and numero_aula <> " + numero_aula +
+	 * " order by numero_aula, indice_aula", AulaImpl.class);
+	 * 
+	 * 
+	 * List<AulaImpl> aulas = Query.getResultList();
+	 * System.out.println("getProximoAulaPorNumero dao");
+	 * 
+	 * return aulas.get(0); }
+	 * 
+	 * public AulaImpl getProximoAulaPorIndice(int id_modulo, int numero_aula,
+	 * char indice_aula){
+	 * 
+	 * Session currentSession = sessionFactory.getCurrentSession();
+	 * 
+	 * Query<AulaImpl> Query = currentSession.createQuery(
+	 * "from AulaImpl where id_modulo_aula= " + id_modulo + "and numero_aula = "
+	 * + numero_aula + "and indice_aula <> " + indice_aula +
+	 * " order by numero_aula, indice_aula", AulaImpl.class);
+	 * 
+	 * 
+	 * List<AulaImpl> aulas = Query.getResultList();
+	 * System.out.println("getProximoAulaPorIndice dao"); return aulas.get(0); }
+	 */
+
 }

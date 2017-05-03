@@ -60,5 +60,10 @@ public class ModuloServiceImpl {
 	public void deleteModulo(int id_modulo) {
 		moduloDAO.deleteModulo(id_modulo);
 	}
+	
+	@Transactional
+	public ModuloImpl getProxModulo(float indice_modulo) {
+		return moduloDAO.getProxModulo(indice_modulo);
+	}
 
 }

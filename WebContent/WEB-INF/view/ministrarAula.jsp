@@ -60,6 +60,10 @@
 				<form:hidden path="aulaRealizadaAtual.id_professor_aula_realizada" />
 				<!-- id da aula_realizada_atual, para guardar na finalizacao da aula -->
 				<form:hidden path="aulaRealizadaAtual.id_aula_realizada" />
+				<!-- id do aluno, para criar a proxima aula -->
+				<form:hidden path="aulaRealizadaAtual.id_aluno_aula_realizada" />
+				<!-- id do aula atual, para criar a proxima aula -->
+				<form:hidden path="aulaRealizadaAtual.id_aula_aula_realizada" />
 
 				<!-- Resultados da aula anterior do aluno -->
 				<legend>Last Class results</legend>
@@ -137,6 +141,18 @@
 								path="aulaRealizadaAtual.nota_production_aula_realizada"
 								required="true" maxlength="1"
 								value="${aulaRealizadaModel.aulaRealizadaAtual.nota_production_aula_realizada}" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-4 control-label">Comentario Aula Realizada</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<form:textarea rows="4" cols="50" placeholder="General comments" type="textarea"
+								path="aulaRealizadaAtual.comentario_aula_realizada"
+								required="true" maxlength="200" 
+								value="${aulaRealizadaModel.aulaRealizadaAtual.comentario_aula_realizada}" />
 						</div>
 					</div>
 				</div>
