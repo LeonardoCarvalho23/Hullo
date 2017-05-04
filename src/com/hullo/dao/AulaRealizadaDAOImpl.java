@@ -1,7 +1,7 @@
 package com.hullo.dao;
 
 import java.math.BigDecimal;
-
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -48,17 +48,23 @@ public class AulaRealizadaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// achar o dia anterior paa consulta das aulas
-		Calendar cal = GregorianCalendar.getInstance();
-		cal.add(Calendar.DAY_OF_YEAR, -2);
-		Date date = cal.getTime();
+		Calendar date = new GregorianCalendar();
+		// reset hour, minutes, seconds and millis
+		date.set(Calendar.HOUR_OF_DAY, 0);
+		date.set(Calendar.MINUTE, 0);
+		date.set(Calendar.SECOND, 0);
+		date.set(Calendar.MILLISECOND, 0);
+		// ontem
+		date.add(Calendar.DAY_OF_MONTH, -1);
+		Date data = date.getTime();
 
-		System.out.println("data que uso para busca " + date);
+		System.out.println("data que uso para busca " + data);
 
 		// busca proxima aula baseado na data atual
 		Query<AulaRealizadaImpl> query = currentSession.createQuery(
-				"from AulaRealizadaImpl where dt_criacao_aula_realizada <= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
+				"from AulaRealizadaImpl where dt_criacao_aula_realizada >= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
 				AulaRealizadaImpl.class);
-		query.setParameter("date", date);
+		query.setParameter("date", data);
 
 		try {
 			// busca a proxima aula no banco
@@ -95,14 +101,17 @@ public class AulaRealizadaDAOImpl {
 		System.out.println(result + " linha atualizada");
 	}
 
-	//Atualiza aula APÓS conclusão da chamada
+	// Atualiza aula APÓS conclusão da chamada
 	@SuppressWarnings("unchecked")
 	public void updateAulaRealizada(String callSid, String callDuration, Status status, String startTimeConv,
-	String endTimeConv, BigDecimal price) {
+			String endTimeConv, BigDecimal price) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<AulaRealizadaImpl> theQuery;					
-		
-		String sql = "UPDATE AulaRealizadaImpl set duracao_chamada_aula_realizada="+callDuration+", status_chamada_aula_realizada='"+status+"', dt_inicio_chamada_aula_realizada='"+startTimeConv+"', dt_fim_chamada_aula_realizada='"+endTimeConv+"', custo_chamada_aula_realizada="+price+"  WHERE sid_chamada_aula_realizada='"+callSid+"'";
+		Query<AulaRealizadaImpl> theQuery;
+
+		String sql = "UPDATE AulaRealizadaImpl set duracao_chamada_aula_realizada=" + callDuration
+				+ ", status_chamada_aula_realizada='" + status + "', dt_inicio_chamada_aula_realizada='" + startTimeConv
+				+ "', dt_fim_chamada_aula_realizada='" + endTimeConv + "', custo_chamada_aula_realizada=" + price
+				+ "  WHERE sid_chamada_aula_realizada='" + callSid + "'";
 		theQuery = currentSession.createQuery(sql);
 		int result = theQuery.executeUpdate();
 		System.out.println(result + " linha atualizada");
@@ -146,10 +155,10 @@ public class AulaRealizadaDAOImpl {
 
 	public void saveProximaAulaRealizada(AulaRealizadaImpl aulaRealizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
-	
-		//esse e por erro no banco que ainda precisamos resolver
+
+		// esse e por erro no banco que ainda precisamos resolver
 		aulaRealizada.setId_professor_aula_realizada(1);
-		
+
 		currentSession.saveOrUpdate(aulaRealizada);
 	}
 
