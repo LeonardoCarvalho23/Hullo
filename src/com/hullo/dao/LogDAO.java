@@ -1,6 +1,5 @@
 package com.hullo.dao;
 
-import com.hullo.entity.LogImpl;
 
 public interface LogDAO {
 

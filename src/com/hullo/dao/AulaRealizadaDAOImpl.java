@@ -1,7 +1,6 @@
 package com.hullo.dao;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -10,8 +9,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.joda.time.DateTime;
-import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -91,7 +88,7 @@ public class AulaRealizadaDAOImpl {
 	// Atualiza aula acrescentando CALLSID quando chamada é iniciada
 	@SuppressWarnings("unchecked")
 	public void updateAulaRealizada(int id_aula, String callSid) {
-		System.out.println("Sid chegou no DAO: " + callSid);
+
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<AulaRealizadaImpl> theQuery;
 		String sql = "UPDATE AulaRealizadaImpl set sid_chamada_aula_realizada='" + callSid
@@ -123,8 +120,6 @@ public class AulaRealizadaDAOImpl {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		System.out.println("id da aula que chegou no dao = " + aulaRealizadaAtual.getId_aula_realizada());
-
 		// Cria query que faz busca no banco
 		Query<AulaRealizadaImpl> theQuery;
 
@@ -134,7 +129,8 @@ public class AulaRealizadaDAOImpl {
 				+ "nota_production_aula_realizada = :nota_production_aula_realizada, "
 				+ "comentario_aula_realizada = :comentario_aula_realizada, "
 				+ "status_aula_realizada = :status_aula_realizada, "
-				+ "id_professor_aula_realizada = :id_professor_aula_realizada " + "WHERE id_aula_realizada = :id";
+				+ "id_professor_aula_realizada = :id_professor_aula_realizada " 
+				+ "WHERE id_aula_realizada = :id";
 		theQuery = currentSession.createQuery(hql);
 
 		// adicionando valores para as variaveis do update
@@ -149,7 +145,7 @@ public class AulaRealizadaDAOImpl {
 		theQuery.setParameter("id_professor_aula_realizada", aulaRealizadaAtual.getId_professor_aula_realizada());
 		theQuery.setParameter("id", aulaRealizadaAtual.getId_aula_realizada());
 
-		int result = theQuery.executeUpdate();
+		theQuery.executeUpdate();
 
 	}
 

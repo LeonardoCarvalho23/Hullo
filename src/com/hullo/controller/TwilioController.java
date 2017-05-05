@@ -2,8 +2,6 @@ package com.hullo.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -15,25 +13,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
@@ -53,11 +45,9 @@ import com.twilio.rest.api.v2010.account.Call.Status;
 import com.twilio.twiml.VoiceResponse;
 import com.twilio.twiml.Dial;
 import com.twilio.twiml.Number;
-import com.twilio.twiml.Record;
-import com.twilio.twiml.Client;
-import com.twilio.twiml.Say;
 import com.twilio.twiml.TwiMLException;
 
+@SuppressWarnings("serial")
 @Controller
 @RequestMapping("/twilioWebApp")
 public class TwilioController extends HttpServlet {
@@ -125,7 +115,7 @@ public class TwilioController extends HttpServlet {
 		String callerId = "551149507002";
 		// Use <Record> to record the caller's message
 		// Não estamos setando isso ainda, tá dando pau
-	    Record record = new Record.Builder().build();
+	    //Record record = new Record.Builder().build();
 		
 		//Cria o objeto dialBuilder e define seus parâmetros
 		Dial.Builder dialBuilder = new Dial.Builder();
