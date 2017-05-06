@@ -97,10 +97,7 @@ public class TwilioController extends HttpServlet {
 			@RequestParam("CallSid") String callSid,
 			@RequestParam("CallStatus") String callStatus,
 			HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
-		
-		// Testa se recebeu tudo
-		System.out.println("Pré-ligação: \nIdAula: "+id_aula+"\nTo: "+ to +"\nCallSid: " + callSid + "\nCallStatus: " + callStatus);
-		
+
 		//Atualiza a aulaRealizada para incluir o CallSid
 		try {
 			aulaRealizadaService.updateAulaRealizada(id_aula, callSid);
@@ -121,7 +118,7 @@ public class TwilioController extends HttpServlet {
 		Dial.Builder dialBuilder = new Dial.Builder();
 		dialBuilder.callerId(callerId);
 		dialBuilder.number(number);
-		dialBuilder.timeLimit(315); // duração de 5min da chamada
+		dialBuilder.timeLimit(15); // duração de 5min da chamada
 		dialBuilder.timeout(15); // desliga se não atender após 15s
 		
 		
@@ -162,16 +159,6 @@ public class TwilioController extends HttpServlet {
 		//Atualiza as informações da chamada pós ligação
 		aulaRealizadaService.updateAulaRealizada(callSid, callDuration, status, startTimeConv,
 				endTimeConv, price);
-		
-		System.out.println(
-				"\nPós ligação"+
-				"\nDuração: "+callDuration+
-				"\nSid: "+callSid+
-				"\nStatus chamada: "+status+
-				"\nGravação: " /*+recordingUrl*/+
-				"\nInício: "+startTime+
-				"\nTérmino: "+endTime+
-				"\nCusto: "+price);		
 	}
 	
 	
