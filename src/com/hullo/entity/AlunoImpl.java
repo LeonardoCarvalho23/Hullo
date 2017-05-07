@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+* Objeto que estabalece mapeamente entre AlunoImpl e tabela aluno
+* @author Hullo Team 
+* @version 1.0
+ */
 @Entity
 @Table(name="aluno")
 public class AlunoImpl implements Usuario {

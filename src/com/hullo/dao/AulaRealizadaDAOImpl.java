@@ -54,9 +54,7 @@ public class AulaRealizadaDAOImpl {
 		// ontem
 		date.add(Calendar.DAY_OF_MONTH, -1);
 		Date data = date.getTime();
-
-		System.out.println("data que uso para busca " + data);
-
+		
 		// busca proxima aula baseado na data atual
 		Query<AulaRealizadaImpl> query = currentSession.createQuery(
 				"from AulaRealizadaImpl where dt_criacao_aula_realizada >= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
@@ -72,7 +70,8 @@ public class AulaRealizadaDAOImpl {
 			return null;
 		}
 	}
-
+	
+	
 	// pegar uma aula especifica
 	public AulaRealizadaImpl getAulaRealizada(int id_aula_realizada) {
 
@@ -110,8 +109,8 @@ public class AulaRealizadaDAOImpl {
 				+ "', dt_fim_chamada_aula_realizada='" + endTimeConv + "', custo_chamada_aula_realizada=" + price
 				+ "  WHERE sid_chamada_aula_realizada='" + callSid + "'";
 		theQuery = currentSession.createQuery(sql);
-		int result = theQuery.executeUpdate();
-		System.out.println(result + " linha atualizada");
+		theQuery.executeUpdate();
+	
 	}
 
 	// atualiza a aula_realizada apos ser concluida pelo professor

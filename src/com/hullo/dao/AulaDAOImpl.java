@@ -244,37 +244,4 @@ public class AulaDAOImpl {
 		}
 	}
 
-	/*
-	 * METODO ENCERRAR AULA + CRIAR NOVA AULA
-	 * 
-	 * public AulaImpl getProximoAulaPorNumero(int id_modulo, int numero_aula){
-	 * 
-	 * Session currentSession = sessionFactory.getCurrentSession();
-	 * 
-	 * Query<AulaImpl> Query = currentSession.createQuery(
-	 * "from AulaImpl where id_modulo_aula= " + id_modulo +
-	 * "and numero_aula <> " + numero_aula +
-	 * " order by numero_aula, indice_aula", AulaImpl.class);
-	 * 
-	 * 
-	 * List<AulaImpl> aulas = Query.getResultList();
-	 * System.out.println("getProximoAulaPorNumero dao");
-	 * 
-	 * return aulas.get(0); }
-	 * 
-	 * public AulaImpl getProximoAulaPorIndice(int id_modulo, int numero_aula,
-	 * char indice_aula){
-	 * 
-	 * Session currentSession = sessionFactory.getCurrentSession();
-	 * 
-	 * Query<AulaImpl> Query = currentSession.createQuery(
-	 * "from AulaImpl where id_modulo_aula= " + id_modulo + "and numero_aula = "
-	 * + numero_aula + "and indice_aula <> " + indice_aula +
-	 * " order by numero_aula, indice_aula", AulaImpl.class);
-	 * 
-	 * 
-	 * List<AulaImpl> aulas = Query.getResultList();
-	 * System.out.println("getProximoAulaPorIndice dao"); return aulas.get(0); }
-	 */
-
 }
