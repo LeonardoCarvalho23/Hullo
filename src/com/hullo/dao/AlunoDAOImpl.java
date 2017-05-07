@@ -10,25 +10,44 @@ import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AlunoImpl;
 
+/**
+ * classe para operações no banco relacionadas ao AlunoImpl
+ * 
+ * @author Hullo Team
+ * @version 1.0
+ */
 
 @Repository
 public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 
+	/**
+	 * Objeto session que administra conexão com o banco
+	 */
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	/**
+	 * descrição do método
+	 * 
+	 * @return lista com todos os alunos do banco
+	 */
 	@Override
 	public List<AlunoImpl> getUsuarios() {
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<AlunoImpl> theQuery = currentSession
-				.createQuery("from AlunoImpl order by nome_usuario", AlunoImpl.class);
+		Query<AlunoImpl> theQuery = currentSession.createQuery("from AlunoImpl order by nome_usuario", AlunoImpl.class);
 
 		List<AlunoImpl> usuarios = theQuery.getResultList();
 
 		return usuarios;
 	}
 
+	/**
+	 * salvar objeto aluno no banco
+	 * 
+	 * @param theUsuario
+	 *            AlunoImpl que deseja salvar
+	 */
 	@Override
 	public void saveUsuario(AlunoImpl theUsuario) {
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -36,7 +55,16 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		currentSession.saveOrUpdate(theUsuario);
 	}
 
-	// metodo para buscar aluno para login
+	/**
+	 * validar que senha e email fronecidos pelo usuario para login estao
+	 * corretos
+	 * 
+	 * @param email
+	 *            email fornecido por usuario
+	 * @param senha
+	 *            senha fornecida por usuario
+	 * @return AlunoImpl se foi encontrado aluno com esses dados
+	 */
 	@Override
 	public AlunoImpl getUsuario(String email, String senha) {
 
@@ -60,7 +88,15 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		}
 	}
 
-	// metodo para validar se o aluno ja existe no banco
+	/**
+	 * validar se ja existe aluno cadatsrado com esses dados
+	 * 
+	 * @param email
+	 *            email fornecido por usuario
+	 * @param cpf
+	 *            cpf fornecidoF por usuario
+	 * @return AlunoImpl se foi encontrado aluno com esses dados
+	 */
 	@Override
 	public AlunoImpl validaUsuario(String email, String cpf) {
 
@@ -86,6 +122,13 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 
 	}
 
+	/**
+	 * buscar objeto AlunoImpl baseado no seu ID
+	 * 
+	 * @param id_usuario
+	 *            id usuario
+	 * @return AlunoImpl se foi encontrado aluno com esse dado
+	 */
 	@Override
 	public AlunoImpl getUsuario(int id_usuario) {
 		// get current hibernate session
@@ -101,7 +144,15 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		return theUsuario;
 	}
 
-	// para validar na troca de email, se email ja existe em outro cadastro
+	/**
+	 * validar na troca de email, se email ja existe em outro cadastro
+	 * 
+	 * @param id
+	 *            id do usuario que quer fazer udpate de email
+	 * @param email
+	 *            novo email fornecido pelo usuario
+	 * @return AlunoImpl se foi encontrado aluno com esse dado
+	 */
 	public AlunoImpl validaUsuario(String email, int id) {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -122,6 +173,12 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		}
 	}
 
+	/**
+	 * fazer update de aluno ja existente, apenas de campos editaveis
+	 * 
+	 * @param theUsuario
+	 *            AlunoImpl que irei atualizar
+	 */
 	// para fazer update do aluno ja existente
 	@SuppressWarnings("unchecked")
 	@Override
@@ -157,6 +214,12 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		System.out.println(result + " linha atualizada");
 	}
 
+	/**
+	 * inativar um aluno que não quer mias ter conta
+	 * 
+	 * @param theUsuario
+	 *            AlunoImpl que dejesa encerrar conta
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void inactivateUsuario(AlunoImpl theUsuario) {
@@ -179,6 +242,13 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		System.out.println(result + " linha atualizada");
 	}
 
+	/**
+	 * buscar aluno baseado apenas no email
+	 * 
+	 * @param email
+	 *            email que estou fazendo a busca
+	 * @return AlunoImpl se foi encontrado aluno com esse dado
+	 */
 	@Override
 	public AlunoImpl getUsuario(String email) {
 		// get current hibernate session
@@ -186,8 +256,7 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 
 		// Cria query que faz busca no banco
 		Query<AlunoImpl> theQuery;
-		theQuery = currentSession.createQuery("from AlunoImpl where email_usuario='" + email + "'",
-				AlunoImpl.class);
+		theQuery = currentSession.createQuery("from AlunoImpl where email_usuario='" + email + "'", AlunoImpl.class);
 
 		// Testa com try catch a execução da query e se foi encontrado algo, é
 		// obrigatorio o uso do try catch

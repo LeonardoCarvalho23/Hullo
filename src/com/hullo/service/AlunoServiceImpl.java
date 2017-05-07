@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hullo.dao.UsuarioDAO;
 import com.hullo.entity.AlunoImpl;
 
+/**
+* serviço do objeto AlunoImpl
+* @author Hullo Team 
+* @version 1.0
+ */
 @Service
 public class AlunoServiceImpl implements UsuarioService<AlunoImpl> {
 

@@ -1,3 +1,4 @@
+
 package com.hullo.controller;
 
 import java.util.Date;
@@ -16,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hullo.entity.AulaImpl;
 import com.hullo.service.AulaServiceImpl;
+
+/**
+* classe para controlar o que é exibido nas telas de home e CRUD do aluno
+* @author Hullo Team 
+* @version 1.0
+ */
 
 @Controller
 @RequestMapping("/modulos")
