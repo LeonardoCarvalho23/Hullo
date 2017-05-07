@@ -1,3 +1,9 @@
+/**
+* classe para UsuarioImpl
+* @author Hullo Team 
+* @version 1.0
+ */
+
 package com.hullo.entity;
 
 import java.util.Date;

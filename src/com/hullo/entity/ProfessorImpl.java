@@ -1,3 +1,9 @@
+/**
+* classe para ProfessorImpl
+* @author Hullo Team 
+* @version 1.0
+ */
+
 package com.hullo.entity;
 
 
@@ -65,7 +71,9 @@ public class ProfessorImpl implements Usuario {
 	public ProfessorImpl(){
 	}
 	
-	//construtor para transformar um usuarioImpl em um alunoImpl
+	/* **
+	 * construtor para transformar um usuarioImpl em um alunoImpl
+	 */
 	public ProfessorImpl(UsuarioImpl usuario) {
 		this.id_usuario = usuario.getId_usuario();
 		this.nome_usuario = usuario.getNome_usuario();

@@ -1,3 +1,9 @@
+/**
+* classe para UsuarioAOImpl
+* @author Hullo Team 
+* @version 1.0
+ */
+
 package com.hullo.dao;
 
 import java.util.List;
@@ -17,78 +23,109 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	//@Transactional //so you don't need to start and commit, import from spring
+	/* **
+	 * @Transactional //so you don't need to start and commit, import from spring(non-Javadoc)
+	 * @see com.hullo.dao.UsuarioDAO#getUsuarios()
+	 */
 	public List<UsuarioImpl> getUsuarios() {
 		
-		//get the current hibernate session
+		/* ** 
+		 * get the current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession(); //import from hibernate
 		
-		//create a query, import hibernate.query
+		/* **
+		 * create a query, import hibernate.query
+		 */
 		Query<UsuarioImpl> theQuery = 
 				currentSession.createQuery("from UsuarioImpl order by nome_usuario", UsuarioImpl.class);
 		
-		//execute query and get result list
+		/* **
+		 * execute query and get result list
+		 */
 		List<UsuarioImpl> usuarios = theQuery.getResultList();
 		
-		//return the results
+		/* **
+		 * return the results
+		 */
 		return usuarios;
 	}
 
 	@Override
 	public void saveUsuario(UsuarioImpl theUsuario) {
-		//get current hibernate session	
+		/* **
+		 * get current hibernate session	
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		//save the usuario
-		System.out.println("DAO: agora vai pedir");
+		/* ** 
+		 * save the usuario
+		 */
 		currentSession.saveOrUpdate(theUsuario);
-		System.out.println("DAO: PEDIU.");
 	}
 
 	@Override
 	public UsuarioImpl getUsuario(String email, String senha) {
 		
-		//get current hibernate session
+		/* **
+		 * get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		// Cria query que faz busca no banco
+		/* **
+		 * Cria query que faz busca no banco
+		 */
 		Query<UsuarioImpl> theQuery;
 		theQuery = currentSession.createQuery("from UsuarioImpl where ativo_usuario = '1' and email_usuario='" + email + "'", UsuarioImpl.class);
 		
-		// Testa com try catch a execução da query e se foi encontrado algo, é obrigatorio o uso do try catch
+		/* **
+		 * Testa com try catch a execução da query e se foi encontrado algo, é obrigatorio o uso do try catch
+		 */
 		UsuarioImpl result = null;
 		boolean empty = false;
 		try {
 			result = theQuery.getSingleResult();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			/* **
+			 *  TODO Auto-generated catch block
+			 */
 			empty = true;
 		}
 
-		// Se a variável empty for verdadeira, significa que usuário não foi encontrado e retorna null
+		/* **
+		 *  Se a variável empty for verdadeira, significa que usuário não foi encontrado e retorna null
+		 */
 		if (empty){
 			return null;
 		} else {
-			// Do contrário, guardo o usuário na variavel theUsuario e testo agora a senha
+			/* **
+			 *  Do contrário, guardo o usuário na variavel theUsuario e testo agora a senha
+			 */
 			UsuarioImpl theUsuario = result;
 			if (theUsuario.getSenha_usuario().equals(senha)){
 				return theUsuario;
 			} else {
 				return null;
-					}
+			}
 		}		
 	}
 
 	@Override
 	public UsuarioImpl getUsuario(int id) {
-		//get current hibernate session
+		/* **
+		 * get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		// Cria query que faz busca no banco
+		/* **
+		 *  Cria query que faz busca no banco
+		 */
 		Query<UsuarioImpl> theQuery;
 		theQuery = currentSession.createQuery("from UsuarioImpl where id_usuario='" + id + "'", UsuarioImpl.class);
 		
-		//executa query
+		/* **
+		 * executa query
+		 */
 		UsuarioImpl theUsuario = theQuery.getSingleResult();
 		
 		return theUsuario;
@@ -96,37 +133,54 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 
 	@Override
 	public UsuarioImpl getUsuario(String email) {
-		//get current hibernate session
+		/* **
+		 * get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		// Cria query que faz busca no banco
+		/* **
+		 *  Cria query que faz busca no banco
+		 */
 		Query<UsuarioImpl> theQuery;
 		theQuery = currentSession.createQuery("from UsuarioImpl where email_usuario='" + email + "'", UsuarioImpl.class);
 				
-		// Testa com try catch a execução da query e se foi encontrado algo, é obrigatorio o uso do try catch
+		/* **
+		 *  Testa com try catch a execução da query e se foi encontrado algo, é obrigatorio o uso do try catch
+		 */
 		UsuarioImpl result = null;
 		boolean empty = false;
 			try {
 					result = theQuery.getSingleResult();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					/* **
+					 *  TODO Auto-generated catch block
+					 */
 					empty = true;
 				}
 
-				// Se a variável empty for verdadeira, significa que usuário não foi encontrado e retorna null
+				/* **
+				 *  Se a variável empty for verdadeira, significa que usuário não foi encontrado e retorna null
+				 */
 		if (empty){
 			return null;
 				} else {
-					// Do contrário, guardo o usuário na variavel theUsuario e testo agora a senha
+					/* **
+					 *  Do contrário, guardo o usuário na variavel theUsuario e testo agora a senha
+					 */
 					UsuarioImpl theUsuario = result;
 						return theUsuario;
 					} 
 				}
 
-	//implemetado apenas por obrigacao
+	/* **
+	 * implemetado apenas por obrigacao(non-Javadoc)
+	 * @see com.hullo.dao.UsuarioDAO#udateUsuario(java.lang.Object)
+	 */
 	@Override
 	public void udateUsuario(UsuarioImpl theUsuario) {
-		// TODO Auto-generated method stub
+		/* **
+		 *  TODO Auto-generated method stub
+		 */
 		
 	}
 	
@@ -137,13 +191,17 @@ public class UsuarioDAOImpl implements UsuarioDAO<UsuarioImpl> {
 
 	@Override
 	public UsuarioImpl validaUsuario(String email, int id_usuario) {
-		// TODO Auto-generated method stub
+		/* **
+		 *  TODO Auto-generated method stub
+		 */
 		return null;
 	}
 
 	@Override
 	public UsuarioImpl validaUsuario(String email, String cpf) {
-		// TODO Auto-generated method stub
+		/* **
+		 *  TODO Auto-generated method stub
+		 */
 		return null;
 	}
 	

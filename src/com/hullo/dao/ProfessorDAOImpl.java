@@ -1,3 +1,9 @@
+/**
+* classe para ProfessorDAOImpl
+* @author Hullo Team 
+* @version 1.0
+ */
+
 package com.hullo.dao;
 
 import java.util.List;
@@ -37,21 +43,30 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		currentSession.saveOrUpdate(theUsuario);
 	}
 
-	// metodo para buscar aluno para login
+	/* **
+	 *  metodo para buscar aluno para login(non-Javadoc)
+	 * @see com.hullo.dao.UsuarioDAO#getUsuario(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public ProfessorImpl getUsuario(String email, String senha) {
 
-		// get current hibernate session
+		/* **
+		 *  get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		System.out.println("chegou no DAO");
-		// Cria query que faz busca no banco
+		/* **
+		 *  Cria query que faz busca no banco
+		 */
 		Query<ProfessorImpl> theQuery;
 		theQuery = currentSession.createQuery("from ProfessorImpl where ativo_usuario = '1' and senha_usuario='" + senha
 				+ "' and email_usuario='" + email + "'", ProfessorImpl.class);
 
-		// Testa com try catch a execução da query e se foi encontrado algo, é
-		// obrigatorio o uso do try catch
+		/* **
+		 *  Testa com try catch a execução da query e se foi encontrado algo, é
+		 *  obrigatorio o uso do try catch
+		 */
+		
 		ProfessorImpl result = null;
 
 		try {
@@ -65,26 +80,36 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 
 	@Override
 	public ProfessorImpl validaUsuario(String email, String cpf) {
-		// get current hibernate session
+		/* **
+		 *  get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		System.out.println("chegou no DAO");
 
-		// Cria query que faz busca no banco
+		/* **
+		 *  Cria query que faz busca no banco
+		 */
 		Query<ProfessorImpl> theQuery;
-		// tirei a busca por aluno para nao correr o risco de um prof se
-		// cadastrar como aluno e zoar o barraco
+		/* **
+		 *  tirei a busca por aluno para nao correr o risco de um prof se
+		 *  cadastrar como aluno e zoar o barraco
+		 */
+		
 		theQuery = currentSession.createQuery(
 				"from ProfessorImpl where email_usuario = '" + email + "' or cpf_usuario = '" + cpf + "'",
 				ProfessorImpl.class);
 
 		try {
 
-			// ve se tem mais de um professor com os dados
+			/* **
+			 *  ve se tem mais de um professor com os dados
+			 */
 			List<ProfessorImpl> professores = theQuery.getResultList();
-			// devolve o primeiro da lista
+			/* **
+			 *  devolve o primeiro da lista
+			 */
 			ProfessorImpl validaProfessor = professores.get(0);
-			System.out.println("chegou no valida");
 			return validaProfessor;
 
 		} catch (Exception e) {
@@ -94,14 +119,20 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 
 	@Override
 	public ProfessorImpl getUsuario(int id) {
-		// get current hibernate session
+		/* **
+		 *  get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		// Cria query que faz busca no banco
+		/* **
+		 *  Cria query que faz busca no banco
+		 */
 		Query<ProfessorImpl> theQuery;
 		theQuery = currentSession.createQuery("from ProfessorImpl where id_usuario='" + id + "'", ProfessorImpl.class);
 
-		// executa query
+		/* **
+		 *  executa query
+		 */
 		ProfessorImpl theUsuario = theQuery.getSingleResult();
 
 		return theUsuario;
@@ -109,16 +140,23 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 
 	@Override
 	public ProfessorImpl getUsuario(String email) {
-		// get current hibernate session
+		/* **
+		 *  get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		// Cria query que faz busca no banco
+		/* **
+		 *  Cria query que faz busca no banco
+		 */
 		Query<ProfessorImpl> theQuery;
 		theQuery = currentSession.createQuery("from ProfessorImpl where email_usuario='" + email + "'",
 				ProfessorImpl.class);
 
-		// Testa com try catch a execução da query e se foi encontrado algo, é
-		// obrigatorio o uso do try catch
+		/* **
+		 *  Testa com try catch a execução da query e se foi encontrado algo, é
+		 *   obrigatorio o uso do try catch
+		 */
+	
 		ProfessorImpl result = null;
 
 		try {
@@ -129,25 +167,36 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		}
 	}
 
-	// para fazer update do professor
+	/* **
+	 *  para fazer update do professor(non-Javadoc)
+	 * @see com.hullo.dao.UsuarioDAO#udateUsuario(java.lang.Object)
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void udateUsuario(ProfessorImpl theUsuario) {
 
-		// get current hibernate session
+		/* **
+		 *  get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		// Cria query que faz busca no banco
+		/* **
+		 *  Cria query que faz busca no banco
+		 */
 		Query<ProfessorImpl> theQuery;
 
-		// para fazer update apenas dos capos editaveis
+		/* **
+		 *  para fazer update apenas dos capos editaveis
+		 */
 		String hql = "UPDATE ProfessorImpl set nome_usuario = :nome, sobrenome_usuario = :sobrenome, email_usuario = :email, "
 				+ "senha_usuario = :senha, sexo_usuario = :sexo, data_nascimento_usuario = :data, telefone_usuario = :telefone, "
 				+ "profissao_usuario = :profissao, cnpj_usuario = :cnpj, dt_last_update_usuario = :lastUpdate "
 				+ "WHERE id_usuario = :id";
 		theQuery = currentSession.createQuery(hql);
 
-		// adicionando valores para as variaveis do update
+		/* **
+		 *  adicionando valores para as variaveis do update
+		 */
 		theQuery.setParameter("nome", theUsuario.getNome_usuario());
 		theQuery.setParameter("sobrenome", theUsuario.getSobrenome_usuario());
 		theQuery.setParameter("email", theUsuario.getEmail_usuario());
@@ -169,13 +218,19 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void inactivateUsuario(ProfessorImpl theUsuario) {
-		// get current hibernate session
+		/* **
+		 *  get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		// Cria query que faz busca no banco
+		/* **
+		 *  Cria query que faz busca no banco
+		 */
 		Query<ProfessorImpl> theQuery;
 
-		// para fazer update apenas dos capos editaveis
+		/* **
+		 *  para fazer update apenas dos capos editaveis
+		 */
 		String hql = "UPDATE ProfessorImpl set ativo_usuario = 0, dt_last_update_usuario = :lastUpdate "
 				+ "WHERE id_usuario = :id";
 
@@ -188,15 +243,24 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		System.out.println(result + " linha atualizada");
 	}
 
-	// para validar na troca de email, se email ja existe em outro cadastro
+	/* **
+	 *  para validar na troca de email, se email ja existe em outro cadastro(non-Javadoc)
+	 * @see com.hullo.dao.UsuarioDAO#validaUsuario(java.lang.String, int)
+	 */
 	public ProfessorImpl validaUsuario(String email, int id) {
-		// get current hibernate session
+		/* **
+		 *  get current hibernate session
+		 */
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		System.out.println("chegou na validacao de email");
-		// Cria query que faz busca no banco pelo email colocado
+		/* **
+		 *  Cria query que faz busca no banco pelo email colocado
+		 */
 		Query<ProfessorImpl> theQuery;
-		// faz busca por outro aluno que tenha o email digitado
+		/* **
+		 *  faz busca por outro aluno que tenha o email digitado
+		 */
 		theQuery = currentSession.createQuery(
 				"from ProfessorImpl where email_usuario = '" + email + "' and id_usuario <> '" + id + "'",
 				ProfessorImpl.class);

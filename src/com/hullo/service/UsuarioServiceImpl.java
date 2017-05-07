@@ -1,3 +1,9 @@
+/**
+* classe para UsuarioServiceImpl
+* @author Hullo Team 
+* @version 1.0
+ */
+
 package com.hullo.service;
 
 import java.util.List;
@@ -49,7 +55,10 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 		return usuarioDAO.getUsuario(email);
 	}
 
-	//implementado por orbigacao
+	/* ** 
+	 * implementado por orbigacao(non-Javadoc)
+	 * @see com.hullo.service.UsuarioService#updateUsuario(java.lang.Object)
+	 */
 	@Override
 	@Transactional
 	public void updateUsuario(UsuarioImpl theUsuario) {
@@ -62,13 +71,17 @@ public class UsuarioServiceImpl implements UsuarioService<UsuarioImpl> {
 
 	@Override
 	public UsuarioImpl validaUsuario(String email, int id) {
-		// TODO Auto-generated method stub
+		/* **
+		 *  TODO Auto-generated method stub
+		 */
 		return null;
 	}
 
 	@Override
 	public UsuarioImpl validaUsuario(String email, String cpf) {
-		// TODO Auto-generated method stub
+		/* **
+		 *  TODO Auto-generated method stub
+		 */
 		return null;
 	}
 
