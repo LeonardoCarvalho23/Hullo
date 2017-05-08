@@ -93,4 +93,8 @@ public class AulaRealizadaServiceImpl {
 		 aulaRealizadaDAO.saveProximaAulaRealizada(proximaAulaRealizada);
 	}
 
+	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
+		return aulaRealizadaDAO.getAulasRealizadasAluno(id_aluno);
+	}
+
 }

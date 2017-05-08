@@ -31,10 +31,12 @@ import com.fasterxml.jackson.databind.*;
 import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
+import com.hullo.entity.ModuloImpl;
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.entity.AlunoModel;
+import com.hullo.entity.AulaRealizadaImpl;
 import com.hullo.service.AulaRealizadaServiceImpl;
 import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
@@ -235,7 +237,8 @@ public class AlunoController {
 	public String showPerfilAluno(HttpSession session) {
 		return "perfil-aluno";
 	}
-
+	
+	
 	/**
 	 * metodo para abrir a pagina de update do aluno
 	 * 
@@ -414,5 +417,31 @@ public class AlunoController {
 		else
 			return false;
 	}
+	
+	/** METODOS EM CONSTRUÇÕES
+	 * pagina aulas do aluno 
+	 */
+	
+	@RequestMapping("/showAulaAluno")
+	public String showAulaAluno(HttpSession session) {
+		return "aluno-aulas";
+	}
+	
+	/**
+	 * metodo para listar aulas do aluno
+	 */
 
+	@GetMapping("/lista")
+	public String listarAulasRealizadas(HttpSession session, Model theModel) {
+
+		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario");
+		
+		// get aulas from the DAO
+		List<AulaRealizadaImpl> aulas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
+
+		// add the usuarios to the model
+		theModel.addAttribute("aulas", aulas); // name and value
+
+		return "lista-aulas-realizadas";
+	}
 }

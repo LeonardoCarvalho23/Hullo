@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AulaRealizadaImpl;
+import com.hullo.entity.ModuloImpl;
 import com.twilio.rest.api.v2010.account.Call.Status;
 
 @Repository
@@ -155,6 +156,17 @@ public class AulaRealizadaDAOImpl {
 		aulaRealizada.setId_professor_aula_realizada(1);
 
 		currentSession.saveOrUpdate(aulaRealizada);
+	}
+
+	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<AulaRealizadaImpl> Query = currentSession.createQuery("from AulaRealizadaImpl "
+				+ "where id_aluno_aula_realizada = " + id_aluno
+				+ " order by dt_inicio_chamada_aula_realizada DESC",
+				AulaRealizadaImpl.class);
+
+		return Query.getResultList();
 	}
 
 }
