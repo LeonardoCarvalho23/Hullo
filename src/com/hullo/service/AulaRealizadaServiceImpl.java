@@ -93,7 +93,9 @@ public class AulaRealizadaServiceImpl {
 		 aulaRealizadaDAO.saveProximaAulaRealizada(proximaAulaRealizada);
 	}
 
+	@Transactional
 	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
+		System.out.println("service aula realizada "+ id_aluno);
 		return aulaRealizadaDAO.getAulasRealizadasAluno(id_aluno);
 	}
 

@@ -157,16 +157,21 @@ public class AulaRealizadaDAOImpl {
 
 		currentSession.saveOrUpdate(aulaRealizada);
 	}
-
+	
+	
 	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
+		System.out.println("dao aula realizada "+ id_aluno);
+		
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaRealizadaImpl> Query = currentSession.createQuery("from AulaRealizadaImpl "
 				+ "where id_aluno_aula_realizada = " + id_aluno
-				+ " order by dt_inicio_chamada_aula_realizada DESC",
-				AulaRealizadaImpl.class);
+				+ "and dt_inicio_chamada_aula_realizada <> 'null'"
+				+ " order by dt_inicio_chamada_aula_realizada DESC"
+				,AulaRealizadaImpl.class);
 
+		System.out.println("query"+ Query);
 		return Query.getResultList();
-	}
-
+	}	
+	
 }

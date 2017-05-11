@@ -49,7 +49,7 @@
 			</div>
 			
 			<div>
-			<form:form action="../aluno/showAulaAluno" method="POST">
+			<form:form action="../aluno/showAulaAluno" method="GET">
 				<br>
 				<br>
 				<input class="btn btn-primary"

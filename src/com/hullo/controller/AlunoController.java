@@ -418,30 +418,26 @@ public class AlunoController {
 			return false;
 	}
 	
-	/** METODOS EM CONSTRUÇÕES
-	 * pagina aulas do aluno 
-	 */
-	
-	@RequestMapping("/showAulaAluno")
-	public String showAulaAluno(HttpSession session) {
-		return "aluno-aulas";
-	}
-	
+		
 	/**
 	 * metodo para listar aulas do aluno
 	 */
 
-	@GetMapping("/lista")
+	@GetMapping("/showAulaAluno")
 	public String listarAulasRealizadas(HttpSession session, Model theModel) {
 
-		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario");
-		
+		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario");		
+			
 		// get aulas from the DAO
 		List<AulaRealizadaImpl> aulas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
+		
+		System.out.println("passou do list "+ aluno.getId_usuario());
 
 		// add the usuarios to the model
-		theModel.addAttribute("aulas", aulas); // name and value
+		theModel.addAttribute("aulas", aulas);
 
+		System.out.println("passou do themodel ");
+		
 		return "lista-aulas-realizadas";
 	}
 }

@@ -40,37 +40,30 @@
 			style="position: relative;">
 
 
-			<h3>Lista de Aulas Realizadas</h3>
+			<h3>Lista de Aulas Realizadas - PAGINA EM CONSTRUÇÃO</h3>
 
 			<br> <br>
 
-			
-
-			<!--  busca por nome -->
-
-
-			<form:form action="search" method="POST">
-				<input type="text" name="nomeBusca" maxlength="45" />
-				<input type="submit" value="Buscar" class="btn btn-primary" />
-			</form:form>
-
 			<br>
 
-			<!-- pagina em construção -->
+			<!-- add out html table here -->
 			<table>
 				<tr>
-					<th>Id da Aula</th>
-					<th>Data da realização da aula</th>
+					<th>ID Aula Realizada</th>
+					
 					<th> </th>
 				</tr>
 
 				<!-- loop over and print usuarios -->
-				<c:forEach var="tempModulo" items="${aulas}">
+				<c:forEach var="tempAula" items="${aulas}">
 
 					<tr>
-						<td>${tempModulo.id_aula_realizada}</td>
-						<td>${tempModulo.dt_inicio_chamada_aula_realizada}</td>
+						<td>${tempAula.id_aula_realizada}</td>
 						
+						<td>
+						
+							
+						</td>
 					</tr>
 
 				</c:forEach>
@@ -80,7 +73,7 @@
 
 			<!-- Botao Voltar -->
 			<input class="btn btn-primary" type="button" value="Voltar"
-				onclick="window.location.href='../aluno/home-aluno'; return false;"
+				onclick="window.location.href='../adm/main'; return false;"
 				class="add-button" />
 
 		</div>
