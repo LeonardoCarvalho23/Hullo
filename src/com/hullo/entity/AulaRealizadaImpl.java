@@ -53,7 +53,7 @@ public class AulaRealizadaImpl {
 	private int id_aluno_aula_realizada;
 	
 	@Column(name = "id_professor_aula_realizada")
-	private int id_professor_aula_realizada;
+	private Integer id_professor_aula_realizada;
 	
 	@Column(name = "sid_chamada_aula_realizada")
 	private String sid_chamada_aula_realizada;
@@ -74,7 +74,6 @@ public class AulaRealizadaImpl {
 		this.dt_criacao_aula_realizada = new Date();
 		this.id_aula_aula_realizada = id_aula_aula_realizada;
 		this.id_aluno_aula_realizada = id_aluno_aula_realizada;
-		this.id_professor_aula_realizada = 1;
 	}
 	
 	public int getId_aula_realizada() {
@@ -195,11 +194,11 @@ public class AulaRealizadaImpl {
 		this.id_aluno_aula_realizada = id_aluno_aula_realizada;
 	}
 
-	public int getId_professor_aula_realizada() {
+	public Integer getId_professor_aula_realizada() {
 		return id_professor_aula_realizada;
 	}
 
-	public void setId_professor_aula_realizada(int id_professor_aula_realizada) {
+	public void setId_professor_aula_realizada(Integer id_professor_aula_realizada) {
 		this.id_professor_aula_realizada = id_professor_aula_realizada;
 	}
 

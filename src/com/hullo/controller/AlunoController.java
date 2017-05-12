@@ -236,8 +236,7 @@ public class AlunoController {
 	public String showPerfilAluno(HttpSession session) {
 		return "perfil-aluno";
 	}
-	
-	
+
 	/**
 	 * metodo para abrir a pagina de update do aluno
 	 * 
@@ -416,27 +415,28 @@ public class AlunoController {
 		else
 			return false;
 	}
-	
-		
-	/**
-	 * metodo para listar aulas do aluno
-	 */
 
+	/**
+	 * metodo para listar aulas realizadas pelo aluno
+	 * @param session
+	 * @param theModel
+	 * @return pagina com a lista de ualas do aluno
+	 */
 	@GetMapping("/showAulaAluno")
 	public String listarAulasRealizadas(HttpSession session, Model theModel) {
 
-		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario");		
-			
+		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario");
+
 		// get aulas from the DAO
 		List<AulaRealizadaImpl> aulas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
-		
-		System.out.println("passou do list "+ aluno.getId_usuario());
+
+		System.out.println("passou do list " + aluno.getId_usuario());
 
 		// add the usuarios to the model
 		theModel.addAttribute("aulas", aulas);
 
 		System.out.println("passou do themodel ");
-		
+
 		return "lista-aulas-realizadas";
 	}
 }

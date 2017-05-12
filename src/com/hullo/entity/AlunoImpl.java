@@ -66,7 +66,10 @@ public class AlunoImpl implements Usuario {
 	public AlunoImpl() {
 	}
 	
-	//construtor para transformar um usuarioImpl em um alunoImpl
+	/**
+	 * construtor para transformar um usuarioImpl em um alunoImpl
+	 * @param usuario
+	 */
 	public AlunoImpl(UsuarioImpl usuario) {
 		this.id_usuario = usuario.getId_usuario();
 		this.nome_usuario = usuario.getNome_usuario();
@@ -83,14 +86,26 @@ public class AlunoImpl implements Usuario {
 		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
 	}
 
+	/**
+	 * 
+	 * @return id
+	 */
 	public int getId_usuario() {
 		return id_usuario;
 	}
 
+	/**
+	 * 
+	 * @param id_usuario
+	 */
 	public void setId_usuario(int id_usuario) {
 		this.id_usuario = id_usuario;
 	}
 
+	/**
+	 * 
+	 * @return nome usuario
+	 */
 	public String getNome_usuario() {
 		return nome_usuario;
 	}
