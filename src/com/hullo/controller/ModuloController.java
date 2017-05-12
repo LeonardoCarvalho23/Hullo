@@ -3,6 +3,8 @@ package com.hullo.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,13 +33,13 @@ public class ModuloController {
 
 	// lista de todos os modulos cadastrados
 	@GetMapping("/lista")
-	public String listarModulos(Model theModel) {
+	public String listarModulos(HttpSession session) {
 
 		// get modulos from the DAO
 		List<ModuloImpl> modulos = moduloService.getModulos();
 
-		// add the usuarios to the model
-		theModel.addAttribute("modulos", modulos); // name and value
+		// adiciona lista na sessao
+		session.setAttribute("modulos", modulos);
 
 		return "lista-modulos";
 	}
@@ -212,12 +214,12 @@ public class ModuloController {
 
 	//para excluir modulo e todas as suas aulas
 	@PostMapping("/deleteModulo")
-	public String formNovaAula(@RequestParam("modulo.id_modulo") int id_modulo, Model theModel) {
+	public String formNovaAula(@RequestParam("modulo.id_modulo") int id_modulo, HttpSession session) {
 		
 		aulaService.deleteAulasModulo(id_modulo);
 		
 		moduloService.deleteModulo(id_modulo);
 		
-		return listarModulos(theModel);
+		return listarModulos(session);
 	}
 }

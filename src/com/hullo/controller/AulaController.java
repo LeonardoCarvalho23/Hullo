@@ -34,7 +34,12 @@ public class AulaController {
 	@Autowired
 	private ModuloController moduloController;
 
-	// abrir pagina para casdatrar nova aula
+	/**
+	 * abrir pagina para casdatrar nova aula
+	 * @param id_modulo em que vou inserir a aula
+	 * @param theModel
+	 * @return pagina de cadastro de aula
+	 */
 	@PostMapping("/formAula")
 	public String formNovaAula(@RequestParam("modulo.id_modulo") int id_modulo, Model theModel) {
 

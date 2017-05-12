@@ -31,7 +31,6 @@ import com.fasterxml.jackson.databind.*;
 import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
-import com.hullo.entity.ModuloImpl;
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;

@@ -2,6 +2,8 @@ package com.hullo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -42,41 +44,40 @@ public class AdmController {
 		return "main";
 	}
 
-
 	/**
 	 * abre pagina com lista de todos os alunos cadastrados
 	 * 
-	 * @param theModel
-	 *            model para enviar infos para a view
+	 * @param session
+	 *           para enviar infos para a view
 	 * @return pagina com lista de alunos cadastrados
 	 */
 	@GetMapping("/listaAlunos")
-	public String listarAlunos(Model theModel) {
+	public String listarAlunos(HttpSession session) {
 
 		// get usuarios from the DAO
 		List<AlunoImpl> theUsuarios = alunoService.getUsuarios();
 
-		// add the usuarios to the model
-		theModel.addAttribute("usuarios", theUsuarios); // name and value
-
+		// adiciona lista na sessao
+		session.setAttribute("usuarios", theUsuarios); // name and value
+		
 		return "lista-aluno";
 	}
 
 	/**
 	 * abre pagina com lista de todos os professores cadastrados
 	 * 
-	 * @param theModel
-	 *            model para enviar infos para a view
+	 * @param session
+	 *            para enviar infos para a view
 	 * @return pagina com lista de professores cadastrados
 	 */
 	@GetMapping("/listaProfessores")
-	public String listarProfessores(Model theModel) {
+	public String listarProfessores(HttpSession session) {
 
 		// get usuarios from the DAO
 		List<ProfessorImpl> theUsuarios = professorService.getUsuarios();
 
-		// add the usuarios to the model
-		theModel.addAttribute("usuarios", theUsuarios); // name and value
+		// adiciona lista na sessao
+		session.setAttribute("usuarios", theUsuarios); // name and value
 
 		return "list-professor";
 	}
@@ -90,17 +91,5 @@ public class AdmController {
 	public String testCronometro() {
 		return "stopwatchTest";
 	}
-	
-	/*	metodo obsoleto prque nao ha mais UsuarioImpl
-	@GetMapping("/listaUsuarios")
-	public String listarUsuarios(Model theModel) {
 
-		// get usuarios from the DAO
-		List<UsuarioImpl> theUsuarios = usuarioService.getUsuarios();
-
-		// add the usuarios to the model
-		theModel.addAttribute("usuarios", theUsuarios); // name and value
-
-		return "lista-usuarios";
-	}*/
 }

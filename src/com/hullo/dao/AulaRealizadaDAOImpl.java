@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AulaRealizadaImpl;
-import com.hullo.entity.ModuloImpl;
 import com.twilio.rest.api.v2010.account.Call.Status;
 
 @Repository
