@@ -99,4 +99,15 @@ public class AulaRealizadaServiceImpl {
 		return aulaRealizadaDAO.getAulasRealizadasAluno(id_aluno);
 	}
 
+	/**
+	 * Salva dados da gravação da chamada no banco
+	 * @param callSid
+	 * @param recordingUrl
+	 */
+	@Transactional
+	public void updateAulaRealizada(String callSid, String recordingUrl) {
+		aulaRealizadaDAO.updateAulaRealizada(callSid, recordingUrl);
+		
+	}
+
 }

@@ -109,6 +109,7 @@ CREATE TABLE aula_realizada(
  id_aula_realizada int NOT NULL AUTO_INCREMENT,
  id_anterior_aula_realizada int DEFAULT NULL,
  sid_chamada_aula_realizada varchar(34) DEFAULT NULL,
+ url_gravacao_aula_realizada varchar(150) DEFAULT NULL,
  duracao_chamada_aula_realizada varchar(4) DEFAULT NULL,
  custo_chamada_aula_realizada BIGINT DEFAULT NULL,
  status_chamada_aula_realizada varchar(20) DEFAULT NULL,

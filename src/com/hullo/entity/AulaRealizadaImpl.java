@@ -58,6 +58,9 @@ public class AulaRealizadaImpl {
 	@Column(name = "sid_chamada_aula_realizada")
 	private String sid_chamada_aula_realizada;
 	
+	@Column(name = "url_gravacao_aula_realizada")
+	private String url_gravacao_aula_realizada;
+	
 	@Column(name = "duracao_chamada_aula_realizada")
 	private String duracao_chamada_aula_realizada;
 	
@@ -202,6 +205,18 @@ public class AulaRealizadaImpl {
 		this.id_professor_aula_realizada = id_professor_aula_realizada;
 	}
 
+	public String getStatus_aula_realizada() {
+		return status_aula_realizada;
+	}
+	public void setStatus_aula_realizada(String status_aula_realizada) {
+		this.status_aula_realizada = status_aula_realizada;
+	}
+	public String getUrl_gravacao_aula_realizada() {
+		return url_gravacao_aula_realizada;
+	}
+	public void setUrl_gravacao_aula_realizada(String url_gravacao_aula_realizada) {
+		this.url_gravacao_aula_realizada = url_gravacao_aula_realizada;
+	}
 	@Override
 	public String toString() {
 		return "AulaRealizadaImpl [id_aula_realizada=" + id_aula_realizada + ", nota_model_aula_realizada="

@@ -212,4 +212,21 @@ public class AulaRealizadaDAOImpl {
 		return Query.getResultList();
 	}
 
+	/**
+	 * Salva dados da gravação da chamada no banco
+	 * @param callSid
+	 * @param recordingUrl
+	 */
+	@SuppressWarnings("unchecked")
+	public void updateAulaRealizada(String callSid, String recordingUrl) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<AulaRealizadaImpl> theQuery;
+		String sql = "UPDATE AulaRealizadaImpl set url_gravacao_aula_realizada='" + recordingUrl
+				+ "' WHERE sid_chamada_aula_realizada='" + callSid +"'";
+		theQuery = currentSession.createQuery(sql);
+		int result = theQuery.executeUpdate();
+		System.out.println(result + " linha atualizada");
+		
+	}
+
 }

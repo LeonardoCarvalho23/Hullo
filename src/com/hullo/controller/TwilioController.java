@@ -44,7 +44,10 @@ import com.twilio.rest.api.v2010.account.Call.Status;
 // TwiML generation imports
 import com.twilio.twiml.VoiceResponse;
 import com.twilio.twiml.Dial;
+import com.twilio.twiml.Dial.Builder;
 import com.twilio.twiml.Number;
+import com.twilio.twiml.Record;
+import com.twilio.twiml.TwiML;
 import com.twilio.twiml.TwiMLException;
 
 /**
@@ -140,6 +143,8 @@ public class TwilioController extends HttpServlet {
 		
 		//Cria o objeto dialBuilder e define seus parâmetros
 		Dial.Builder dialBuilder = new Dial.Builder();
+		dialBuilder.record(Dial.Record.RECORD_FROM_ANSWER);
+		dialBuilder.recordingStatusCallback("../twilioWebApp/callbackRecording");
 		dialBuilder.callerId(callerId);
 		dialBuilder.number(number);
 		dialBuilder.timeLimit(15); // duração de 5min da chamada
@@ -155,6 +160,29 @@ public class TwilioController extends HttpServlet {
     } 
 	
 	/**
+	 * Recebe os dados da gravação do Twilio quando fica disponível
+	 * @param recordingUrl
+	 * @param callSid
+	 * @param request
+	 * @param response
+	 * @throws ParseException
+	 */
+	@PostMapping("/callbackRecording")
+	public void statusCallbackRecording(
+			@RequestParam("RecordingUrl") String recordingUrl,
+			@RequestParam("CallSid") String callSid,
+			HttpServletRequest request, HttpServletResponse response) throws ParseException {
+		
+		System.out.println("Recebidos dados da gravação!"
+				+ "\n CallSid: "+callSid + "\n Url da gravação: "+recordingUrl);
+		
+		// Grava os dados recebidos no banco
+		aulaRealizadaService.updateAulaRealizada(callSid, recordingUrl);
+		
+	}
+	
+	
+	/**
 	 * Recebe os dados finais da ligacao
 	 * @param callDuration
 	 * @param callSid
@@ -164,7 +192,8 @@ public class TwilioController extends HttpServlet {
 	 */
 	@PostMapping("/callback")
 	@ResponseStatus(value=HttpStatus.OK)
-	public void statusCallback(
+	public String statusCallback(
+			//@RequestParam("Recording")
 			@RequestParam("CallDuration") String callDuration,
 			@RequestParam("CallSid") String callSid,
 			HttpServletRequest request, HttpServletResponse response) throws ParseException {
@@ -179,6 +208,7 @@ public class TwilioController extends HttpServlet {
 		BigDecimal price = call.getPrice();
 		Status status = call.getStatus();
 		
+		
 		// Converte as datas que chegam em RFC 2822 para o datetime do MySQL
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -190,6 +220,8 @@ public class TwilioController extends HttpServlet {
 		//Atualiza as informações da chamada pós ligação
 		aulaRealizadaService.updateAulaRealizada(callSid, callDuration, status, startTimeConv,
 				endTimeConv, price);
+		
+		return "callback";
 	}
 	
 	
