@@ -47,6 +47,14 @@ import com.twilio.twiml.Dial;
 import com.twilio.twiml.Number;
 import com.twilio.twiml.TwiMLException;
 
+/**
+ * Twilio API class - makes calls and save calls info
+ * @author Hullo
+ * @version 1.0
+ * @since 13/05/2017
+ */
+
+
 @SuppressWarnings("serial")
 @Controller
 @RequestMapping("/twilioWebApp")
@@ -60,7 +68,13 @@ public class TwilioController extends HttpServlet {
 	@Autowired
 	private AulaRealizadaServiceImpl aulaRealizadaService;
 	
-	// Generate token in JSON format
+	/**
+	 * Generate token in JSON format
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws TwiMLException
+	 */
 	@GetMapping("/ligacao/token")
 	public void getToken(HttpServletRequest request, HttpServletResponse response) throws IOException, TwiMLException{
         
@@ -87,8 +101,18 @@ public class TwilioController extends HttpServlet {
 
         }
 
-    // Generate voice TwiML
-	// TwiML é a linguagem do Twilio, com a qual nos comunicamos com ele via XML
+	/**
+	 * Generate voice TwiML
+	 * TwiML é a linguagem do Twilio, com a qual nos comunicamos com ele via XML
+	 * @param id_aula - recebe id da aula
+	 * @param to - número de telefone do aluno
+	 * @param callSid - numero de identificação da chamada no twilio
+	 * @param callStatus
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws TwiMLException
+	 */
 	@PostMapping("/voice")
 	public void postVoice(
 			// este paramatro IdAula foi acrescentado ao JS do Twilio (quickstart.js)
@@ -133,7 +157,14 @@ public class TwilioController extends HttpServlet {
             response.getWriter().print(voiceTwimlResponse.toXml());      
     } 
 	
-	// Recebe os dados finais da ligacao
+	/**
+	 * Recebe os dados finais da ligacao
+	 * @param callDuration
+	 * @param callSid
+	 * @param request
+	 * @param response
+	 * @throws ParseException
+	 */
 	@PostMapping("/callback")
 	@ResponseStatus(value=HttpStatus.OK)
 	public void statusCallback(
@@ -175,7 +206,10 @@ public class TwilioController extends HttpServlet {
 	}
 	
 	
-	//Exibe a página com os controles para a chamada
+	/**
+	 * Exibe a página com os controles para a chamada
+	 * @return
+	 */
 	@RequestMapping("/ligacao")
 	public String fazerLigacao(){
 		return "twiliowebapp";
