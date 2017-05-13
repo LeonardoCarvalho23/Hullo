@@ -1,3 +1,4 @@
+
 package com.hullo.controller;
 
 import java.util.Date;
@@ -17,6 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hullo.entity.AulaImpl;
 import com.hullo.service.AulaServiceImpl;
 
+/**
+* classe para controlar o que é exibido nas telas de home e CRUD do aluno
+* @author Hullo Team 
+* @version 1.0
+ */
+
 @Controller
 @RequestMapping("/modulos")
 public class AulaController {
@@ -27,7 +34,12 @@ public class AulaController {
 	@Autowired
 	private ModuloController moduloController;
 
-	// abrir pagina para casdatrar nova aula
+	/**
+	 * abrir pagina para casdatrar nova aula
+	 * @param id_modulo em que vou inserir a aula
+	 * @param theModel
+	 * @return pagina de cadastro de aula
+	 */
 	@PostMapping("/formAula")
 	public String formNovaAula(@RequestParam("modulo.id_modulo") int id_modulo, Model theModel) {
 

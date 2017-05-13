@@ -48,8 +48,6 @@ public class MinistrarAulaController {
 		// crio o model que vai receber a infos para exibir na pagina
 		AulaRealizadaModel aulaRealizadaModel = new AulaRealizadaModel();
 
-		System.out.println("chegou no controller ministrar aula");
-
 		// buscar qual a proxima aula realizada e adiciona ao model
 		AulaRealizadaImpl aulaRealizadaAtual = aulaRealizadaService.getProximaAula();
 
@@ -96,7 +94,7 @@ public class MinistrarAulaController {
 
 		Date current_date = new Date();
 		
-		// pego modulo do objeto moduloModel
+		// pego modulo do objeto Model
 		AulaRealizadaImpl aulaRealizadaAtual = aulaRealizadaModel.getAulaRealizadaAtual();
 		ProfessorImpl professor = (ProfessorImpl) session.getAttribute("usuario");
 
@@ -133,6 +131,7 @@ public class MinistrarAulaController {
 		proxAulaRealizada.setId_aluno_aula_realizada(aulaRealizadaAtual.getId_aluno_aula_realizada());
 		proxAulaRealizada.setId_aula_aula_realizada(proxAula.getId_aula());
 		proxAulaRealizada.setDt_criacao_aula_realizada(current_date);
+		proxAulaRealizada.setId_anterior_aula_realizada(aulaRealizadaAtual.getId_aula_realizada());
 		
 		//salva prox aula_realizada no banco
 		aulaRealizadaService.createProximaAulaRealizada(proxAulaRealizada);

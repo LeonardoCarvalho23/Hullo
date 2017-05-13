@@ -1,3 +1,10 @@
+/**
+* classe para UsuarioControler
+* @author Hullo Team 
+* @version 1.0
+ */
+
+
 package com.hullo.controller;
 
 import javax.servlet.http.HttpSession;
@@ -27,7 +34,9 @@ import com.hullo.service.UsuarioService;
 public class UsuarioController {
 	
 
-	// --Abaixo, dados para disparo de email
+	/* **
+	 * Abaixo, dados para disparo de email
+	 */
 	@Autowired
 	private MailSender mailSender;
 
@@ -35,9 +44,13 @@ public class UsuarioController {
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
 	}
-	// -- fim do código para email
+	/* **
+	 * fim do código para email
+	 */
 
-	// with the service, inject the service here
+	/* **
+	 *  with the service, inject the service here
+	 */
 	@Autowired
 	@Qualifier("usuarioServiceImpl")
 	private UsuarioService<UsuarioImpl> usuarioService;
@@ -56,9 +69,11 @@ public class UsuarioController {
 	@GetMapping("/showFormNewUsuario")
 	public String showFormNovoUsuario(Model theModel) {
 
-		// create model attribute to bind form data
+		/* **
+		 *  create model attribute to bind form data
+		 */
 		UsuarioImpl theUsuario = new UsuarioImpl();
-		theModel.addAttribute("usuario", theUsuario); // name,value
+		theModel.addAttribute("usuario", theUsuario);
 
 		return "usuario-form";
 	}
@@ -73,17 +88,24 @@ public class UsuarioController {
 
 	@PostMapping("/getUsuario")
 	public String loginUsuario(@ModelAttribute("usuarioLogin") UsuarioImpl theUsuario, HttpSession session, Model model) {
-		// Acima, acrescentei o "Model model" para poder repassar a mensagem de erro quando o login falha
-		// O HttpSession session é para guardar a sessão do usuário logado.
-		// Pega o Model e retira os parâmetros para variáveis
+		/* ** 
+		 * Acima, acrescentei o "Model model" para poder repassar a mensagem de erro quando o login falha
+		 * O HttpSession session é para guardar a sessão do usuário logado.
+		 * Pega o Model e retira os parâmetros para variáveis
+		 */
+		
 		String email = theUsuario.getEmail_usuario();
 		String senha = theUsuario.getSenha_usuario();
 
-		// busca por aluno e professor
+		/* **
+		 *  busca por aluno e professor
+		 */
 		AlunoImpl loggedAluno = alunoService.getUsuario(email, senha);
 		ProfessorImpl loggedProfessor = professorService.getUsuario(email, senha);
 		
-		//checa se o usuário possui cadastro como aluno E TAMBÉM como professor
+		/* **
+		 *checa se o usuário possui cadastro como aluno E TAMBÉM como professor
+		 */
 		if ((loggedAluno != null) && (loggedProfessor != null)){
 			session.setAttribute("usuario_aluno", loggedAluno);
 			session.setAttribute("usuario_professor", loggedProfessor);
@@ -91,29 +113,43 @@ public class UsuarioController {
 			return "select-profile";
 		}
 		
-		//login aluno
+		/* **
+		 * login aluno
+		 */
 		if (loggedAluno != null) {
-			//login feito com sucesso
-			//Abaixo, adiciona o objeto AlunoImpl à sessão Http
+			/* **
+			 * login feito com sucesso
+			 * Abaixo, adiciona o objeto AlunoImpl à sessão Http
+			 */
 			session.setAttribute("usuario", loggedAluno);
-			//Guarda no log o horário do login
+			/* **
+			 * Guarda no log o horário do login
+			 */
 			logService.saveAlunoLog(loggedAluno.getId_usuario());
 			return "home-aluno";
 		}
 
-		// login professor
+		/* **
+		 *  login professor
+		 */
 		if (loggedProfessor != null) {
-			// login feito com sucesso
-			//Abaixo, adiciona o objeto ProfessorImpl à sessão Http
+			/* **
+			 *  login feito com sucesso
+			 *  Abaixo, adiciona o objeto ProfessorImpl à sessão Http
+			 */
 			session.setAttribute("usuario", loggedProfessor);
 			session.setAttribute("online", false);
 			
-			//Guarda no log o horário do login
+			/* **
+			 * Guarda no log o horário do login
+			 */
 			logService.saveProfessorLog(loggedProfessor.getId_usuario());
 			return "home-professor";
 		}
 
-		// verifica se eh o adm
+		/* **
+		 *  verifica se eh o adm
+		 */
 		if (senha.equals("adm") & email.equals("adm")) {
 			UsuarioImpl loggedAdmin = new UsuarioImpl();
 			loggedAdmin.setNome_usuario("Administrador");
@@ -121,27 +157,37 @@ public class UsuarioController {
 			return "main";
 		}
 
-		// erro de login
+		/* **
+		 *  erro de login
+		 */
 		final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário ou senha incorretos. </div>";
 		model.addAttribute("errorMessage", errorMessage);
 		return "usuario-login";
 	}
 	
-	// mapeamento com parâmetro para usuario escolher se loga como professor ou aluno
+	/* **
+	 *  mapeamento com parâmetro para usuario escolher se loga como professor ou aluno
+	 */
 	@RequestMapping(value="/getUsuario", params="userType")
 	public String selectUsuario(@RequestParam("userType") String userType, HttpSession session){
-		//guarda em variaveis os dados da sessão para uso no log
+		/* **
+		 * guarda em variaveis os dados da sessão para uso no log
+		 */
 		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario_aluno");
 		ProfessorImpl professor = (ProfessorImpl) session.getAttribute("usuario_professor");
 		
 		if (userType.equals("aluno")){
 			session.setAttribute("usuario", session.getAttribute("usuario_aluno"));
-			//salva o log de login
+			/* **
+			 * salva o log de login
+			 */
 			logService.saveAlunoLog(aluno.getId_usuario());
 			return "home-aluno";
 		} else {
 			session.setAttribute("usuario", session.getAttribute("usuario_professor"));
-			//salva o log de login
+			/* **
+			 * salva o log de login
+			 */
 			logService.saveProfessorLog(professor.getId_usuario());
 			return "home-professor";
 		}
@@ -164,16 +210,22 @@ public class UsuarioController {
 
 	@PostMapping("/sendPassword")
 	public String sendPassword(@ModelAttribute("usuario") UsuarioImpl theUsuario, Model model) {
-		// Pega o email passado no modelo e busca o objeto
+		/* **
+		 *  Pega o email passado no modelo e busca o objeto
+		 */
 		String email = theUsuario.getEmail_usuario();
 		String senha = null;
 		String nome = null;
 		
-		// coloca um usuario no model pra retornar ao login
+		/* **
+		 *  coloca um usuario no model pra retornar ao login
+		 */
 		Usuario oUsuario = new UsuarioImpl();
 		model.addAttribute("usuarioLogin", oUsuario);
 		
-		//busca por aluno e depois por professor e se encontrar, coloca os valores
+		/* **
+		 * busca por aluno e depois por professor e se encontrar, coloca os valores
+		 */
 		AlunoImpl aluno = alunoService.getUsuario(email);
 				
 		if (aluno == null){
@@ -192,9 +244,13 @@ public class UsuarioController {
 		}
 		
 		
-		// Se o usuario nao foi encontrado, retorna erro. Do contrario, envia email.
+		/* **
+		 *  Se o usuario nao foi encontrado, retorna erro. Do contrario, envia email.
+		 */
 		if (senha == null) {
-			// erro
+			/* **
+			 *  erro
+			 */
 			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário não encontrado. </div>";
 			model.addAttribute("errorMessage", errorMessage);
 			return "usuario-password-recover";
@@ -210,9 +266,10 @@ public class UsuarioController {
 
 			try {
 				this.mailSender.send(msg);
-				// System.out.println(msg.toString());
 			} catch (MailException e) {
-				// TODO Auto-generated catch block
+				/* **
+				 *  TODO Auto-generated catch block
+				 */
 			}
 			final String okPasswordMessage = "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Senha enviada com sucesso. </div>";
 			model.addAttribute("okPasswordMessage", okPasswordMessage);

@@ -1,3 +1,9 @@
+/**
+* classe para ProfessorServiceImpl
+* @author Hullo Team 
+* @version 1.0
+ */
+
 package com.hullo.service;
 
 import java.util.List;

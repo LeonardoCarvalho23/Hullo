@@ -122,7 +122,7 @@ CREATE TABLE aula_realizada(
  dt_fim_chamada_aula_realizada datetime DEFAULT NULL,
  id_aula_aula_realizada int NOT NULL,
  id_aluno_aula_realizada int NOT NULL,
- id_professor_aula_realizada SMALLINT(5) not NULL,
+ id_professor_aula_realizada SMALLINT(5) DEFAULT NULL,
  CONSTRAINT PK_aula_realizada 
   PRIMARY KEY (id_aula_realizada),
  CONSTRAINT FK_aula_realizada_aula

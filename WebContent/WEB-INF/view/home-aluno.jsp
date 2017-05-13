@@ -38,14 +38,26 @@
 			style="height: 600px; position: relative;">
 
 			<h3>Bem-vindo, ${usuario.nome_usuario}.</h3>
-			<form:form action="../aluno/showPerfilAluno"
-				method="POST">
+			<div>
+			<form:form action="../aluno/showPerfilAluno" method="POST">
 				<br>
 				<br>
 				<input class="btn btn-primary"
-					style="position: absolute; bottom: 50px; right: 100px;"
-					type="submit" name="Perfil" value="Meu perfil">
+					bottom: 50px; right: 100px;"
+					type="submit" name="Perfil" value="Meu perfil"/>
 			</form:form>
+			</div>
+			
+			<div>
+			<form:form action="../aluno/showAulaAluno" method="GET">
+				<br>
+				<br>
+				<input class="btn btn-primary"
+					bottom: 50px; right: 100px;"
+					type="submit" name="aulas" value="Minhas Aulas"/>
+			</form:form>
+			
+			</div>
 
 		</div>
 		<div id="footer">

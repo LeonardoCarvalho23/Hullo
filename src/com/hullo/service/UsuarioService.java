@@ -1,3 +1,9 @@
+/**
+* classe para UsuarioService
+* @author Hullo Team 
+* @version 1.0
+ */
+
 package com.hullo.service;
 
 import java.util.List;
@@ -9,7 +15,9 @@ public interface UsuarioService<T> {
 
 	public void saveUsuario(T theUsuario);
 
-	//metodo de busca do login
+	/* ** 
+	 * metodo de busca do login
+	 */
 	public T getUsuario(String email, String senha);
 	
 	public T validaUsuario(String email, int id);
@@ -22,7 +30,9 @@ public interface UsuarioService<T> {
 
 	public void inactivateUsuario(T theUsuario);
 
-	//metodo validacao na hora de cadastrar
+	/* ** 
+	 * metodo validacao na hora de cadastrar
+	 */
 	public T validaUsuario(String email, String cpf);
 
 }
