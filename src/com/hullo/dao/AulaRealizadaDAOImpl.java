@@ -198,6 +198,12 @@ public class AulaRealizadaDAOImpl {
 
 		currentSession.saveOrUpdate(aulaRealizada);
 	}
+	
+	/**
+	 * lista aulas realizadas pelo aluno
+	 * @param id_aluno
+	 * @return lista de aulas realizadas
+	 */
 
 	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
 		System.out.println("dao aula realizada " + id_aluno);

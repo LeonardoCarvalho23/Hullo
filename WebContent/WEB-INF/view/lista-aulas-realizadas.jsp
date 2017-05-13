@@ -73,8 +73,8 @@
 
 			<!-- Botao Voltar -->
 			<input class="btn btn-primary" type="button" value="Voltar"
-				onclick="window.location.href='../adm/main'; return false;"
-				class="add-button" />
+				onclick="window.location.href='../aluno/showHomeAluno'; return false;" />
+				
 
 		</div>
 		<div id="footer">

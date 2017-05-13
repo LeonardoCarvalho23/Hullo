@@ -248,6 +248,18 @@ public class AlunoController {
 	public String showFormUpdateAluno(HttpSession session) {
 		return "aluno-update-form";
 	}
+	
+	/**
+	 * metodo para abrir a pagina de home do aluno
+	 * 
+	 * @param session
+	 *            session em que está o objeto AlunoImpl
+	 * @return pagina de home do aluno
+	 */
+	@RequestMapping("/showHomeAluno")
+	public String showHomeAluno(HttpSession session) {
+		return "home-aluno";
+	}
 
 	/**
 	 * metodo para atualizar aluno
@@ -432,7 +444,7 @@ public class AlunoController {
 
 		System.out.println("passou do list " + aluno.getId_usuario());
 
-		// add the usuarios to the model
+		// add the aulas to the model
 		theModel.addAttribute("aulas", aulas);
 
 		System.out.println("passou do themodel ");
