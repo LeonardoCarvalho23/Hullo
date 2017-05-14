@@ -1,10 +1,13 @@
 package com.hullo.entity;
 
+import java.util.List;
+
 public class AulaRealizadaModel {
 	
 	private AlunoImpl aluno;
 	private AulaImpl aulaAnterior;
 	private AulaImpl aulaAtual;
+	private AulaImpl nomeAula;
 	private AulaRealizadaImpl aulaRealizadaAnterior;
 	private AulaRealizadaImpl aulaRealizadaAtual;
 	
@@ -38,5 +41,12 @@ public class AulaRealizadaModel {
 	public void setAulaRealizadaAtual(AulaRealizadaImpl aulaRealizadaAtual) {
 		this.aulaRealizadaAtual = aulaRealizadaAtual;
 	}
+	public AulaImpl getNomeAula() {
+		return nomeAula;
+	}
+	public void setNomeAula(AulaImpl nomeAula) {
+		this.nomeAula = nomeAula;
+	}
 
+	
 }

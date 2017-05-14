@@ -40,7 +40,7 @@
 			style="position: relative;">
 
 
-			<h3>Lista de Aulas Realizadas - PAGINA EM CONSTRUÇÃO</h3>
+			<h3>Lista de Aulas Realizadas</h3>
 
 			<br> <br>
 
@@ -50,6 +50,9 @@
 			<table>
 				<tr>
 					<th>ID Aula Realizada</th>
+					<th>Nome da Aula</th>
+					<th>Data Aula</th>
+					<th>Status</th>
 					
 					<th> </th>
 				</tr>
@@ -59,10 +62,14 @@
 
 					<tr>
 						<td>${tempAula.id_aula_realizada}</td>
-						
+						<td>Nome Aula</td>
+						<td>${tempAula.dt_inicio_aula_realizada}</td>
+						<td>${tempAula.status_aula_realizada}</td>
 						<td>
-						
-							
+						<!-- botao de update do modulo --> 
+							<c:url var="viewLink" value="/aluno/showDetalhesAula">
+								<c:param name="id_aula_realizada" value="${tempAula.id_aula_realizada}" />
+							</c:url> <!-- mostra o link --> <a href="${viewLink}">Detalhes</a>
 						</td>
 					</tr>
 

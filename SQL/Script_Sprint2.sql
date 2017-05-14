@@ -117,7 +117,7 @@ CREATE TABLE aula_realizada(
  nota_practice_aula_realizada int DEFAULT NULL,
  nota_production_aula_realizada int DEFAULT NULL,
  comentario_aula_realizada varchar(200) DEFAULT NULL,
- status_aula_realizada char (1) DEFAULT NULL, -- 1 = ligacao atendida por aluno, 0 ligacao não atendia
+ status_aula_realizada varchar (20) DEFAULT NULL,
  dt_criacao_aula_realizada datetime NOT NULL,
  dt_inicio_chamada_aula_realizada datetime DEFAULT NULL,
  dt_fim_chamada_aula_realizada datetime DEFAULT NULL,
