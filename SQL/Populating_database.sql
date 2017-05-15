@@ -63,6 +63,7 @@ insert into aula_realizada (id_aula_realizada,
                             dt_criacao_aula_realizada,
                             id_aula_aula_realizada,
                             id_aluno_aula_realizada,
-                            id_professor_aula_realizada) 
-	values (4, 2, STR_TO_DATE( "30/04/2017 21:15:10", "%d/%m/%Y %H:%i:%s" ), 5, 1, 1);
+                            id_professor_aula_realizada,
+                            url_gravacao_aula_realizada) 
+	values (4, 2, STR_TO_DATE( "30/04/2017 21:15:10", "%d/%m/%Y %H:%i:%s" ), 5, 1, 1,"https://api.twilio.com/2010-04-01/Accounts/AC8963db92d979cf31fbdb8df728e70966/Recordings/RE4ac17c7f10a4bb61b5f921a234d17916");
     
