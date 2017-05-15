@@ -6,7 +6,7 @@
 
 <head>
 <title>Editar Módulo</title>
-<title>Editar Modulo</title>
+
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <link

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -31,10 +32,13 @@ import com.fasterxml.jackson.databind.*;
 import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
+import com.hullo.entity.ModuloImpl;
+import com.hullo.entity.ModuloModel;
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.entity.AlunoModel;
+import com.hullo.entity.AulaImpl;
 import com.hullo.entity.AulaRealizadaImpl;
 import com.hullo.service.AulaRealizadaServiceImpl;
 import com.hullo.service.CidadeServiceImpl;
@@ -248,6 +252,18 @@ public class AlunoController {
 	public String showFormUpdateAluno(HttpSession session) {
 		return "aluno-update-form";
 	}
+	
+	/**
+	 * metodo para abrir a pagina de home do aluno
+	 * 
+	 * @param session
+	 *            session em que está o objeto AlunoImpl
+	 * @return pagina de home do aluno
+	 */
+	@RequestMapping("/showHomeAluno")
+	public String showHomeAluno(HttpSession session) {
+		return "home-aluno";
+	}
 
 	/**
 	 * metodo para atualizar aluno
@@ -426,17 +442,37 @@ public class AlunoController {
 	public String listarAulasRealizadas(HttpSession session, Model theModel) {
 
 		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario");
-
+		
 		// get aulas from the DAO
 		List<AulaRealizadaImpl> aulas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
 
-		System.out.println("passou do list " + aluno.getId_usuario());
-
-		// add the usuarios to the model
+		// add the aulas to the model
 		theModel.addAttribute("aulas", aulas);
-
-		System.out.println("passou do themodel ");
 
 		return "lista-aulas-realizadas";
 	}
+	
+	@RequestMapping("/showDetalhesAula")
+	public String showDetalhesAula(HttpSession session) {
+		return "aluno-aula";
+	}
+	
+	@GetMapping("/showDetalhesAula")
+	public String showDetalhesAula(@RequestParam("id_aula_realizada") int id_aula_realizada, Model theModel, ModelMap modelMap) {
+
+		// get aula realizada do banco
+		AulaRealizadaImpl aula = aulaRealizadaService.getAulaRealizada(id_aula_realizada);
+
+		// cria AulaImpl
+		AulaImpl aulaImpl = new AulaImpl();
+
+			
+		theModel.addAttribute("aula", aula);
+
+		// retorna pagina de detalhe da aula
+		return "aluno-aula";
+
+	}
+	
+	
 }

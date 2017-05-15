@@ -40,7 +40,7 @@
 
 			<h3>Perfil de professor</h3>
                 
-                    <p>Nome: ${usuario.nome_usuario}</p>
+    <p>Nome: ${usuario.nome_usuario}</p>
 	<p>Sobrenome: ${usuario.sobrenome_usuario}</p>
 	<p>E-mail: ${usuario.email_usuario}</p>
 	<p>Senha: ${usuario.senha_usuario}</p>

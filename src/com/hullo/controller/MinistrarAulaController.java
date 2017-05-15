@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.AulaImpl;
@@ -23,6 +24,7 @@ import com.hullo.service.UsuarioService;
 
 @Controller
 @RequestMapping("/professor")
+@SessionAttributes("aulaRealizada")
 public class MinistrarAulaController {
 
 	ProfessorImpl professor;

@@ -198,20 +198,27 @@ public class AulaRealizadaDAOImpl {
 
 		currentSession.saveOrUpdate(aulaRealizada);
 	}
+	
+	/**
+	 * lista aulas realizadas pelo aluno
+	 * @param id_aluno
+	 * @return lista de aulas realizadas
+	 */
 
 	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
-		System.out.println("dao aula realizada " + id_aluno);
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaRealizadaImpl> Query = currentSession.createQuery("from AulaRealizadaImpl "
-				+ "where id_aluno_aula_realizada = " + id_aluno + "and dt_inicio_chamada_aula_realizada <> 'null'"
-				+ " order by dt_inicio_chamada_aula_realizada DESC", AulaRealizadaImpl.class);
+				+ "where id_aluno_aula_realizada = " + id_aluno 
+				+ "and dt_inicio_chamada_aula_realizada <> 'null'"
+				+ " order by dt_inicio_chamada_aula_realizada DESC", 
+				AulaRealizadaImpl.class);
 
-		System.out.println("query" + Query);
 		return Query.getResultList();
 	}
-
+	
+	
 	/**
 	 * Salva dados da gravação da chamada no banco
 	 * @param callSid
