@@ -35,15 +35,15 @@
 		</div>
 		<div id="container">
 			<fieldset>
-				<h3>Aula Realizada</h3>
-                
-    			<div class="form-group">
+				<legend>Aula Realizada</legend>            
     			
-						<label class="col-md-4 control-label">Nome Aula</label>
-						<div class="col-md-4 inputGroupContainer">
-							
-						</div>
+										
+					<div class="form-group">
+						
+						<p>Data Realização da aula: ${aula.dt_inicio_aula_realizada}</p>
+						
 					</div>
+					
 		
 				<!-- Botões -->
 				<div class="form-group">

@@ -49,7 +49,7 @@
 			<!-- add out html table here -->
 			<table>
 				<tr>
-					<th>ID Aula Realizada</th>
+					
 					<th>Nome da Aula</th>
 					<th>Data Aula</th>
 					<th>Status</th>
@@ -61,7 +61,7 @@
 				<c:forEach var="tempAula" items="${aulas}">
 
 					<tr>
-						<td>${tempAula.id_aula_realizada}</td>
+						
 						<td>Nome Aula</td>
 						<td>${tempAula.dt_inicio_aula_realizada}</td>
 						<td>${tempAula.status_aula_realizada}</td>
