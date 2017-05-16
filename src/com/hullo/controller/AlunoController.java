@@ -444,23 +444,17 @@ public class AlunoController {
 	 * @return pagina com a lista de ualas do aluno
 	 */
 	@GetMapping("/showAulaAluno")
-	public String listarAulasRealizadas(HttpSession session, Model theModel, ModelMap modelMap) {
+	public String listarAulasRealizadas(HttpSession session, Model theModel) {
 
 		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario");
 		
 		// get aulas from the DAO
 		List<AulaRealizadaImpl> aulasRealizadas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
-		
 
 		// add the aulas to the model
 		theModel.addAttribute("aulas", aulasRealizadas);
 
 		return "lista-aulas-realizadas";
-	}
-	
-	@RequestMapping("/showDetalhesAula")
-	public String showDetalhesAula(HttpSession session) {
-		return "aluno-aula";
 	}
 	
 	/**

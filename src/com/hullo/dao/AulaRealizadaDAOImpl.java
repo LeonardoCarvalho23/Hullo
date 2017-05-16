@@ -47,7 +47,7 @@ public class AulaRealizadaDAOImpl {
 		currentSession.saveOrUpdate(aulaRealizada);
 	}
 
-/*	// DESA buscar proxima aula realizada, baseado na sua data de criacao
+	// DESA buscar proxima aula realizada, baseado na sua data de criacao
 	public AulaRealizadaImpl getProximaAula() {
 		Session currentSession = sessionFactory.getCurrentSession();
 
@@ -77,9 +77,9 @@ public class AulaRealizadaDAOImpl {
 			return null;
 		}
 	}
-*/
+
 	// PROD buscar proxima aula realizada, baseado na sua data de criacao
-		public AulaRealizadaImpl getProximaAula() {
+/*		public AulaRealizadaImpl getProximaAula() {
 			Session currentSession = sessionFactory.getCurrentSession();
 
 			// achar os dias anteriores para consulta das aulas
@@ -117,7 +117,7 @@ public class AulaRealizadaDAOImpl {
 				return null;
 			}
 		}
-
+*/
 	// pegar uma aula especifica
 	public AulaRealizadaImpl getAulaRealizada(int id_aula_realizada) {
 
