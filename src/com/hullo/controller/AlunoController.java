@@ -40,7 +40,9 @@ import com.hullo.entity.UsuarioImpl;
 import com.hullo.entity.AlunoModel;
 import com.hullo.entity.AulaImpl;
 import com.hullo.entity.AulaRealizadaImpl;
+import com.hullo.entity.AulaRealizadaModel;
 import com.hullo.service.AulaRealizadaServiceImpl;
+import com.hullo.service.AulaServiceImpl;
 import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
@@ -66,6 +68,9 @@ public class AlunoController {
 
 	@Autowired
 	private AulaRealizadaServiceImpl aulaRealizadaService;
+	
+	@Autowired
+	private AulaServiceImpl aulaService;
 
 	@Autowired
 	private EstadoServiceImpl estadoService;
@@ -439,15 +444,16 @@ public class AlunoController {
 	 * @return pagina com a lista de ualas do aluno
 	 */
 	@GetMapping("/showAulaAluno")
-	public String listarAulasRealizadas(HttpSession session, Model theModel) {
+	public String listarAulasRealizadas(HttpSession session, Model theModel, ModelMap modelMap) {
 
 		AlunoImpl aluno = (AlunoImpl) session.getAttribute("usuario");
 		
 		// get aulas from the DAO
-		List<AulaRealizadaImpl> aulas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
+		List<AulaRealizadaImpl> aulasRealizadas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
+		
 
 		// add the aulas to the model
-		theModel.addAttribute("aulas", aulas);
+		theModel.addAttribute("aulas", aulasRealizadas);
 
 		return "lista-aulas-realizadas";
 	}
@@ -457,18 +463,27 @@ public class AlunoController {
 		return "aluno-aula";
 	}
 	
+	/**
+	 * metodo para popular tela de detalhes de aula
+	 * @param id_aula_realizada
+	 * @param theModel
+	 * @param modelMap
+	 * @return tela de detalhes da aula selecionada
+	 */
+	
 	@GetMapping("/showDetalhesAula")
 	public String showDetalhesAula(@RequestParam("id_aula_realizada") int id_aula_realizada, Model theModel, ModelMap modelMap) {
 
+		
 		// get aula realizada do banco
-		AulaRealizadaImpl aula = aulaRealizadaService.getAulaRealizada(id_aula_realizada);
-
-		// cria AulaImpl
-		AulaImpl aulaImpl = new AulaImpl();
+		AulaRealizadaImpl aulaRealizada = aulaRealizadaService.getAulaRealizada(id_aula_realizada);
+		String nomeAula = aulaService.getNomeAula(aulaRealizada.getId_aula_aula_realizada());
 
 			
-		theModel.addAttribute("aula", aula);
+		modelMap.addAttribute("aulaRealizada", aulaRealizada);
+		modelMap.addAttribute("nomeAula", nomeAula);
 
+		
 		// retorna pagina de detalhe da aula
 		return "aluno-aula";
 

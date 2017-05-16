@@ -7,9 +7,10 @@ public class AulaRealizadaModel {
 	private AlunoImpl aluno;
 	private AulaImpl aulaAnterior;
 	private AulaImpl aulaAtual;
-	private AulaImpl nomeAula;
+	String nomeAula;
 	private AulaRealizadaImpl aulaRealizadaAnterior;
 	private AulaRealizadaImpl aulaRealizadaAtual;
+	private AulaRealizadaImpl aulaRealizada;
 	
 	public AlunoImpl getAluno() {
 		return aluno;
@@ -41,12 +42,19 @@ public class AulaRealizadaModel {
 	public void setAulaRealizadaAtual(AulaRealizadaImpl aulaRealizadaAtual) {
 		this.aulaRealizadaAtual = aulaRealizadaAtual;
 	}
-	public AulaImpl getNomeAula() {
+	public String getNomeAula() {
 		return nomeAula;
 	}
-	public void setNomeAula(AulaImpl nomeAula) {
+	public void setNomeAula(String nomeAula) {
 		this.nomeAula = nomeAula;
 	}
+	public AulaRealizadaImpl getAulaRealizada() {
+		return aulaRealizada;
+	}
+	public void setAulaRealizada(AulaRealizadaImpl aulaRealizada) {
+		this.aulaRealizada = aulaRealizada;
+	}
+	
 
 	
 }

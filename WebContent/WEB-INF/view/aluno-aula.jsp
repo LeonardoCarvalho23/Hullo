@@ -40,7 +40,17 @@
 										
 					<div class="form-group">
 						
-						<p>Data Realização da aula: ${aula.dt_inicio_aula_realizada}</p>
+						<p>Data Nome da aula: ${nomeAula}</p>						
+						<p>Data Realização da aula: ${aulaRealizada.dt_inicio_aula_realizada}</p>
+						<p>Escute sua aula:: ${aulaRealizada.url_gravacao_aula_realizada}</p>
+						
+						<audio controls>
+  							<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/ogg">
+ 							<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/mpeg">
+							
+						</audio>
+						
+						
 						
 					</div>
 					

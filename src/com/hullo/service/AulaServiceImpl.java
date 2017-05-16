@@ -68,19 +68,11 @@ public class AulaServiceImpl {
 		return aulaDAO.getProximaAulaParalela(id_aula_aula_realizada);
 	}
 	
-	
+	@Transactional
+	public String getNomeAula (int id_aula){
+		System.out.println("chegou  aulaservice  "+id_aula);
+		return aulaDAO.getNomeAula(id_aula);
+	}
 		
-	/* METODO ENCERRAR AULA + CRIAR NOVA AULA
-	@Transactional
-	public AulaImpl getProximoAulaPorNumero(int id_modulo, int numero_aula){
-		System.out.println("getProximoAulaPorNumero aula service");
-		return aulaDAO.getProximoAulaPorNumero(id_modulo, numero_aula);
-	}
 	
-	@Transactional
-	public AulaImpl getProximoAulaPorIndice(int id_modulo, int numero_aula, char indice_aula){
-		System.out.println("getProximoAulaPorIndice aula service");
-		return aulaDAO.getProximoAulaPorIndice(id_modulo, numero_aula, indice_aula);
-	}
-	*/
 }
