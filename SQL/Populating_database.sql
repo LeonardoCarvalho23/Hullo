@@ -32,8 +32,13 @@ insert into aula_realizada (id_aula_realizada,
                             dt_fim_chamada_aula_realizada,
                             id_aula_aula_realizada,
                             id_aluno_aula_realizada,
-                            id_professor_aula_realizada) 
-	values (1, 5, 4, 4, "aluno conseguiu entender e reproduzir bem as estruturas, necessita melhorar um pouco o sotaque", "Realizada", STR_TO_DATE( "28/04/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "29/04/2017 13:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "29/04/2017 13:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 1, 1);
+                            id_professor_aula_realizada,
+                            url_gravacao_aula_realizada) 
+	values (1, 5, 4, 4, "aluno conseguiu entender e reproduzir bem as estruturas, necessita melhorar um pouco o sotaque", "Realizada", 
+            STR_TO_DATE( "28/04/2017 10:10:10", "%d/%m/%Y %H:%i:%s" ), 
+            STR_TO_DATE( "29/04/2017 13:10:10", "%d/%m/%Y %H:%i:%s" ), 
+            STR_TO_DATE( "29/04/2017 13:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 1, 1,
+            "https://api.twilio.com/2010-04-01/Accounts/AC8963db92d979cf31fbdb8df728e70966/Recordings/RE4ac17c7f10a4bb61b5f921a234d17916");
 
 insert into aula_realizada (id_aula_realizada, 
 							nota_model_aula_realizada, 
@@ -46,8 +51,13 @@ insert into aula_realizada (id_aula_realizada,
                             dt_fim_chamada_aula_realizada,
                             id_aula_aula_realizada,
                             id_aluno_aula_realizada,
-                            id_professor_aula_realizada) 
-	values (2, 4, 3, 3, "aluno conseguiu reproduzir a produzir maior parte, problema com o verbo", "Realizada", STR_TO_DATE( "30/04/2017 08:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "30/04/2017 18:10:10", "%d/%m/%Y %H:%i:%s" ), STR_TO_DATE( "30/04/2017 18:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 2, 1);
+                            id_professor_aula_realizada,
+                            url_gravacao_aula_realizada) 
+	values (2, 4, 3, 3, "aluno conseguiu reproduzir a produzir maior parte, problema com o verbo", "Realizada",
+             STR_TO_DATE( "30/04/2017 08:10:10", "%d/%m/%Y %H:%i:%s" ), 
+			 STR_TO_DATE( "30/04/2017 18:10:10", "%d/%m/%Y %H:%i:%s" ), 
+             STR_TO_DATE( "30/04/2017 18:15:10", "%d/%m/%Y %H:%i:%s" ), 1, 2, 1, 
+             "https://api.twilio.com/2010-04-01/Accounts/AC8963db92d979cf31fbdb8df728e70966/Recordings/RE4ac17c7f10a4bb61b5f921a234d17916");
 
 insert into aula_realizada (id_aula_realizada,
 							id_anterior_aula_realizada,

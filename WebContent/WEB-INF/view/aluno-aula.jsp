@@ -42,7 +42,7 @@
 						
 						<p>Data Nome da aula: ${nomeAula}</p>						
 						<p>Data Realização da aula: ${aulaRealizada.dt_inicio_aula_realizada}</p>
-						<p>Escute sua aula:: ${aulaRealizada.url_gravacao_aula_realizada}</p>
+						<p>Escute sua aula:</p>
 						
 						<audio controls>
   							<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/ogg">
