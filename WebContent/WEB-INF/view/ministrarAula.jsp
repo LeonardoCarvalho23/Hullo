@@ -110,7 +110,7 @@
 					<button id="button-call" class="btn btn-primary" onclick="toggle_visibility('grade')">Call Student</button>
 					<button id="button-hangup" class="btn btn-danger" style="display: none;">Hangup</button>
 				</div>
-				<div id="log"></div>
+				<div id="log" style="height: 100px; overflow: auto; padding: 10px; margin-top: 20px; border-radius: 5px; border: 1px solid #808080; font-size: 10px;"></div>
 			</div>
             </div>
             <!-- End twilio controls -->
