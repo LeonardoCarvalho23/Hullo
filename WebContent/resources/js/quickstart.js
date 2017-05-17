@@ -27,6 +27,10 @@
         log('Call ended.');
         document.getElementById('button-call').style.display = 'inline';
         document.getElementById('button-hangup').style.display = 'none';
+      //ADDED HULLO - Toggle student grade
+        var e = document.getElementById('grade');
+        if(e.style.display == 'none')
+            e.style.display = 'block';  
       });
 
       Twilio.Device.incoming(function (conn) {
