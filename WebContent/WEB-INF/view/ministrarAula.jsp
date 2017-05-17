@@ -109,6 +109,7 @@
 					<input id="phone-number" type="hidden" value="${aulaRealizadaModel.aluno.telefone_usuario}" />
 					<button id="button-call" class="btn btn-primary" onclick="toggle_visibility('grade')">Call Student</button>
 					<button id="button-hangup" class="btn btn-danger" style="display: none;">Hangup</button>
+					<p id="timer" style="display: none; background: red; border-radius: 2px; color: white; margin-left: 10px; padding: 10px; font-weight: bold;"></p>
 				</div>
 				<div id="log" style="height: 100px; overflow: auto; padding: 10px; margin-top: 20px; border-radius: 5px; border: 1px solid #808080; font-size: 10px;"></div>
 			</div>
@@ -208,7 +209,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}/resources/js/quickstart.js?v=03"></script>
+		src="${pageContext.request.contextPath}/resources/js/quickstart.js?v=31"></script>
 
 </body>
 

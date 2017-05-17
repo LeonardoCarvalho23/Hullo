@@ -21,12 +21,23 @@
         log('Successfully established call!');
         document.getElementById('button-call').style.display = 'none';
         document.getElementById('button-hangup').style.display = 'inline';
+        // HULLO ADDED - COUNTER
+        clearInterval(x);
+        now = 0;
+        x = setInterval(function(){ callTimer() },1000);
+        document.getElementById("timer").style.display = 'inline';
+        // end hullo added - counter
       });
 
       Twilio.Device.disconnect(function (conn) {
         log('Call ended.');
         document.getElementById('button-call').style.display = 'inline';
         document.getElementById('button-hangup').style.display = 'none';
+        document.getElementById("timer").style.display = 'none';
+        clearInterval(x);
+        
+
+        
       //ADDED HULLO - Toggle student grade
         var e = document.getElementById('grade');
         if(e.style.display == 'none')
@@ -86,3 +97,21 @@ function setClientNameUI(clientName) {
   div.innerHTML = 'Your client name: <strong>' + clientName +
     '</strong>';
 }
+
+// HULLO ADDED - CALL TIMER
+var now = 0;
+function callTimer(){
+	var distance = 300 - now;
+	var minutes = Math.floor(distance/60);
+	var seconds = Math.floor(distance%60);
+	//output result to element with id="timer"
+	document.getElementById("timer").innerHTML = minutes + "min " + seconds + "s ";
+	//when countdown is over
+	if (distance < 0) {
+		clearInterval(x);
+		document.getElementById("timer").innerHTML = "Encerrar";
+	}	
+	now++;
+}
+var x = setInterval(function(){ callTimer() },1000);
+clearInterval(x);
