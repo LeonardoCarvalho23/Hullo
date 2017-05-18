@@ -40,12 +40,12 @@
 				src="${pageContext.request.contextPath}/resources/images/logo200v2.png"
 				width="100px">
 		</div>
-		<div id="container" class="well form-horizontal"position:relative;">
+		<div id="container" class="well form-horizontal">
 
-			<h3>Sorry, there are no classes available</h3>
+			<!--<h3>Sorry, there are no classes available</h3>-->
 			<br>
 			<div class="form-group">
-				<label class="col-md-4 control-label"></label>
+				${errorMessage} <label class="col-md-4 control-label"></label>
 				<div class="col-md-4">
 					<input type="button" class="btn btn-primary" value="Voltar"
 						onclick="window.location.href='../professor/showHomeProfessor'; return false;" />
