@@ -1,12 +1,12 @@
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt">
 <head>
-<title>Detalhes Aula Realizada</title>
-
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classes</title>
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <link
@@ -21,9 +21,16 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
+<link
+	href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
+	rel="stylesheet">
+<script
+	src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
+
+
 </head>
 
 <body>
@@ -33,15 +40,11 @@
 				src="${pageContext.request.contextPath}/resources/images/logo200v2.png"
 				width="100px">
 		</div>
-		<div id="container">
-			<fieldset>
-				<legend>Aula Realizada</legend>            
-    			
-										
-					<div class="form-group">
-						
-						<p>Data Nome da aula: ${nomeAula}</p>						
+		<div id="container" class="well form-horizontal">
+
+						<p>Nome da aula: ${nomeAula}</p>						
 						<p>Data Realização da aula: ${aulaRealizada.dt_inicio_aula_realizada}</p>
+						<p>Status da aula: ${aulaRealizada.status_aula_realizada}</p>
 						<p>Escute sua aula:</p>
 						
 						<audio controls>
@@ -49,29 +52,26 @@
  							<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/mpeg">
 							
 						</audio>
-						
-						
-						
-					</div>
-					
-		
-				<!-- Botões -->
-				<div class="form-group">
-						<label class="col-md-4 control-label"></label>
-						<div class="col-md-4">							
-							<input type="button" class="btn btn-primary" value="Voltar"
-								onclick="window.location.href='../aluno/showAulaAluno'; return false;" />
-						</div>
-						
+			<br>
+			<div class="form-group">
+				<label class="col-md-4 control-label"></label>
+				<div class="col-md-4">
+					<input type="button" class="btn btn-primary" value="Voltar"
+						onclick="window.location.href='../aluno/showAulaAluno'; return false;" />
 				</div>
-			</fieldset>.
+			</div>
+			<!-- Botao voltar -->
+
+
 		</div>
-	</div>
-	
-	<div id="footer">
-		<p style="display: block; margin: auto; padding: 10px;" align="center">Copyright
-			© 2017 Hullo. Todos os direitos reservados.</p>
+		<div id="footer">
+			<p style="display: block; margin: auto; padding: 10px;"
+				align="center">Copyright © 2017 Hullo. Todos os direitos
+				reservados.</p>
+		</div>
 	</div>
 </body>
 
 </html>
+
+</script>
