@@ -1,6 +1,7 @@
 package com.hullo.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -450,9 +451,37 @@ public class AlunoController {
 		
 		// get aulas from the DAO
 		List<AulaRealizadaImpl> aulasRealizadas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
-
+		
+		
+		List<AulaRealizadaModel> listaAulas = new ArrayList<AulaRealizadaModel>();
+		
+		
+		for (int i = 0; i < aulasRealizadas.size(); i++) {
+			//objeto que vai pegar apenas o registro daquela iteração, pq esta vindo como list
+			AulaRealizadaModel aulaRealizadaModel = new AulaRealizadaModel();
+			AulaRealizadaImpl aulaRealizada = new AulaRealizadaImpl();
+			aulaRealizada = aulasRealizadas.get(i);
+			
+			System.out.println("id aula realizada iteracao "+ aulaRealizada.getId_aula_realizada());
+			
+			System.out.println("id aula iteracao "+ aulaRealizada.getId_aula_aula_realizada());
+							
+			String nomeAula = aulaService.getNomeAula(aulaRealizada.getId_aula_aula_realizada());
+			
+			System.out.println("nome aula iteracao "+nomeAula);
+			
+			//adiciona no model
+			aulaRealizadaModel.setNomeAula(nomeAula);			
+			aulaRealizadaModel.setAulaRealizadaAtual(aulaRealizada);
+		
+			
+			listaAulas.add(aulaRealizadaModel);
+			
+			
+		}
+		
 		// add the aulas to the model
-		theModel.addAttribute("aulas", aulasRealizadas);
+		theModel.addAttribute("aulas", listaAulas);
 
 		return "lista-aulas-realizadas";
 	}

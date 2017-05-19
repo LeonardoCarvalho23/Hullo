@@ -245,7 +245,7 @@ public class AulaDAOImpl {
 	}
 
 	public String getNomeAula(int id_aula) {
-		System.out.println("chegou  auladao getNomeAula "+id_aula);
+		
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// busca nome por id da aula
@@ -253,7 +253,7 @@ public class AulaDAOImpl {
 
 		AulaImpl result = query.getSingleResult();
 		String nome = result.getNm_aula();
-		System.out.println("chegou  auladao result "+nome);
+		
 		return nome;
 		
 		

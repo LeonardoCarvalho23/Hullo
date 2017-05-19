@@ -70,7 +70,6 @@ public class AulaServiceImpl {
 	
 	@Transactional
 	public String getNomeAula (int id_aula){
-		System.out.println("chegou  aulaservice  "+id_aula);
 		return aulaDAO.getNomeAula(id_aula);
 	}
 		

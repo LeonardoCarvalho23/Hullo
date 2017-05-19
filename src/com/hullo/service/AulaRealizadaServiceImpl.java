@@ -95,7 +95,6 @@ public class AulaRealizadaServiceImpl {
 
 	@Transactional
 	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
-		System.out.println("service aula realizada "+ id_aluno);
 		return aulaRealizadaDAO.getAulasRealizadasAluno(id_aluno);
 	}
 
