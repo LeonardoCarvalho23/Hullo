@@ -72,9 +72,10 @@ public class MinistrarAulaController {
 				return "sem-aulas-disponiveis";
 		}
 
-		// se voltou aula realizada, coloco o id do professor atual e adiciono
+		// se voltou aula realizada, coloco o id do professor atual, faz update no banco e adiciono
 		// ao model
 		aulaRealizadaAtual.setId_professor_aula_realizada(professor.getId_usuario());
+		aulaRealizadaService.updateProfessorAulaRealizada(aulaRealizadaAtual.getId_aula_realizada(), aulaRealizadaAtual.getId_professor_aula_realizada());
 		aulaRealizadaModel.setAulaRealizadaAtual(aulaRealizadaAtual);
 
 		// pego o aluno dessa aula e coloco no model
@@ -153,6 +154,13 @@ public class MinistrarAulaController {
 
 		return "home-professor";
 
+	}
+	
+	//metodo para salvar que aula nao foi atendida
+	@RequestMapping("/updateAulaNaoAtendida")
+	public String updateAulaNaoAtendida(HttpSession session) {
+		
+		return "home-professor";
 	}
 
 }

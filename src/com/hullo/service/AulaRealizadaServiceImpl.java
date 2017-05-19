@@ -110,4 +110,14 @@ public class AulaRealizadaServiceImpl {
 		
 	}
 
+	/**
+	 * faz update do status e professor da aula realizada
+	 * @param id_aula_realizada
+	 * @param id_professor_aula_realizada
+	 */
+	@Transactional
+	public void updateProfessorAulaRealizada(int id_aula_realizada, Integer id_professor_aula_realizada) {
+		aulaRealizadaDAO.updateProfessorAulaRealizada(id_aula_realizada, id_professor_aula_realizada);
+	}
+
 }

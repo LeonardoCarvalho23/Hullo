@@ -182,7 +182,7 @@ public class AulaRealizadaDAOImpl {
 		theQuery.setParameter("nota_practice_aula_realizada", aulaRealizadaAtual.getNota_practice_aula_realizada());
 		theQuery.setParameter("nota_production_aula_realizada", aulaRealizadaAtual.getNota_production_aula_realizada());
 		theQuery.setParameter("comentario_aula_realizada", aulaRealizadaAtual.getComentario_aula_realizada());
-		theQuery.setParameter("status_aula_realizada", "1"); // significa que
+		theQuery.setParameter("status_aula_realizada", "Realizada"); // significa que
 																// foi concluida
 																// pelo
 																// professor
@@ -234,6 +234,24 @@ public class AulaRealizadaDAOImpl {
 		int result = theQuery.executeUpdate();
 		System.out.println(result + " linha atualizada");
 		
+	}
+
+	/**
+	 * metodo para atualizar o professor asignado a aula e seu status
+	 * @param id_aula_realizada
+	 * @param id_professor_aula_realizada
+	 */
+	@SuppressWarnings("unchecked")
+	public void updateProfessorAulaRealizada(int id_aula_realizada, Integer id_professor_aula_realizada) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<AulaRealizadaImpl> theQuery;
+		String sql = "UPDATE AulaRealizadaImpl set id_professor_aula_realizada='" + id_professor_aula_realizada
+				+ "' , status_aula_realizada='Asignada' "
+				+ "WHERE id_aula_realizada='" + id_aula_realizada +"'";
+		theQuery = currentSession.createQuery(sql);
+		int result = theQuery.executeUpdate();
+		System.out.println(result + " linha atualizada");
 	}
 
 }

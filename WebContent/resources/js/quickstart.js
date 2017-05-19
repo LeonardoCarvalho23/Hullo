@@ -21,6 +21,7 @@
         log('Successfully established call!');
         document.getElementById('button-call').style.display = 'none';
         document.getElementById('button-hangup').style.display = 'inline';
+        document.getElementById('button-no-answer').style.display = 'inline';
         // HULLO ADDED - COUNTER
         clearInterval(x);
         now = 0;
