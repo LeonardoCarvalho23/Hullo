@@ -79,45 +79,35 @@ public class AulaRealizadaDAOImpl {
 	}
 
 	// PROD buscar proxima aula realizada, baseado na sua data de criacao
-/*		public AulaRealizadaImpl getProximaAula() {
-			Session currentSession = sessionFactory.getCurrentSession();
-
-			// achar os dias anteriores para consulta das aulas
-			Calendar date = new GregorianCalendar();
-			
-			// reset hour, minutes, seconds and millis
-			date.set(Calendar.HOUR_OF_DAY, 0);
-			date.set(Calendar.MINUTE, 0);
-			date.set(Calendar.SECOND, 0);
-			date.set(Calendar.MILLISECOND, 0);
-			
-			//ate 0h de hoje
-			Date dataFim = date.getTime();
-			
-			// tres dias atras
-			date.add(Calendar.DAY_OF_MONTH, -3);
-			Date dataInicio = date.getTime();
-			
-
-			// busca proxima aula baseado na data atual
-			Query<AulaRealizadaImpl> query = currentSession.createQuery(
-					"from AulaRealizadaImpl where dt_criacao_aula_realizada >= :dataInicio "
-					+ "and dt_criacao_aula_realizada <= :dataFim "
-					+ "and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
-					AulaRealizadaImpl.class);
-			query.setParameter("dataInicio", dataInicio);
-			query.setParameter("dataFim", dataFim);
-
-			try {
-				// busca a proxima aula no banco
-				List<AulaRealizadaImpl> listaAulas = query.getResultList();
-				return listaAulas.get(0);
-			} catch (Exception e) {
-				// se nao tem aula, retorna null
-				return null;
-			}
-		}
-*/
+	/*
+	 * public AulaRealizadaImpl getProximaAula() { Session currentSession =
+	 * sessionFactory.getCurrentSession();
+	 * 
+	 * // achar os dias anteriores para consulta das aulas Calendar date = new
+	 * GregorianCalendar();
+	 * 
+	 * // reset hour, minutes, seconds and millis date.set(Calendar.HOUR_OF_DAY,
+	 * 0); date.set(Calendar.MINUTE, 0); date.set(Calendar.SECOND, 0);
+	 * date.set(Calendar.MILLISECOND, 0);
+	 * 
+	 * //ate 0h de hoje Date dataFim = date.getTime();
+	 * 
+	 * // tres dias atras date.add(Calendar.DAY_OF_MONTH, -3); Date dataInicio =
+	 * date.getTime();
+	 * 
+	 * 
+	 * // busca proxima aula baseado na data atual Query<AulaRealizadaImpl>
+	 * query = currentSession.createQuery(
+	 * "from AulaRealizadaImpl where dt_criacao_aula_realizada >= :dataInicio "
+	 * + "and dt_criacao_aula_realizada <= :dataFim " +
+	 * "and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
+	 * AulaRealizadaImpl.class); query.setParameter("dataInicio", dataInicio);
+	 * query.setParameter("dataFim", dataFim);
+	 * 
+	 * try { // busca a proxima aula no banco List<AulaRealizadaImpl> listaAulas
+	 * = query.getResultList(); return listaAulas.get(0); } catch (Exception e)
+	 * { // se nao tem aula, retorna null return null; } }
+	 */
 	// pegar uma aula especifica
 	public AulaRealizadaImpl getAulaRealizada(int id_aula_realizada) {
 
@@ -182,10 +172,11 @@ public class AulaRealizadaDAOImpl {
 		theQuery.setParameter("nota_practice_aula_realizada", aulaRealizadaAtual.getNota_practice_aula_realizada());
 		theQuery.setParameter("nota_production_aula_realizada", aulaRealizadaAtual.getNota_production_aula_realizada());
 		theQuery.setParameter("comentario_aula_realizada", aulaRealizadaAtual.getComentario_aula_realizada());
-		theQuery.setParameter("status_aula_realizada", "Realizada"); // significa que
-																// foi concluida
-																// pelo
-																// professor
+		theQuery.setParameter("status_aula_realizada", "Realizada"); // significa
+																		// que
+		// foi concluida
+		// pelo
+		// professor
 		theQuery.setParameter("id_professor_aula_realizada", aulaRealizadaAtual.getId_professor_aula_realizada());
 		theQuery.setParameter("id", aulaRealizadaAtual.getId_aula_realizada());
 
@@ -198,9 +189,10 @@ public class AulaRealizadaDAOImpl {
 
 		currentSession.saveOrUpdate(aulaRealizada);
 	}
-	
+
 	/**
 	 * lista aulas realizadas pelo aluno
+	 * 
 	 * @param id_aluno
 	 * @return lista de aulas realizadas
 	 */
@@ -210,17 +202,15 @@ public class AulaRealizadaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaRealizadaImpl> Query = currentSession.createQuery("from AulaRealizadaImpl "
-				+ "where id_aluno_aula_realizada = " + id_aluno 
-				+ "and dt_inicio_chamada_aula_realizada <> 'null'"
-				+ " order by dt_inicio_chamada_aula_realizada DESC", 
-				AulaRealizadaImpl.class);
+				+ "where id_aluno_aula_realizada = " + id_aluno + "and dt_inicio_chamada_aula_realizada <> 'null'"
+				+ " order by dt_inicio_chamada_aula_realizada DESC", AulaRealizadaImpl.class);
 
 		return Query.getResultList();
 	}
-	
-	
+
 	/**
 	 * Salva dados da gravação da chamada no banco
+	 * 
 	 * @param callSid
 	 * @param recordingUrl
 	 */
@@ -229,43 +219,77 @@ public class AulaRealizadaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<AulaRealizadaImpl> theQuery;
 		String sql = "UPDATE AulaRealizadaImpl set url_gravacao_aula_realizada='" + recordingUrl
-				+ "' WHERE sid_chamada_aula_realizada='" + callSid +"'";
+				+ "' WHERE sid_chamada_aula_realizada='" + callSid + "'";
 		theQuery = currentSession.createQuery(sql);
 		int result = theQuery.executeUpdate();
 		System.out.println(result + " linha atualizada");
-		
+
 	}
 
 	/**
 	 * Faz update da aulaRealizada para status de nao atendida
-	 * @param id_aula_realizada
+	 * 
+	 * @param aulaRealizada
 	 */
-	public void updateAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void saveProximaAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
-		// TODO Auto-generated method stub
-		
-	}
-
-/*	*//**
-	 * metodo para atualizar o professor asignado a aula e seu status
-	 * @param id_aula_realizada
-	 * @param id_professor_aula_realizada
-	 *//*
 	@SuppressWarnings("unchecked")
-	public void updateProfessorAulaRealizada(int id_aula_realizada, Integer id_professor_aula_realizada) {
+	public void updateAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		Query<AulaRealizadaImpl> theQuery;
-		String sql = "UPDATE AulaRealizadaImpl set id_professor_aula_realizada='" + id_professor_aula_realizada
-				+ "' , status_aula_realizada='Asignada' "
-				+ "WHERE id_aula_realizada='" + id_aula_realizada +"'";
+
+		String sql = "UPDATE AulaRealizadaImpl set status_aula_realizada='Não Atendida' WHERE id_aula_realizada="
+				+ aulaRealizada.getId_aula_realizada();
 		theQuery = currentSession.createQuery(sql);
 		int result = theQuery.executeUpdate();
 		System.out.println(result + " linha atualizada");
-	}*/
+
+	}
+
+	/**
+	 * criação de próxima aulaRealizada igual à anterior não atendida +2h da
+	 * criação
+	 * 
+	 * @param aulaRealizada
+	 */
+	public void saveProximaAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		//mudar data de criacao para +2h
+		Calendar data = new GregorianCalendar();
+		data.setTime(aulaRealizada.getDt_criacao_aula_realizada());
+		data.set(Calendar.HOUR, data.get(Calendar.HOUR)+2);
+		Date dataNova = data.getTime();
+
+		AulaRealizadaImpl aulaNova = new AulaRealizadaImpl();
+
+		aulaNova.setDt_criacao_aula_realizada(dataNova);
+		aulaNova.setId_aula_aula_realizada(aulaRealizada.getId_aula_aula_realizada());
+		aulaNova.setId_anterior_aula_realizada(aulaRealizada.getId_anterior_aula_realizada());
+		aulaNova.setId_aluno_aula_realizada(aulaRealizada.getId_aluno_aula_realizada());
+
+		currentSession.saveOrUpdate(aulaNova);
+
+	}
+
+	/*	*//**
+			 * metodo para atualizar o professor asignado a aula e seu status
+			 * 
+			 * @param id_aula_realizada
+			 * @param id_professor_aula_realizada
+			 *//*
+			 * @SuppressWarnings("unchecked") public void
+			 * updateProfessorAulaRealizada(int id_aula_realizada, Integer
+			 * id_professor_aula_realizada) { Session currentSession =
+			 * sessionFactory.getCurrentSession();
+			 * 
+			 * Query<AulaRealizadaImpl> theQuery; String sql =
+			 * "UPDATE AulaRealizadaImpl set id_professor_aula_realizada='" +
+			 * id_professor_aula_realizada +
+			 * "' , status_aula_realizada='Asignada' " +
+			 * "WHERE id_aula_realizada='" + id_aula_realizada +"'"; theQuery =
+			 * currentSession.createQuery(sql); int result =
+			 * theQuery.executeUpdate(); System.out.println(result +
+			 * " linha atualizada"); }
+			 */
 
 }
