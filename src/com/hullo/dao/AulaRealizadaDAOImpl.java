@@ -237,10 +237,24 @@ public class AulaRealizadaDAOImpl {
 	}
 
 	/**
+	 * Faz update da aulaRealizada para status de nao atendida
+	 * @param id_aula_realizada
+	 */
+	public void updateAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void saveProximaAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
+		// TODO Auto-generated method stub
+		
+	}
+
+/*	*//**
 	 * metodo para atualizar o professor asignado a aula e seu status
 	 * @param id_aula_realizada
 	 * @param id_professor_aula_realizada
-	 */
+	 *//*
 	@SuppressWarnings("unchecked")
 	public void updateProfessorAulaRealizada(int id_aula_realizada, Integer id_professor_aula_realizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -252,6 +266,6 @@ public class AulaRealizadaDAOImpl {
 		theQuery = currentSession.createQuery(sql);
 		int result = theQuery.executeUpdate();
 		System.out.println(result + " linha atualizada");
-	}
+	}*/
 
 }

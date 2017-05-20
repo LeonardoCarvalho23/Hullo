@@ -1,18 +1,13 @@
 package jUnit;
 
-import static org.junit.Assert.*;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hullo.dao.AlunoDAOImpl;
 import com.hullo.entity.AlunoImpl;
