@@ -489,26 +489,39 @@ public class AlunoController {
 	/**
 	 * metodo para popular tela de detalhes de aula
 	 * @param id_aula_realizada
-	 * @param theModel
 	 * @param modelMap
 	 * @return tela de detalhes da aula selecionada
 	 */
 	
 	@GetMapping("/showDetalhesAula")
-	public String showDetalhesAula(@RequestParam("id_aula_realizada") int id_aula_realizada, Model theModel, ModelMap modelMap) {
+	public String showDetalhesAula(@RequestParam("id_aula_realizada") int id_aula_realizada, ModelMap modelMap, HttpSession session ) {
 
 		
 		// get aula realizada do banco
 		AulaRealizadaImpl aulaRealizada = aulaRealizadaService.getAulaRealizada(id_aula_realizada);
 		String nomeAula = aulaService.getNomeAula(aulaRealizada.getId_aula_aula_realizada());
-
-			
-		modelMap.addAttribute("aulaRealizada", aulaRealizada);
-		modelMap.addAttribute("nomeAula", nomeAula);
-
+		AulaImpl aula = aulaService.getAula(aulaRealizada.getId_aula_aula_realizada());
+		String atividade = aula.getAtividade_aula();
 		
-		// retorna pagina de detalhe da aula
-		return "aluno-aula";
+		
+		//apenas abre os detalhes se o aluno realizou aula
+		if(aulaRealizada.getStatus_aula_realizada().toLowerCase().equals("realizada") ){
+			modelMap.addAttribute("aulaRealizada", aulaRealizada);
+			modelMap.addAttribute("nomeAula", nomeAula);
+			modelMap.addAttribute("atividade", atividade);
+			
+			// retorna pagina de detalhe da aula
+			return "aluno-aula";
+		}else{
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Você não realizou essa aula.</div>";
+			modelMap.addAttribute("errorMessage", errorMessage);
+			
+			//instaciado apena para ser chamado em caso de erro
+			Model theModel = (Model) modelMap;
+			
+			return listarAulasRealizadas(session, theModel);
+		}
+		
 
 	}
 	

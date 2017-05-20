@@ -41,7 +41,7 @@
 
 
 			<h3>Lista de Aulas Realizadas</h3>
-
+			${errorMessage}
 			<br> <br>
 
 			<br>

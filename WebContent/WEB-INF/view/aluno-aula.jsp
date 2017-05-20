@@ -52,6 +52,8 @@
  							<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/mpeg">
 							
 						</audio>
+						<p>Complemente seu estudo: </p>
+						<a href="${atividade}/">Atividade</a>
 			<br>
 			<div class="form-group">
 				<label class="col-md-4 control-label"></label>
