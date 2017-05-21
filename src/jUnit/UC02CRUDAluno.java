@@ -32,7 +32,7 @@ public class UC02CRUDAluno {
 		Date dataNasc = data.getTime();	
 		
 		aluno.setAtivo_usuario("1");
-		aluno.setCd_cidade_usuario(1);
+		//aluno.setCd_cidade_usuario(1);
 		aluno.setCpf_usuario("33225074837");
 		aluno.setData_nascimento_usuario(dataNasc);
 		aluno.setDt_insert_usuario(now);

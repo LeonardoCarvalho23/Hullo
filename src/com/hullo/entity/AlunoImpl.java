@@ -2,11 +2,16 @@ package com.hullo.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -59,8 +64,9 @@ public class AlunoImpl implements Usuario {
 	@Column(name="dt_last_update_aluno")
 	private Date dt_last_update_usuario;
 	
-	@Column(name="cd_cidade_aluno")
-	private int cd_cidade_usuario;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="cd_cidade_aluno")
+	private CidadeImpl cidade;
 	
 	
 	public AlunoImpl() {
@@ -202,12 +208,12 @@ public class AlunoImpl implements Usuario {
 		this.dt_last_update_usuario = dt_last_update_usuario;
 	}
 
-	public int getCd_cidade_usuario() {
-		return cd_cidade_usuario;
+	public CidadeImpl getCidade() {
+		return cidade;
 	}
 
-	public void setCd_cidade_usuario(int cd_cidade_usuario) {
-		this.cd_cidade_usuario = cd_cidade_usuario;
+	public void setCidade(CidadeImpl cidade) {
+		this.cidade = cidade;
 	}
 
 	@Override
@@ -218,8 +224,7 @@ public class AlunoImpl implements Usuario {
 				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
 				+ telefone_usuario + ", profissao_usuario=" + profissao_usuario
 				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
-				+ ", dt_last_update_usuario=" + dt_last_update_usuario + ", cd_cidade_usuario=" + cd_cidade_usuario
-				+ "]";
+				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
 	}
 	
 }

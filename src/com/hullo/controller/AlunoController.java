@@ -137,7 +137,7 @@ public class AlunoController {
 		CidadeImpl cidade = mapper.readValue(usuarioModel.getCidade(), CidadeImpl.class);
 
 		// seta o id da cidade no usuario
-		theAluno.setCd_cidade_usuario(cidade.getId_Cidade());
+		theAluno.setCidade(cidade);
 
 		// validar se ja existe usuario com esse email ou senha, tanto professor
 		// quanto aluno

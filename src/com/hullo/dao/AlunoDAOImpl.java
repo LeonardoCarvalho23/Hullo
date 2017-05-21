@@ -83,8 +83,8 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		try {
 			result = theQuery.getSingleResult();
 			return result;
-		} catch (Exception e) {
-			return result;
+		} catch (Exception nenhumAlunoEncontrado) {
+			return null;
 		}
 	}
 

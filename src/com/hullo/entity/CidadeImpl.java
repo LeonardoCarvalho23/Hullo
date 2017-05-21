@@ -1,10 +1,14 @@
 package com.hullo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +22,9 @@ public class CidadeImpl {
 	@Column(name="nm_cidade")
 	private String nm_cidade;
 
-	@Column(name="id_estado_cidade")
-	private int id_Estado;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_estado_cidade")
+	private EstadoImpl estado;
 
 	public int getId_Cidade() {
 		return id_Cidade;
@@ -37,17 +42,17 @@ public class CidadeImpl {
 		this.nm_cidade = nm_cidade;
 	}
 
-	public int getEstado() {
-		return id_Estado;
+	public EstadoImpl getEstado() {
+		return estado;
 	}
 
-	public void setEstado(int id_Estado) {
-		this.id_Estado = id_Estado;
+	public void setEstado(EstadoImpl estado) {
+		this.estado = estado;
 	}
 
 	@Override
 	public String toString() {
-		return "{'id_Cidade' :" + id_Cidade + ", 'nm_cidade' : '" + nm_cidade + "' , 'id_Estado' :" + id_Estado + "}";
+		return "{'id_Cidade' :" + id_Cidade + ", 'nm_cidade' : '" + nm_cidade + "}";
 	}
 	
 	
