@@ -137,7 +137,7 @@ function TestaCPF(strCPF) {
 		</div>
 	<div id="container">
 		
-		<form:form class="well form-horizontal" action="newAluno" modelAttribute="usuarioModel" method="POST" onsubmit="return checkPasswordMatch();" >
+		<form:form class="well form-horizontal" action="formAluno" modelAttribute="usuarioModel" method="POST" onsubmit="return checkPasswordMatch();" >
 		<fieldset>
 		${errorMessage}
 			<!-- Nome do formulário -->
