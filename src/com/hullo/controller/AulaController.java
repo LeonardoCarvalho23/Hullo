@@ -56,7 +56,13 @@ public class AulaController {
 		return "aula-form";
 	}
 
-	// gravar nova aula
+	/**
+	 * Gravar nova aula
+	 * @param model
+	 * @param theModel
+	 * @param modelMap
+	 * @return
+	 */
 	@PostMapping("/newAula")
 	public String saveAula(@ModelAttribute("aula") AulaImpl model, Model theModel, ModelMap modelMap) {
 
@@ -92,7 +98,13 @@ public class AulaController {
 		}
 	}
 
-	// abrir detalhes da aula e para fazer update
+	/**
+	 * Abrir detalhes da aula e para fazer update
+	 * @param id_aula
+	 * @param theModel
+	 * @param modelMap
+	 * @return
+	 */
 	@GetMapping("/showAula")
 	public String showAula(@RequestParam("id_aula") int id_aula, Model theModel, ModelMap modelMap) {
 
@@ -108,7 +120,13 @@ public class AulaController {
 
 	}
 
-	// metodo para abrir pagina de update da aula
+	/**
+	 * Metodo para abrir pagina de update da aula
+	 * @param session
+	 * @param model
+	 * @param theModel
+	 * @return
+	 */
 	@RequestMapping("/showFormUpdateAula")
 	public String showFormUpdateAula(HttpSession session, AulaImpl model, Model theModel) {
 		AulaImpl aula = model;
@@ -117,7 +135,13 @@ public class AulaController {
 		return "aula-update-form";
 	}
 
-	// metodo para atualizar aula
+	/**
+	 * Metodo para atualizar aula
+	 * @param model
+	 * @param theModel
+	 * @param modelMap
+	 * @return
+	 */
 	@RequestMapping("/updateAula")
 	public String updateAula(@ModelAttribute("aula") AulaImpl model, Model theModel, ModelMap modelMap) {
 		System.out.println("metodo errado");
@@ -147,7 +171,12 @@ public class AulaController {
 		}
 	}
 
-	// metodo para excluir aula
+	/**
+	 * Metodo para excluir aula
+	 * @param aula
+	 * @param theModel
+	 * @return
+	 */
 	@PostMapping("/deleteAula")
 	public String deleteAula(@ModelAttribute("aula") AulaImpl aula, Model theModel) {
 

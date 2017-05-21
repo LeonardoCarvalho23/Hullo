@@ -1,8 +1,6 @@
 package com.hullo.controller;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpSession;
 
@@ -48,15 +46,17 @@ public class MinistrarAulaController {
 	@PostMapping("/ministrarAula")
 	public String ministrarAula(HttpSession session, Model model, ModelMap modelMap) {
 		ProfessorImpl professor = (ProfessorImpl) session.getAttribute("usuario");
-				
-		// achar o dia para saber se e fim de semana
-		Calendar date = new GregorianCalendar();
 
-		if (date.get(Calendar.DAY_OF_WEEK) == 1 || date.get(Calendar.DAY_OF_WEEK) == 7){
-			String errorMessage = "<div class='alert alert-danger fade in' align='center'> Weekend is for resting only, go have some fun!</div>";
-			modelMap.addAttribute("errorMessage", errorMessage);
-			return "sem-aulas-disponiveis";
-		}
+		/*
+		 * // achar o dia para saber se e fim de semana Calendar date = new
+		 * GregorianCalendar();
+		 * 
+		 * if (date.get(Calendar.DAY_OF_WEEK) == 1 ||
+		 * date.get(Calendar.DAY_OF_WEEK) == 7){ String errorMessage =
+		 * "<div class='alert alert-danger fade in' align='center'> Weekend is for resting only, go have some fun!</div>"
+		 * ; modelMap.addAttribute("errorMessage", errorMessage); return
+		 * "sem-aulas-disponiveis"; }
+		 */
 
 		// crio o model que vai receber a infos para exibir na pagina
 		AulaRealizadaModel aulaRealizadaModel = new AulaRealizadaModel();
@@ -67,15 +67,13 @@ public class MinistrarAulaController {
 		// se nao retornou nnehuma aula, abre pagina que nao ha aulas
 		// disponiveis
 		if (aulaRealizadaAtual == null) {
-				String errorMessage = "<div class='alert alert-danger fade in' align='center'>Sorry, there are no classes available ate the moment</div>";
-				modelMap.addAttribute("errorMessage", errorMessage);
-				return "sem-aulas-disponiveis";
+			String errorMessage = "<div class='alert alert-danger fade in' align='center'>Sorry, there are no classes available ate the moment</div>";
+			modelMap.addAttribute("errorMessage", errorMessage);
+			return "sem-aulas-disponiveis";
 		}
 
-		// se voltou aula realizada, coloco o id do professor atual, faz update no banco e adiciono
-		// ao model
+		// se voltou aula realizada, adiciono ao model
 		aulaRealizadaAtual.setId_professor_aula_realizada(professor.getId_usuario());
-		aulaRealizadaService.updateProfessorAulaRealizada(aulaRealizadaAtual.getId_aula_realizada(), aulaRealizadaAtual.getId_professor_aula_realizada());
 		aulaRealizadaModel.setAulaRealizadaAtual(aulaRealizadaAtual);
 
 		// pego o aluno dessa aula e coloco no model
@@ -99,6 +97,7 @@ public class MinistrarAulaController {
 		}
 
 		model.addAttribute("aulaRealizadaModel", aulaRealizadaModel);
+		session.setAttribute("aulaRealizadaModel", aulaRealizadaModel);
 
 		return "ministrarAula";
 	}
@@ -155,10 +154,19 @@ public class MinistrarAulaController {
 		return "home-professor";
 
 	}
-	
-	//metodo para salvar que aula nao foi atendida
+
+	/**
+	 * update de status da aula para nao atendida e criacao dessa aula de novo para +2h
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/updateAulaNaoAtendida")
 	public String updateAulaNaoAtendida(HttpSession session) {
+		
+		//pegar objeto aulaRealizadaModel da session 
+		AulaRealizadaModel aulaRealizadaModel = (AulaRealizadaModel) session.getAttribute("aulaRealizadaModel");
+		
+		aulaRealizadaService.updateAulaNaoAtendida(aulaRealizadaModel.getAulaRealizadaAtual());
 		
 		return "home-professor";
 	}

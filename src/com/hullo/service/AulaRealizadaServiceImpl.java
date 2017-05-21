@@ -95,7 +95,6 @@ public class AulaRealizadaServiceImpl {
 
 	@Transactional
 	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
-		System.out.println("service aula realizada "+ id_aluno);
 		return aulaRealizadaDAO.getAulasRealizadasAluno(id_aluno);
 	}
 
@@ -107,17 +106,28 @@ public class AulaRealizadaServiceImpl {
 	@Transactional
 	public void updateAulaRealizada(String callSid, String recordingUrl) {
 		aulaRealizadaDAO.updateAulaRealizada(callSid, recordingUrl);
-		
+	}
+
+	/**
+	 * update de status da aula para nao atendida e criacao dessa aula de novo para +2h
+	 * @param id_aula_realizada
+	 */
+	@Transactional
+	public void updateAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
+		//atualizar status
+		aulaRealizadaDAO.updateAulaNaoAtendida(aulaRealizada);
+		//criar proxima aula realizada com as mesmas informacoes da atual +2h
+		aulaRealizadaDAO.saveProximaAulaNaoAtendida(aulaRealizada);
 	}
 
 	/**
 	 * faz update do status e professor da aula realizada
 	 * @param id_aula_realizada
 	 * @param id_professor_aula_realizada
-	 */
+	 *//*
 	@Transactional
 	public void updateProfessorAulaRealizada(int id_aula_realizada, Integer id_professor_aula_realizada) {
 		aulaRealizadaDAO.updateProfessorAulaRealizada(id_aula_realizada, id_professor_aula_realizada);
-	}
+	}*/
 
 }

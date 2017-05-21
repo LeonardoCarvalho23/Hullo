@@ -41,7 +41,7 @@
 
 
 			<h3>Lista de Aulas Realizadas</h3>
-
+			${errorMessage}
 			<br> <br>
 
 			<br>
@@ -62,13 +62,13 @@
 
 					<tr>
 						
-						<td>Nome Aula</td>
-						<td>${tempAula.dt_inicio_aula_realizada}</td>
-						<td>${tempAula.status_aula_realizada}</td>
+						<td>${tempAula.nomeAula}</td>
+						<td>${tempAula.aulaRealizadaAtual.dt_inicio_aula_realizada}</td>
+						<td>${tempAula.aulaRealizadaAtual.status_aula_realizada}</td>
 						<td>
 						<!-- botao de update do modulo --> 
 							<c:url var="viewLink" value="/aluno/showDetalhesAula">
-								<c:param name="id_aula_realizada" value="${tempAula.id_aula_realizada}" />
+								<c:param name="id_aula_realizada" value="${tempAula.aulaRealizadaAtual.id_aula_realizada}" />
 							</c:url> <!-- mostra o link --> <a href="${viewLink}">Detalhes</a>
 						</td>
 					</tr>

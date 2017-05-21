@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page session="false"%>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -57,6 +57,8 @@
 
 							<!-- Resultados da aula anterior do aluno -->
 							<h3>Last Class results</h3>
+							
+							
 
 							<div class="form-group">
 								<label class="col-md-4 control-label">Nome da Aula:</label>
@@ -134,7 +136,7 @@
 
 			<!-- Objetivos da Aula Atual -->
 			<div id="grade" style="clear: both; display: none;">
-				<form:form action="encerrarAula" modelAttribute="aulaRealizadaModel"
+				<form:form action="encerrarAula"  modelAttribute="aulaRealizadaModel"
 					method="POST">
 					<!-- id do professor que esta ministrando a aula, para guardar na finalizacao da aula -->
 					<form:hidden path="aulaRealizadaAtual.id_professor_aula_realizada" />
@@ -207,7 +209,7 @@
 						<label class="col-md-4 control-label"></label>
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-primary">Encerrar
-								Aula</button>
+								Aula</button> 
 						</div>
 					</div>
 				</form:form>
@@ -225,7 +227,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}/resources/js/quickstart.js?v=31"></script>
+		src="${pageContext.request.contextPath}/resources/js/quickstart.js?v=32"></script>
 
 </body>
 

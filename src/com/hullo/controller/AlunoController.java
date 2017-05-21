@@ -1,6 +1,7 @@
 package com.hullo.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -450,9 +451,37 @@ public class AlunoController {
 		
 		// get aulas from the DAO
 		List<AulaRealizadaImpl> aulasRealizadas = aulaRealizadaService.getAulasRealizadasAluno(aluno.getId_usuario());
-
+		
+		
+		List<AulaRealizadaModel> listaAulas = new ArrayList<AulaRealizadaModel>();
+		
+		
+		for (int i = 0; i < aulasRealizadas.size(); i++) {
+			//objeto que vai pegar apenas o registro daquela iteração, pq esta vindo como list
+			AulaRealizadaModel aulaRealizadaModel = new AulaRealizadaModel();
+			AulaRealizadaImpl aulaRealizada = new AulaRealizadaImpl();
+			aulaRealizada = aulasRealizadas.get(i);
+			
+			System.out.println("id aula realizada iteracao "+ aulaRealizada.getId_aula_realizada());
+			
+			System.out.println("id aula iteracao "+ aulaRealizada.getId_aula_aula_realizada());
+							
+			String nomeAula = aulaService.getNomeAula(aulaRealizada.getId_aula_aula_realizada());
+			
+			System.out.println("nome aula iteracao "+nomeAula);
+			
+			//adiciona no model
+			aulaRealizadaModel.setNomeAula(nomeAula);			
+			aulaRealizadaModel.setAulaRealizadaAtual(aulaRealizada);
+		
+			
+			listaAulas.add(aulaRealizadaModel);
+			
+			
+		}
+		
 		// add the aulas to the model
-		theModel.addAttribute("aulas", aulasRealizadas);
+		theModel.addAttribute("aulas", listaAulas);
 
 		return "lista-aulas-realizadas";
 	}
@@ -460,26 +489,39 @@ public class AlunoController {
 	/**
 	 * metodo para popular tela de detalhes de aula
 	 * @param id_aula_realizada
-	 * @param theModel
 	 * @param modelMap
 	 * @return tela de detalhes da aula selecionada
 	 */
 	
 	@GetMapping("/showDetalhesAula")
-	public String showDetalhesAula(@RequestParam("id_aula_realizada") int id_aula_realizada, Model theModel, ModelMap modelMap) {
+	public String showDetalhesAula(@RequestParam("id_aula_realizada") int id_aula_realizada, ModelMap modelMap, HttpSession session ) {
 
 		
 		// get aula realizada do banco
 		AulaRealizadaImpl aulaRealizada = aulaRealizadaService.getAulaRealizada(id_aula_realizada);
 		String nomeAula = aulaService.getNomeAula(aulaRealizada.getId_aula_aula_realizada());
-
-			
-		modelMap.addAttribute("aulaRealizada", aulaRealizada);
-		modelMap.addAttribute("nomeAula", nomeAula);
-
+		AulaImpl aula = aulaService.getAula(aulaRealizada.getId_aula_aula_realizada());
+		String atividade = aula.getAtividade_aula();
 		
-		// retorna pagina de detalhe da aula
-		return "aluno-aula";
+		
+		//apenas abre os detalhes se o aluno realizou aula
+		if(aulaRealizada.getStatus_aula_realizada().toLowerCase().equals("realizada") ){
+			modelMap.addAttribute("aulaRealizada", aulaRealizada);
+			modelMap.addAttribute("nomeAula", nomeAula);
+			modelMap.addAttribute("atividade", atividade);
+			
+			// retorna pagina de detalhe da aula
+			return "aluno-aula";
+		}else{
+			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Você não realizou essa aula.</div>";
+			modelMap.addAttribute("errorMessage", errorMessage);
+			
+			//instaciado apena para ser chamado em caso de erro
+			Model theModel = (Model) modelMap;
+			
+			return listarAulasRealizadas(session, theModel);
+		}
+		
 
 	}
 	
