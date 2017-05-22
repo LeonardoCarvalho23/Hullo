@@ -30,7 +30,7 @@ public class CidadeDAOImpl {
 	public List<CidadeImpl> getCidades(EstadoImpl estado) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query<CidadeImpl> theQuery = currentSession.createQuery("from CidadeImpl where id_Estado = "+ estado.getId_estado() +" order by nm_cidade", CidadeImpl.class);
+		Query<CidadeImpl> theQuery = currentSession.createQuery("from CidadeImpl where id_estado_cidade = "+ estado.getId_estado() +" order by nm_cidade", CidadeImpl.class);
 
 		List<CidadeImpl> cidades = theQuery.getResultList();
 		

@@ -217,7 +217,7 @@ function validaCnpj(cnpj){
 		</div>
 	<div id="container">
 
-			<form:form class="well form-horizontal" action="newProfessor"
+			<form:form class="well form-horizontal" action="formProfessor"
 				modelAttribute="professorModel" method="POST"
 				onsubmit="return checkPasswordMatch();">
 				<fieldset>

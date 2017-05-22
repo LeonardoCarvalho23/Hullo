@@ -111,7 +111,7 @@ public class ProfessorController {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	@PostMapping("/newProfessor")
+	@PostMapping("/formProfessor")
 	public String saveUsuario(@ModelAttribute("professorModel") ProfessorModel professorModel, ModelMap modelMap)
 			throws JsonParseException, JsonMappingException, IOException {
 
@@ -130,6 +130,11 @@ public class ProfessorController {
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
 		AlunoImpl validaAluno = alunoService.getUsuario(theProfessor.getEmail_usuario());
 	
+		//pega os estados
+				List<EstadoImpl> estados = estadoService.getEstados();
+				//coloca cidades na model caso ocorra erro
+				professorModel.setEstado(estados);
+		
 		/* **
 		 * valida idade	
 		 * valida cpf

@@ -12,6 +12,11 @@ import com.hullo.entity.AulaImpl;
 import com.hullo.entity.ModuloImpl;
 import com.hullo.service.ModuloServiceImpl;
 
+/**
+ * Classe para comunicação com o banco (DAO)
+ * @author Hullo Team;
+ *
+ */
 @Repository
 public class AulaDAOImpl {
 
@@ -21,6 +26,11 @@ public class AulaDAOImpl {
 	@Autowired
 	private ModuloServiceImpl moduloService;
 
+	/**
+	 * Valida se não existe aula com o mesmo índice no mesmo módulo
+	 * @param indice_aula
+	 * @return
+	 */
 	public boolean validaAula(float indice_aula) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
@@ -36,13 +46,21 @@ public class AulaDAOImpl {
 
 	}
 
+	/**
+	 * Método para salvar aula
+	 * @param aula
+	 */
 	public void saveAula(AulaImpl aula) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		currentSession.saveOrUpdate(aula);
 	}
 
-	// listar aulas de um modulo
+	/**
+	 * Listar aulas de um modulo
+	 * @param id_modulo
+	 * @return
+	 */
 	public List<AulaImpl> getAulas(int id_modulo) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -54,7 +72,11 @@ public class AulaDAOImpl {
 		return Query.getResultList();
 	}
 
-	// pegar uma aula especifica
+	/**
+	 * Pegar uma aula especifica
+	 * @param id_aula
+	 * @return
+	 */
 	public AulaImpl getAula(int id_aula) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -67,6 +89,11 @@ public class AulaDAOImpl {
 		return result;
 	}
 
+	/**
+	 * Pegar a primeira aula
+	 * @param id_modulo
+	 * @return
+	 */
 	public AulaImpl getPrimeiraAula(int id_modulo) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -80,7 +107,10 @@ public class AulaDAOImpl {
 		return aulas.get(0);
 	}
 
-	// para fazer update da aula ja existente
+	/**
+	 * Para fazer update da aula ja existente
+	 * @param aula
+	 */
 	@SuppressWarnings("unchecked")
 	public void updateAula(AulaImpl aula) {
 
@@ -109,6 +139,14 @@ public class AulaDAOImpl {
 		System.out.println(result + " linha atualizada");
 	}
 
+	/**
+	 * Para valiar a aula
+	 * @param indice_aula
+	 * @param numero_aula
+	 * @param id_modulo_aula
+	 * @param id_aula
+	 * @return
+	 */
 	public AulaImpl validaAula(char indice_aula, int numero_aula, int id_modulo_aula, int id_aula) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
@@ -134,7 +172,10 @@ public class AulaDAOImpl {
 
 	}
 
-	// para deletar uma aula
+	/**
+	 * Para deletar uma aula
+	 * @param aula
+	 */
 	public void deleteAula(AulaImpl aula) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -143,7 +184,10 @@ public class AulaDAOImpl {
 
 	}
 
-	// deletar todas as aulas de um modulo
+	/**
+	 * Deletar todas as aulas de um modulo
+	 * @param id_modulo
+	 */
 	@SuppressWarnings("unchecked")
 	public void deleteAulasModulo(int id_modulo) {
 
@@ -165,7 +209,11 @@ public class AulaDAOImpl {
 
 	}
 
-	// para buscar proxima aula linear do curso
+	/**
+	 * Para buscar proxima aula linear do curso
+	 * @param id_aula_aula_realizada
+	 * @return
+	 */
 	public AulaImpl getProximaAulaLinear(int id_aula_aula_realizada) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -215,6 +263,11 @@ public class AulaDAOImpl {
 		return aulas.get(0);
 	}
 
+	/**
+	 * Pega a próxima aula com o mesmo índice (paralela)
+	 * @param id_aula_aula_realizada
+	 * @return
+	 */
 	public AulaImpl getProximaAulaParalela(int id_aula_aula_realizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
@@ -244,6 +297,11 @@ public class AulaDAOImpl {
 		}
 	}
 
+	/**
+	 * Pega o nome da aula pelo Id
+	 * @param id_aula
+	 * @return
+	 */
 	public String getNomeAula(int id_aula) {
 		
 		Session currentSession = sessionFactory.getCurrentSession();

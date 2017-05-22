@@ -52,6 +52,8 @@
 	<p>Nascimento: ${dateString}</p>
 	<p>Telefone: ${usuario.telefone_usuario}</p>
 	<p>Profissão: ${usuario.profissao_usuario}</p>
+	<p>Estado: ${usuario.cidade.estado.nm_estado}</p>
+    <p>Cidade: ${usuario.cidade.nm_cidade}</p>
 
                     <form:form action="../usuario/getUsuario" modelAttribute="usuario"
                         method="POST">

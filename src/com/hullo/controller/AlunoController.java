@@ -125,7 +125,7 @@ public class AlunoController {
 	 * @return pagina de login de usuario, se tiver erro abre a pagina atual
 	 */
 	// Metodo para gravar novo aluno
-	@PostMapping("/newAluno")
+	@PostMapping("/formAluno")
 	public String saveUsuario(@ModelAttribute("usuarioModel") AlunoModel usuarioModel, ModelMap modelMap)
 			throws JsonParseException, JsonMappingException, IOException {
 		Date current_date = new Date();
@@ -138,7 +138,7 @@ public class AlunoController {
 		CidadeImpl cidade = mapper.readValue(usuarioModel.getCidade(), CidadeImpl.class);
 
 		// seta o id da cidade no usuario
-		theAluno.setCd_cidade_usuario(cidade.getId_Cidade());
+		theAluno.setCidade(cidade);
 
 		// validar se ja existe usuario com esse email ou senha, tanto professor
 		// quanto aluno
@@ -146,6 +146,11 @@ public class AlunoController {
 		AlunoImpl validaAluno = alunoService.validaUsuario(theAluno.getEmail_usuario(), theAluno.getCpf_usuario());
 		ProfessorImpl validaProfessor = professorService.getUsuario(theAluno.getEmail_usuario());
 
+		//pega os estados
+		List<EstadoImpl> estados = estadoService.getEstados();
+		//coloca cidades na model caso ocorra erro
+		usuarioModel.setEstado(estados);
+		
 		// valida idade
 		if (calculaIdade(theAluno.getData_nascimento_usuario())) {
 
