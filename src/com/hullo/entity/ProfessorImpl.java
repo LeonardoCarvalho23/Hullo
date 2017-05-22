@@ -3,11 +3,14 @@ package com.hullo.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -64,8 +67,9 @@ public class ProfessorImpl implements Usuario {
 	@Column(name="dt_last_update_professor")
 	private Date dt_last_update_usuario;
 	
-	@Column(name="cd_cidade_professor")
-	private int cd_cidade_usuario;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="cd_cidade_professor")
+	private CidadeImpl cidade;
 	
 	
 	public ProfessorImpl(){
@@ -93,15 +97,6 @@ public class ProfessorImpl implements Usuario {
 		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
 	}
 	
-
-	public int getCidade() {
-		return cd_cidade_usuario;
-	}
-
-	public void setCidade(int cd_cidade_usuario) {
-		this.cd_cidade_usuario = cd_cidade_usuario;
-	}
-
 	public int getId_usuario() {
 		return id_usuario;
 	}
@@ -214,6 +209,16 @@ public class ProfessorImpl implements Usuario {
 		this.dt_last_update_usuario = dt_last_update_usuario;
 	}
 	
+	public CidadeImpl getCidade() {
+		return cidade;
+	}
+
+
+	public void setCidade(CidadeImpl cidade) {
+		this.cidade = cidade;
+	}
+
+
 	/**
 	 * metodo pra trazer uma string do usuario	 
 	 * @return string
@@ -225,11 +230,9 @@ public class ProfessorImpl implements Usuario {
 				+ sobrenome_usuario + ", cpf_usuario=" + cpf_usuario + ", cnpj_usuario=" + cnpj_usuario
 				+ ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario + ", sexo_usuario="
 				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
-				+ telefone_usuario + ", profissao_usuario=" + profissao_usuario
-				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
-				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
+				+ telefone_usuario + ", profissao_usuario=" + profissao_usuario + ", ativo_usuario=" + ativo_usuario
+				+ ", dt_insert_usuario=" + dt_insert_usuario + ", dt_last_update_usuario=" + dt_last_update_usuario
+				+ ", cidade=" + cidade + "]";
 	}
-
-
 
 }

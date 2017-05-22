@@ -19,6 +19,7 @@
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
@@ -329,9 +330,33 @@
 							</div>
 						</div>
 					</div>
-
-
-
+					
+					<!-- Campo Estado -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Estado</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-home"></i></span>
+								<form:select class="form-control" path="" id="estado" multiple="false">
+								<form:options items="${estados}" itemLabel="nm_estado"/>
+								</form:select>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Campo Cidade -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Cidade</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-home"></i></span>
+								<form:select class="form-control" path="cidade.id_Cidade" id="cidade" multiple="false"> </form:select>
+							</div>
+						</div>
+					</div>
+					
 					<!-- Botões -->
 					
 					<div class="form-group">

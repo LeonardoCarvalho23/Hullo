@@ -119,12 +119,9 @@ public class ProfessorController {
 
 		ProfessorImpl theProfessor = professorModel.getUsuario();
 
-		ObjectMapper mapper = new ObjectMapper();
-		CidadeImpl cidade = mapper.readValue(professorModel.getCidade(), CidadeImpl.class);
-
 		//seta o id da cidade no usuario
 		
-		theProfessor.setCidade(cidade.getId_Cidade());
+		theProfessor.setCidade(cidadeService.getCidade(theProfessor.getCidade().getId_Cidade()));
 		//validar se ja existe usuario com esse email ou senha
 		 
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
@@ -236,6 +233,20 @@ public class ProfessorController {
 
 		return cidade;
 	}
+	
+	/**
+	 * metodo que traz a lista de cidades
+	 * @param estado
+	 * @return cidade
+	 */
+	@RequestMapping(value = "/showFormUpdateProfessor/cidades", method = RequestMethod.POST)
+	public @ResponseBody List<CidadeImpl> obterCidades(@RequestBody EstadoImpl estado) {
+
+
+		List<CidadeImpl> cidade = cidadeService.obterCidadesDoEstado(estado);
+
+		return cidade;
+	}
 
 	/**
 	 * metodo para abrir pagina de perfil professor
@@ -264,6 +275,11 @@ public class ProfessorController {
 	 */
 	@PostMapping("/showFormUpdateProfessor")
 	public String showFormUpdateProfessor(HttpSession session) {
+		
+		List<EstadoImpl> estados = estadoService.getEstados();
+		
+		session.setAttribute("estados", estados);
+		
 		return "professor-update-form";
 	}
 
@@ -283,6 +299,8 @@ public class ProfessorController {
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
 		AlunoImpl validaAluno = alunoService.getUsuario(theUsuario.getEmail_usuario());
 	
+		theUsuario.setCidade(cidadeService.getCidade(theUsuario.getCidade().getId_Cidade()));
+		
 		// valida idade	
 		 
 		if(calculaIdade(theUsuario.getData_nascimento_usuario())){
