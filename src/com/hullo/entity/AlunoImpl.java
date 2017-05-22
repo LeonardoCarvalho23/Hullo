@@ -1,5 +1,6 @@
 package com.hullo.entity;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
 * Objeto que estabalece mapeamente entre AlunoImpl e tabela aluno
@@ -215,16 +220,23 @@ public class AlunoImpl implements Usuario {
 	public void setCidade(CidadeImpl cidade) {
 		this.cidade = cidade;
 	}
+	
+	public void setCidade(String cidadeJSON) throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		CidadeImpl cidade = mapper.readValue(cidadeJSON, CidadeImpl.class);
+		this.cidade = cidade;
+	}
 
 	@Override
 	public String toString() {
 		return "AlunoImpl [id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", sobrenome_usuario="
-				+ sobrenome_usuario + ", cpf_usuario=" + cpf_usuario
-				+ ", email_usuario=" + email_usuario + ", senha_usuario=" + senha_usuario + ", sexo_usuario="
-				+ sexo_usuario + ", data_nascimento_usuario=" + data_nascimento_usuario + ", telefone_usuario="
-				+ telefone_usuario + ", profissao_usuario=" + profissao_usuario
-				+ ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
-				+ ", dt_last_update_usuario=" + dt_last_update_usuario + "]";
+				+ sobrenome_usuario + ", cpf_usuario=" + cpf_usuario + ", email_usuario=" + email_usuario
+				+ ", senha_usuario=" + senha_usuario + ", sexo_usuario=" + sexo_usuario + ", data_nascimento_usuario="
+				+ data_nascimento_usuario + ", telefone_usuario=" + telefone_usuario + ", profissao_usuario="
+				+ profissao_usuario + ", ativo_usuario=" + ativo_usuario + ", dt_insert_usuario=" + dt_insert_usuario
+				+ ", dt_last_update_usuario=" + dt_last_update_usuario + ", cidade=" + cidade + "]";
 	}
+
+	
 	
 }

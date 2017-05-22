@@ -271,7 +271,7 @@ function TestaCPF(strCPF) {
 		  				<div class="input-group">
 		  				<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
 		  					<form:select class="form-control" path="" id="estado" multiple="false">
-							<form:options items="${usuarioModel.estado}" itemLabel="nm_estado"/>
+							<form:options items="${usuarioModel.estado}" itemLabel="nm_estado"  />
 							</form:select>
 		    			</div>
 		  			</div>
@@ -283,7 +283,7 @@ function TestaCPF(strCPF) {
 		  			<div class="col-md-4 inputGroupContainer">
 		  				<div class="input-group">
 		  				<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-							<form:select class="form-control" path="cidade" id="cidade" multiple="false"> </form:select>
+							<form:select class="form-control" path="usuario.cidade.id_Cidade" id="cidade" multiple="false"> </form:select>
 		    			</div>
 		  			</div>
 			</div>	

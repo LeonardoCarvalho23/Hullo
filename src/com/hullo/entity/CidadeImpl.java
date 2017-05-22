@@ -52,8 +52,7 @@ public class CidadeImpl {
 
 	@Override
 	public String toString() {
-		return "{'id_Cidade' :" + id_Cidade + ", 'nm_cidade' : '" + nm_cidade + "}";
+		return "{id_Cidade=" + id_Cidade + ", nm_cidade=" + nm_cidade + ", estado=" + estado + "}";
 	}
-	
-	
+
 }

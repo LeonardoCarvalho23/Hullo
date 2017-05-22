@@ -1,5 +1,7 @@
 $(document).ready(function (){
 	
+	obterCidades();
+	
 	$("#estado").change(function(){
 		var cidades = $('#cidade');
 		cidades.html('');
@@ -29,7 +31,7 @@ $(document).ready(function (){
 				var cidades = $('#cidade');
 				$.each(data, function(index, val){
 					cidades.append(
-							$("<option value='"+ JSON.stringify(val) +"'>"+ val.nm_cidade+"</option>")
+							$("<option value='"+ val.id_Cidade +"'>"+ val.nm_cidade+"</option>")
 							);
 				});
 				cidades.prop('disabled', false);

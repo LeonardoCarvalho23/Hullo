@@ -9,6 +9,7 @@
 <title>Editar perfil</title>
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css" />
@@ -243,8 +244,32 @@ function checkPasswordMatch() {
 							</div>
 						</div>
 					</div>
-
-
+					
+					<!-- Campo Estado -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Estado</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-home"></i></span>
+								<form:select class="form-control" path="" id="estado" multiple="false">
+								<form:options items="${estados}" itemLabel="nm_estado"/>
+								</form:select>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Campo Cidade -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Cidade</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-home"></i></span>
+								<form:select class="form-control" path="cidade.id_Cidade" id="cidade" multiple="false"> </form:select>
+							</div>
+						</div>
+					</div>
 
 					<!-- Botões -->
 					

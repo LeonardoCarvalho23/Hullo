@@ -133,12 +133,8 @@ public class AlunoController {
 		// pega o aluno do objeto alunoModel
 		AlunoImpl theAluno = usuarioModel.getUsuario();
 
-		// pega a cidade do objeto alunoModel (cast de JSON para Objeto)
-		ObjectMapper mapper = new ObjectMapper();
-		CidadeImpl cidade = mapper.readValue(usuarioModel.getCidade(), CidadeImpl.class);
-
 		// seta o id da cidade no usuario
-		theAluno.setCidade(cidade);
+		theAluno.setCidade(cidadeService.getCidade(theAluno.getCidade().getId_Cidade()));
 
 		// validar se ja existe usuario com esse email ou senha, tanto professor
 		// quanto aluno
@@ -239,6 +235,21 @@ public class AlunoController {
 
 		return cidade;
 	}
+	
+	/**
+	 * mapeamento para trazer lista de cidades
+	 * 
+	 * @param estado
+	 *            estado dos quais desejo saber a cidade
+	 * @return lista de cidades
+	 */
+	@RequestMapping(value = "showFormUpdateAluno/cidades", method = RequestMethod.POST)
+	public @ResponseBody List<CidadeImpl> obterCidades(@RequestBody EstadoImpl estado) {
+
+		List<CidadeImpl> cidade = cidadeService.obterCidadesDoEstado(estado);
+
+		return cidade;
+	}
 
 	/**
 	 * pagina perfil do aluno
@@ -261,6 +272,11 @@ public class AlunoController {
 	 */
 	@RequestMapping("/showFormUpdateAluno")
 	public String showFormUpdateAluno(HttpSession session) {
+		
+		List<EstadoImpl> estados = estadoService.getEstados();
+		
+		session.setAttribute("estados", estados);
+		
 		return "aluno-update-form";
 	}
 	
@@ -286,13 +302,18 @@ public class AlunoController {
 	 * @param modelMap
 	 *            para exibição de mensagens de erro
 	 * @return pagina de update do aluno
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
 	 */
 	@RequestMapping("/updateAluno")
-	public String updateAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, HttpSession session, ModelMap modelMap) {
+	public String updateAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, HttpSession session, ModelMap modelMap) throws JsonParseException, JsonMappingException, IOException {
 
 		// // validar se ja existe usuario com esse email
 		AlunoImpl validaAluno = alunoService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
 
+		theUsuario.setCidade(cidadeService.getCidade(theUsuario.getCidade().getId_Cidade()));
+		
 		// valida idade
 		if (calculaIdade(theUsuario.getData_nascimento_usuario())) {
 
