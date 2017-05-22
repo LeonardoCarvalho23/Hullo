@@ -1,14 +1,15 @@
+package com.hullo.entity;
+
+import java.util.Date;
+
+import org.springframework.stereotype.Component;
+
 /**
 * classe para UsuarioImpl
 * @author Hullo Team 
 * @version 1.0
  */
 
-package com.hullo.entity;
-
-import java.util.Date;
-
-import org.springframework.stereotype.Component;
 
 @Component
 public class UsuarioImpl implements Usuario{
@@ -149,6 +150,10 @@ public class UsuarioImpl implements Usuario{
 		this.cd_cidade_usuario = cd_cidade_usuario;
 	}
 
+	/**
+	 * metodo para trazer a string do usuario
+	 * @return string
+	 */
 	@Override
 	public String toString() {
 		return "UsuarioImpl [id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", sobrenome_usuario="

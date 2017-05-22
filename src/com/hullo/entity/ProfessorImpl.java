@@ -1,9 +1,3 @@
-/**
-* classe para ProfessorImpl
-* @author Hullo Team 
-* @version 1.0
- */
-
 package com.hullo.entity;
 
 
@@ -15,6 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+/**
+* classe para ProfessorImpl
+* @author Hullo Team 
+* @version 1.0
+ */
 
 @Entity
 @Table(name="professor")
@@ -71,8 +71,10 @@ public class ProfessorImpl implements Usuario {
 	public ProfessorImpl(){
 	}
 	
-	/* **
+	
+	/**
 	 * construtor para transformar um usuarioImpl em um alunoImpl
+	 * @param usuario
 	 */
 	public ProfessorImpl(UsuarioImpl usuario) {
 		this.id_usuario = usuario.getId_usuario();
@@ -211,6 +213,11 @@ public class ProfessorImpl implements Usuario {
 	public void setDt_last_update_usuario(Date dt_last_update_usuario) {
 		this.dt_last_update_usuario = dt_last_update_usuario;
 	}
+	
+	/**
+	 * metodo pra trazer uma string do usuario	 
+	 * @return string
+	 */
 
 	@Override
 	public String toString() {

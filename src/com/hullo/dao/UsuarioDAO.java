@@ -1,12 +1,12 @@
+package com.hullo.dao;
+
+import java.util.List;
+
 /**
 * classe para UsuarioAO
 * @author Hullo Team 
 * @version 1.0
  */
-
-package com.hullo.dao;
-
-import java.util.List;
 
 
 public interface UsuarioDAO<T> {

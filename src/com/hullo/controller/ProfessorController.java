@@ -1,9 +1,3 @@
-/**
-* classe para ProfessorControler
-* @author Hullo Team 
-* @version 1.0
- */
-
 package com.hullo.controller;
 
 import java.io.IOException;
@@ -43,6 +37,13 @@ import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
 
+/**
+* classe para ProfessorControler
+* @author Hullo Team 
+* @version 1.0
+ */
+
+
 @Controller
 @RequestMapping("/professor")
 @SessionAttributes("usuario")
@@ -62,20 +63,24 @@ public class ProfessorController {
 	@Autowired
 	private CidadeServiceImpl cidadeService;
 
-	/* **
-	 * Abaixo, dados para disparo de email
-	 */
+	// Abaixo, dados para disparo de email	
 	@Autowired
 	private MailSender mailSender;
 
+	/**
+	 * disparo de email
+	 * @param mailSender
+	 */
 	@Autowired
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
 	}
-	/* **
-	 *  fim do código para email
+	
+	/**
+	 * metodo para abrir formulario
+	 * @param theModel
+	 * @return professor-form
 	 */
-
 	@GetMapping("/formProfessor")
 	public String showFormNovoUsuario(Model theModel) {
 
@@ -96,8 +101,15 @@ public class ProfessorController {
 		return "professor-form";
 	}
 
-	/* **
-	 *  para gravar novo professor
+	/**
+	 * metodo para salvar novo usuario
+	 * @param professorModel
+	 * @param modelMap
+	 * @return professor-form
+	 * @return redirect:/usuario/usuarioLogin
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
 	 */
 	@PostMapping("/formProfessor")
 	public String saveUsuario(@ModelAttribute("professorModel") ProfessorModel professorModel, ModelMap modelMap)
@@ -110,14 +122,11 @@ public class ProfessorController {
 		ObjectMapper mapper = new ObjectMapper();
 		CidadeImpl cidade = mapper.readValue(professorModel.getCidade(), CidadeImpl.class);
 
-		/* **
-		 *  seta o id da cidade no usuario
-		 */
-		theProfessor.setCidade(cidade.getId_Cidade());
+		//seta o id da cidade no usuario
 		
-		/* **
-		 *  validar se ja existe usuario com esse email ou senha
-		 */
+		theProfessor.setCidade(cidade.getId_Cidade());
+		//validar se ja existe usuario com esse email ou senha
+		 
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theProfessor.getEmail_usuario(), theProfessor.getCpf_usuario());
 		AlunoImpl validaAluno = alunoService.getUsuario(theProfessor.getEmail_usuario());
 	
@@ -140,42 +149,36 @@ public class ProfessorController {
 				
 						if (validaProfessor != null) {
 				
-							/* **
-							 *  exibe mensagem de erro
-							 */
+							 //exibe mensagem de erro
+							 
 							final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Já existe usuario com o mesmo e-mail ou cpf. </div>";
 							modelMap.addAttribute("errorMessage", errorMessage);
 				
 							return "professor-form";
 							
-						/* **
-						 *  se houver aluno, checa se a senha é igual. Se não for, devolve erro	
-						 */
+						
+						  //se houver aluno, checa se a senha é igual. Se não for, devolve erro	
+						 
 						} else if ((validaAluno!=null) && !(validaAluno.getSenha_usuario().equals(theProfessor.getSenha_usuario()))){
-							/* **
-							 *  exibe mensagem de erro
-							 */
+							
 								final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>A senha deve ser a mesma do perfil de aluno já cadastrado.</div>";
 								modelMap.addAttribute("errorMessage", errorMessage);
 				
 								return "professor-form";
-							
-							/* **
-							 *  se nao existe professor com esses dados, cria o ususario
-							 */
+							//se nao existe professor com esses dados, cria o ususario
+							 
 						} else {
 							theProfessor.setAtivo_usuario("1");
 							theProfessor.setDt_insert_usuario(current_date);
 							theProfessor.setDt_last_update_usuario(current_date);
 				
-							/* **
-							 *  save the professor
-							 */
+							// save the professor
+							 
 							professorService.saveUsuario(theProfessor);
 				
-							/* **
-							 *  Envia email de confirmação
-							 */
+							
+							 // Envia email de confirmação
+							 
 							SimpleMailMessage msg = new SimpleMailMessage();
 				
 							msg.setTo(theProfessor.getEmail_usuario());
@@ -187,47 +190,44 @@ public class ProfessorController {
 								this.mailSender.send(msg);
 								
 							} catch (MailException e) {
-								/* **
-								 *  TODO Auto-generated catch block
-								 */
+							
+								 // TODO Auto-generated catch block
+								 
 							}
 				
-							/* **
-							 *  envia mensagem de cadastro com sucesso
-							 */
+							
 							final String okNewProfessorMessage = "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Professor cadastrado com sucesso. Faça login. </div>";
 							modelMap.addAttribute("okNewProfessorMessage", okNewProfessorMessage);
 							return "redirect:/usuario/usuarioLogin";
 						}
 					}else{
-						/* **
-						 *  exibe mensagem de erro
-						 */
+						
 						final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CNPJ inválido.</div>";
 						modelMap.addAttribute("errorMessage", errorMessage);
 				
 						return "professor-form";
 					}
 				}else{
-					/* **
-					 *  exibe mensagem de erro
-					 */
+					
 					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CPF inválido.</div>";
 					modelMap.addAttribute("errorMessage", errorMessage);
 			
 					return "professor-form";
 				}
 		}else{
-			/* **
-			 *  exibe mensagem de erro
-			 */
+			
 			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Idade mínima 18 anos.</div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
 	
 			return "professor-form";
 		}
 	}
-
+	
+	/**
+	 * metodo que traz a lista de cidades
+	 * @param estado
+	 * @return cidade
+	 */
 	@RequestMapping(value = "/formProfessor/cidades", method = RequestMethod.POST)
 	public @ResponseBody List<CidadeImpl> obterCidade(@RequestBody EstadoImpl estado) {
 
@@ -237,64 +237,68 @@ public class ProfessorController {
 		return cidade;
 	}
 
-	
-	/* **
-	 *  metodo para abrir pagina de perfil professor
-	 */
+	/**
+	 * metodo para abrir pagina de perfil professor
+	 * @param session
+	 * @return perfil-professor
+	 */	
 	@RequestMapping("/showPerfilProfessor")
 	public String showPerfilProfessor(HttpSession session) {
 		return "perfil-professor";
 	}
 	
-	/* **
-	 *  metodo para abrir pagina home do professor
+	/**
+	 * metodo para abrir pagina home do professor
+	 * @param session
+	 * @return home-professor
 	 */
 	@RequestMapping("/showHomeProfessor")
 	public String showHomeProfessor(HttpSession session) {
 		return "home-professor";
 	}
 
-	/* **
-	 *  metodo para abrir pagina de update do professor
+	/**
+	 * metodo para abrir pagina de update do professor
+	 * @param session
+	 * @return professor-update-form
 	 */
 	@PostMapping("/showFormUpdateProfessor")
 	public String showFormUpdateProfessor(HttpSession session) {
 		return "professor-update-form";
 	}
 
-	/* **
-	 *  metodo para atualizar professor
+	/**
+	 * metodo para atualizar professor
+	 * @param theUsuario
+	 * @param session
+	 * @param modelMap
+	 * @return home-professor
+	 * @return professor-update-form
 	 */
 	@RequestMapping("/updateProfessor")
 	public String updateProfessor(@ModelAttribute("usuario") ProfessorImpl theUsuario, HttpSession session,	ModelMap modelMap) {
 
-		/* **
-		 *  validar se ja existe usuario com esse email
-		 */
+		//validar se ja existe usuario com esse email
+		 
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
 		AlunoImpl validaAluno = alunoService.getUsuario(theUsuario.getEmail_usuario());
 	
-		/* **
-		 * valida idade	
-		 */
+		// valida idade	
+		 
 		if(calculaIdade(theUsuario.getData_nascimento_usuario())){
 			
 			if(isCNPJ(theUsuario.getCnpj_usuario())){
 
 				if (validaProfessor != null || validaAluno!= null) {
 		
-					/* **
-					 *  exibe mensagem de erro
-					 */
 					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro usuario com esse email </div>";
 					modelMap.addAttribute("errorMessage", errorMessage);
 					return "professor-update-form";
 					
 				} else {
 					
-					/* **
-					 *  Atualiza a sessão com os dados inseridos no formulario
-					 */
+					//Atualiza a sessão com os dados inseridos no formulario
+					 
 					Date current_date = new Date();
 					theUsuario.setDt_last_update_usuario(current_date);
 					professorService.updateUsuario(theUsuario);
@@ -302,18 +306,14 @@ public class ProfessorController {
 					return "home-professor";
 				}										
 			}else{
-				/* **
-				 *  exibe mensagem de erro
-				 */
+				
 				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>CNPJ inválido.</div>";
 				modelMap.addAttribute("errorMessage", errorMessage);
 	
 				return "professor-update-form";
 			}
 		}else{
-			/* **
-			 *  exibe mensagem de erro
-			 */
+			
 			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a>Idade mínima 18 anos.</div>";
 			modelMap.addAttribute("errorMessage", errorMessage);
 		
@@ -322,8 +322,11 @@ public class ProfessorController {
 	
 	}
 
-	/* **
-	 *  metodo para inativar professor
+	/**
+	 * metodo para inativar professor
+	 * @param theUsuario
+	 * @param theModel
+	 * @return redirect:/usuario/usuarioLogin
 	 */
 	@PostMapping("/inactivateProfessor")
 	public String inactivateProfessor(@ModelAttribute("usuario") ProfessorImpl theUsuario, Model theModel) {
@@ -338,11 +341,15 @@ public class ProfessorController {
 
 	}
 	
+	/**
+	 * metodo que valida cpf
+	 * @param CPF
+	 * @return boolean
+	 */
 	public static boolean isCPF(String CPF) {
 		CPF = CPF.replaceAll("[.-]","");
-		/* **
-		 *  considera-se erro CPF's formados por uma sequencia de numeros iguais
-		 */
+		// considera-se erro CPF's formados por uma sequencia de numeros iguais
+		 
 		    if (CPF.equals("00000000000") || CPF.equals("11111111111") ||
 		        CPF.equals("22222222222") || CPF.equals("33333333333") ||
 		        CPF.equals("44444444444") || CPF.equals("55555555555") ||
@@ -355,9 +362,8 @@ public class ProfessorController {
 		    int sm, i, r, num, peso;
 
 		    try {
-			/* **
-			 *  Calculo do 1o. Digito Verificador
-			 */
+			// Calculo do 1o. Digito Verificador
+			 
 		      sm = 0;
 		      peso = 10;
 		      for (i=0; i<9; i++) {              
@@ -375,14 +381,12 @@ public class ProfessorController {
 		      r = 11 - (sm % 11);
 		      if ((r == 10) || (r == 11))
 		         dig10 = '0';
-		      /* **
-		       * converte no respectivo caractere numerico
-		       */
+		      // converte no respectivo caractere numerico
+		       
 		      else dig10 = (char)(r + 48); 
 
-		/* **
-		 * Calculo do 2o. Digito Verificador
-		 */
+		// Calculo do 2o. Digito Verificador
+		 
 		      sm = 0;
 		      peso = 11;
 		      for(i=0; i<10; i++) {
@@ -396,9 +400,8 @@ public class ProfessorController {
 		         dig11 = '0';
 		      else dig11 = (char)(r + 48);
 
-		/* **
-		 *  Verifica se os digitos calculados conferem com os digitos informados.
-		 */
+		//Verifica se os digitos calculados conferem com os digitos informados.
+		 
 		      if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
 		         return(true);
 		      else return(false);
@@ -406,18 +409,18 @@ public class ProfessorController {
 		        return(false);
 		    }
 		 }
-	
+	/**
+	 * metodo de validar cnpj
+	 * @param CNPJ
+	 * @return boolean
+	 */
 	public static boolean isCNPJ(String CNPJ) {
 		CNPJ = CNPJ.replaceAll("[.-/-]","");
-		
-		/* **
-		 * para considerar campo vazio
-		 */
+		//para considerar campo vazio
+		 
 		if(CNPJ.equals("")) return(true); 
-		
-		/* **
-		 *  considera-se erro CNPJ's formados por uma sequencia de numeros iguais
-		 */
+		// considera-se erro CNPJ's formados por uma sequencia de numeros iguais
+		 
 		    if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") ||
 		        CNPJ.equals("22222222222222") || CNPJ.equals("33333333333333") ||
 		        CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555") ||
@@ -430,9 +433,8 @@ public class ProfessorController {
 		    int sm, i, r, num, peso;
 
 		    try {
-		/* **
-		 *  Calculo do 1o. Digito Verificador
-		 */
+		// Calculo do 1o. Digito Verificador
+		 
 		      sm = 0;
 		      peso = 2;
 		      for (i=11; i>=0; i--) {
@@ -454,9 +456,8 @@ public class ProfessorController {
 		         dig13 = '0';
 		      else dig13 = (char)((11-r) + 48);
 
-		/* **
-		 *  Calculo do 2o. Digito Verificador
-		 */
+		// Calculo do 2o. Digito Verificador
+		 
 		      sm = 0;
 		      peso = 2;
 		      for (i=12; i>=0; i--) {
@@ -472,9 +473,8 @@ public class ProfessorController {
 		         dig14 = '0';
 		      else dig14 = (char)((11-r) + 48);
 
-		/* **
-		 *  Verifica se os dígitos calculados conferem com os dígitos informados.
-		 */
+		//Verifica se os dígitos calculados conferem com os dígitos informados.
+		 
 		      if ((dig13 == CNPJ.charAt(12)) && (dig14 == CNPJ.charAt(13)))
 		         return(true);
 		      else return(false);
@@ -482,7 +482,11 @@ public class ProfessorController {
 		        return(false);
 		    }
 	}	
-	
+	/**
+	 * metodo de calcular idade
+	 * @param dataNasc
+	 * @return boolean
+	 */
 	public static boolean calculaIdade(java.util.Date dataNasc) {
 
 	    Calendar dataNascimento = Calendar.getInstance();  

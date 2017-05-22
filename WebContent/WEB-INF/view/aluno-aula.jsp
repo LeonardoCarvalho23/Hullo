@@ -53,7 +53,7 @@
 							
 						</audio>
 						<p>Complemente seu estudo: </p>
-						<a href="${atividade}/">Atividade</a>
+						${atividade}
 			<br>
 			<div class="form-group">
 				<label class="col-md-4 control-label"></label>
@@ -76,4 +76,3 @@
 
 </html>
 
-</script>
