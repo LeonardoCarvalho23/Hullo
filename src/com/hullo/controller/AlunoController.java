@@ -309,7 +309,7 @@ public class AlunoController {
 	@RequestMapping("/updateAluno")
 	public String updateAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, HttpSession session, ModelMap modelMap) throws JsonParseException, JsonMappingException, IOException {
 
-		// // validar se ja existe usuario com esse email
+		// validar se ja existe usuario com esse email
 		AlunoImpl validaAluno = alunoService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
 
 		theUsuario.setCidade(cidadeService.getCidade(theUsuario.getCidade().getId_Cidade()));

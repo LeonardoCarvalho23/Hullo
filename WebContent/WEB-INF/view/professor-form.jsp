@@ -411,8 +411,7 @@ function validaCnpj(cnpj){
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-home"></i></span>
-								<form:select class="form-control" path="cidade" id="cidade"
-									multiple="false">
+								<form:select class="form-control" path="usuario.cidade.id_Cidade" id="cidade" multiple="false">
 								</form:select>
 							</div>
 						</div>
