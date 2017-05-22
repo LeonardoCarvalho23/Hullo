@@ -1,12 +1,12 @@
+package com.hullo.entity;
+
+import java.util.List;
+
 /**
 * classe para ProfessorModel
 * @author Hullo Team 
 * @version 1.0
  */
-
-package com.hullo.entity;
-
-import java.util.List;
 
 public class ProfessorModel {
 	
