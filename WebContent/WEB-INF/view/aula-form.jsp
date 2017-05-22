@@ -56,7 +56,7 @@
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-user"></i></span>
 								<form:input placeholder="Nome" class="form-control"
-									path="nm_aula" required="true" maxlength="45" />
+									path="nm_aula" required="true" maxlength="40" />
 							</div>
 						</div>
 					</div>

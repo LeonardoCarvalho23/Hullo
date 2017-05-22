@@ -120,8 +120,16 @@ public class AulaDAOImpl {
 		// Cria query que faz busca no banco
 		Query<AulaImpl> theQuery;
 		// para fazer update apenas dos capos editaveis
-		String hql = "UPDATE AulaImpl set nm_aula = :nome, numero_aula= :numero, indice_aula= :indice, revisao_aula = :rev, "
-				+ " conteudo_aula = :cont, ativo_aula=:ativo, dt_last_update_aula = :lastUpdate, id_modulo_aula=:id_modulo "
+		String hql = "UPDATE AulaImpl set nm_aula = :nome, "
+				+ "numero_aula= :numero, "
+				+ "indice_aula= :indice, "
+				+ "revisao_aula = :rev, "
+				+ "conteudo_aula = :cont, "
+				+ "atividade_aula = :atv, "
+				+ "teaser_aula = :teaser, "
+				+ "ativo_aula=:ativo, "
+				+ "dt_last_update_aula = :lastUpdate, "
+				+ "id_modulo_aula=:id_modulo "
 				+ "WHERE id_aula = :id";
 		theQuery = currentSession.createQuery(hql);
 		// adicionando valores para as variaveis do update
@@ -131,6 +139,8 @@ public class AulaDAOImpl {
 		theQuery.setParameter("ativo", aula.isAtivo_aula());
 		theQuery.setParameter("rev", aula.getRevisao_aula());
 		theQuery.setParameter("cont", aula.getConteudo_aula());
+		theQuery.setParameter("atv", aula.getAtividade_aula());
+		theQuery.setParameter("teaser", aula.getTeaser_aula());
 		theQuery.setParameter("lastUpdate", aula.getDt_last_update_aula());
 		theQuery.setParameter("id_modulo", aula.getId_modulo_aula());
 
