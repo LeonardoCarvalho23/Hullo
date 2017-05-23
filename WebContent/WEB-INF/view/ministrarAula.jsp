@@ -91,10 +91,10 @@
 						<div id="classscript" class="tab-pane fade in active">
 							<!-- Script Aula atual -->
 							<h3>Class Script</h3>
-							<p>Last Class Review:
+							<p><font color="#1588c9">Last Class Review:</font>
 								${aulaRealizadaModel.aulaAnterior.revisao_aula}</p>
-							<p>Class Name: ${aulaRealizadaModel.aulaAtual.nm_aula}</p>
-							<p>Class Content:
+							<p><font color="#1588c9"><b>Class Name: ${aulaRealizadaModel.aulaAtual.nm_aula}</b></font></p>
+							<p><font color="#1588c9">Class Content:</font>
 								${aulaRealizadaModel.aulaAtual.conteudo_aula}</p>
 
 						</div>
