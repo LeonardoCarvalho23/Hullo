@@ -47,12 +47,12 @@
 			<br>
 
 			<!-- add out html table here -->
-			<table>
+			<table >
 				<tr>
 					
-					<th>Nome da Aula</th>
-					<th>Data Aula</th>
-					<th>Status</th>
+					<th align="left">Nome da Aula</th>
+					<th align="left">Data Aula</th>
+					<th align="left">Status</th>
 					
 					<th> </th>
 				</tr>
@@ -62,9 +62,9 @@
 
 					<tr>
 						
-						<td>${tempAula.nomeAula}</td>
-						<td>${tempAula.aulaRealizadaAtual.dt_inicio_aula_realizada}</td>
-						<td>${tempAula.aulaRealizadaAtual.status_aula_realizada}</td>
+						<td align="left">${tempAula.nomeAula}</td>
+						<td align="left">${tempAula.aulaRealizadaAtual.dt_inicio_aula_realizada}</td>
+						<td align="left">${tempAula.aulaRealizadaAtual.status_aula_realizada}</td>
 						<td>
 						<!-- botao de update do modulo --> 
 							<c:url var="viewLink" value="/aluno/showDetalhesAula">

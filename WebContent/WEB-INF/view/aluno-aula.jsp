@@ -43,8 +43,10 @@
 		<div id="container" class="well form-horizontal">
 
 						<p>Nome da aula: ${nomeAula}</p>						
-						<p>Data Realização da aula: ${aulaRealizada.dt_inicio_aula_realizada}</p>
+						<p>Data Realização da aula: ${aulaRealizada.dt_inicio_aula_realizada}</p>						
 						<p>Status da aula: ${aulaRealizada.status_aula_realizada}</p>
+						<p>Professor: ${professor}</p>
+						
 						<p>Escute sua aula:</p>
 						
 						<audio controls>
