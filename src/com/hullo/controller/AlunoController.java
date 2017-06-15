@@ -490,9 +490,14 @@ public class AlunoController {
 			
 			String nomeAula = aulaService.getNomeAula(aulaRealizada.getId_aula_aula_realizada());
 			
+			ProfessorImpl professor = professorService.getUsuario(aulaRealizada.getId_professor_aula_realizada());				
+			String nomeProfessor = professor.getNome_usuario();
+			
+			System.out.println("nomeProfessor"+nomeProfessor);
 			
 			//adiciona no model
-			aulaRealizadaModel.setNomeAula(nomeAula);			
+			aulaRealizadaModel.setNomeAula(nomeAula);
+			aulaRealizadaModel.setNomeProfessor(nomeProfessor);
 			aulaRealizadaModel.setAulaRealizadaAtual(aulaRealizada);
 		
 			

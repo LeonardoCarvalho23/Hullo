@@ -48,29 +48,31 @@
 
 			<!-- add out html table here -->
 			<table >
+				
 				<tr>
 					
-					<th align="left">Nome da Aula</th>
-					<th align="left">Data Aula</th>
-					<th align="left">Status</th>
+					<th>Nome da Aula</th>
+					<th>Data Aula</th>
+					<th>Status</th>
+					<th>Professor</th>
 					
-					<th> </th>
-				</tr>
+					<th> 
 
 				<!-- loop over and print usuarios -->
 				<c:forEach var="tempAula" items="${aulas}">
 
 					<tr>
 						
-						<td align="left">${tempAula.nomeAula}</td>
-						<td align="left">${tempAula.aulaRealizadaAtual.dt_inicio_aula_realizada}</td>
-						<td align="left">${tempAula.aulaRealizadaAtual.status_aula_realizada}</td>
 						<td>
 						<!-- botao de update do modulo --> 
 							<c:url var="viewLink" value="/aluno/showDetalhesAula">
 								<c:param name="id_aula_realizada" value="${tempAula.aulaRealizadaAtual.id_aula_realizada}" />
-							</c:url> <!-- mostra o link --> <a href="${viewLink}">Detalhes</a>
+							</c:url> <!-- mostra o link --> <a href="${viewLink}">${tempAula.nomeAula}</a>
+							
 						</td>
+						<td>${tempAula.aulaRealizadaAtual.dt_inicio_aula_realizada}</td>
+						<td>${tempAula.aulaRealizadaAtual.status_aula_realizada}</td>
+						<td>${tempAula.nomeProfessor}</td>
 					</tr>
 
 				</c:forEach>

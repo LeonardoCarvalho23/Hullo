@@ -11,6 +11,9 @@ public class AulaRealizadaModel {
 	private AulaRealizadaImpl aulaRealizadaAnterior;
 	private AulaRealizadaImpl aulaRealizadaAtual;
 	private AulaRealizadaImpl aulaRealizada;
+	private ProfessorImpl professor;
+	String nomeProfessor;
+	
 	
 	public AlunoImpl getAluno() {
 		return aluno;
@@ -55,6 +58,17 @@ public class AulaRealizadaModel {
 		this.aulaRealizada = aulaRealizada;
 	}
 	
-
+	public ProfessorImpl getProfessor() {
+		return professor;
+	}
+	public void setProfessor(ProfessorImpl professor) {
+		this.professor = professor;
+	}
+	public String getNomeProfessor() {
+		return nomeProfessor;
+	}
+	public void setNomeProfessor(String nomeProfessor) {
+		this.nomeProfessor = nomeProfessor;
+	}
 	
 }
