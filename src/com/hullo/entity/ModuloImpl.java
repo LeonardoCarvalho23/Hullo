@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="modulo")
@@ -19,6 +21,8 @@ public class ModuloImpl {
 	private int id_modulo;
 	
 	@Column(name="nm_modulo")
+	@NotNull(message="Campo obrigatório")
+	@Size(min=3, message="Nome inválido")
 	private String nm_modulo;
 	
 	@Column(name="indice_modulo")

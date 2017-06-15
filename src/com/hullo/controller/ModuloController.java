@@ -4,12 +4,17 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +49,14 @@ public class ModuloController {
 		return "lista-modulos";
 	}
 
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+		
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
+	
 	// abrir pagina para casdatrar novo modulo
 	@GetMapping("/formModulo")
 	public String formNovoModulo(Model theModel) {
@@ -58,10 +71,18 @@ public class ModuloController {
 	}
 
 	// gravar novo modulo
-	@PostMapping("/newModulo")
-	public String saveModulo(@ModelAttribute("modulo") ModuloImpl model, ModelMap modelMap, Model newModel) {
+	@RequestMapping("/newModulo")
+	public String saveModulo(
+			@Valid @ModelAttribute("modulo") ModuloImpl model, BindingResult theBindingResult,
+			ModelMap modelMap, Model newModel)  {
 		Date current_date = new Date();
+		System.out.println("validation no controller?");
 
+		if (theBindingResult.hasErrors()) {
+            return "modulo-form";
+        }
+		
+		else{
 		// pega o objeto modulo do model
 		ModuloImpl modulo = model;
 
@@ -85,6 +106,7 @@ public class ModuloController {
 
 		// abre a pagina de edicao de modulo onde pode adicionar as aulas
 		return showModulo(modulo.getId_modulo(), newModel, modelMap);
+		}
 	}
 
 	// buscar no banco por nome
