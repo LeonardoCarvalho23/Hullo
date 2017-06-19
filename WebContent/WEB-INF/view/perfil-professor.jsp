@@ -43,7 +43,6 @@
     <p>Nome: ${usuario.nome_usuario}</p>
 	<p>Sobrenome: ${usuario.sobrenome_usuario}</p>
 	<p>E-mail: ${usuario.email_usuario}</p>
-	<p>Senha: ${usuario.senha_usuario}</p>
 	<p>CPF: ${usuario.cpf_usuario}</p>
 	<p>CNPJ: ${usuario.cnpj_usuario}</p>
 	<p>Sexo: ${usuario.sexo_usuario}</p>
