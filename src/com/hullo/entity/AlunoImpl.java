@@ -1,6 +1,7 @@
 package com.hullo.entity;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -62,10 +63,10 @@ public class AlunoImpl implements Usuario {
 	private String ativo_usuario;
 	
 	@Column(name="dt_insert_aluno")
-	private Date dt_insert_usuario;
+	private LocalDateTime dt_insert_usuario;
 	
 	@Column(name="dt_last_update_aluno")
-	private Date dt_last_update_usuario;
+	private LocalDateTime dt_last_update_usuario;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cd_cidade_aluno")
@@ -91,8 +92,8 @@ public class AlunoImpl implements Usuario {
 		this.telefone_usuario = usuario.getTelefone_usuario();
 		this.profissao_usuario = usuario.getProfissao_usuario();
 		this.ativo_usuario = usuario.getAtivo_usuario();
-		this.dt_insert_usuario = usuario.getDt_insert_usuario();
-		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
+//		this.dt_insert_usuario = usuario.getDt_insert_usuario();
+//		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
 	}
 
 	/**
@@ -195,19 +196,19 @@ public class AlunoImpl implements Usuario {
 		this.ativo_usuario = ativo_usuario;
 	}
 
-	public Date getDt_insert_usuario() {
+	public LocalDateTime getDt_insert_usuario() {
 		return dt_insert_usuario;
 	}
 
-	public void setDt_insert_usuario(Date dt_insert_usuario) {
+	public void setDt_insert_usuario(LocalDateTime dt_insert_usuario) {
 		this.dt_insert_usuario = dt_insert_usuario;
 	}
 
-	public Date getDt_last_update_usuario() {
+	public LocalDateTime getDt_last_update_usuario() {
 		return dt_last_update_usuario;
 	}
 
-	public void setDt_last_update_usuario(Date dt_last_update_usuario) {
+	public void setDt_last_update_usuario(LocalDateTime dt_last_update_usuario) {
 		this.dt_last_update_usuario = dt_last_update_usuario;
 	}
 

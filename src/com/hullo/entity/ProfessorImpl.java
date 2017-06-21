@@ -1,6 +1,6 @@
 package com.hullo.entity;
 
-
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -14,70 +14,70 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
-* classe para ProfessorImpl
-* @author Hullo Team 
-* @version 1.0
+ * classe para ProfessorImpl
+ * 
+ * @author Hullo Team
+ * @version 1.0
  */
 
 @Entity
-@Table(name="professor")
+@Table(name = "professor")
 public class ProfessorImpl implements Usuario {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_professor")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_professor")
 	private int id_usuario;
-	
-	@Column(name="nome_professor")
+
+	@Column(name = "nome_professor")
 	private String nome_usuario;
-	
-	@Column(name="sobrenome_professor")
+
+	@Column(name = "sobrenome_professor")
 	private String sobrenome_usuario;
-	
-	@Column(name="cpf_professor")
+
+	@Column(name = "cpf_professor")
 	private String cpf_usuario;
-	
-	@Column(name="cnpj_professor")
+
+	@Column(name = "cnpj_professor")
 	private String cnpj_usuario;
-	
-	@Column(name="email_professor")
+
+	@Column(name = "email_professor")
 	private String email_usuario;
-	
-	@Column(name="senha_professor")
+
+	@Column(name = "senha_professor")
 	private String senha_usuario;
-	
-	@Column(name="sexo_professor")
+
+	@Column(name = "sexo_professor")
 	private String sexo_usuario;
-	
-	@Column(name="data_nascimento_professor")
+
+	@Column(name = "data_nascimento_professor")
 	private Date data_nascimento_usuario;
-	
-	@Column(name="telefone_professor")
+
+	@Column(name = "telefone_professor")
 	private String telefone_usuario;
 
-	@Column(name="profissao_professor")
+	@Column(name = "profissao_professor")
 	private String profissao_usuario;
-	
-	@Column(name="ativo_professor")
+
+	@Column(name = "ativo_professor")
 	private String ativo_usuario;
-	
-	@Column(name="dt_insert_professor")
-	private Date dt_insert_usuario;
-	
-	@Column(name="dt_last_update_professor")
-	private Date dt_last_update_usuario;
-	
+
+	@Column(name = "dt_insert_professor")
+	private LocalDateTime dt_insert_usuario;
+
+	@Column(name = "dt_last_update_professor")
+	private LocalDateTime dt_last_update_usuario;
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="cd_cidade_professor")
+	@JoinColumn(name = "cd_cidade_professor")
 	private CidadeImpl cidade;
-	
-	
-	public ProfessorImpl(){
+
+	public ProfessorImpl() {
 	}
-	
-	
+
 	/**
 	 * construtor para transformar um usuarioImpl em um alunoImpl
+	 * 
 	 * @param usuario
 	 */
 	public ProfessorImpl(UsuarioImpl usuario) {
@@ -93,10 +93,10 @@ public class ProfessorImpl implements Usuario {
 		this.telefone_usuario = usuario.getTelefone_usuario();
 		this.profissao_usuario = usuario.getProfissao_usuario();
 		this.ativo_usuario = usuario.getAtivo_usuario();
-		this.dt_insert_usuario = usuario.getDt_insert_usuario();
-		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
+//		this.dt_insert_usuario = usuario.getDt_insert_usuario();
+//		this.dt_last_update_usuario = usuario.getDt_last_update_usuario();
 	}
-	
+
 	public int getId_usuario() {
 		return id_usuario;
 	}
@@ -193,34 +193,33 @@ public class ProfessorImpl implements Usuario {
 		this.ativo_usuario = ativo_usuario;
 	}
 
-	public Date getDt_insert_usuario() {
+	public LocalDateTime getDt_insert_usuario() {
 		return dt_insert_usuario;
 	}
 
-	public void setDt_insert_usuario(Date dt_insert_usuario) {
+	public void setDt_insert_usuario(LocalDateTime dt_insert_usuario) {
 		this.dt_insert_usuario = dt_insert_usuario;
 	}
 
-	public Date getDt_last_update_usuario() {
+	public LocalDateTime getDt_last_update_usuario() {
 		return dt_last_update_usuario;
 	}
 
-	public void setDt_last_update_usuario(Date dt_last_update_usuario) {
+	public void setDt_last_update_usuario(LocalDateTime dt_last_update_usuario) {
 		this.dt_last_update_usuario = dt_last_update_usuario;
 	}
-	
+
 	public CidadeImpl getCidade() {
 		return cidade;
 	}
-
 
 	public void setCidade(CidadeImpl cidade) {
 		this.cidade = cidade;
 	}
 
-
 	/**
-	 * metodo pra trazer uma string do usuario	 
+	 * metodo pra trazer uma string do usuario
+	 * 
 	 * @return string
 	 */
 

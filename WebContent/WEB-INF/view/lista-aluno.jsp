@@ -18,7 +18,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>Lista de usuarios</h2>		
+			<h2>Lista de Alunos</h2>		
 		</div>
 	</div>
 	

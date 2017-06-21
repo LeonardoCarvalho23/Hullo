@@ -1,5 +1,6 @@
 package com.hullo.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.UsuarioImpl;
 import com.hullo.service.UsuarioService;
+import com.hullo.utility.DataConversion;
 
 /**
  * classe para controlar o que é exibido na tela do administrador
@@ -48,18 +50,26 @@ public class AdmController {
 	 * abre pagina com lista de todos os alunos cadastrados
 	 * 
 	 * @param session
-	 *           para enviar infos para a view
+	 *            para enviar infos para a view
 	 * @return pagina com lista de alunos cadastrados
 	 */
 	@GetMapping("/listaAlunos")
 	public String listarAlunos(HttpSession session) {
 
+		//objeto para converter datas para hora BR
+		DataConversion conversor = new DataConversion();
 		// get usuarios from the DAO
 		List<AlunoImpl> theUsuarios = alunoService.getUsuarios();
 
+		for (int i = 0; i < theUsuarios.size(); i++) {
+			AlunoImpl aluno = theUsuarios.get(i);
+			LocalDateTime date = aluno.getDt_insert_usuario();
+			aluno.setDt_insert_usuario(conversor.banco2br(date));
+		}
+
 		// adiciona lista na sessao
 		session.setAttribute("usuarios", theUsuarios); // name and value
-		
+
 		return "lista-aluno";
 	}
 
@@ -72,9 +82,16 @@ public class AdmController {
 	 */
 	@GetMapping("/listaProfessores")
 	public String listarProfessores(HttpSession session) {
-
+		//objeto para converter datas para hora BR
+		DataConversion conversor = new DataConversion();
 		// get usuarios from the DAO
 		List<ProfessorImpl> theUsuarios = professorService.getUsuarios();
+
+		for (int i = 0; i < theUsuarios.size(); i++) {
+			ProfessorImpl professor = theUsuarios.get(i);
+			LocalDateTime date = professor.getDt_insert_usuario();
+			professor.setDt_insert_usuario(conversor.banco2br(date));
+		}
 
 		// adiciona lista na sessao
 		session.setAttribute("usuarios", theUsuarios); // name and value

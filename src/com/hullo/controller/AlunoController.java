@@ -1,9 +1,9 @@
 package com.hullo.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 
@@ -33,8 +33,6 @@ import com.fasterxml.jackson.databind.*;
 import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
-import com.hullo.entity.ModuloImpl;
-import com.hullo.entity.ModuloModel;
 import com.hullo.entity.ProfessorImpl;
 import com.hullo.entity.Usuario;
 import com.hullo.entity.UsuarioImpl;
@@ -46,9 +44,7 @@ import com.hullo.service.AulaRealizadaServiceImpl;
 import com.hullo.service.AulaServiceImpl;
 import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
-import com.hullo.service.ProfessorServiceImpl;
 import com.hullo.service.UsuarioService;
-import com.hullo.utility.DataConversion;
 
 /**
  * classe para controlar o que é exibido na home e CRUD do aluno
@@ -130,7 +126,8 @@ public class AlunoController {
 	@PostMapping("/formAluno")
 	public String saveUsuario(@ModelAttribute("usuarioModel") AlunoModel usuarioModel, ModelMap modelMap)
 			throws JsonParseException, JsonMappingException, IOException {
-		Date current_date = new Date();
+		//Date current_date = new Date();
+		LocalDateTime current_date = LocalDateTime.now();
 
 		// pega o aluno do objeto alunoModel
 		AlunoImpl theAluno = usuarioModel.getUsuario();
@@ -329,7 +326,8 @@ public class AlunoController {
 			} else {
 
 				// Atualiza a sessão com os dados inseridos no formulario
-				Date current_date = new Date();
+				//Date current_date = new Date();
+				LocalDateTime current_date = LocalDateTime.now();
 				theUsuario.setDt_last_update_usuario(current_date);
 				alunoService.updateUsuario(theUsuario);
 
@@ -355,8 +353,9 @@ public class AlunoController {
 	 */
 	@PostMapping("/inactivateAluno")
 	public String inactivateAluno(@ModelAttribute("usuario") AlunoImpl theUsuario, Model theModel) {
-		Date current_date = new Date();
-
+		//Date current_date = new Date();
+		LocalDateTime current_date = LocalDateTime.now();
+		
 		theUsuario.setDt_last_update_usuario(current_date);
 
 		alunoService.inactivateUsuario(theUsuario);

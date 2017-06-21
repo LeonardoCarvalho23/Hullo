@@ -1,8 +1,8 @@
 package com.hullo.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hullo.entity.AlunoImpl;
 import com.hullo.entity.CidadeImpl;
 import com.hullo.entity.EstadoImpl;
@@ -115,8 +114,9 @@ public class ProfessorController {
 	public String saveUsuario(@ModelAttribute("professorModel") ProfessorModel professorModel, ModelMap modelMap)
 			throws JsonParseException, JsonMappingException, IOException {
 
-		Date current_date = new Date();
-
+		//Date current_date = new Date();
+		LocalDateTime current_date = LocalDateTime.now();
+		
 		ProfessorImpl theProfessor = professorModel.getUsuario();
 
 		//seta o id da cidade no usuario
@@ -317,7 +317,8 @@ public class ProfessorController {
 					
 					//Atualiza a sessão com os dados inseridos no formulario
 					 
-					Date current_date = new Date();
+					//Date current_date = new Date();
+					LocalDateTime current_date = LocalDateTime.now();
 					theUsuario.setDt_last_update_usuario(current_date);
 					professorService.updateUsuario(theUsuario);
 		
@@ -348,8 +349,8 @@ public class ProfessorController {
 	 */
 	@PostMapping("/inactivateProfessor")
 	public String inactivateProfessor(@ModelAttribute("usuario") ProfessorImpl theUsuario, Model theModel) {
-		Date current_date = new Date();
-
+		//Date current_date = new Date();
+		LocalDateTime current_date = LocalDateTime.now();
 		theUsuario.setDt_last_update_usuario(current_date);
 
 		professorService.inactivateUsuario(theUsuario);
