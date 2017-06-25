@@ -9,7 +9,7 @@
 <title>Editar perfil</title>
 <!--  Basic jquery and Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/editar.js"></script>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css" />
@@ -282,7 +282,9 @@ function checkPasswordMatch() {
 						</div>
 					</div>
 
-
+					<input type="hidden" value="${usuario.cidade.id_Cidade}" id="cidadeUsuario"/>
+					<input type="hidden" value="{&quot;id_estado&quot;:&quot;${usuario.cidade.estado.id_estado}&quot;, &quot;nm_estado&quot;:&quot;${usuario.cidade.estado.nm_estado}&quot;, &quot;sg_estado&quot;:&quot;${usuario.cidade.estado.sg_estado}&quot;}" id="estadoUsuario"/>
+					
 
 				</fieldset>
 			</form:form>

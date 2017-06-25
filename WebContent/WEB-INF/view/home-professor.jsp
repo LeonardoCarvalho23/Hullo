@@ -43,19 +43,19 @@
 			style="height: 600px; position: relative;">
 
 			<h3>Welcome, ${usuario.nome_usuario}.</h3>
-			<div style="position: absolute; bottom: 88%; right: 100px;">
+			<%-- <div style="position: absolute; bottom: 88%; right: 100px;">
 				<input type="checkbox" id="status" checked data-toggle="toggle"
 					data-on="Online" data-off="Offline"> <input type='hidden'
 					name='usuario' value='${online}' id='sessionVar' />
-			</div>
+			</div> --%>
 
 
-			<form:form action="online" modelAttribute="usuario" method="POST">
+			<%-- <form:form action="online" modelAttribute="usuario" method="POST">
 				<br>
 				<br>
 				<input class="btn btn-primary" style="display: none" type="submit"
 					name="Perfil" id="o">
-			</form:form>
+			</form:form> --%>
 
 			<form:form action="../professor/ministrarAula"
 				modelAttribute="usuario" method="POST">

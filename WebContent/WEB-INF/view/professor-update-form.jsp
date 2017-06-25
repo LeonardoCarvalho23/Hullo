@@ -19,7 +19,7 @@
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/editar.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
@@ -368,7 +368,8 @@
 						</div>
 					</div>
 
-
+					<input type="hidden" value="${usuario.cidade.id_Cidade}" id="cidadeUsuario"/>
+					<input type="hidden" value="{&quot;id_estado&quot;:&quot;${usuario.cidade.estado.id_estado}&quot;, &quot;nm_estado&quot;:&quot;${usuario.cidade.estado.nm_estado}&quot;, &quot;sg_estado&quot;:&quot;${usuario.cidade.estado.sg_estado}&quot;}" id="estadoUsuario"/>
 
 				</fieldset>
 			</form:form>
