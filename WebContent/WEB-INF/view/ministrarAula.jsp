@@ -24,7 +24,7 @@
 	src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
+	href="${pageContext.request.contextPath}/resources/css/style.css?v=30" />
 
 
 
@@ -38,7 +38,7 @@
 				width="100px">
 		</div>
 		<div id="container" class="well form-horizontal"
-			style="height: 600px; position: relative; display: table; width: 100%;">
+			style="height: 60vh; position: relative; display: table; width: 100%;">
 
 
 			<div style="width: 100%;">
@@ -88,7 +88,7 @@
 						</div>
 
 						<!-- Second tab -->
-						<div id="classscript" class="tab-pane fade in active">
+						<div id="classcript" class="tab-pane fade in active">
 							<!-- Script Aula atual -->
 							<h3>Class Script</h3>
 							<p><font color="#1588c9">Last Class Review:</font>
