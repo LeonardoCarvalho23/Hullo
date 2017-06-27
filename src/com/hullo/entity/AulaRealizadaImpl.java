@@ -10,6 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+/**
+ * classe para AulaRealizadaImpl
+ * 
+ * @author Hullo Team
+ * @version 1.0
+ */
 @Entity
 @Table(name = "aula_realizada")
 public class AulaRealizadaImpl {
@@ -73,6 +80,12 @@ public class AulaRealizadaImpl {
 	public AulaRealizadaImpl(){
 		
 	}
+	
+	/**
+	 * 
+	 * @param id_aula_aula_realizada
+	 * @param id_aluno_aula_realizada
+	 */
 	public AulaRealizadaImpl(int id_aula_aula_realizada, int id_aluno_aula_realizada){
 		this.dt_criacao_aula_realizada = new Date();
 		this.id_aula_aula_realizada = id_aula_aula_realizada;

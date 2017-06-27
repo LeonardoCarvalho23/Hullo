@@ -15,6 +15,12 @@ import com.hullo.entity.AulaRealizadaImpl;
 import com.hullo.entity.ModuloImpl;
 import com.twilio.rest.api.v2010.account.Call.Status;
 
+/**
+ * serviço do objeto AulaRealizadaServiceImpl
+ * 
+ * @author Hullo Team
+ * @version 1.0
+ */
 @Service
 public class AulaRealizadaServiceImpl {
 
@@ -31,11 +37,18 @@ public class AulaRealizadaServiceImpl {
 	@Qualifier("alunoServiceImpl")
 	private UsuarioService<AlunoImpl> alunoService;
 
+	/**
+	 *  pega todas as aulas realizadas
+	 * @return lista de AulaRealizadaImpl
+	 */
 	public List<AulaRealizadaImpl> getAulasRealizadas() {
 		return aulaRealizadaDAO.getAulasRealizadas();
 	}
 
-	// montar a primeira aula do curso
+	/**
+	 * montar a primeira aula do curso
+	 * @param email
+	 */
 	@Transactional
 	public void montarPrimeiraAulaRealizada(String email) {
 		ModuloImpl modulo = moduloService.getPrimeiroModulo();
@@ -49,26 +62,45 @@ public class AulaRealizadaServiceImpl {
 		aulaRealizadaDAO.savePrimeiraAulaRealizada(aulaRealizada);
 	}
 
-	// buscar proxima aula
+	/**
+	 * buscar proxima aula
+	 * @return AulaRealizadaImpl
+	 */
 	@Transactional
 	public AulaRealizadaImpl getProximaAula() {
 		return aulaRealizadaDAO.getProximaAula();
 	}
 
-	// buscar aula_realizada por ID
+	/**
+	 * buscar aula_realizada por ID
+	 * @param id_aula_realizada
+	 * @return AulaRealizadaImpl
+	 */
 	@Transactional
 	public AulaRealizadaImpl getAulaRealizada(Integer id_aula_realizada) {
 		return aulaRealizadaDAO.getAulaRealizada(id_aula_realizada);
 	}
 
-	// atualiza SID da aula quando a chamada é iniciada
+	/**
+	 * atualiza SID da aula quando a chamada é iniciada
+	 * @param id_aula
+	 * @param callSid
+	 */
 	@Transactional
 	public void updateAulaRealizada(int id_aula, String callSid) {
 		aulaRealizadaDAO.updateAulaRealizada(id_aula, callSid);
 
 	}
 
-	// atualiza dados da aula quando a chamada é finalizada
+	/**
+	 * atualiza dados da aula quando a chamada é finalizada
+	 * @param callSid
+	 * @param callDuration
+	 * @param status
+	 * @param startTimeConv
+	 * @param endTimeConv
+	 * @param price
+	 */
 	@Transactional
 	public void updateAulaRealizada(String callSid, String callDuration, Status status, String startTimeConv,
 			String endTimeConv, BigDecimal price) {
@@ -76,7 +108,10 @@ public class AulaRealizadaServiceImpl {
 		
 	}
 
-	// encerrar aula apos concluida pelo professor
+	/**
+	 * encerrar aula apos concluida pelo professor
+	 * @param aulaRealizadaAtual
+	 */
 	@Transactional
 	public void concludedAulaRealizada(AulaRealizadaImpl aulaRealizadaAtual) {
 
@@ -87,12 +122,20 @@ public class AulaRealizadaServiceImpl {
 
 	}
 
-	// metodo para criar proxima aula realizada, baseado na aula anterior
+	/**
+	 * metodo para criar proxima aula realizada, baseado na aula anterior
+	 * @param proximaAulaRealizada
+	 */
 	@Transactional
 	public void createProximaAulaRealizada(AulaRealizadaImpl proximaAulaRealizada) {
 		 aulaRealizadaDAO.saveProximaAulaRealizada(proximaAulaRealizada);
 	}
 
+	/**
+	 * pega alas realizadas de um aluno por id
+	 * @param id_aluno
+	 * @return lista de aulaRealizadaImpl
+	 */
 	@Transactional
 	public List<AulaRealizadaImpl> getAulasRealizadasAluno(int id_aluno) {
 		return aulaRealizadaDAO.getAulasRealizadasAluno(id_aluno);

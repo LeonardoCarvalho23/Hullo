@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * classe para AulaImpl
+ * 
+ * @author Hullo Team
+ * @version 1.0
+ */
 @Entity
 @Table(name="aula")
 public class AulaImpl {

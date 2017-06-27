@@ -11,6 +11,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
+/**
+ * classe para ModuloImpl
+ * 
+ * @author Hullo Team
+ * @version 1.0
+ */
+
 @Entity
 @Table(name="modulo")
 public class ModuloImpl {
