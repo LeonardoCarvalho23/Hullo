@@ -23,6 +23,12 @@ import com.hullo.service.AulaRealizadaServiceImpl;
 import com.hullo.service.AulaServiceImpl;
 import com.hullo.service.UsuarioService;
 
+/**
+ * classe para controlar o professor dando aula
+ * 
+ * @author Hullo Team
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/professor")
 @SessionAttributes("aulaRealizada")
@@ -42,7 +48,14 @@ public class MinistrarAulaController {
 	@Autowired
 	private AulaServiceImpl aulaService;
 
-	// abrir pagina com dados da aula a ministrar
+	
+	/**
+	 * abrir pagina com dados da aula a ministrar
+	 * @param session
+	 * @param model
+	 * @param modelMap
+	 * @return pagina com dados da aula
+	 */
 	@PostMapping("/ministrarAula")
 	public String ministrarAula(HttpSession session, Model model, ModelMap modelMap) {
 		ProfessorImpl professor = (ProfessorImpl) session.getAttribute("usuario");
@@ -102,7 +115,13 @@ public class MinistrarAulaController {
 		return "ministrarAula";
 	}
 
-	// metodo para encerrar aula
+	/**
+	 * metodo para encerrar aula
+	 * @param aulaRealizadaModel
+	 * @param theModel
+	 * @param session
+	 * @return pagina da home do professor
+	 */
 	@PostMapping("/encerrarAula")
 	public String concludedAulaRealizada(@ModelAttribute("aulaRealizadaModel") AulaRealizadaModel aulaRealizadaModel,
 			Model theModel, HttpSession session) {
@@ -158,7 +177,7 @@ public class MinistrarAulaController {
 	/**
 	 * update de status da aula para nao atendida e criacao dessa aula de novo para +2h
 	 * @param session
-	 * @return
+	 * @return home do professor
 	 */
 	@RequestMapping("/updateAulaNaoAtendida")
 	public String updateAulaNaoAtendida(HttpSession session) {

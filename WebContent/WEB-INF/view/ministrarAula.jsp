@@ -24,7 +24,7 @@
 	src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css?v=30" />
+	href="${pageContext.request.contextPath}/resources/css/style.css?v=31" />
 
 
 
@@ -88,7 +88,7 @@
 						</div>
 
 						<!-- Second tab -->
-						<div id="classcript" class="tab-pane fade in active">
+						<div id="classscript" class="tab-pane fade in active">
 							<!-- Script Aula atual -->
 							<h3>Class Script</h3>
 							<p><font color="#1588c9">Last Class Review:</font>

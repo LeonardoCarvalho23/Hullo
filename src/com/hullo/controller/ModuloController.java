@@ -26,6 +26,13 @@ import com.hullo.entity.ModuloModel;
 import com.hullo.service.AulaServiceImpl;
 import com.hullo.service.ModuloServiceImpl;
 
+
+/**
+ * classe para controlar os modulos
+ * 
+ * @author Hullo Team
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/modulos")
 public class ModuloController {
@@ -35,8 +42,11 @@ public class ModuloController {
 
 	@Autowired
 	private AulaServiceImpl aulaService;
-
-	// lista de todos os modulos cadastrados
+	/**
+	 * lista de todos os modulos cadastrados
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/lista")
 	public String listarModulos(HttpSession session) {
 
@@ -48,7 +58,10 @@ public class ModuloController {
 
 		return "lista-modulos";
 	}
-
+/**
+ * 
+ * @param dataBinder
+ */
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
 		
@@ -56,8 +69,11 @@ public class ModuloController {
 		
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
-	
-	// abrir pagina para casdatrar novo modulo
+	/**
+	 * abrir pagina para cadastrar novo modulo
+	 * @param theModel
+	 * @return pagina cadastro modulo
+	 */
 	@GetMapping("/formModulo")
 	public String formNovoModulo(Model theModel) {
 
@@ -69,8 +85,14 @@ public class ModuloController {
 
 		return "modulo-form";
 	}
-
-	// gravar novo modulo
+/**
+ * gravar novo modulo
+ * @param model
+ * @param theBindingResult
+ * @param modelMap
+ * @param newModel
+ * @return cadastra modulo ou se der erro fica na pagina
+ */
 	@RequestMapping("/newModulo")
 	public String saveModulo(
 			@Valid @ModelAttribute("modulo") ModuloImpl model, BindingResult theBindingResult,
@@ -108,8 +130,12 @@ public class ModuloController {
 		return showModulo(modulo.getId_modulo(), newModel, modelMap);
 		}
 	}
-
-	// buscar no banco por nome
+/**
+ * buscar no banco por nome
+ * @param nomeBusca
+ * @param theModel
+ * @return lista de modulos
+ */ 
 	@PostMapping("/search")
 	public String searchCustomers(@RequestParam("nomeBusca") String nomeBusca, Model theModel) {
 
@@ -121,8 +147,13 @@ public class ModuloController {
 
 		return "lista-modulos";
 	}
-
-	// abrir detalhes do modulo e para fazer update
+/**
+ * abrir detalhes do modulo e para fazer update
+ * @param id_modulo
+ * @param theModel
+ * @param modelMap
+ * @return pagina de detalhes do modulo
+ */
 	@GetMapping("/showModulo")
 	public String showModulo(@RequestParam("id_modulo") int id_modulo, Model theModel, ModelMap modelMap) {
 
@@ -145,8 +176,13 @@ public class ModuloController {
 		return "modulo-update-form";
 
 	}
-
-	// metodo para atualizar modulo
+	/**
+	 * metodo para atualizar modulo
+	 * @param moduloModel
+	 * @param modelMap
+	 * @param newModel
+	 * @return pagina de edicao
+	 */
 	@RequestMapping("/updateModulo")
 	public String updateModulo(@ModelAttribute("moduloModel") ModuloModel moduloModel, ModelMap modelMap,
 			Model newModel) {
@@ -201,7 +237,11 @@ public class ModuloController {
 		}
 	}
 
-	// validacao se tem 5 aulas base no modulo
+	/**
+	 * validacao se tem 5 aulas base no modulo
+	 * @param listaAulas
+	 * @return se aula tem ou não estrutura de 5 aulas
+	 */
 	private boolean validaAulasBase(List<AulaImpl> listaAulas) {
 		boolean um = false;
 		boolean dois = false;
@@ -233,8 +273,12 @@ public class ModuloController {
 
 		return false;
 	}
-
-	//para excluir modulo e todas as suas aulas
+/**
+ * para excluir modulo e todas as suas aulas
+ * @param id_modulo
+ * @param session
+ * @return deleta modulo e aulas
+ */
 	@PostMapping("/deleteModulo")
 	public String formNovaAula(@RequestParam("modulo.id_modulo") int id_modulo, HttpSession session) {
 		
