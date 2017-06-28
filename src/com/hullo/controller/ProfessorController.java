@@ -360,6 +360,14 @@ public class ProfessorController {
 
 	}
 	
+	@GetMapping("logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("usuario_professor");
+		session.removeAttribute("usuario_aluno");
+		session.invalidate();
+		return "redirect:/usuario/usuarioLogin";
+	}
+	
 	/**
 	 * metodo que valida cpf
 	 * @param CPF
@@ -527,5 +535,7 @@ public class ProfessorController {
 	    if (idade >= 18) return true;
 	    else return false;
 	}
+	
+	
 	
 }
