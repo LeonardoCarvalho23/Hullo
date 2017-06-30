@@ -31,7 +31,7 @@
 				<tr>
 					<th>ID</th>
 					<th>Nome</th>
-					<th>Sobreome</th>
+					<th>Sobrenome</th>
 					<th>Email</th>
 					<th>Data Nascimento</th>
 					<th>Ativo</th>
