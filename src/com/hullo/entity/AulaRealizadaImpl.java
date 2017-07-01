@@ -1,6 +1,7 @@
 package com.hullo.entity;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -45,13 +46,13 @@ public class AulaRealizadaImpl {
 	private String status_aula_realizada;
 	
 	@Column(name = "dt_criacao_aula_realizada")
-	private Date dt_criacao_aula_realizada;
+	private LocalDateTime dt_criacao_aula_realizada;
 	
 	@Column(name = "dt_inicio_chamada_aula_realizada")
-	private Date dt_inicio_aula_realizada;
+	private LocalDateTime dt_inicio_aula_realizada;
 	
 	@Column(name = "dt_fim_chamada_aula_realizada")
-	private Date dt_fim_aula_realizada;
+	private LocalDateTime dt_fim_aula_realizada;
 	
 	@Column(name = "id_aula_aula_realizada")
 	private int id_aula_aula_realizada;
@@ -87,7 +88,7 @@ public class AulaRealizadaImpl {
 	 * @param id_aluno_aula_realizada
 	 */
 	public AulaRealizadaImpl(int id_aula_aula_realizada, int id_aluno_aula_realizada){
-		this.dt_criacao_aula_realizada = new Date();
+		this.dt_criacao_aula_realizada = LocalDateTime.now();
 		this.id_aula_aula_realizada = id_aula_aula_realizada;
 		this.id_aluno_aula_realizada = id_aluno_aula_realizada;
 	}
@@ -170,19 +171,19 @@ public class AulaRealizadaImpl {
 		this.status_aula_realizada = status_ligacao_aula_realizada;
 	}
 
-	public Date getDt_criacao_aula_realizada() {
+	public LocalDateTime getDt_criacao_aula_realizada() {
 		return dt_criacao_aula_realizada;
 	}
 
-	public void setDt_criacao_aula_realizada(Date dt_criacao_aula_realizada) {
+	public void setDt_criacao_aula_realizada(LocalDateTime dt_criacao_aula_realizada) {
 		this.dt_criacao_aula_realizada = dt_criacao_aula_realizada;
 	}
 
-	public Date getDt_inicio_aula_realizada() {
+	public LocalDateTime getDt_inicio_aula_realizada() {
 		return dt_inicio_aula_realizada;
 	}
 
-	public void setDt_inicio_aula_realizada(Date dt_inicio_aula_realizada) {
+	public void setDt_inicio_aula_realizada(LocalDateTime dt_inicio_aula_realizada) {
 		this.dt_inicio_aula_realizada = dt_inicio_aula_realizada;
 	}
 
@@ -194,11 +195,11 @@ public class AulaRealizadaImpl {
 		this.id_aula_aula_realizada = id_aula_aula_realizada;
 	}
 
-	public Date getDt_fim_aula_realizada() {
+	public LocalDateTime getDt_fim_aula_realizada() {
 		return dt_fim_aula_realizada;
 	}
 
-	public void setDt_fim_aula_realizada(Date dt_fim_aula_realizada) {
+	public void setDt_fim_aula_realizada(LocalDateTime dt_fim_aula_realizada) {
 		this.dt_fim_aula_realizada = dt_fim_aula_realizada;
 	}
 

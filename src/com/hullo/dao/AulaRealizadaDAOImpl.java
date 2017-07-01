@@ -1,9 +1,7 @@
 package com.hullo.dao;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -40,7 +38,7 @@ public class AulaRealizadaDAOImpl {
 
 	public void savePrimeiraAulaRealizada(AulaRealizadaImpl aulaRealizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Date current_date = new Date();
+		LocalDateTime current_date = LocalDateTime.now();
 
 		aulaRealizada.setDt_criacao_aula_realizada(current_date);
 
@@ -52,21 +50,16 @@ public class AulaRealizadaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// achar os dias anteriores para consulta das aulas
-		Calendar date = new GregorianCalendar();
-		// reset hour, minutes, seconds and millis
-		date.set(Calendar.HOUR_OF_DAY, 0);
-		date.set(Calendar.MINUTE, 0);
-		date.set(Calendar.SECOND, 0);
-		date.set(Calendar.MILLISECOND, 0);
-		// ontem
-		date.add(Calendar.DAY_OF_MONTH, -3);
-		Date data = date.getTime();
+		LocalDateTime data = LocalDateTime.now();
+		LocalDateTime date = data.minusDays(3).withHour(0).withMinute(0).withSecond(0);
+		
+		System.out.println("data buscada para aula = " + date.toString());
 
 		// busca proxima aula baseado na data atual
 		Query<AulaRealizadaImpl> query = currentSession.createQuery(
 				"from AulaRealizadaImpl where dt_criacao_aula_realizada >= :date and status_aula_realizada = NULL order by dt_criacao_aula_realizada",
 				AulaRealizadaImpl.class);
-		query.setParameter("date", data);
+		query.setParameter("date", date);
 
 		try {
 			// busca a proxima aula no banco
@@ -255,17 +248,14 @@ public class AulaRealizadaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		//mudar data de criacao para +2h
-		Calendar data = new GregorianCalendar();
-		data.setTime(aulaRealizada.getDt_criacao_aula_realizada());
-		data.set(Calendar.HOUR, data.get(Calendar.HOUR)+2);
-		Date dataNova = data.getTime();
-
 		AulaRealizadaImpl aulaNova = new AulaRealizadaImpl();
 
-		aulaNova.setDt_criacao_aula_realizada(dataNova);
+		aulaNova.setDt_criacao_aula_realizada(aulaRealizada.getDt_criacao_aula_realizada().plusHours(2));
 		aulaNova.setId_aula_aula_realizada(aulaRealizada.getId_aula_aula_realizada());
 		aulaNova.setId_anterior_aula_realizada(aulaRealizada.getId_anterior_aula_realizada());
 		aulaNova.setId_aluno_aula_realizada(aulaRealizada.getId_aluno_aula_realizada());
+		
+		System.out.println("novo horario de criacao da aula nao atendida = " + aulaNova.getDt_criacao_aula_realizada().toString());
 
 		currentSession.saveOrUpdate(aulaNova);
 
