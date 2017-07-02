@@ -17,13 +17,17 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
    		<script src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
    	<!-- CSS Custom -->
-   		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
 <script>			
 $(function(){
     $('#datepicker').datepicker({ 
     	altField: '#usuario\\.data_nascimento_usuario', // é preciso usar \\ antes do ponto quando o id tem ponto
     	altFormat: 'mm/dd/yy',
     	dateFormat: 'dd/mm/yy',
+    	changeYear: true,
+    	changeMonth: true,
+    	showMonthAfterYear: true,
+    	yearRange: '-100:-14',
     	maxDate: new Date, //funcao que impede datas futuras,
     	
     });
@@ -357,6 +361,8 @@ function validaCnpj(cnpj){
 							</div>
 						</div>
 					</div>
+					
+					
 
 					<!-- Campo Telefone -->
 					<div class="form-group">

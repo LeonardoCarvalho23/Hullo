@@ -54,7 +54,6 @@
 					<th align="left">Nome da Aula</th>
 					<th  align="left">Data Aula</th>
 					<th  align="left">Status</th>
-					<th align="left">Professor</th>
 					
 				</tr>
 
@@ -72,7 +71,6 @@
 						</td>
 						<td  align="left">${tempAula.aulaRealizadaAtual.dt_inicio_aula_realizada}</td>
 						<td  align="left">${tempAula.aulaRealizadaAtual.status_aula_realizada}</td>
-						<td align="left">${tempAula.nomeProfessor}</td>
 					</tr>
 
 				</c:forEach>

@@ -1,6 +1,6 @@
 package com.hullo.controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpSession;
 
@@ -126,7 +126,7 @@ public class MinistrarAulaController {
 	public String concludedAulaRealizada(@ModelAttribute("aulaRealizadaModel") AulaRealizadaModel aulaRealizadaModel,
 			Model theModel, HttpSession session) {
 
-		Date current_date = new Date();
+		LocalDateTime current_date = LocalDateTime.now();
 
 		// pego modulo do objeto Model
 		AulaRealizadaImpl aulaRealizadaAtual = aulaRealizadaModel.getAulaRealizadaAtual();

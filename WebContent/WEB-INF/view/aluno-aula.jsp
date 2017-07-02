@@ -39,21 +39,43 @@
 				width="100px">
 		</div>
 		<div id="container" class="well form-horizontal">
+		
+						<div class="form-group">
+								<label class="col-md-4 control-label">Nome da aula:</label>
+								${nomeAula}
+						</div>
 
-						<p>Nome da aula: ${nomeAula}</p>						
-						<p>Data Realização da aula: ${aulaRealizada.dt_inicio_aula_realizada}</p>						
-						<p>Status da aula: ${aulaRealizada.status_aula_realizada}</p>
-						<p>Professor: ${professor}</p>
+						<div class="form-group">
+								<label class="col-md-4 control-label">Data Realização da aula:</label>
+								${aulaRealizada.dt_inicio_aula_realizada}
+						</div>
 						
-						<p>Escute sua aula:</p>
+						<div class="form-group">
+								<label class="col-md-4 control-label">Status da aula:</label>
+								${aulaRealizada.status_aula_realizada}
+						</div>
+									
+						<div class="form-group">
+								<label class="col-md-4 control-label">Professor:</label>
+								${professor}
+						</div>
+									
+						<div class="form-group">
+								<label class="col-md-4 control-label">Escute sua aula:</label>
+								<audio controls>
+  									<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/ogg">
+ 									<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/mpeg">							
+								</audio>
+						</div>
+											
+											
 						
-						<audio controls>
-  							<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/ogg">
- 							<source src=" ${aulaRealizada.url_gravacao_aula_realizada}" type="audio/mpeg">
-							
-						</audio>
-						<p>Complemente seu estudo: </p>
-						${atividade}
+						
+						<div class="form-group">
+								<label class="col-md-4 control-label">Escute sua aula:</label>
+								${atividade}								
+						</div>
+						
 			<br>
 			<div class="form-group">
 				<label class="col-md-4 control-label"></label>

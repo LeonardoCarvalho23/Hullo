@@ -45,6 +45,7 @@ import com.hullo.service.AulaServiceImpl;
 import com.hullo.service.CidadeServiceImpl;
 import com.hullo.service.EstadoServiceImpl;
 import com.hullo.service.UsuarioService;
+import com.hullo.utility.DataConversion;
 
 /**
  * classe para controlar o que é exibido na home e CRUD do aluno
@@ -126,7 +127,6 @@ public class AlunoController {
 	@PostMapping("/formAluno")
 	public String saveUsuario(@ModelAttribute("usuarioModel") AlunoModel usuarioModel, ModelMap modelMap)
 			throws JsonParseException, JsonMappingException, IOException {
-		//Date current_date = new Date();
 		LocalDateTime current_date = LocalDateTime.now();
 
 		// pega o aluno do objeto alunoModel
@@ -483,6 +483,10 @@ public class AlunoController {
 		
 		
 		for (int i = 0; i < aulasRealizadas.size(); i++) {
+			
+			//objeto para coversao de datas
+			DataConversion conversor = new DataConversion();
+			
 			//objeto que vai pegar apenas o registro daquela iteração, pq esta vindo como list
 			AulaRealizadaModel aulaRealizadaModel = new AulaRealizadaModel();
 			AulaRealizadaImpl aulaRealizada = new AulaRealizadaImpl();
@@ -493,7 +497,8 @@ public class AlunoController {
 			ProfessorImpl professor = professorService.getUsuario(aulaRealizada.getId_professor_aula_realizada());				
 			String nomeProfessor = professor.getNome_usuario();
 			
-			System.out.println("nomeProfessor"+nomeProfessor);
+			//transformardata em horario BR
+			aulaRealizada.setDt_inicio_aula_realizada(conversor.banco2br(aulaRealizada.getDt_inicio_aula_realizada()));
 			
 			//adiciona no model
 			aulaRealizadaModel.setNomeAula(nomeAula);

@@ -59,7 +59,7 @@
 							
 
 							<div class="form-group">
-								<label class="col-md-4 control-label">Nome da Aula:</label>
+								<label class="col-md-4 control-label">Class name</label>
 								${aulaRealizadaModel.aulaAnterior.nm_aula}
 							</div>
 
@@ -189,8 +189,7 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-4 control-label">Comentario Aula
-							Realizada</label>
+						<label class="col-md-4 control-label">Overall Comments</label>
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<form:textarea rows="4" cols="50" placeholder="General comments"
@@ -206,8 +205,8 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label"></label>
 						<div class="col-md-4">
-							<button type="submit" class="btn btn-primary">Encerrar
-								Aula</button> 
+							<button type="submit" class="btn btn-primary">Class Concluded
+								</button> 
 						</div>
 					</div>
 				</form:form>

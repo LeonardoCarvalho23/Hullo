@@ -3,7 +3,6 @@ package com.hullo.utility;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
 
 /**
  * Classe utilitaria para conversao de data/hullo
@@ -22,14 +21,13 @@ public class DataConversion {
 	 */
 	public LocalDateTime banco2br(LocalDateTime data_banco) {
 
+		//banco esta em UTC
+		ZonedDateTime data_local = data_banco.atZone(ZoneId.of("UTC"));
 		
-		ZonedDateTime data_local = data_banco.atZone(ZoneId.of("America/Sao_Paulo"));
+//		so transforma em BR
+		ZonedDateTime data_local2 = data_local.withZoneSameInstant(ZoneId.of("America/Sao_Paulo"));
 		
-//		so para testar com outros fusos
-//		ZonedDateTime data_local2 = data_local.withZoneSameInstant(ZoneId.of("Europe/Paris"));
-//		System.out.println("Tokyo : " + data_local2);
-		
-		return data_local.toLocalDateTime();
+		return data_local2.toLocalDateTime();
 	}
 
 }
