@@ -29,6 +29,10 @@
 			altField : '#data_nascimento_usuario',
 			altFormat : 'mm/dd/yy',
 			dateFormat : 'dd/mm/yy',
+			changeYear: true,
+	    	changeMonth: true,
+	    	showMonthAfterYear: true,
+	    	yearRange: '-100:-14',
 			maxDate: new Date //funcao que impede datas futuras
 		});
 	});

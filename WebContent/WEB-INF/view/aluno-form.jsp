@@ -22,6 +22,10 @@ $(function(){
     	altField: '#usuario\\.data_nascimento_usuario', // é preciso usar dois \\ antes do ponto pra funcionar quando o id tem ponto no nome
     	altFormat: 'mm/dd/yy',
     	dateFormat: 'dd/mm/yy',
+    	changeYear: true,
+    	changeMonth: true,
+    	showMonthAfterYear: true,
+    	yearRange: '-100:-14',
     	maxDate: new Date //funcao que impede datas futuras
     });
 });
