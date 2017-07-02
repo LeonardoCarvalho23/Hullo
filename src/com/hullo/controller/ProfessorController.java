@@ -359,6 +359,19 @@ public class ProfessorController {
 		return "redirect:/usuario/usuarioLogin";
 
 	}
+	/**
+	 * sair da sessão
+	 * @param session
+	 * @return
+	 */
+	@GetMapping("logout")
+	public String logout(HttpSession session){
+		//formas de tirar a sessão, mas ainda não funciona
+		/*session.removeAttribute("usuario_professor");
+		session.removeAttribute("usuario_aluno");
+		session.invalidate();*/
+		return "redirect:/usuario/usuarioLogin";
+	}
 	
 	/**
 	 * metodo que valida cpf
@@ -527,5 +540,7 @@ public class ProfessorController {
 	    if (idade >= 18) return true;
 	    else return false;
 	}
+	
+	
 	
 }

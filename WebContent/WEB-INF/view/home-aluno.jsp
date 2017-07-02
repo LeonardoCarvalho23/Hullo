@@ -37,6 +37,16 @@
 
 			<h3>Bem-vindo, ${usuario.nome_usuario}.</h3>
 			<div>
+			
+			<form:form action="../aluno/logout" method="GET">
+			
+			 <div style="position: absolute; bottom: 88%; right: 100px;">
+				<input class="btn btn-primary"
+					type="submit" name="sair" id="sair" value="Sair">
+			</div>
+			
+			</form:form>
+			
 			<form:form action="../aluno/showPerfilAluno" method="POST">
 				<br>
 				<br>
