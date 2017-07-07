@@ -26,7 +26,6 @@ import com.hullo.entity.ModuloModel;
 import com.hullo.service.AulaServiceImpl;
 import com.hullo.service.ModuloServiceImpl;
 
-
 /**
  * classe para controlar os modulos
  * 
@@ -42,8 +41,10 @@ public class ModuloController {
 
 	@Autowired
 	private AulaServiceImpl aulaService;
+
 	/**
 	 * lista de todos os modulos cadastrados
+	 * 
 	 * @param session
 	 * @return
 	 */
@@ -58,19 +59,24 @@ public class ModuloController {
 
 		return "lista-modulos";
 	}
-/**
- * 
- * @param dataBinder
- */
+
+	/**
+	 * iniBinder é um pre-processador de toda form data o que vem da view
+	 * esse é para remover espaços em branco
+	 * @param dataBinder
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
-		
+
+		//remove leading and trailing white space and substitutes to null
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-		
+
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
+
 	/**
 	 * abrir pagina para cadastrar novo modulo
+	 * 
 	 * @param theModel
 	 * @return pagina cadastro modulo
 	 */
@@ -85,57 +91,60 @@ public class ModuloController {
 
 		return "modulo-form";
 	}
-/**
- * gravar novo modulo
- * @param model
- * @param theBindingResult
- * @param modelMap
- * @param newModel
- * @return cadastra modulo ou se der erro fica na pagina
- */
+
+	/**
+	 * gravar novo modulo
+	 * 
+	 * @param model
+	 * @param theBindingResult
+	 * @param modelMap
+	 * @param newModel
+	 * @return cadastra modulo ou se der erro fica na pagina
+	 */
 	@RequestMapping("/newModulo")
-	public String saveModulo(
-			@Valid @ModelAttribute("modulo") ModuloImpl model, BindingResult theBindingResult,
-			ModelMap modelMap, Model newModel)  {
+	public String saveModulo(@Valid @ModelAttribute("modulo") ModuloImpl model, BindingResult theBindingResult,
+			ModelMap modelMap, Model newModel) {
 		Date current_date = new Date();
 		System.out.println("validation no controller?");
 
 		if (theBindingResult.hasErrors()) {
-            return "modulo-form";
-        }
-		
-		else{
-		// pega o objeto modulo do model
-		ModuloImpl modulo = model;
-
-		// validar se ja existe modulo com esse indice
-		if (moduloService.validaModulo(modulo.getIndice_modulo())) {
-
-			// exibe mensagem de erro
-			final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Ja exite modulo com esse índice </div>";
-			modelMap.addAttribute("errorMessage", errorMessage);
-
 			return "modulo-form";
 		}
 
-		// adiciona infos ao modulo
-		modulo.setAtivo_modulo(false);
-		modulo.setDt_insert_modulo(current_date);
-		modulo.setDt_last_update_modulo(current_date);
+		else {
+			// pega o objeto modulo do model
+			ModuloImpl modulo = model;
 
-		// salva o modulo
-		moduloService.saveModulo(modulo);
+			// validar se ja existe modulo com esse indice
+			if (moduloService.validaModulo(modulo.getIndice_modulo())) {
 
-		// abre a pagina de edicao de modulo onde pode adicionar as aulas
-		return showModulo(modulo.getId_modulo(), newModel, modelMap);
+				// exibe mensagem de erro
+				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Ja exite modulo com esse índice </div>";
+				modelMap.addAttribute("errorMessage", errorMessage);
+
+				return "modulo-form";
+			}
+
+			// adiciona infos ao modulo
+			modulo.setAtivo_modulo(false);
+			modulo.setDt_insert_modulo(current_date);
+			modulo.setDt_last_update_modulo(current_date);
+
+			// salva o modulo
+			moduloService.saveModulo(modulo);
+
+			// abre a pagina de edicao de modulo onde pode adicionar as aulas
+			return showModulo(modulo.getId_modulo(), newModel, modelMap);
 		}
 	}
-/**
- * buscar no banco por nome
- * @param nomeBusca
- * @param theModel
- * @return lista de modulos
- */ 
+
+	/**
+	 * buscar no banco por nome
+	 * 
+	 * @param nomeBusca
+	 * @param theModel
+	 * @return lista de modulos
+	 */
 	@PostMapping("/search")
 	public String searchCustomers(@RequestParam("nomeBusca") String nomeBusca, Model theModel) {
 
@@ -147,13 +156,15 @@ public class ModuloController {
 
 		return "lista-modulos";
 	}
-/**
- * abrir detalhes do modulo e para fazer update
- * @param id_modulo
- * @param theModel
- * @param modelMap
- * @return pagina de detalhes do modulo
- */
+
+	/**
+	 * abrir detalhes do modulo e para fazer update
+	 * 
+	 * @param id_modulo
+	 * @param theModel
+	 * @param modelMap
+	 * @return pagina de detalhes do modulo
+	 */
 	@GetMapping("/showModulo")
 	public String showModulo(@RequestParam("id_modulo") int id_modulo, Model theModel, ModelMap modelMap) {
 
@@ -163,7 +174,7 @@ public class ModuloController {
 		// cria ModuloModel, objeto com modulo e lista de aulas
 		ModuloModel moduloModel = new ModuloModel();
 
-		// busca as aulas desse modulo no banco	
+		// busca as aulas desse modulo no banco
 		List<AulaImpl> listaAulas = aulaService.getAulas(id_modulo);
 
 		// adiciona os objetos ao modeloModel
@@ -176,8 +187,10 @@ public class ModuloController {
 		return "modulo-update-form";
 
 	}
+
 	/**
 	 * metodo para atualizar modulo
+	 * 
 	 * @param moduloModel
 	 * @param modelMap
 	 * @param newModel
@@ -239,6 +252,7 @@ public class ModuloController {
 
 	/**
 	 * validacao se tem 5 aulas base no modulo
+	 * 
 	 * @param listaAulas
 	 * @return se aula tem ou não estrutura de 5 aulas
 	 */
@@ -273,19 +287,21 @@ public class ModuloController {
 
 		return false;
 	}
-/**
- * para excluir modulo e todas as suas aulas
- * @param id_modulo
- * @param session
- * @return deleta modulo e aulas
- */
+
+	/**
+	 * para excluir modulo e todas as suas aulas
+	 * 
+	 * @param id_modulo
+	 * @param session
+	 * @return deleta modulo e aulas
+	 */
 	@PostMapping("/deleteModulo")
 	public String formNovaAula(@RequestParam("modulo.id_modulo") int id_modulo, HttpSession session) {
-		
+
 		aulaService.deleteAulasModulo(id_modulo);
-		
+
 		moduloService.deleteModulo(id_modulo);
-		
+
 		return listarModulos(session);
 	}
 }
