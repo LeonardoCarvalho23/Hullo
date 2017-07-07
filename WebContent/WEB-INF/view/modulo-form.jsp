@@ -53,7 +53,7 @@
 									class="glyphicon glyphicon-user"></i></span>
 								<form:input path="nm_modulo" placeholder="Nome"
 									class="form-control" />
-								<form:errors path="nm_modulo" />
+								<form:errors path="nm_modulo"/>
 							</div>
 						</div>
 					</div>

@@ -64,7 +64,8 @@ public class AulaController {
 	 * @return
 	 */
 	@PostMapping("/newAula")
-	public String saveAula(@ModelAttribute("aula") AulaImpl model, Model theModel, ModelMap modelMap) {
+	public String saveAula(@ModelAttribute("aula") AulaImpl model, 
+			Model theModel, ModelMap modelMap) {
 
 		// data atual para gravar no insert
 		Date current_date = new Date();

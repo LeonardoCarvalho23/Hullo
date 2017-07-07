@@ -61,7 +61,7 @@ public class ModuloController {
 	}
 
 	/**
-	 * iniBinder é um pre-processador de toda form data o que vem da view
+	 * initBinder é um pre-processador de toda form data o que vem da view
 	 * esse é para remover espaços em branco
 	 * @param dataBinder
 	 */
@@ -101,7 +101,7 @@ public class ModuloController {
 	 * @param newModel
 	 * @return cadastra modulo ou se der erro fica na pagina
 	 */
-	@RequestMapping("/newModulo")
+	@RequestMapping("/newModulo") //at valid faz todas as validações da entidade
 	public String saveModulo(@Valid @ModelAttribute("modulo") ModuloImpl model, BindingResult theBindingResult,
 			ModelMap modelMap, Model newModel) {
 		Date current_date = new Date();

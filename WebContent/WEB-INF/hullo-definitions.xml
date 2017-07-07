@@ -26,14 +26,15 @@
 	</bean>
 
 	<!-- Step 1: Define Database DataSource / connection pool -->
-	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://hullo.cx84fsxg8a9x.us-west-2.rds.amazonaws.com:3306/hullo" />
-        <property name="user" value="admin_hullo" />
-        <property name="password" value="vA$6tg0o" /> 
-        <!--  <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hullo" />
-        <property name="user" value="root" />
-        <property name="password" value="admin" /> -->
+	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<!-- <property name="jdbcUrl" value="jdbc:mysql://hullo.cx84fsxg8a9x.us-west-2.rds.amazonaws.com:3306/hullo" 
+			/> <property name="user" value="admin_hullo" /> <property name="password" 
+			value="vA$6tg0o" /> -->
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hullo" />
+		<property name="user" value="root" />
+		<property name="password" value="root" />
 
 		<!-- these are connection pool properties for C3P0 -->
 		<property name="minPoolSize" value="3" />

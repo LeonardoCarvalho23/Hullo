@@ -19,8 +19,6 @@
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <!-- CSS Custom -->
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?v=29" />
@@ -82,9 +80,10 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-th"></i></span>
-								<form:input pattern="[A-Za-z]{1}" placeholder="A"
+								<form:input  placeholder="A" pattern="[A-Za-z]{1}" maxlength="1" title="Letra de A a Z"
 									class="form-control" path="indice_aula" required="true"
-									maxlength="1" title="Letra de A a Z" />
+									/>
+
 							</div>
 						</div>
 					</div>
