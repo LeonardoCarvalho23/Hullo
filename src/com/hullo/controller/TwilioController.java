@@ -147,7 +147,7 @@ public class TwilioController extends HttpServlet {
 		dialBuilder.recordingStatusCallback("../twilioWebApp/callbackRecording");
 		dialBuilder.callerId(callerId);
 		dialBuilder.number(number);
-		dialBuilder.timeLimit(15); // duração de 5min da chamada
+		dialBuilder.timeLimit(300); // duração de 5min da chamada
 		dialBuilder.timeout(15); // desliga se não atender após 15s
 		
 		
