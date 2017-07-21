@@ -52,7 +52,7 @@ public class AulaRealizadaDAOImpl {
 		// achar os dias anteriores para consulta das aulas
 		LocalDateTime data = LocalDateTime.now();
 		LocalDateTime date = data.minusDays(3).withHour(0).withMinute(0).withSecond(0);
-		
+
 		System.out.println("data buscada para aula = " + date.toString());
 
 		// busca proxima aula baseado na data atual
@@ -227,7 +227,7 @@ public class AulaRealizadaDAOImpl {
 	@SuppressWarnings("unchecked")
 	public void updateAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		
+
 		Query<AulaRealizadaImpl> theQuery;
 
 		String sql = "UPDATE AulaRealizadaImpl set status_aula_realizada='Não Atendida' WHERE id_aula_realizada="
@@ -247,18 +247,35 @@ public class AulaRealizadaDAOImpl {
 	public void saveProximaAulaNaoAtendida(AulaRealizadaImpl aulaRealizada) {
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		//mudar data de criacao para +2h
+		// mudar data de criacao para +2h
 		AulaRealizadaImpl aulaNova = new AulaRealizadaImpl();
 
 		aulaNova.setDt_criacao_aula_realizada(aulaRealizada.getDt_criacao_aula_realizada().plusHours(2));
 		aulaNova.setId_aula_aula_realizada(aulaRealizada.getId_aula_aula_realizada());
 		aulaNova.setId_anterior_aula_realizada(aulaRealizada.getId_anterior_aula_realizada());
 		aulaNova.setId_aluno_aula_realizada(aulaRealizada.getId_aluno_aula_realizada());
-		
-		System.out.println("novo horario de criacao da aula nao atendida = " + aulaNova.getDt_criacao_aula_realizada().toString());
+
+		System.out.println(
+				"novo horario de criacao da aula nao atendida = " + aulaNova.getDt_criacao_aula_realizada().toString());
 
 		currentSession.saveOrUpdate(aulaNova);
 
+	}
+
+	/**
+	 * mudar status de aula agendada para cancelada
+	 * @param id_aluno
+	 */
+	@SuppressWarnings("unchecked")
+	public void cancelAulaRealizada(int id_aluno) {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<AulaRealizadaImpl> theQuery;
+		String sql = "UPDATE AulaRealizadaImpl set status_aula_realizada = 'Cancelada'"
+				+ " WHERE status_aula_realizada = NULL and id_aluno_aula_realizada =" + id_aluno;
+		theQuery = currentSession.createQuery(sql);
+		int result = theQuery.executeUpdate();
+		System.out.println(result + " linha atualizada");
 	}
 
 	/*	*//**

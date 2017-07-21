@@ -70,6 +70,15 @@ public class AulaRealizadaServiceImpl {
 	public AulaRealizadaImpl getProximaAula() {
 		return aulaRealizadaDAO.getProximaAula();
 	}
+	
+	/**
+	 * cancelar aula agendada
+	 * @param id_aluno
+	 */
+	@Transactional
+	public void cancelAulaRealizada(int id_aluno) {
+		aulaRealizadaDAO.cancelAulaRealizada(id_aluno);
+	}
 
 	/**
 	 * buscar aula_realizada por ID

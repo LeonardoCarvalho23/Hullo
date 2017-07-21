@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hullo.entity.AlunoImpl;
+import com.hullo.service.AulaRealizadaServiceImpl;
 
 /**
  * classe para operações no banco relacionadas ao AlunoImpl
@@ -25,6 +26,9 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 	 */
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private AulaRealizadaServiceImpl aulaRealizadaService;
 
 	/**
 	 * descrição do método
@@ -219,7 +223,7 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 	 * inativar um aluno que não quer mias ter conta
 	 * 
 	 * @param theUsuario
-	 *            AlunoImpl que dejesa encerrar conta
+	 *            AlunoImpl que deseja encerrar conta
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -237,6 +241,9 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 		theQuery = currentSession.createQuery(hql);
 		theQuery.setParameter("lastUpdate", theUsuario.getDt_last_update_usuario());
 		theQuery.setParameter("id", theUsuario.getId_usuario());
+		
+		//para cancelar aula que estava agendada para esse aluno
+		aulaRealizadaService.cancelAulaRealizada(theUsuario.getId_usuario());
 
 		int result = theQuery.executeUpdate();
 
