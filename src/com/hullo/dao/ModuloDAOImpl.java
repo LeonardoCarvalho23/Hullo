@@ -74,7 +74,7 @@ public class ModuloDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// busca por indice do modulo
-		Query<ModuloImpl> query = currentSession.createQuery("from ModuloImpl where indice_modulo= " + indice_modulo,
+		Query<ModuloImpl> query = currentSession.createQuery("from ModuloImpl where ativo_modulo = true and indice_modulo= " + indice_modulo,
 				ModuloImpl.class);
 
 		List<ModuloImpl> result = query.getResultList();
@@ -115,7 +115,7 @@ public class ModuloDAOImpl {
 
 		// busca por indice, se nao for do mesmo id do modulo
 		Query<ModuloImpl> query = currentSession.createQuery(
-				"from ModuloImpl where id_modulo <> " + id_modulo + " and indice_modulo= " + indice_modulo,
+				"from ModuloImpl where ativo_modulo = true and id_modulo <> " + id_modulo + " and indice_modulo= " + indice_modulo,
 				ModuloImpl.class);
 
 		List<ModuloImpl> result = query.getResultList();
