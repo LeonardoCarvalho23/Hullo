@@ -106,7 +106,7 @@ public class AulaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaImpl> Query = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula",
+				"from AulaImpl where ativo_aula = true and id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula",
 				AulaImpl.class);
 
 		List<AulaImpl> aulas = Query.getResultList();
@@ -206,6 +206,9 @@ public class AulaDAOImpl {
 		theQuery.setParameter("ativo", false);
 		theQuery.setParameter("lastUpdate", current_date);
 		theQuery.setParameter("id", aula.getId_aula());
+		
+		int result = theQuery.executeUpdate();
+		System.out.println(result + " linhas atualizadas");
 
 	}
 
@@ -270,7 +273,7 @@ public class AulaDAOImpl {
 
 				// pego a primeira aula do proximo modulo
 				Query<AulaImpl> query2 = currentSession.createQuery(
-						"from AulaImpl where id_modulo_aula= :modulo order by numero_aula, indice_aula",
+						"from AulaImpl where ativo_aula = true and id_modulo_aula= :modulo order by numero_aula, indice_aula",
 						AulaImpl.class);
 				query2.setParameter("modulo", proxModulo.getId_modulo());
 
@@ -286,7 +289,7 @@ public class AulaDAOImpl {
 
 		// se minha aula nao e a 5, pego a proxima aula do modulo
 		Query<AulaImpl> query2 = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= :modulo and numero_aula > :numero order by numero_aula, indice_aula",
+				"from AulaImpl where ativo_aula = true and id_modulo_aula= :modulo and numero_aula > :numero order by numero_aula, indice_aula",
 				AulaImpl.class);
 		query2.setParameter("modulo", aulaAtual.getId_modulo_aula());
 		query2.setParameter("numero", aulaAtual.getNumero_aula());
@@ -315,7 +318,7 @@ public class AulaDAOImpl {
 		// maior que o atual
 		try {
 
-			Query<AulaImpl> query2 = currentSession.createQuery("from AulaImpl where id_modulo_aula= :modulo and "
+			Query<AulaImpl> query2 = currentSession.createQuery("from AulaImpl where ativo_aula = true and id_modulo_aula= :modulo and "
 					+ "numero_aula= :numero and indice_aula> :indice order by indice_aula", AulaImpl.class);
 			query2.setParameter("modulo", aulaAtual.getId_modulo_aula());
 			query2.setParameter("numero", aulaAtual.getNumero_aula());
