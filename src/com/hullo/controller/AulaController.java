@@ -173,7 +173,7 @@ public class AulaController {
 	}
 
 	/**
-	 * Metodo para excluir aula
+	 * Metodo para inativar aula
 	 * @param aula
 	 * @param theModel
 	 * @return

@@ -1,5 +1,6 @@
 package com.hullo.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -160,16 +161,21 @@ public class ModuloDAOImpl {
 	public void deleteModulo(int id_modulo) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
+		Date current_date = new Date();
 
 		// Cria query que faz busca no banco
 		Query<ModuloImpl> theQuery;
 
 		// para fazer update apenas dos capos editaveis
-		String hql = "DELETE from ModuloImpl WHERE id_modulo = :id";
+		String hql = "UPDATE ModuloImpl set ativo_modulo=:ativo, " 
+				+ "dt_last_update_modulo = :lastUpdate "
+				+ "WHERE id_modulo=:id";
 
 		theQuery = currentSession.createQuery(hql);
 
 		// adicionando valores para as variaveis do update
+		theQuery.setParameter("ativo", false);
+		theQuery.setParameter("lastUpdate", current_date);
 		theQuery.setParameter("id", id_modulo);
 
 		int result = theQuery.executeUpdate();

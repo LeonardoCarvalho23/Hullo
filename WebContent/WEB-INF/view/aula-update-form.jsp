@@ -19,8 +19,6 @@
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/javascript/cadastro.js"></script>
 <!-- CK Editor -->
 <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <!-- CSS Custom -->

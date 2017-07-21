@@ -1,5 +1,6 @@
 package com.hullo.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -14,6 +15,7 @@ import com.hullo.service.ModuloServiceImpl;
 
 /**
  * Classe para comunicação com o banco (DAO)
+ * 
  * @author Hullo Team;
  *
  */
@@ -28,6 +30,7 @@ public class AulaDAOImpl {
 
 	/**
 	 * Valida se não existe aula com o mesmo índice no mesmo módulo
+	 * 
 	 * @param indice_aula
 	 * @return
 	 */
@@ -48,6 +51,7 @@ public class AulaDAOImpl {
 
 	/**
 	 * Método para salvar aula
+	 * 
 	 * @param aula
 	 */
 	public void saveAula(AulaImpl aula) {
@@ -58,6 +62,7 @@ public class AulaDAOImpl {
 
 	/**
 	 * Listar aulas de um modulo
+	 * 
 	 * @param id_modulo
 	 * @return
 	 */
@@ -74,6 +79,7 @@ public class AulaDAOImpl {
 
 	/**
 	 * Pegar uma aula especifica
+	 * 
 	 * @param id_aula
 	 * @return
 	 */
@@ -91,6 +97,7 @@ public class AulaDAOImpl {
 
 	/**
 	 * Pegar a primeira aula
+	 * 
 	 * @param id_modulo
 	 * @return
 	 */
@@ -109,6 +116,7 @@ public class AulaDAOImpl {
 
 	/**
 	 * Para fazer update da aula ja existente
+	 * 
 	 * @param aula
 	 */
 	@SuppressWarnings("unchecked")
@@ -120,17 +128,10 @@ public class AulaDAOImpl {
 		// Cria query que faz busca no banco
 		Query<AulaImpl> theQuery;
 		// para fazer update apenas dos capos editaveis
-		String hql = "UPDATE AulaImpl set nm_aula = :nome, "
-				+ "numero_aula= :numero, "
-				+ "indice_aula= :indice, "
-				+ "revisao_aula = :rev, "
-				+ "conteudo_aula = :cont, "
-				+ "atividade_aula = :atv, "
-				+ "teaser_aula = :teaser, "
-				+ "ativo_aula=:ativo, "
-				+ "dt_last_update_aula = :lastUpdate, "
-				+ "id_modulo_aula=:id_modulo "
-				+ "WHERE id_aula = :id";
+		String hql = "UPDATE AulaImpl set nm_aula = :nome, " + "numero_aula= :numero, " + "indice_aula= :indice, "
+				+ "revisao_aula = :rev, " + "conteudo_aula = :cont, " + "atividade_aula = :atv, "
+				+ "teaser_aula = :teaser, " + "ativo_aula=:ativo, " + "dt_last_update_aula = :lastUpdate, "
+				+ "id_modulo_aula=:id_modulo " + "WHERE id_aula = :id";
 		theQuery = currentSession.createQuery(hql);
 		// adicionando valores para as variaveis do update
 		theQuery.setParameter("nome", aula.getNm_aula());
@@ -150,7 +151,8 @@ public class AulaDAOImpl {
 	}
 
 	/**
-	 * Para valiar a aula
+	 * Para validar a aula
+	 * 
 	 * @param indice_aula
 	 * @param numero_aula
 	 * @param id_modulo_aula
@@ -184,34 +186,54 @@ public class AulaDAOImpl {
 
 	/**
 	 * Para deletar uma aula
+	 * 
 	 * @param aula
 	 */
+	@SuppressWarnings("unchecked")
 	public void deleteAula(AulaImpl aula) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
+		Date current_date = new Date();
 
-		currentSession.delete(aula);
+		// Cria query que faz busca no banco
+		Query<AulaImpl> theQuery;
+		// para fazer update apenas dos capos editaveis
+		String hql = "UPDATE AulaImpl set ativo_aula=:ativo, " 
+				+ "dt_last_update_aula = :lastUpdate "
+				+ "WHERE id_aula = :id";
+		theQuery = currentSession.createQuery(hql);
+		// adicionando valores para as variaveis do update
+		theQuery.setParameter("ativo", false);
+		theQuery.setParameter("lastUpdate", current_date);
+		theQuery.setParameter("id", aula.getId_aula());
 
 	}
 
 	/**
 	 * Deletar todas as aulas de um modulo
+	 * 
 	 * @param id_modulo
 	 */
 	@SuppressWarnings("unchecked")
 	public void deleteAulasModulo(int id_modulo) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
+		Date current_date = new Date();
 
 		// Cria query que faz busca no banco
 		Query<AulaImpl> theQuery;
 
 		// para fazer update apenas dos capos editaveis
-		String hql = "DELETE from AulaImpl where id_modulo_aula=:id_modulo";
+		String hql = "UPDATE AulaImpl set ativo_aula=:ativo, " 
+				+ "dt_last_update_aula = :lastUpdate "
+				+ "WHERE id_modulo_aula=:id_modulo";
+		//String hql = "DELETE from AulaImpl where id_modulo_aula=:id_modulo";
 
 		theQuery = currentSession.createQuery(hql);
 
 		// adicionando valores para as variaveis do update
+		theQuery.setParameter("ativo", false);
+		theQuery.setParameter("lastUpdate", current_date);
 		theQuery.setParameter("id_modulo", id_modulo);
 
 		int result = theQuery.executeUpdate();
@@ -221,6 +243,7 @@ public class AulaDAOImpl {
 
 	/**
 	 * Para buscar proxima aula linear do curso
+	 * 
 	 * @param id_aula_aula_realizada
 	 * @return
 	 */
@@ -275,6 +298,7 @@ public class AulaDAOImpl {
 
 	/**
 	 * Pega a próxima aula com o mesmo índice (paralela)
+	 * 
 	 * @param id_aula_aula_realizada
 	 * @return
 	 */
@@ -286,21 +310,21 @@ public class AulaDAOImpl {
 				AulaImpl.class);
 
 		AulaImpl aulaAtual = query.getSingleResult();
-		
-		//verifico se ha aula paralela para esse numero desse modulo com indice maior que o atual
-		try{
-			
+
+		// verifico se ha aula paralela para esse numero desse modulo com indice
+		// maior que o atual
+		try {
+
 			Query<AulaImpl> query2 = currentSession.createQuery("from AulaImpl where id_modulo_aula= :modulo and "
-					+ "numero_aula= :numero and indice_aula> :indice order by indice_aula",
-					AulaImpl.class);
+					+ "numero_aula= :numero and indice_aula> :indice order by indice_aula", AulaImpl.class);
 			query2.setParameter("modulo", aulaAtual.getId_modulo_aula());
 			query2.setParameter("numero", aulaAtual.getNumero_aula());
 			query2.setParameter("indice", aulaAtual.getIndice_aula());
 
 			List<AulaImpl> aulas = query2.getResultList();
-			
+
 			return aulas.get(0);
-			
+
 		} catch (Exception e) {
 			// se nao tem aula paralela o aluno faz a mesma aula
 			return aulaAtual;
@@ -309,11 +333,12 @@ public class AulaDAOImpl {
 
 	/**
 	 * Pega o nome da aula pelo Id
+	 * 
 	 * @param id_aula
 	 * @return
 	 */
 	public String getNomeAula(int id_aula) {
-		
+
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// busca nome por id da aula
@@ -321,10 +346,9 @@ public class AulaDAOImpl {
 
 		AulaImpl result = query.getSingleResult();
 		String nome = result.getNm_aula();
-		
+
 		return nome;
-		
-		
+
 	}
 
 }
