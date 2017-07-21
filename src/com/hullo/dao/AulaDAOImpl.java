@@ -38,7 +38,7 @@ public class AulaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// busca por indice do modulo
-		Query<AulaImpl> query = currentSession.createQuery("from AulaImpl where indice_aula= " + indice_aula,
+		Query<AulaImpl> query = currentSession.createQuery("from AulaImpl where ativo_aula = true and indice_aula= " + indice_aula,
 				AulaImpl.class);
 
 		List<AulaImpl> result = query.getResultList();
@@ -71,7 +71,7 @@ public class AulaDAOImpl {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Query<AulaImpl> Query = currentSession.createQuery(
-				"from AulaImpl where id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula",
+				"from AulaImpl where ativo_aula = true and id_modulo_aula= " + id_modulo + " order by numero_aula, indice_aula",
 				AulaImpl.class);
 
 		return Query.getResultList();
@@ -165,7 +165,7 @@ public class AulaDAOImpl {
 		// busca por indice e NUMERO
 
 		Query<AulaImpl> query = currentSession.createQuery(
-				"from AulaImpl where indice_aula = '" + indice_aula + "' and numero_aula = '" + numero_aula
+				"from AulaImpl where ativo_aula = true and indice_aula = '" + indice_aula + "' and numero_aula = '" + numero_aula
 						+ "'and id_modulo_aula = '" + id_modulo_aula + "' and id_aula <> '" + id_aula + "'",
 				AulaImpl.class);
 
