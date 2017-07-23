@@ -77,9 +77,11 @@ public class AlunoDAOImpl implements UsuarioDAO<AlunoImpl> {
 
 		// Cria query que faz busca no banco
 		Query<AlunoImpl> theQuery;
-		theQuery = currentSession.createQuery("from AlunoImpl where ativo_usuario = '1' and senha_usuario='" + senha
-				+ "' and email_usuario='" + email + "'", AlunoImpl.class);
+		/*theQuery = currentSession.createQuery("from AlunoImpl where ativo_usuario = '1' and senha_usuario='" + senha
+				+ "' and email_usuario='" + email + "'", AlunoImpl.class);*/
 
+		theQuery = currentSession.createQuery("from AlunoImpl where senha_usuario='" + senha
+				+ "' and email_usuario='" + email + "'", AlunoImpl.class);
 		// Testa com try catch a execução da query e se foi encontrado algo, é
 		// obrigatorio o uso do try catch
 		AlunoImpl result = null;

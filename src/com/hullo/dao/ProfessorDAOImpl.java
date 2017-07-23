@@ -68,7 +68,7 @@ public class ProfessorDAOImpl implements UsuarioDAO<ProfessorImpl> {
 		
 		// Cria query que faz busca no banco
 		Query<ProfessorImpl> theQuery;
-		theQuery = currentSession.createQuery("from ProfessorImpl where ativo_usuario = '1' and senha_usuario='" + senha
+		theQuery = currentSession.createQuery("from ProfessorImpl where senha_usuario='" + senha
 				+ "' and email_usuario='" + email + "'", ProfessorImpl.class);
 
 		/* **

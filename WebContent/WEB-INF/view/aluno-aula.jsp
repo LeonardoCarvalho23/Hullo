@@ -72,7 +72,7 @@
 						
 						
 						<div class="form-group">
-								<label class="col-md-4 control-label">Escute sua aula:</label>
+								<label class="col-md-4 control-label">Complemente sua aula:</label>
 								${atividade}								
 						</div>
 						

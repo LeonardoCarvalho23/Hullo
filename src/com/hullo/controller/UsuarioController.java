@@ -112,11 +112,14 @@ public class UsuarioController {
 		
 		String email = theUsuario.getEmail_usuario();
 		String senha = theUsuario.getSenha_usuario();
+			
 
 		// busca por aluno e professor
 		 
 		AlunoImpl loggedAluno = alunoService.getUsuario(email, senha);
 		ProfessorImpl loggedProfessor = professorService.getUsuario(email, senha);
+		
+		
 		
 		//checa se o usuário possui cadastro como aluno E TAMBÉM como professor
 		 
@@ -130,27 +133,42 @@ public class UsuarioController {
 		//login aluno
 		 
 		if (loggedAluno != null) {
-			/* **
-			 * login feito com sucesso
-			 * Abaixo, adiciona o objeto AlunoImpl à sessão Http
-			 */
-			session.setAttribute("usuario", loggedAluno);
+			if(loggedAluno.getAtivo_usuario().equals("1") ){
+				/* **
+				 * login feito com sucesso
+				 * Abaixo, adiciona o objeto AlunoImpl à sessão Http
+				 */
+				session.setAttribute("usuario", loggedAluno);
+				
+				//Guarda no log o horário do login
+				 
+				logService.saveAlunoLog(loggedAluno.getId_usuario());
+				return "home-aluno";
+				
+			}else{
+				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário inativo. </div>";
+				model.addAttribute("errorMessage", errorMessage);
+				
+				return "usuario-login";
+			}
 			
-			//Guarda no log o horário do login
-			 
-			logService.saveAlunoLog(loggedAluno.getId_usuario());
-			return "home-aluno";
 		}
 
 		// login professor
 		 
 		if (loggedProfessor != null) {
-			/* **
-			 *  login feito com sucesso
-			 *  Abaixo, adiciona o objeto ProfessorImpl à sessão Http
-			 */
-			session.setAttribute("usuario", loggedProfessor);
-			session.setAttribute("online", false);
+			if(loggedProfessor.getAtivo_usuario().equals("1") ){
+				/* **
+				 *  login feito com sucesso
+				 *  Abaixo, adiciona o objeto ProfessorImpl à sessão Http
+				 */
+				session.setAttribute("usuario", loggedProfessor);
+				session.setAttribute("online", false);
+			}else{
+				final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário inativo. </div>";
+				model.addAttribute("errorMessage", errorMessage);
+				return "usuario-login";
+			}
 			
 			//Guarda no log o horário do login
 			 
@@ -168,7 +186,8 @@ public class UsuarioController {
 		}
 
 		//erro de login
-		 
+		
+			 
 		final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Usuário ou senha incorretos. </div>";
 		model.addAttribute("errorMessage", errorMessage);
 		return "usuario-login";
