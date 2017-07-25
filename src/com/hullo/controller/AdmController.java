@@ -108,5 +108,20 @@ public class AdmController {
 	public String testCronometro() {
 		return "stopwatchTest";
 	}
+	
+	/**
+	 * sair da sessão
+	 * @param session
+	 * @return
+	 */
+	@GetMapping("logout")
+	public String logout(HttpSession session){
+		//formas de tirar a sessão, mas ainda não funciona
+		/*session.removeAttribute("usuario_professor");
+		session.removeAttribute("usuario_aluno");
+		session.invalidate();*/
+		return "redirect:/usuario/usuarioLogin";
+	}
+
 
 }

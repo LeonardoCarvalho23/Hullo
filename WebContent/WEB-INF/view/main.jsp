@@ -39,6 +39,15 @@
 			<h3>Bem-vindo, ${usuario.nome_usuario}.</h3>
 
 			<br> <br>
+			
+			<form:form action="../adm/logout" method="GET">
+			
+			 <div style="position: absolute; bottom: 82%; right: 100px;">
+				<input class="btn btn-primary"
+					type="submit" name="sair" id="sair" value="Sair">
+			</div>
+			
+			</form:form>
 
 			<!-- ver lista de alunos -->
 			<form:form action="../adm/listaAlunos" method="GET">
