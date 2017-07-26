@@ -297,7 +297,6 @@ public class ProfessorController {
 		//validar se ja existe usuario com esse email
 		 
 		ProfessorImpl validaProfessor = professorService.validaUsuario(theUsuario.getEmail_usuario(), theUsuario.getId_usuario());
-		AlunoImpl validaAluno = alunoService.getUsuario(theUsuario.getEmail_usuario());
 	
 		theUsuario.setCidade(cidadeService.getCidade(theUsuario.getCidade().getId_Cidade()));
 		
@@ -307,7 +306,7 @@ public class ProfessorController {
 			
 			if(isCNPJ(theUsuario.getCnpj_usuario())){
 
-				if (validaProfessor != null || validaAluno!= null) {
+				if (validaProfessor != null ) {
 		
 					final String errorMessage = "<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert'>&times;</a> Existe outro usuario com esse email </div>";
 					modelMap.addAttribute("errorMessage", errorMessage);
